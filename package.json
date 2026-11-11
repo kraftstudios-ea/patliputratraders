@@ -4,10 +4,11 @@
   "private": true,
   "description": "Patliputra Traders — Luxury Lighting & Modern Chandeliers",
   "scripts": {
+    "postinstall": "npm --prefix Backend install",
     "build": "node tools/build-pages-site.js .pages-site && node tools/audit-pages.js .pages-site",
     "serve:build": "npx -y http-server .pages-site -a 0.0.0.0 -p 9000 -c-1",
     "dev:backend": "cd Backend && node server.js",
     "dev:frontend": "node scripts/serve-frontend.js",
-    "start": "node scripts/serve-frontend.js"
+    "start": "node server.js"
   }
 }
