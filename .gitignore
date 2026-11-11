@@ -14,3 +14,7 @@ Backend/serviceAccountKey.json
 Backend/assets/*search-console*.json
 *.pem
 *.key
+
+.pages-site
+
+._*

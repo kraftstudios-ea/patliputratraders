@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "outputDirectory": "public",
+  "buildCommand": "node tools/build-pages-site.js .pages-site && node tools/audit-pages.js .pages-site",
+  "outputDirectory": ".pages-site",
   "cleanUrls": true,
   "rewrites": [
     {
