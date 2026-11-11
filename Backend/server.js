@@ -1094,15 +1094,16 @@ const paymentOrderLimiter = rateLimit({
 // ever confirms" (or worse, an easier bypass surface for the payment
 // verification in /api/orders). Fail fast at startup instead, matching
 // the MONGODB_URI check below.
-if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
-  console.error("❌ FATAL ERROR: RAZORPAY_KEY_ID / RAZORPAY_KEY_SECRET environment variables are not set.");
-  process.exit(1);
+let razorpay = null;
+if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
+  razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
+  });
+  console.log('💳 Razorpay initialized');
+} else {
+  console.warn('⚠️  RAZORPAY_KEY_ID / RAZORPAY_KEY_SECRET not set — Razorpay online checkout unavailable (Cash on Delivery active).');
 }
-
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET
-});
 
 // ── Cashfree Payment Gateway (sandbox / test mode) ─────────────
 // Configured from the same .env as Razorpay. Credentials are optional:
@@ -3166,20 +3167,28 @@ app.post('/api/payment/create-order', paymentOrderLimiter, requireUser, async (r
     };
 
     let order;
-    try {
-      order = await razorpay.orders.create(options);
-    } catch (rzpError) {
-      console.error('Razorpay Order Error:', rzpError);
-      // The mock fallback skips the payment step entirely (checkout confirms
-      // "order_mock_" orders without opening Razorpay, and /api/orders skips
-      // the signature check for them). It used to kick in automatically
-      // whenever Razorpay failed — so a Razorpay outage or bad key made
-      // every UPI/card order confirm as paid with no money collected. Now
-      // it is a local-development switch only.
-      if (process.env.ALLOW_MOCK_PAYMENTS !== 'true') {
-        return res.status(503).json({ error: 'Online payment is temporarily unavailable. Please choose Cash on Delivery or try again shortly.' });
+    if (!razorpay) {
+      if (process.env.ALLOW_MOCK_PAYMENTS === 'true') {
+        order = { id: 'order_mock_' + Date.now(), amount: amountPaise, currency: 'INR' };
+      } else {
+        return res.status(503).json({ error: 'Razorpay is not configured on this server. Please choose Cash on Delivery or contact us.' });
       }
-      order = { id: 'order_mock_' + Date.now(), amount: amountPaise, currency: 'INR' };
+    } else {
+      try {
+        order = await razorpay.orders.create(options);
+      } catch (rzpError) {
+        console.error('Razorpay Order Error:', rzpError);
+        // The mock fallback skips the payment step entirely (checkout confirms
+        // "order_mock_" orders without opening Razorpay, and /api/orders skips
+        // the signature check for them). It used to kick in automatically
+        // whenever Razorpay failed — so a Razorpay outage or bad key made
+        // every UPI/card order confirm as paid with no money collected. Now
+        // it is a local-development switch only.
+        if (process.env.ALLOW_MOCK_PAYMENTS !== 'true') {
+          return res.status(503).json({ error: 'Online payment is temporarily unavailable. Please choose Cash on Delivery or try again shortly.' });
+        }
+        order = { id: 'order_mock_' + Date.now(), amount: amountPaise, currency: 'INR' };
+      }
     }
 
     // Everything the webhook would need to build this order without the
