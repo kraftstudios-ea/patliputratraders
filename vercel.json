@@ -1,972 +1,107 @@
 {
-  "buildCommand": "node tools/build-pages-site.js .pages-site && node tools/audit-pages.js .pages-site",
-  "outputDirectory": ".pages-site",
-  "cleanUrls": false,
-  "redirects": [
-    {
-      "source": "/index.html",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/all_products.html",
-      "destination": "/shop/",
-      "permanent": true
-    },
-    {
-      "source": "/poster-reels.html",
-      "destination": "/reels/",
-      "permanent": true
-    },
-    {
-      "source": "/build-pack.html",
-      "destination": "/build-pack/",
-      "permanent": true
-    },
-    {
-      "source": "/digital-assets.html",
-      "destination": "/buy-digital-assets/",
-      "permanent": true
-    },
-    {
-      "source": "/about_us.html",
-      "destination": "/about/",
-      "permanent": true
-    },
-    {
-      "source": "/institutional.html",
-      "destination": "/institutional/",
-      "permanent": true
-    },
-    {
-      "source": "/special_day.html",
-      "destination": "/special-day/",
-      "permanent": true
-    },
-    {
-      "source": "/style_options.html",
-      "destination": "/style-options/",
-      "permanent": true
-    },
-    {
-      "source": "/policies.html",
-      "destination": "/policies/",
-      "permanent": true
-    },
-    {
-      "source": "/checkout.html",
-      "destination": "/checkout/",
-      "permanent": true
-    },
-    {
-      "source": "/order-confirmation.html",
-      "destination": "/order-confirmation/",
-      "permanent": true
-    },
-    {
-      "source": "/track.html",
-      "destination": "/track/",
-      "permanent": true
-    },
-    {
-      "source": "/orders.html",
-      "destination": "/orders/",
-      "permanent": true
-    },
-    {
-      "source": "/orders",
-      "destination": "/orders/",
-      "permanent": true
-    },
-    {
-      "source": "/profile.html",
-      "destination": "/profile/",
-      "permanent": true
-    },
-    {
-      "source": "/profile",
-      "destination": "/profile/",
-      "permanent": true
-    },
-    {
-      "source": "/reset-password.html",
-      "destination": "/reset-password/",
-      "permanent": true
-    },
-    {
-      "source": "/admin.html",
-      "destination": "/admin/",
-      "permanent": true
-    },
-    {
-      "source": "/maintenance.html",
-      "destination": "/maintenance/",
-      "permanent": true
-    },
-    {
-      "source": "/items.html",
-      "destination": "/shop/?category=stationery",
-      "permanent": true
-    },
+  "version": 2,
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "rewrites": [
     {
       "source": "/shop",
-      "destination": "/shop/",
-      "permanent": true
+      "destination": "/all_products.html"
     },
     {
-      "source": "/shop/posters",
-      "destination": "/shop/posters/",
-      "permanent": true
-    },
-    {
-      "source": "/posters",
-      "destination": "/shop/posters/",
-      "permanent": true
-    },
-    {
-      "source": "/posters/",
-      "destination": "/shop/posters/",
-      "permanent": true
-    },
-    {
-      "source": "/reels",
-      "destination": "/reels/",
-      "permanent": true
-    },
-    {
-      "source": "/build-pack",
-      "destination": "/build-pack/",
-      "permanent": true
-    },
-    {
-      "source": "/buy-digital-assets",
-      "destination": "/buy-digital-assets/",
-      "permanent": true
+      "source": "/shop/",
+      "destination": "/all_products.html"
     },
     {
       "source": "/about",
-      "destination": "/about/",
-      "permanent": true
+      "destination": "/about_us.html"
     },
     {
-      "source": "/institutional",
-      "destination": "/institutional/",
-      "permanent": true
+      "source": "/about/",
+      "destination": "/about_us.html"
     },
     {
-      "source": "/special-day",
-      "destination": "/special-day/",
-      "permanent": true
+      "source": "/contact",
+      "destination": "/about_us.html"
     },
     {
-      "source": "/style-options",
-      "destination": "/style-options/",
-      "permanent": true
-    },
-    {
-      "source": "/policies",
-      "destination": "/policies/",
-      "permanent": true
-    },
-    {
-      "source": "/checkout",
-      "destination": "/checkout/",
-      "permanent": true
-    },
-    {
-      "source": "/order-confirmation",
-      "destination": "/order-confirmation/",
-      "permanent": true
-    },
-    {
-      "source": "/track",
-      "destination": "/track/",
-      "permanent": true
-    },
-    {
-      "source": "/reset-password",
-      "destination": "/reset-password/",
-      "permanent": true
+      "source": "/contact/",
+      "destination": "/about_us.html"
     },
     {
       "source": "/admin",
-      "destination": "/admin/",
-      "permanent": true
+      "destination": "/admin.html"
     },
     {
-      "source": "/maintenance",
-      "destination": "/maintenance/",
-      "permanent": true
+      "source": "/admin/",
+      "destination": "/admin.html"
     },
     {
-      "source": "/p/532-chill",
-      "destination": "/p/532-chill-typography/",
-      "permanent": true
+      "source": "/checkout",
+      "destination": "/checkout.html"
     },
     {
-      "source": "/p/532-chill/",
-      "destination": "/p/532-chill-typography/",
-      "permanent": true
+      "source": "/checkout/",
+      "destination": "/checkout.html"
     },
     {
-      "source": "/p/93-yellow-a3",
-      "destination": "/p/93-coldplay-yellow/",
-      "permanent": true
+      "source": "/orders",
+      "destination": "/orders.html"
     },
     {
-      "source": "/p/93-yellow-a3/",
-      "destination": "/p/93-coldplay-yellow/",
-      "permanent": true
+      "source": "/orders/",
+      "destination": "/orders.html"
     },
     {
-      "source": "/p/505-fernando-alonso",
-      "destination": "/p/505-fernando-alonso-aston-martin/",
-      "permanent": true
+      "source": "/profile",
+      "destination": "/profile.html"
     },
     {
-      "source": "/p/505-fernando-alonso/",
-      "destination": "/p/505-fernando-alonso-aston-martin/",
-      "permanent": true
+      "source": "/profile/",
+      "destination": "/profile.html"
     },
     {
-      "source": "/p/123-avengers-endgame",
-      "destination": "/p/123-thor-avenge-the-fallen/",
-      "permanent": true
+      "source": "/policies",
+      "destination": "/policies.html"
     },
     {
-      "source": "/p/123-avengers-endgame/",
-      "destination": "/p/123-thor-avenge-the-fallen/",
-      "permanent": true
+      "source": "/policies/",
+      "destination": "/policies.html"
     },
     {
-      "source": "/p/625-batman-begins-2005-swarm-of-bats-bat-symbol-teaser-poster",
-      "destination": "/p/625-batman-begins-bat-swarm/",
-      "permanent": true
+      "source": "/track",
+      "destination": "/track.html"
     },
     {
-      "source": "/p/625-batman-begins-2005-swarm-of-bats-bat-symbol-teaser-poster/",
-      "destination": "/p/625-batman-begins-bat-swarm/",
-      "permanent": true
+      "source": "/track/",
+      "destination": "/track.html"
     },
     {
-      "source": "/p/629-batman-v-superman-dawn-of-justice-armored-batman-heavy-battl",
-      "destination": "/p/629-batman-v-superman-heavy-armor/",
-      "permanent": true
+      "source": "/order-confirmation",
+      "destination": "/order-confirmation.html"
     },
     {
-      "source": "/p/629-batman-v-superman-dawn-of-justice-armored-batman-heavy-battl/",
-      "destination": "/p/629-batman-v-superman-heavy-armor/",
-      "permanent": true
+      "source": "/order-confirmation/",
+      "destination": "/order-confirmation.html"
     },
     {
-      "source": "/p/538-the-beach-songboard",
-      "destination": "/p/538-the-neighbourhood-beach/",
-      "permanent": true
+      "source": "/build-pack",
+      "destination": "/build-pack.html"
     },
     {
-      "source": "/p/538-the-beach-songboard/",
-      "destination": "/p/538-the-neighbourhood-beach/",
-      "permanent": true
+      "source": "/digital-assets",
+      "destination": "/digital-assets.html"
     },
     {
-      "source": "/p/95-bloom",
-      "destination": "/p/95-bloom-on-order/",
-      "permanent": true
+      "source": "/special-day",
+      "destination": "/special_day.html"
     },
     {
-      "source": "/p/95-bloom/",
-      "destination": "/p/95-bloom-on-order/",
-      "permanent": true
+      "source": "/style-options",
+      "destination": "/style_options.html"
     },
     {
-      "source": "/p/54-boom",
-      "destination": "/p/54-mickey-mouse-boom/",
-      "permanent": true
-    },
-    {
-      "source": "/p/54-boom/",
-      "destination": "/p/54-mickey-mouse-boom/",
-      "permanent": true
-    },
-    {
-      "source": "/p/501-carlos-sainz",
-      "destination": "/p/501-carlos-sainz-smooth-operator/",
-      "permanent": true
-    },
-    {
-      "source": "/p/501-carlos-sainz/",
-      "destination": "/p/501-carlos-sainz-smooth-operator/",
-      "permanent": true
-    },
-    {
-      "source": "/p/5-cigarettes-poster-a3",
-      "destination": "/p/5-vintage-cigarettes-box/",
-      "permanent": true
-    },
-    {
-      "source": "/p/5-cigarettes-poster-a3/",
-      "destination": "/p/5-vintage-cigarettes-box/",
-      "permanent": true
-    },
-    {
-      "source": "/p/645-demon-slayer-infinity-castle-the-all-out-war-begins-theatric",
-      "destination": "/p/645-demon-slayer-all-out-war/",
-      "permanent": true
-    },
-    {
-      "source": "/p/645-demon-slayer-infinity-castle-the-all-out-war-begins-theatric/",
-      "destination": "/p/645-demon-slayer-all-out-war/",
-      "permanent": true
-    },
-    {
-      "source": "/p/132-dune-part-two",
-      "destination": "/p/132-paul-chani-dune-2/",
-      "permanent": true
-    },
-    {
-      "source": "/p/132-dune-part-two/",
-      "destination": "/p/132-paul-chani-dune-2/",
-      "permanent": true
-    },
-    {
-      "source": "/p/98-earth",
-      "destination": "/p/98-leviathan-on-carrying/",
-      "permanent": true
-    },
-    {
-      "source": "/p/98-earth/",
-      "destination": "/p/98-leviathan-on-carrying/",
-      "permanent": true
-    },
-    {
-      "source": "/p/173-egypt",
-      "destination": "/p/173-egypt-6-000-years/",
-      "permanent": true
-    },
-    {
-      "source": "/p/173-egypt/",
-      "destination": "/p/173-egypt-6-000-years/",
-      "permanent": true
-    },
-    {
-      "source": "/p/674-the-odyssey-2026-christopher-nolan-epic-ensemble-theatrical-",
-      "destination": "/p/674-the-odyssey-ensemble/",
-      "permanent": true
-    },
-    {
-      "source": "/p/674-the-odyssey-2026-christopher-nolan-epic-ensemble-theatrical-/",
-      "destination": "/p/674-the-odyssey-ensemble/",
-      "permanent": true
-    },
-    {
-      "source": "/p/147-spiderman-homecoming",
-      "destination": "/p/147-spider-man-homecoming/",
-      "permanent": true
-    },
-    {
-      "source": "/p/147-spiderman-homecoming/",
-      "destination": "/p/147-spider-man-homecoming/",
-      "permanent": true
-    },
-    {
-      "source": "/p/294-icarus",
-      "destination": "/p/294-icarus-fly-close-to-sun/",
-      "permanent": true
-    },
-    {
-      "source": "/p/294-icarus/",
-      "destination": "/p/294-icarus-fly-close-to-sun/",
-      "permanent": true
-    },
-    {
-      "source": "/p/17-iron-man-3-poster-a3",
-      "destination": "/p/17-iron-man-3-2013/",
-      "permanent": true
-    },
-    {
-      "source": "/p/17-iron-man-3-poster-a3/",
-      "destination": "/p/17-iron-man-3-2013/",
-      "permanent": true
-    },
-    {
-      "source": "/p/103-joy",
-      "destination": "/p/103-joy-notes-on-joy/",
-      "permanent": true
-    },
-    {
-      "source": "/p/103-joy/",
-      "destination": "/p/103-joy-notes-on-joy/",
-      "permanent": true
-    },
-    {
-      "source": "/p/344-lewis-hamilton",
-      "destination": "/p/344-lewis-hamilton-mercedes-f1/",
-      "permanent": true
-    },
-    {
-      "source": "/p/344-lewis-hamilton/",
-      "destination": "/p/344-lewis-hamilton-mercedes-f1/",
-      "permanent": true
-    },
-    {
-      "source": "/p/158-star-wars-the-mandalorian-and-grogu",
-      "destination": "/p/158-the-mandalorian-grogu/",
-      "permanent": true
-    },
-    {
-      "source": "/p/158-star-wars-the-mandalorian-and-grogu/",
-      "destination": "/p/158-the-mandalorian-grogu/",
-      "permanent": true
-    },
-    {
-      "source": "/p/619-men-are-brave",
-      "destination": "/p/619-batman-v-superman-men-are-still-good-the-dark-knight-theatri/",
-      "permanent": true
-    },
-    {
-      "source": "/p/619-men-are-brave/",
-      "destination": "/p/619-batman-v-superman-men-are-still-good-the-dark-knight-theatri/",
-      "permanent": true
-    },
-    {
-      "source": "/p/104-metro",
-      "destination": "/p/104-inversion-on-inversion/",
-      "permanent": true
-    },
-    {
-      "source": "/p/104-metro/",
-      "destination": "/p/104-inversion-on-inversion/",
-      "permanent": true
-    },
-    {
-      "source": "/p/601-minis-aesthetic-pack-10-poster-wall-pack",
-      "destination": "/p/601-minis-aesthetic-10-pack/",
-      "permanent": true
-    },
-    {
-      "source": "/p/601-minis-aesthetic-pack-10-poster-wall-pack/",
-      "destination": "/p/601-minis-aesthetic-10-pack/",
-      "permanent": true
-    },
-    {
-      "source": "/p/339-onepiece",
-      "destination": "/p/339-luffy-straw-hat-ukiyo-e/",
-      "permanent": true
-    },
-    {
-      "source": "/p/339-onepiece/",
-      "destination": "/p/339-luffy-straw-hat-ukiyo-e/",
-      "permanent": true
-    },
-    {
-      "source": "/p/333-wanted-roronoa-zoro",
-      "destination": "/p/333-zoro-bounty-one-piece/",
-      "permanent": true
-    },
-    {
-      "source": "/p/333-wanted-roronoa-zoro/",
-      "destination": "/p/333-zoro-bounty-one-piece/",
-      "permanent": true
-    },
-    {
-      "source": "/p/620-pink-panther",
-      "destination": "/p/620-the-pink-panther-inspector-clouseau-retro-cartoon-pop-art-po/",
-      "permanent": true
-    },
-    {
-      "source": "/p/620-pink-panther/",
-      "destination": "/p/620-the-pink-panther-inspector-clouseau-retro-cartoon-pop-art-po/",
-      "permanent": true
-    },
-    {
-      "source": "/p/302-save-me",
-      "destination": "/p/302-save-me-from-myself/",
-      "permanent": true
-    },
-    {
-      "source": "/p/302-save-me/",
-      "destination": "/p/302-save-me-from-myself/",
-      "permanent": true
-    },
-    {
-      "source": "/p/106-solitude",
-      "destination": "/p/106-solitude-on-being-alone/",
-      "permanent": true
-    },
-    {
-      "source": "/p/106-solitude/",
-      "destination": "/p/106-solitude-on-being-alone/",
-      "permanent": true
-    },
-    {
-      "source": "/p/609-artist-masters-pack-10-poster-wall-pack",
-      "destination": "/p/609-artist-masters-10-pack/",
-      "permanent": true
-    },
-    {
-      "source": "/p/609-artist-masters-pack-10-poster-wall-pack/",
-      "destination": "/p/609-artist-masters-10-pack/",
-      "permanent": true
-    },
-    {
-      "source": "/p/46-waifu-2-dark-blue-a3-portrait",
-      "destination": "/p/46-midnight-azure-cyberpunk/",
-      "permanent": true
-    },
-    {
-      "source": "/p/46-waifu-2-dark-blue-a3-portrait/",
-      "destination": "/p/46-midnight-azure-cyberpunk/",
-      "permanent": true
-    },
-    {
-      "source": "/p/45-waifu-1-pink-a3-portrait",
-      "destination": "/p/45-pastel-pink-sakura/",
-      "permanent": true
-    },
-    {
-      "source": "/p/45-waifu-1-pink-a3-portrait/",
-      "destination": "/p/45-pastel-pink-sakura/",
-      "permanent": true
-    },
-    {
-      "source": "/p/332-wanted-monkey-d-luffy",
-      "destination": "/p/332-luffy-bounty-one-piece/",
-      "permanent": true
-    },
-    {
-      "source": "/p/332-wanted-monkey-d-luffy/",
-      "destination": "/p/332-luffy-bounty-one-piece/",
-      "permanent": true
-    },
-    {
-      "source": "/p/343-kimi-antonelli-mercedes-f1/",
-      "destination": "/p/343-kimi-antonelli-mercedes-amg-f1/",
-      "permanent": true
-    },
-    {
-      "source": "/p/343-kimi-antonelli-mercedes-f1",
-      "destination": "/p/343-kimi-antonelli-mercedes-amg-f1/",
-      "permanent": true
-    },
-    {
-      "source": "/p/122-avengers-doomsday/",
-      "destination": "/p/122-avengers-doomsday-doctor-doom-teaser/",
-      "permanent": true
-    },
-    {
-      "source": "/p/122-avengers-doomsday",
-      "destination": "/p/122-avengers-doomsday-doctor-doom-teaser/",
-      "permanent": true
-    },
-    {
-      "source": "/p/210-ballerina/",
-      "destination": "/p/210-john-wick-ballerina-action-study/",
-      "permanent": true
-    },
-    {
-      "source": "/p/210-ballerina",
-      "destination": "/p/210-john-wick-ballerina-action-study/",
-      "permanent": true
-    },
-    {
-      "source": "/p/215-lana-del-rey-born-to-die/",
-      "destination": "/p/215-lana-del-rey-born-to-die-vintage-portrait/",
-      "permanent": true
-    },
-    {
-      "source": "/p/215-lana-del-rey-born-to-die",
-      "destination": "/p/215-lana-del-rey-born-to-die-vintage-portrait/",
-      "permanent": true
-    },
-    {
-      "source": "/p/298-dekho-magar-pyaar-se/",
-      "destination": "/p/298-dekho-magar-pyaar-se-desi-truck-art/",
-      "permanent": true
-    },
-    {
-      "source": "/p/298-dekho-magar-pyaar-se",
-      "destination": "/p/298-dekho-magar-pyaar-se-desi-truck-art/",
-      "permanent": true
-    },
-    {
-      "source": "/p/666-the-matrix-resurrections-2021-trinity-carrie-anne-moss-leath/",
-      "destination": "/p/666-the-matrix-trinity-iconic-leather-dive/",
-      "permanent": true
-    },
-    {
-      "source": "/p/666-the-matrix-resurrections-2021-trinity-carrie-anne-moss-leath",
-      "destination": "/p/666-the-matrix-trinity-iconic-leather-dive/",
-      "permanent": true
-    },
-    {
-      "source": "/p/86-tum-se-coke-studio/",
-      "destination": "/p/86-tum-se-coke-studio-song-board/",
-      "permanent": true
-    },
-    {
-      "source": "/p/86-tum-se-coke-studio",
-      "destination": "/p/86-tum-se-coke-studio-song-board/",
-      "permanent": true
-    },
-    {
-      "source": "/p/133-paul-atreides-dune-2/",
-      "destination": "/p/133-dune-part-two-paul-atreides-muad-dib/",
-      "permanent": true
-    },
-    {
-      "source": "/p/133-paul-atreides-dune-2",
-      "destination": "/p/133-dune-part-two-paul-atreides-muad-dib/",
-      "permanent": true
-    },
-    {
-      "source": "/p/646-fight-club-1999-pink-soap-bar-mischief-mayhem-soap-theatrica/",
-      "destination": "/p/646-fight-club-pink-bar-soap-david-fincher/",
-      "permanent": true
-    },
-    {
-      "source": "/p/646-fight-club-1999-pink-soap-bar-mischief-mayhem-soap-theatrica",
-      "destination": "/p/646-fight-club-pink-bar-soap-david-fincher/",
-      "permanent": true
-    },
-    {
-      "source": "/p/646-fight-club-pink-soap/",
-      "destination": "/p/646-fight-club-pink-bar-soap-david-fincher/",
-      "permanent": true
-    },
-    {
-      "source": "/p/646-fight-club-pink-soap",
-      "destination": "/p/646-fight-club-pink-bar-soap-david-fincher/",
-      "permanent": true
-    },
-    {
-      "source": "/p/318-these-fucking-humans/",
-      "destination": "/p/318-these-fucking-humans-alien-cat-art/",
-      "permanent": true
-    },
-    {
-      "source": "/p/318-these-fucking-humans",
-      "destination": "/p/318-these-fucking-humans-alien-cat-art/",
-      "permanent": true
-    },
-    {
-      "source": "/p/158-the-mandalorian-grogu/",
-      "destination": "/p/158-star-wars-the-mandalorian-grogu/",
-      "permanent": true
-    },
-    {
-      "source": "/p/158-the-mandalorian-grogu",
-      "destination": "/p/158-star-wars-the-mandalorian-grogu/",
-      "permanent": true
-    },
-    {
-      "source": "/p/739-gta-6-poster/",
-      "destination": "/p/739-gta-6-jason-lucia-vice-city-2-pack/",
-      "permanent": true
-    },
-    {
-      "source": "/p/739-gta-6-poster",
-      "destination": "/p/739-gta-6-jason-lucia-vice-city-2-pack/",
-      "permanent": true
-    },
-    {
-      "source": "/p/195-rose-sub-rosa/",
-      "destination": "/p/195-vintage-rose-botanical-study/",
-      "permanent": true
-    },
-    {
-      "source": "/p/195-rose-sub-rosa",
-      "destination": "/p/195-vintage-rose-botanical-study/",
-      "permanent": true
-    },
-    {
-      "source": "/p/102-infinity/",
-      "destination": "/p/102-infinite-curves-minimalist-geometric/",
-      "permanent": true
-    },
-    {
-      "source": "/p/102-infinity",
-      "destination": "/p/102-infinite-curves-minimalist-geometric/",
-      "permanent": true
-    },
-    {
-      "source": "/p/15-iron-man-2008/",
-      "destination": "/p/15-iron-man-2008-mark-iii-flight/",
-      "permanent": true
-    },
-    {
-      "source": "/p/15-iron-man-2008",
-      "destination": "/p/15-iron-man-2008-mark-iii-flight/",
-      "permanent": true
-    },
-    {
-      "source": "/p/17-iron-man-3-2013/",
-      "destination": "/p/17-iron-man-3-2013-hall-of-armors/",
-      "permanent": true
-    },
-    {
-      "source": "/p/17-iron-man-3-2013",
-      "destination": "/p/17-iron-man-3-2013-hall-of-armors/",
-      "permanent": true
-    },
-    {
-      "source": "/p/299-menu-fuck-ni-penda/",
-      "destination": "/p/299-menu-fuck-ni-penda-punjabi-swag/",
-      "permanent": true
-    },
-    {
-      "source": "/p/299-menu-fuck-ni-penda",
-      "destination": "/p/299-menu-fuck-ni-penda-punjabi-swag/",
-      "permanent": true
-    },
-    {
-      "source": "/p/329-make-money/",
-      "destination": "/p/329-make-money-make-art-basquiat-crown-mantra/",
-      "permanent": true
-    },
-    {
-      "source": "/p/329-make-money",
-      "destination": "/p/329-make-money-make-art-basquiat-crown-mantra/",
-      "permanent": true
-    },
-    {
-      "source": "/p/167-malenia-blade-of-miquella/",
-      "destination": "/p/167-elden-ring-malenia-blade-of-miquella/",
-      "permanent": true
-    },
-    {
-      "source": "/p/167-malenia-blade-of-miquella",
-      "destination": "/p/167-elden-ring-malenia-blade-of-miquella/",
-      "permanent": true
-    },
-    {
-      "source": "/p/686-mia-wallace-pulp-fiction/",
-      "destination": "/p/686-pulp-fiction-mia-wallace-cigarette/",
-      "permanent": true
-    },
-    {
-      "source": "/p/686-mia-wallace-pulp-fiction",
-      "destination": "/p/686-pulp-fiction-mia-wallace-cigarette/",
-      "permanent": true
-    },
-    {
-      "source": "/p/338-naruto-wanted-bounty/",
-      "destination": "/p/338-naruto-wanted-dead-or-alive-bounty/",
-      "permanent": true
-    },
-    {
-      "source": "/p/338-naruto-wanted-bounty",
-      "destination": "/p/338-naruto-wanted-dead-or-alive-bounty/",
-      "permanent": true
-    },
-    {
-      "source": "/p/642-nezuko-awakened-flame/",
-      "destination": "/p/642-demon-slayer-nezuko-awakened-form/",
-      "permanent": true
-    },
-    {
-      "source": "/p/642-nezuko-awakened-flame",
-      "destination": "/p/642-demon-slayer-nezuko-awakened-form/",
-      "permanent": true
-    },
-    {
-      "source": "/p/618-no-man-s-sky/",
-      "destination": "/p/618-no-man-s-sky-planetary-atlas/",
-      "permanent": true
-    },
-    {
-      "source": "/p/618-no-man-s-sky",
-      "destination": "/p/618-no-man-s-sky-planetary-atlas/",
-      "permanent": true
-    },
-    {
-      "source": "/p/303-are-you-pooping/",
-      "destination": "/p/303-are-you-pooping-cat-bathroom-humor/",
-      "permanent": true
-    },
-    {
-      "source": "/p/303-are-you-pooping",
-      "destination": "/p/303-are-you-pooping-cat-bathroom-humor/",
-      "permanent": true
-    },
-    {
-      "source": "/p/513-messi-bernabeu-shirt/",
-      "destination": "/p/513-lionel-messi-bernabeu-iconic-shirt-hold/",
-      "permanent": true
-    },
-    {
-      "source": "/p/513-messi-bernabeu-shirt",
-      "destination": "/p/513-lionel-messi-bernabeu-iconic-shirt-hold/",
-      "permanent": true
-    },
-    {
-      "source": "/p/296-pressure-is-a-privilege/",
-      "destination": "/p/296-pressure-is-a-privilege-billie-jean-king/",
-      "permanent": true
-    },
-    {
-      "source": "/p/296-pressure-is-a-privilege",
-      "destination": "/p/296-pressure-is-a-privilege-billie-jean-king/",
-      "permanent": true
-    },
-    {
-      "source": "/p/99-memory-on-remembering/",
-      "destination": "/p/99-fitoor-autumn-maple-leaf/",
-      "permanent": true
-    },
-    {
-      "source": "/p/99-memory-on-remembering",
-      "destination": "/p/99-fitoor-autumn-maple-leaf/",
-      "permanent": true
-    },
-    {
-      "source": "/p/207-i-love-rollercoasters/",
-      "destination": "/p/207-i-love-rollercoasters-retro-amusement-art/",
-      "permanent": true
-    },
-    {
-      "source": "/p/207-i-love-rollercoasters",
-      "destination": "/p/207-i-love-rollercoasters-retro-amusement-art/",
-      "permanent": true
-    },
-    {
-      "source": "/p/302-save-me-from-myself/",
-      "destination": "/p/302-save-me-from-myself-grayscale-typography/",
-      "permanent": true
-    },
-    {
-      "source": "/p/302-save-me-from-myself",
-      "destination": "/p/302-save-me-from-myself-grayscale-typography/",
-      "permanent": true
-    },
-    {
-      "source": "/p/316-sunshine-state-of-mind/",
-      "destination": "/p/316-sunshine-state-of-mind-warm-aesthetic/",
-      "permanent": true
-    },
-    {
-      "source": "/p/316-sunshine-state-of-mind",
-      "destination": "/p/316-sunshine-state-of-mind-warm-aesthetic/",
-      "permanent": true
-    },
-    {
-      "source": "/p/649-inception-2010-your-mind-is-the-scene-of-the-crime-city-skys/",
-      "destination": "/p/649-inception-totem-spinning-top/",
-      "permanent": true
-    },
-    {
-      "source": "/p/649-inception-2010-your-mind-is-the-scene-of-the-crime-city-skys",
-      "destination": "/p/649-inception-totem-spinning-top/",
-      "permanent": true
-    },
-    {
-      "source": "/p/154-spider-man-2002/",
-      "destination": "/p/154-spider-man-2002-skyscraper-window-cling/",
-      "permanent": true
-    },
-    {
-      "source": "/p/154-spider-man-2002",
-      "destination": "/p/154-spider-man-2002-skyscraper-window-cling/",
-      "permanent": true
-    },
-    {
-      "source": "/p/154-spiderman/",
-      "destination": "/p/154-spider-man-2002-skyscraper-window-cling/",
-      "permanent": true
-    },
-    {
-      "source": "/p/154-spiderman",
-      "destination": "/p/154-spider-man-2002-skyscraper-window-cling/",
-      "permanent": true
-    },
-    {
-      "source": "/p/137-spider-man-3-black-suit/",
-      "destination": "/p/137-spider-man-3-symbiote-black-suit/",
-      "permanent": true
-    },
-    {
-      "source": "/p/137-spider-man-3-black-suit",
-      "destination": "/p/137-spider-man-3-symbiote-black-suit/",
-      "permanent": true
-    },
-    {
-      "source": "/p/341-super-mario-odyssey/",
-      "destination": "/p/341-super-mario-8-bit-pixel-art/",
-      "permanent": true
-    },
-    {
-      "source": "/p/341-super-mario-odyssey",
-      "destination": "/p/341-super-mario-8-bit-pixel-art/",
-      "permanent": true
-    },
-    {
-      "source": "/p/209-tax-me-daddy/",
-      "destination": "/p/209-tax-me-daddy-satirical-finance-pop-art/",
-      "permanent": true
-    },
-    {
-      "source": "/p/209-tax-me-daddy",
-      "destination": "/p/209-tax-me-daddy-satirical-finance-pop-art/",
-      "permanent": true
-    },
-    {
-      "source": "/p/51-we-bare-bears-grizzly/",
-      "destination": "/p/51-we-bare-bears-grizzly-bear-hug/",
-      "permanent": true
-    },
-    {
-      "source": "/p/51-we-bare-bears-grizzly",
-      "destination": "/p/51-we-bare-bears-grizzly-bear-hug/",
-      "permanent": true
-    },
-    {
-      "source": "/p/53-we-bare-bears-panda/",
-      "destination": "/p/53-we-bare-bears-panda-phone-selfie/",
-      "permanent": true
-    },
-    {
-      "source": "/p/53-we-bare-bears-panda",
-      "destination": "/p/53-we-bare-bears-panda-phone-selfie/",
-      "permanent": true
-    },
-    {
-      "source": "/p/56-weathering-with-you/",
-      "destination": "/p/56-weathering-with-you-tokyo-sky-fall/",
-      "permanent": true
-    },
-    {
-      "source": "/p/56-weathering-with-you",
-      "destination": "/p/56-weathering-with-you-tokyo-sky-fall/",
-      "permanent": true
-    },
-    {
-      "source": "/p/304-what-the-actual-duck/",
-      "destination": "/p/304-what-the-actual-duck-quirky-illustration/",
-      "permanent": true
-    },
-    {
-      "source": "/p/304-what-the-actual-duck",
-      "destination": "/p/304-what-the-actual-duck-quirky-illustration/",
-      "permanent": true
-    },
-    {
-      "source": "/p/340-arthur-morgan-rdr2/",
-      "destination": "/p/340-red-dead-redemption-2-arthur-morgan/",
-      "permanent": true
-    },
-    {
-      "source": "/p/340-arthur-morgan-rdr2",
-      "destination": "/p/340-red-dead-redemption-2-arthur-morgan/",
-      "permanent": true
-    },
-    {
-      "source": "/p/333-zoro-bounty-one-piece/",
-      "destination": "/p/333-one-piece-roronoa-zoro-1-111-billion-bounty/",
-      "permanent": true
-    },
-    {
-      "source": "/p/333-zoro-bounty-one-piece",
-      "destination": "/p/333-one-piece-roronoa-zoro-1-111-billion-bounty/",
-      "permanent": true
+      "source": "/institutional",
+      "destination": "/institutional.html"
     }
   ],
   "headers": [
@@ -1005,28 +140,11 @@
       ]
     },
     {
-      "source": "/(img|assets|posters|downloads|Fonts)/(.*)",
+      "source": "/(img|assets|Fonts)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.usdz",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "model/vnd.usdz+zip"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
     },
@@ -1056,8 +174,8 @@
       "source": "/(.*)",
       "headers": [
         {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=31536000; includeSubDomains"
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         },
         {
           "key": "X-Content-Type-Options",
@@ -1070,18 +188,6 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(self), microphone=(), geolocation=(), payment=(), interest-cohort=()"
-        },
-        {
-          "key": "Cross-Origin-Opener-Policy",
-          "value": "same-origin-allow-popups"
-        },
-        {
-          "key": "X-Permitted-Cross-Domain-Policies",
-          "value": "none"
         }
       ]
     }

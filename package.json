@@ -1,19 +1,13 @@
 {
-  "name": "brush-production",
+  "name": "patliputra-traders",
   "version": "1.0.0",
   "private": true,
-  "description": "Brush — Premium poster e-commerce platform",
+  "description": "Patliputra Traders — Luxury Lighting & Modern Chandeliers",
   "scripts": {
-    "build": "node tools/build-pages-site.js .pages-site",
-    "serve:build": "npx -y http-server .pages-site -a 0.0.0.0 -p 3000 -c-1",
-    "dev:build": "npm run build && npm run serve:build",
+    "build": "echo 'Patliputra Traders static frontend ready'",
+    "serve:build": "npx -y http-server public -a 0.0.0.0 -p 9000 -c-1",
     "dev:backend": "cd Backend && node server.js",
     "dev:frontend": "node scripts/serve-frontend.js",
-    "start": "cd Backend && node server.js",
-    "audit:pages": "node tools/audit-pages.js .pages-site",
-    "test": "node Backend/tests/charges-parity.js && node Backend/tests/ar-poster-contract.js && node Backend/tests/product-feed-progressive.js",
-    "test:otp": "node Backend/tests/profile-otp-test.js",
-    "test:all": "npm test && npm run test:otp",
-    "migrate:poster-prices": "node Backend/scripts/set-poster-original-price.js"
+    "start": "node scripts/serve-frontend.js"
   }
 }

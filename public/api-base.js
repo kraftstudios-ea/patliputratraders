@@ -12,6 +12,11 @@ const isLocalHost = (hostname) => (
 window.MAINTENANCE_MODE = false;
 
 const getApiBase = () => {
+  const custom = window.__BACKEND_URL__ || (typeof localStorage !== 'undefined' && localStorage.getItem('patliputra_backend_url'));
+  if (custom) {
+    const clean = custom.replace(/\/+$/, '');
+    return clean.endsWith('/api') ? clean : `${clean}/api`;
+  }
   const hostname = window.location.hostname;
   if (isLocalHost(hostname)) {
     const port = window.location.port;
@@ -80,16 +85,13 @@ var API_BASE = window.API_BASE;
       const data = await fetchNetwork(`${window.API_BASE}/products`);
       return Array.isArray(data) ? data : (data && Array.isArray(data.products) ? data.products : []);
     } catch (err) {
-      if (window.API_BASE !== 'https://brush-production.onrender.com/api') {
-        try {
-          console.warn('⚠️ Local backend unreachable, falling back to production backend:', err.message);
-          window.API_BASE = 'https://brush-production.onrender.com/api';
-          API_BASE = window.API_BASE;
-          const fallback = await fetchNetwork(`${window.API_BASE}/products`);
-          return Array.isArray(fallback) ? fallback : (fallback && Array.isArray(fallback.products) ? fallback.products : []);
-        } catch (_) {}
+      try {
+        console.warn('⚠️ Backend API unreachable, falling back to static /data/products.json:', err.message);
+        const fallback = await fetchNetwork('/data/products.json');
+        return Array.isArray(fallback) ? fallback : (fallback && Array.isArray(fallback.products) ? fallback.products : []);
+      } catch (fallbackErr) {
+        throw err;
       }
-      throw err;
     }
   }
 
