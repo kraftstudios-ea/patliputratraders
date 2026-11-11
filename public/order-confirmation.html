@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script src="api-base.js?v=2"></script>
+  <script src="theme.js?v=2"></script>
+  <title>Order Confirmed — Patliputra Traders</title>
+  <link rel="icon" href="/favicon.ico?v=3" sizes="48x48">
+  <link rel="icon" href="/assets/misc/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/misc/favicon-48x48.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/misc/favicon-192x192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+  <meta name="description" content="Your Patliputra Traders lighting fixture order has been confirmed! Track your shipment delivery.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <!-- The catalogue lives on Render; opening the connection during head
+       parsing removes a DNS + TLS handshake from the first API call,
+       which is the slowest request on every page. -->
+  <link rel="preconnect" href="https://brush-production.onrender.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <script src="https://kit.fontawesome.com/84df58c29a.js" crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="styles.css?v=53">
+  <style>
+    .confirmation-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 60px;
+    }
+
+    .confirmation-card {
+      max-width: 640px;
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    .confirmation-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--success), color-mix(in srgb, var(--success) 70%, black));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 2.2rem;
+      color: white;
+      animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes scaleIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .confirmation-card h1 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .confirmation-card .subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 32px;
+    }
+
+    .order-id-display {
+      display: inline-block;
+      background: rgba(var(--accent-rgb), 0.1);
+      border: 1px solid rgba(var(--accent-rgb), 0.25);
+      border-radius: var(--radius-sm);
+      padding: 12px 28px;
+      margin-bottom: 32px;
+    }
+
+    .order-id-display .label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .order-id-display .id {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+
+    /* Order Details */
+    .order-details {
+      text-align: left;
+      margin: 24px 0;
+    }
+
+    .detail-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .detail-section h4 {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 0.9rem;
+    }
+
+    .detail-row .label { color: var(--text-secondary); }
+    .detail-row .value { font-weight: 600; }
+    .detail-row.total { 
+      padding-top: 12px; 
+      margin-top: 8px; 
+      border-top: 1px solid var(--border);
+      font-size: 1.05rem;
+    }
+    .detail-row.total .value { color: var(--accent); font-weight: 800; }
+    .detail-row .free { color: var(--success); }
+    .detail-row .discount { color: var(--success); }
+
+    .order-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .order-item-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .order-item-img {
+      width: 48px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+    }
+
+    .order-item-info {
+      flex: 1;
+    }
+
+    .order-item-info h5 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .order-item-info p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .order-item-price {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .pack-posters-preview {
+      margin-top: 8px;
+      padding: 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    .pack-posters-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .pack-posters-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pack-poster-thumb {
+      position: relative;
+      width: 44px;
+      height: 60px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+
+    .pack-poster-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .pack-poster-thumb .pack-size-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: rgba(0, 0, 0, 0.82);
+      color: #fff;
+      font-size: 0.55rem;
+      font-weight: 700;
+      padding: 1px 3px;
+      border-radius: 2px;
+      line-height: 1;
+    }
+
+    /* Status timeline */
+    .status-timeline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 28px 0;
+      position: relative;
+    }
+
+    .status-timeline::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 40px;
+      right: 40px;
+      height: 3px;
+      background: var(--border);
+      z-index: 0;
+    }
+
+    .status-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 1;
+    }
+
+    .status-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      color: var(--text-muted);
+      transition: all 0.4s ease;
+    }
+
+    .status-step.active .status-dot {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--on-accent);
+    }
+
+    .status-step.active .status-label {
+      color: var(--text-primary);
+    }
+
+    .status-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-timeline.cancelled-banner {
+      justify-content: center;
+      gap: 12px;
+      background: rgba(var(--sale-red-rgb), 0.08);
+      border: 1px solid var(--sale-red);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+
+    .status-timeline.cancelled-banner::before { content: none; }
+
+    .status-timeline.cancelled-banner i {
+      color: var(--sale-red);
+      font-size: 1.3rem;
+    }
+
+    .status-timeline.cancelled-banner span {
+      color: var(--sale-red);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.85rem;
+    }
+
+    /* Actions */
+    .confirmation-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .confirmation-actions .hero-cta {
+      font-size: 0.85rem;
+      padding: 14px 28px;
+    }
+
+    .confirmation-actions .outline-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 2px solid var(--border-light);
+      color: var(--text-primary);
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .confirmation-actions .outline-btn:hover {
+      border-color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.05);
+    }
+
+    /* Loading & Error States */
+    .loading-state, .error-state {
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .loading-state .loader {
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @media (max-width: 640px) {
+      .confirmation-card {
+        padding: 32px 20px;
+      }
+
+      .status-timeline {
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+      }
+
+      .status-timeline::before {
+        display: none;
+      }
+    }
+  
+    .hub-note {
+      margin: 18px 0 0;
+      font-size: 0.74rem;
+      letter-spacing: 0.02em;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    .courier-pending {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 20px 0 0;
+      padding: 13px 15px;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      text-align: left;
+      color: var(--text-secondary);
+      background: rgba(255, 159, 41, 0.08);
+      border: 1px solid rgba(255, 159, 41, 0.3);
+      border-radius: var(--radius-md);
+    }
+    .courier-pending i { color: var(--accent); margin-top: 3px; flex: 0 0 auto; }
+
+    .confirmation-icon.is-pending { background: rgba(255, 159, 41, 0.15); color: var(--accent); }
+    .payment-pending-note {
+      margin: 24px 0 0;
+      padding: 16px 18px;
+      text-align: left;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      background: rgba(255, 159, 41, 0.07);
+      border: 1px solid rgba(255, 159, 41, 0.3);
+      border-radius: var(--radius-md);
+    }
+    .payment-pending-note p { margin: 0 0 10px; }
+    .payment-pending-note p:last-child { margin-bottom: 0; }
+    .payment-pending-note strong { color: var(--text-primary); }
+    .pay-ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.02em; }
+</style>
+  <script src="global-navbar.js?v=21" defer></script>
+  <script src="global-footer.js?v=4" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="interactions.js?v=1" defer></script>
+</head>
+
+<body>
+
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  
+  <global-navbar></global-navbar>
+
+
+  <main id="main-content" class="confirmation-page">
+    <div class="confirmation-card" id="confirmation-card">
+      <div class="loading-state" id="loading-state">
+        <div class="loader"></div>
+        <p>Loading your order details...</p>
+      </div>
+    </div>
+  </main>
+
+  <global-footer></global-footer>
+
+  <script src="lenis.min.js"></script>
+  <script src="scroll.js" defer></script>
+  <script src="img-utils.js?v=4"></script>
+  <script src="cart.js?v=12"></script>
+  <script>
+
+    // Order lookup is intentionally unauthenticated (the order ID is the
+    // access credential — see server.js) — anyone with the link can view
+    // this page, so the customer fields it renders must be escaped rather
+    // than trusted, same as the admin panel's order view.
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Same casual-copying deterrent as script.js?v=53 on the main site — not real
+    // security, just removes the one-click "Save image as" / drag-out path.
+    document.addEventListener('contextmenu', (e) => {
+      if (e.target.matches?.('.mockup-poster, .mockup-hover')) e.preventDefault();
+    });
+    document.addEventListener('dragstart', (e) => {
+      if (e.target.matches?.('.mockup-poster, .mockup-hover')) e.preventDefault();
+    });
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const card = document.getElementById('confirmation-card');
+      const params = new URLSearchParams(window.location.search);
+      const rawOrderId = params.get('orderId');
+      // Order IDs are 'ORD-' + 12 hex chars, server-generated. Anything else is
+      // not an order, and must never reach the DOM or a URL: fetch() strips a
+      // #fragment before sending, so a value like  ORD-abc#"><img src=x onerror=…>
+      // used to pass the "did the server find it?" check and still land in the
+      // invoice link's href below as live markup. Validate the shape up front.
+      const orderId = /^[A-Za-z0-9_-]{4,64}$/.test(rawOrderId || '') ? rawOrderId : '';
+
+      if (!orderId) {
+        card.innerHTML = `
+          <div class="error-state">
+            <i class="fa-solid fa-circle-exclamation" style="font-size:3rem;color:var(--sale-red);margin-bottom:16px;"></i>
+            <h2>No Order Found</h2>
+            <p style="color:var(--text-secondary);margin-top:8px;">No order ID was provided.</p>
+            <div class="confirmation-actions" style="margin-top:24px;">
+              <a href="index.html" class="hero-cta">Back to Store</a>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}/orders/${encodeURIComponent(orderId)}`);
+        if (!response.ok) throw new Error('Order not found');
+        const data = await response.json();
+        const order = data.order;
+
+        const awaitingPayment = order.status === 'awaiting-payment';
+
+        const paymentLabel = {
+          'cod': 'Cash on Delivery',
+          'upi': 'UPI Payment',
+          'card': 'Credit/Debit Card'
+        }[order.paymentMethod] || order.paymentMethod;
+
+        const STATUS_STEPS = ['confirmed', 'sent-for-printing', 'packed', 'shipped', 'transit', 'delivered'];
+        const normStatus = order.status === 'printing' ? 'sent-for-printing' : order.status;
+        const statusIndex = STATUS_STEPS.indexOf(normStatus);
+
+        const timelineHtml = order.status === 'cancelled' ? `
+          <div class="status-timeline cancelled-banner">
+            <i class="fa-solid fa-circle-xmark"></i>
+            <span>This order was cancelled</span>
+          </div>
+        ` : `
+          <div class="status-timeline">
+            <div class="status-step ${statusIndex >= 0 ? 'active' : ''}">
+              <div class="status-dot"><i class="fa-solid fa-check"></i></div>
+              <span class="status-label">Confirmed</span>
+            </div>
+            <div class="status-step ${statusIndex >= 1 ? 'active' : ''}">
+              <div class="status-dot"><i class="fa-solid fa-print"></i></div>
+              <span class="status-label">Printing</span>
+            </div>
+            <div class="status-step ${statusIndex >= 2 ? 'active' : ''}">
+              <div class="status-dot"><i class="fa-solid fa-box"></i></div>
+              <span class="status-label">Packed</span>
+            </div>
+            <div class="status-step ${statusIndex >= 3 ? 'active' : ''}">
+              <div class="status-dot"><i class="fa-solid fa-shipping-fast"></i></div>
+              <span class="status-label">Shipped</span>
+            </div>
+            <div class="status-step ${statusIndex >= 4 ? 'active' : ''}">
+              <div class="status-dot"><i class="fa-solid fa-truck"></i></div>
+              <span class="status-label">Transit</span>
+            </div>
+            <div class="status-step ${statusIndex >= 5 ? 'active' : ''}">
+              <div class="status-dot"><i class="fa-solid fa-house"></i></div>
+              <span class="status-label">Delivered</span>
+            </div>
+          </div>
+        `;
+
+        card.innerHTML = `
+          <div class="confirmation-icon${awaitingPayment ? ' is-pending' : ''}"><i class="fa-solid fa-${awaitingPayment ? 'hourglass-half' : 'check'}"></i></div>
+          <h1>${awaitingPayment ? 'Order Placed' : 'Order Confirmed!'}</h1>
+          <p class="subtitle">${awaitingPayment
+            ? 'Thank you — we have your order. We are checking your transfer against our bank now.'
+            : 'Thank you for shopping with Patliputra Traders. Your order has been placed successfully.'}</p>
+
+          ${awaitingPayment ? `
+          <div class="payment-pending-note">
+            <p><strong>What happens next</strong></p>
+            <p>We match your reference <strong class="pay-ref">${escapeHtml(order.paymentReference || '')}</strong> against our bank,
+            then email you to confirm. That is usually within a few hours on working days.</p>
+            <p>Your lighting fixtures are held for you until payment is confirmed.
+            If anything looks wrong, reply to your order email or write to
+            <a href="mailto:patliputratraders01@gmail.com">patliputratraders01@gmail.com</a> with your order number.</p>
+          </div>` : ''}
+
+          <div class="order-id-display">
+            <span class="label">Order ID</span>
+            <span class="id">${escapeHtml(order.orderId)}</span>
+          </div>
+
+          ${timelineHtml}
+
+          ${statusIndex >= 3 ? `
+          <div class="courier-pending" style="background: rgba(var(--accent-rgb), 0.05); border-color: rgba(var(--accent-rgb), 0.2); justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <div style="flex: 1; text-align: left;">
+              <strong>Tracking Details</strong><br>
+              ${order.awbNumber
+                ? `AWB / Transit No: <strong style="color: var(--text-primary)">${escapeHtml(order.awbNumber)}</strong><br>
+                   Courier Partner: <strong>${escapeHtml(order.courierPartner || 'N/A')}</strong><br>
+                   <a href="track.html?awb=${encodeURIComponent(order.awbNumber)}${order.customer && order.customer.email ? `&verify=${encodeURIComponent(order.customer.email)}` : ''}" class="btn-ghost" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 0.82rem; padding: 6px 14px; text-decoration: none; border-radius: var(--radius-sm); font-weight: 600; color: var(--accent); border: 1px solid var(--accent);">
+                     <i class="fa-solid fa-location-crosshairs"></i> Track Live Shipment &rarr;
+                   </a>`
+                : 'Transit number not assigned yet. Updates will be emailed once dispatched.'}
+            </div>
+            <div>
+              <i class="fa-solid fa-truck" style="font-size: 1.5rem; opacity: 0.8; color: var(--accent);"></i>
+            </div>
+          </div>
+          ` : ''}
+
+          <div class="order-details">
+            <div class="detail-section">
+              <h4><i class="fa-solid fa-box-open"></i>&nbsp; Items Ordered</h4>
+              <div class="order-items-list">
+                ${order.items.map(item => {
+                  const isDigital = (item.productType && item.productType.toLowerCase().includes('digital')) || (item.category && item.category.toLowerCase().includes('digital'));
+                  const slug = (item.sku ? item.sku.replace(/^DIG-/, '').toLowerCase() : '');
+                  const downloadUrl = item.downloadUrl || (slug ? `/downloads/${slug}-assets.zip` : null);
+                  return `
+                  <div class="order-item-row" style="align-items: flex-start;">
+                    <div class="order-item-img">
+                      <div class="mockup-wrapper">
+                        <img src="assets/mockup_2-w480.webp" class="mockup-frame" alt="" width="480" height="733" decoding="async">
+                        <img ${BrushImg.urlAttrs(item.image, 480)} class="mockup-poster" alt="${escapeHtml(item.name)}">
+                        <img ${BrushImg.urlAttrs(item.image, 480)} class="mockup-hover" alt="${escapeHtml(item.name)}">
+                      </div>
+                    </div>
+                    <div class="order-item-info">
+                      <h5>${escapeHtml(item.name)}</h5>
+                      <p>Qty: ${item.quantity}</p>
+                      ${Array.isArray(item.customPosters) && item.customPosters.length > 0 ? `
+                        <div class="pack-posters-preview">
+                          <div class="pack-posters-label"><i class="fa-solid fa-layer-group"></i> Pack Contains (${item.customPosters.length} Posters):</div>
+                          <div class="pack-posters-grid">
+                            ${item.customPosters.map((cp, idx) => `
+                              <div class="pack-poster-thumb" title="${escapeHtml(cp.name || cp.title || `Poster ${idx+1}`)} — Size: ${escapeHtml(cp.size || 'A5')}">
+                                <img src="${escapeHtml(cp.image)}" alt="${escapeHtml(cp.name || cp.title || 'Poster')}" loading="lazy">
+                                <span class="pack-size-badge">${escapeHtml(cp.size || 'A5')}</span>
+                              </div>
+                            `).join('')}
+                          </div>
+                        </div>
+                      ` : ''}
+                      ${isDigital ? `
+                        <div style="margin-top: 6px;">
+                          <span style="display:inline-block;background:#dcfce7;color:#15803d;font-size:0.75rem;font-weight:600;padding:2px 8px;border-radius:4px;margin-bottom:6px;">
+                            <i class="fa-solid fa-bolt"></i> Instant Download
+                          </span>
+                          <p style="font-size:0.8rem;color:var(--text-muted);margin:0 0 6px;">Download link also sent to <strong>${escapeHtml(order.customer.email)}</strong></p>
+                          ${downloadUrl ? `<a href="${downloadUrl}" class="btn-ghost" style="display:inline-block;font-size:0.8rem;padding:4px 12px;border-radius:4px;text-decoration:none;"><i class="fa-solid fa-download"></i> Download File</a>` : ''}
+                        </div>
+                      ` : ''}
+                    </div>
+                    <span class="order-item-price">₹${item.subtotal}</span>
+                  </div>
+                `;}).join('')}
+              </div>
+            </div>
+
+            <div class="detail-section">
+              <h4><i class="fa-solid fa-receipt"></i>&nbsp; Price Breakdown</h4>
+              <div class="detail-row">
+                <span class="label">Subtotal <small style="font-size:0.85em;color:var(--text-muted);font-weight:normal;">(Inc. Tax)</small></span>
+                <span class="value">₹${order.subtotal}</span>
+              </div>
+              ${order.launchDiscount > 0 ? `
+              <div class="detail-row">
+                <span class="label">Launch offer</span>
+                <span class="value discount">-₹${order.launchDiscount}</span>
+              </div>` : ''}
+              ${order.bundleDiscount > 0 ? `
+              <div class="detail-row">
+                <span class="label">${order.bundleLabel || 'Combo offer'} (${order.bundleFreeCount || 1} free)</span>
+                <span class="value discount">-₹${order.bundleDiscount}</span>
+              </div>` : ''}
+              ${order.couponDiscount > 0 ? `
+              <div class="detail-row">
+                <span class="label">Coupon</span>
+                <span class="value discount">-₹${order.couponDiscount}</span>
+              </div>` : ''}
+              ${(order.launchDiscount == null && order.couponDiscount == null && order.discount > 0) ? `
+              <div class="detail-row">
+                <span class="label">Discount</span>
+                <span class="value discount">-₹${order.discount}</span>
+              </div>` : ''}
+              <div class="detail-row">
+                <span class="label">Delivery${order.deliveryLabel && order.deliveryLabel !== 'Standard' ? ' (' + order.deliveryLabel + ')' : ''}</span>
+                <span class="value ${order.shipping === 0 ? 'free' : ''}">${order.shipping === 0 ? 'FREE' : '₹' + order.shipping}</span>
+              </div>
+              ${order.deliverySurcharge ? `
+              <div class="detail-row">
+                <span class="label">${order.deliveryLabel || 'Faster'} delivery</span>
+                <span class="value">₹${order.deliverySurcharge}</span>
+              </div>` : ''}
+              ${order.processingFee ? `
+              <div class="detail-row">
+                <span class="label">Handling fee</span>
+                <span class="value">₹${order.processingFee}</span>
+              </div>` : ''}
+              ${order.codFee ? `
+              <div class="detail-row">
+                <span class="label">Cash on delivery fee</span>
+                <span class="value">₹${order.codFee}</span>
+              </div>` : ''}
+              ${(order.tax != null || order.gst) ? `
+              <div class="detail-row" style="color:var(--text-secondary);font-size:0.88rem;">
+                <span class="label">Includes 18% GST</span>
+                <span class="value">₹${Number(order.tax != null ? order.tax : order.gst).toFixed(2)}</span>
+              </div>` : ''}
+              <div class="detail-row total">
+                <span class="label">Total Paid</span>
+                <span class="value">₹${order.total}</span>
+              </div>
+              <p class="price-note" style="margin-top:10px;font-size:0.8rem;color:var(--text-muted);line-height:1.4;">All product prices are inclusive of 18% GST. Only offers/discounts, handling, and delivery fees are applied to calculate the final total.</p>
+            </div>
+
+            <div class="detail-section">
+              <h4><i class="fa-solid fa-location-dot"></i>&nbsp; Shipping To</h4>
+              <p style="font-size:0.9rem;line-height:1.6;">
+                <strong>${escapeHtml(order.customer.name)}</strong><br>
+                ${escapeHtml(order.customer.address)}<br>
+                ${escapeHtml(order.customer.city)}, ${escapeHtml(order.customer.state)} — ${escapeHtml(order.customer.pincode)}<br>
+                <span style="color:var(--text-muted);">Phone:</span> ${escapeHtml(order.customer.phone)}<br>
+                <span style="color:var(--text-muted);">Email:</span> ${escapeHtml(order.customer.email)}
+              </p>
+            </div>
+
+            <div class="detail-section">
+              <h4><i class="fa-solid fa-credit-card"></i>&nbsp; Payment & Delivery</h4>
+              <div class="detail-row">
+                <span class="label">Payment</span>
+                <span class="value">${escapeHtml(paymentLabel)}</span>
+              </div>
+              <div class="detail-row">
+                <span class="label">Status</span>
+                <span class="value" style="color:${order.status === 'cancelled' ? 'var(--sale-red)' : 'var(--success)'};text-transform:capitalize;">${escapeHtml(order.status)}</span>
+              </div>
+              <div class="detail-row">
+                <span class="label">Est. Delivery</span>
+                <span class="value">${(order.items && order.items.every(i => (i.productType && i.productType.toLowerCase().includes('digital')) || (i.category && i.category.toLowerCase().includes('digital'))))
+                  ? 'Instant Email Delivery'
+                  : escapeHtml(order.estimatedDelivery) + (order.deliveryPromise ? ' · ' + escapeHtml(order.deliveryPromise) : '')}</span>
+              </div>
+            </div>
+            ${order.preferredCourier ? `
+            <p class="courier-pending">
+              <i class="fa-solid fa-truck-fast" aria-hidden="true"></i>
+              You asked for <strong>${escapeHtml(order.preferredCourier)}</strong>. We'll check whether it
+              works for your PIN code and get in touch if there's an additional charge — nothing extra has
+              been charged, and nothing will be until you agree to it. If it isn't possible we'll send your
+              order on standard delivery and let you know.
+            </p>` : ''}
+            <p class="hub-note">Designed at our Patna studio · dispatched from our Delhi distribution centre</p>
+          </div>
+
+          <div class="confirmation-actions">
+            <a href="index.html" class="hero-cta">Continue Shopping</a>
+            <a href="${API_BASE}/orders/${encodeURIComponent(orderId)}/invoice" target="_blank" rel="noopener noreferrer" class="outline-btn"><i class="fa-solid fa-file-pdf"></i> Download Invoice</a>
+          </div>
+        `;
+      } catch (err) {
+        card.innerHTML = `
+          <div class="error-state">
+            <i class="fa-solid fa-circle-exclamation" style="font-size:3rem;color:var(--sale-red);margin-bottom:16px;display:block;"></i>
+            <h2>Could Not Load Order</h2>
+            <p style="color:var(--text-secondary);margin:8px 0 24px;">${err.message}<br><small>Make sure the backend server is running on port 5500.</small></p>
+            <div class="confirmation-actions">
+              <a href="index.html" class="hero-cta">Back to Store</a>
+            </div>
+          </div>
+        `;
+      }
+    });
+  </script>
+
+</body>
+</html>

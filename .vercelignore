@@ -1,0 +1,13 @@
+Backend/
+_archive/
+node_modules/
+.git/
+.pages-site/
+.pages-site-check/
+*.py
+*.bak
+public/p/
+._*
+**._*
+.DS_Store
+**/.DS_Store

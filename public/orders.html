@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <script src="api-base.js?v=2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script src="theme.js?v=2"></script>
+  <title>My Orders — Track Shipments & Purchases | Patliputra Traders</title>
+  <meta name="description" content="View and manage your Patliputra Traders orders, live courier shipment tracking, tax invoices, replacements, and reviews.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="48x48">
+  <link rel="icon" href="/assets/misc/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/misc/favicon-48x48.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/misc/favicon-192x192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <script src="https://kit.fontawesome.com/84df58c29a.js" crossorigin="anonymous" defer></script>
+  
+  <link rel="stylesheet" href="styles.css?v=46">
+  <link rel="stylesheet" href="account.css?v=1">
+
+  <script src="global-navbar.js?v=21" defer></script>
+  <script src="lenis.min.js"></script>
+  <script src="scroll.js"></script>
+  <script src="site-overlays.js?v=3" defer></script>
+  <script src="global-footer.js?v=5" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="account.js?v=1"></script>
+</head>
+<body>
+  <global-navbar></global-navbar>
+
+  <main class="account-page">
+    <div class="account-layout">
+      <!-- Left Sidebar (Flipkart Style) -->
+      <aside class="account-sidebar">
+        <!-- User Greeting Card -->
+        <div class="account-user-card">
+          <div class="account-avatar" id="account-sidebar-avatar">B</div>
+          <div class="account-greeting-meta">
+            <span class="account-greeting-label">Hello,</span>
+            <span class="account-user-name" id="account-sidebar-name">Art Collector</span>
+          </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="account-nav-card" aria-label="Account navigation">
+          <!-- Section 1: Orders -->
+          <div class="account-nav-section">
+            <div class="account-nav-item active">
+              <a href="orders.html">
+                <span style="display:flex; align-items:center; gap:12px;">
+                  <i class="fa-solid fa-box-open" style="color:var(--accent);"></i>
+                  <span>MY ORDERS</span>
+                </span>
+                <span class="account-nav-badge" id="sidebar-orders-badge" style="display:none;">0</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Section 2: Account Settings -->
+          <div class="account-nav-section">
+            <div class="account-nav-header">
+              <i class="fa-regular fa-user"></i>
+              <span>ACCOUNT SETTINGS</span>
+            </div>
+            <ul class="account-nav-list">
+              <li class="account-nav-item">
+                <a href="profile.html#profile">Profile Information</a>
+              </li>
+              <li class="account-nav-item">
+                <a href="profile.html#addresses">Manage Addresses</a>
+              </li>
+              <li class="account-nav-item">
+                <a href="profile.html#password">Change Password</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Section 3: Logout -->
+          <div class="account-nav-section">
+            <button type="button" class="account-logout-btn" onclick="BrushAccount.logout()">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span>Logout</span>
+            </button>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Right Content Area -->
+      <section class="account-main" id="orders-main-content">
+        <!-- Main Orders List View -->
+        <div id="orders-list-view">
+          <div class="account-panel">
+            <div class="account-panel-header">
+              <h1 class="account-panel-title">
+                <span>My Orders</span>
+                <span id="orders-total-count" style="font-size:0.85rem; color:var(--text-muted); font-weight:600;"></span>
+              </h1>
+            </div>
+
+            <!-- Toolbar: Search & Filter Chips -->
+            <div class="orders-toolbar">
+              <div class="orders-search-wrap">
+                <i class="fa-solid fa-magnifying-glass orders-search-icon"></i>
+                <input type="text" id="orders-search-input" class="orders-search-input" placeholder="Search orders by product name, variant, or order ID..." autocomplete="off">
+                <button type="button" id="orders-search-btn" class="orders-search-btn">Search</button>
+              </div>
+
+              <div class="orders-filter-chips" role="tablist">
+                <button type="button" class="orders-filter-chip active" data-filter="all">
+                  All Orders <span class="chip-count" id="count-all">0</span>
+                </button>
+                <button type="button" class="orders-filter-chip" data-filter="in_progress">
+                  In Progress <span class="chip-count" id="count-in_progress">0</span>
+                </button>
+                <button type="button" class="orders-filter-chip" data-filter="delivered">
+                  Delivered <span class="chip-count" id="count-delivered">0</span>
+                </button>
+                <button type="button" class="orders-filter-chip" data-filter="cancelled">
+                  Cancelled <span class="chip-count" id="count-cancelled">0</span>
+                </button>
+                <button type="button" class="orders-filter-chip" data-filter="returned">
+                  Replacements <span class="chip-count" id="count-returned">0</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Orders Loading State -->
+            <div id="orders-loading" style="text-align:center; padding:50px 0; color:var(--text-muted);">
+              <i class="fa-solid fa-circle-notch fa-spin" style="font-size:2rem; color:var(--accent); margin-bottom:12px;"></i>
+              <p>Fetching your orders & tracking status...</p>
+            </div>
+
+            <!-- Orders List Container -->
+            <div id="orders-container" class="orders-list" style="display:none;"></div>
+
+            <!-- Empty State -->
+            <div id="orders-empty" class="orders-empty-state" style="display:none;">
+              <i class="fa-solid fa-box-open empty-icon"></i>
+              <h3 class="empty-title">No orders found</h3>
+              <p class="empty-desc">You haven't placed any orders yet, or no orders match your search criteria.</p>
+              <a href="all_products.html" class="btn-action btn-action-primary" style="margin-top:8px;">
+                <i class="fa-solid fa-bag-shopping"></i> Explore Art Catalog
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Single Order View (Flipkart Style) -->
+        <div id="order-detail-view" style="display:none;">
+          <div class="order-detail-header-nav">
+            <button type="button" class="back-link" onclick="showOrdersList()">
+              <i class="fa-solid fa-arrow-left"></i> Back to all orders
+            </button>
+            <div id="detail-quick-actions" style="display:flex; gap:10px;"></div>
+          </div>
+
+          <div id="order-detail-content"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modals Container -->
+  <!-- 1. Cancellation Modal -->
+  <div class="account-modal-overlay" id="modal-cancel-order" data-lenis-prevent>
+    <div class="account-modal-box">
+      <div class="account-modal-header">
+        <h3 class="account-modal-title">Cancel Order</h3>
+        <button type="button" class="account-modal-close" onclick="closeModal('modal-cancel-order')">&times;</button>
+      </div>
+      <div class="account-modal-body">
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.4;">
+          Are you sure you want to cancel order <strong id="cancel-order-id-label"></strong>?
+        </p>
+        <div class="profile-field-group">
+          <label class="profile-field-label">Reason for cancellation *</label>
+          <select id="cancel-reason-select" class="profile-input" style="cursor:pointer;">
+            <option value="" disabled selected>Select a reason</option>
+            <option value="Ordered by mistake">Ordered by mistake</option>
+            <option value="Expected delivery date is too late">Expected delivery date is too late</option>
+            <option value="Found cheaper elsewhere / Changed mind">Found cheaper elsewhere / Changed mind</option>
+            <option value="Need to change shipping address or phone">Need to change shipping address or phone</option>
+            <option value="Need to change product size / variant">Need to change product size / variant</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="profile-field-group">
+          <label class="profile-field-label">Additional Comments (Optional)</label>
+          <textarea id="cancel-comments-input" class="profile-input" rows="3" placeholder="Tell us more about why you are cancelling..."></textarea>
+        </div>
+      </div>
+      <div class="account-modal-footer">
+        <button type="button" class="btn-action btn-action-subtle" onclick="closeModal('modal-cancel-order')">Keep Order</button>
+        <button type="button" class="btn-action btn-action-danger" id="btn-confirm-cancel">Confirm Cancellation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Replacement Modal -->
+  <div class="account-modal-overlay" id="modal-return-order" data-lenis-prevent>
+    <div class="account-modal-box">
+      <div class="account-modal-header">
+        <h3 class="account-modal-title">Request Free Replacement</h3>
+        <button type="button" class="account-modal-close" onclick="closeModal('modal-return-order')">&times;</button>
+      </div>
+      <div class="account-modal-body">
+        <div style="background:var(--bg-primary); border:1px solid var(--border); border-radius:8px; padding:12px 14px; margin-bottom:16px; font-size:0.84rem; line-height:1.45; color:var(--text-muted);">
+          <strong style="color:var(--text-primary);"><i class="fa-solid fa-shield-halved" style="color:#16a34a;"></i> 100% Free Replacement Guarantee</strong><br>
+          Every print is made to order specifically for you. If your order arrived damaged, defective, or incorrect, our studio will reprint and dispatch a brand new replacement at zero cost.
+        </div>
+        <input type="hidden" id="return-type-input" name="return-type" value="replacement">
+        <div class="profile-field-group">
+          <label class="profile-field-label">Reason for replacement *</label>
+          <select id="return-reason-select" class="profile-input" style="cursor:pointer;">
+            <option value="" disabled selected>Select issue</option>
+            <option value="Damaged in transit / Broken glass or frame">Damaged in transit / Broken glass or frame</option>
+            <option value="Print quality or color defect">Print quality or color defect</option>
+            <option value="Wrong item or size received">Wrong item or size received</option>
+            <option value="Missing posters or items from combo pack">Missing posters or items from combo pack</option>
+            <option value="Other defect or issue">Other defect or issue</option>
+          </select>
+        </div>
+        <div class="profile-field-group">
+          <label class="profile-field-label">Details / Issue Description *</label>
+          <textarea id="return-comments-input" class="profile-input" rows="3" placeholder="Please describe the damage or defect in detail to expedite your replacement..."></textarea>
+        </div>
+      </div>
+      <div class="account-modal-footer">
+        <button type="button" class="btn-action btn-action-subtle" onclick="closeModal('modal-return-order')">Cancel</button>
+        <button type="button" class="btn-action btn-action-primary" id="btn-confirm-return">Submit Replacement Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Rate & Review Modal -->
+  <div class="account-modal-overlay" id="modal-review-order" data-lenis-prevent>
+    <div class="account-modal-box">
+      <div class="account-modal-header">
+        <h3 class="account-modal-title">Rate & Review Order</h3>
+        <button type="button" class="account-modal-close" onclick="closeModal('modal-review-order')">&times;</button>
+      </div>
+      <div class="account-modal-body">
+        <div class="profile-field-group" style="align-items:center; text-align:center;">
+          <label class="profile-field-label">Your Rating</label>
+          <div class="star-rating-selector" id="modal-star-selector">
+            <button type="button" class="star-btn" data-star="1"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" data-star="2"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" data-star="3"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" data-star="4"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" data-star="5"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <span id="modal-star-hint" style="font-size:0.8rem; color:var(--text-muted); font-weight:600; margin-top:4px;">Select rating</span>
+        </div>
+        <div class="profile-field-group">
+          <label class="profile-field-label">Review Comments</label>
+          <textarea id="modal-review-comment" class="profile-input" rows="4" placeholder="How is the print sharpness, paper thickness, or delivery experience?"></textarea>
+        </div>
+        <div class="profile-field-group">
+          <label class="profile-field-label">Photos (Up to 5)</label>
+          <input type="file" id="modal-review-photos" accept="image/*" multiple style="font-size:0.85rem;">
+          <div id="modal-review-photo-previews" style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;"></div>
+        </div>
+      </div>
+      <div class="account-modal-footer">
+        <button type="button" class="btn-action btn-action-subtle" onclick="closeModal('modal-review-order')">Cancel</button>
+        <button type="button" class="btn-action btn-action-primary" id="btn-submit-review">Save Review</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Need Help / Support Modal -->
+  <div class="account-modal-overlay" id="modal-support-order" data-lenis-prevent>
+    <div class="account-modal-box">
+      <div class="account-modal-header">
+        <h3 class="account-modal-title">Need Help with Order</h3>
+        <button type="button" class="account-modal-close" onclick="closeModal('modal-support-order')">&times;</button>
+      </div>
+      <div class="account-modal-body">
+        <div class="profile-field-group">
+          <label class="profile-field-label">What do you need assistance with? *</label>
+          <select id="support-issue-select" class="profile-input">
+            <option value="Delivery status / Tracking delay">Delivery status / Tracking delay</option>
+            <option value="Wrong product received">Wrong product received</option>
+            <option value="Damaged in transit">Damaged in transit</option>
+            <option value="Invoice or payment enquiry">Invoice or payment enquiry</option>
+            <option value="Cancellation / Address change">Cancellation / Address change</option>
+            <option value="Other question">Other question</option>
+          </select>
+        </div>
+        <div class="profile-field-group">
+          <label class="profile-field-label">Message Details *</label>
+          <textarea id="support-message-input" class="profile-input" rows="4" placeholder="Please describe your query with order details..."></textarea>
+        </div>
+      </div>
+      <div class="account-modal-footer">
+        <button type="button" class="btn-action btn-action-subtle" onclick="closeModal('modal-support-order')">Close</button>
+        <button type="button" class="btn-action btn-action-primary" id="btn-submit-support">Send Message</button>
+      </div>
+    </div>
+  </div>
+
+  <site-overlays></site-overlays>
+  <global-footer></global-footer>
+
+  <!-- Client-side Orders Controller -->
+  <script>
+    (function() {
+      let allOrders = [];
+      let currentFilter = 'all';
+      let activeOrder = null;
+      let reviewStarValue = 5;
+      let reviewImages = [];
+
+      // Modal helpers
+      window.openModal = function(id) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          if (window.lenis && typeof window.lenis.stop === 'function') window.lenis.stop();
+        }
+      };
+      window.closeModal = function(id) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.remove('active');
+          document.body.style.overflow = '';
+          if (window.lenis && typeof window.lenis.start === 'function') window.lenis.start();
+        }
+      };
+
+      // Status helper
+      function getStatusInfo(order) {
+        const rawStatus = (order.status || 'Placed').toLowerCase();
+        if (order.cancellation || rawStatus.includes('cancel')) {
+          return {
+            dot: 'cancelled',
+            text: 'Cancelled',
+            dateText: `Cancelled on ${BrushAccount.formatDate(order.cancellation?.cancelledAt || order.updatedAt || order.createdAt)}`,
+            inProgress: false
+          };
+        }
+        if (order.returnRequest || rawStatus.includes('return') || rawStatus.includes('refund') || rawStatus.includes('replace')) {
+          return {
+            dot: 'returned',
+            text: 'Replacement Requested',
+            dateText: `Status: ${order.returnRequest?.status || 'In Review'}`,
+            inProgress: true
+          };
+        }
+        if (rawStatus.includes('deliver')) {
+          return {
+            dot: 'delivered',
+            text: 'Delivered',
+            dateText: `Delivered on ${BrushAccount.formatDate(order.deliveredAt || order.updatedAt || order.createdAt)}`,
+            inProgress: false
+          };
+        }
+        if (rawStatus.includes('ship') || rawStatus.includes('transit') || rawStatus.includes('out for delivery')) {
+          return {
+            dot: 'transit',
+            text: rawStatus.includes('out') ? 'Out for Delivery' : 'In Transit (Shipped)',
+            dateText: `Courier: ${order.courierPartner || 'DTDC'}`,
+            inProgress: true
+          };
+        }
+        // Placed / Confirmed / Processing
+        return {
+          dot: 'confirmed',
+          text: rawStatus.includes('pack') ? 'Packed & Processing' : (rawStatus.includes('confirm') ? 'Order Confirmed' : 'Order Placed'),
+          dateText: `Placed on ${BrushAccount.formatDate(order.createdAt)}`,
+          inProgress: true
+        };
+      }
+
+      // Check URL query parameters for deep-linking
+      function checkUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        const orderId = params.get('id');
+        if (orderId && allOrders.length > 0) {
+          const match = allOrders.find(o => String(o.orderId || o.id) === orderId);
+          if (match) {
+            renderOrderDetail(match);
+          }
+        }
+      }
+
+      // Load Orders from Server
+      async function loadOrders() {
+        const user = BrushAccount.getUser();
+        if (!user) {
+          BrushAccount.requireAuth();
+          return;
+        }
+
+        const loadingEl = document.getElementById('orders-loading');
+        const container = document.getElementById('orders-container');
+        const emptyEl = document.getElementById('orders-empty');
+
+        try {
+          const res = await BrushAccount.apiFetch(`/orders/user/${user.userId || user.email}`);
+          if (!res.ok) throw new Error('Failed to load orders');
+          
+          allOrders = await res.json();
+          if (!Array.isArray(allOrders)) allOrders = [];
+
+          // Sort orders by creation date descending
+          allOrders.sort((a, b) => {
+            const timeA = a.createdAt?._seconds ? a.createdAt._seconds * 1000 : new Date(a.createdAt || 0).getTime();
+            const timeB = b.createdAt?._seconds ? b.createdAt._seconds * 1000 : new Date(b.createdAt || 0).getTime();
+            return timeB - timeA;
+          });
+
+          // Update badges
+          updateFilterCounts();
+
+          loadingEl.style.display = 'none';
+
+          if (allOrders.length === 0) {
+            emptyEl.style.display = 'flex';
+            container.style.display = 'none';
+          } else {
+            container.style.display = 'flex';
+            renderOrdersList();
+            checkUrlParams();
+          }
+        } catch (err) {
+          loadingEl.innerHTML = `<p style="color:var(--sale-red);"><i class="fa-solid fa-circle-exclamation"></i> Error loading orders: ${BrushAccount.escapeHtml(err.message)}</p>`;
+        }
+      }
+
+      // Update Filter Counts
+      function updateFilterCounts() {
+        const counts = {
+          all: allOrders.length,
+          in_progress: 0,
+          delivered: 0,
+          cancelled: 0,
+          returned: 0
+        };
+
+        allOrders.forEach(o => {
+          const info = getStatusInfo(o);
+          if (info.dot === 'cancelled') counts.cancelled++;
+          else if (info.dot === 'returned') counts.returned++;
+          else if (info.dot === 'delivered') counts.delivered++;
+          else counts.in_progress++;
+        });
+
+        document.getElementById('count-all').textContent = counts.all;
+        document.getElementById('count-in_progress').textContent = counts.in_progress;
+        document.getElementById('count-delivered').textContent = counts.delivered;
+        document.getElementById('count-cancelled').textContent = counts.cancelled;
+        document.getElementById('count-returned').textContent = counts.returned;
+
+        const badge = document.getElementById('sidebar-orders-badge');
+        if (badge) {
+          badge.textContent = counts.all;
+          badge.style.display = counts.all > 0 ? 'inline-block' : 'none';
+        }
+        const totalCount = document.getElementById('orders-total-count');
+        if (totalCount) {
+          totalCount.textContent = `(${counts.all} ${counts.all === 1 ? 'order' : 'orders'})`;
+        }
+      }
+
+      // Render Orders List
+      function renderOrdersList() {
+        const container = document.getElementById('orders-container');
+        const emptyEl = document.getElementById('orders-empty');
+        const query = (document.getElementById('orders-search-input').value || '').trim().toLowerCase();
+
+        const filtered = allOrders.filter(o => {
+          // Status filter
+          const info = getStatusInfo(o);
+          if (currentFilter === 'in_progress' && !info.inProgress) return false;
+          if (currentFilter === 'delivered' && info.dot !== 'delivered') return false;
+          if (currentFilter === 'cancelled' && info.dot !== 'cancelled') return false;
+          if (currentFilter === 'returned' && info.dot !== 'returned') return false;
+
+          // Search query filter
+          if (query) {
+            const orderId = String(o.orderId || '').toLowerCase();
+            const items = o.items || [];
+            const matchesId = orderId.includes(query);
+            const matchesItem = items.some(i => (i.name || '').toLowerCase().includes(query) || (i.size || '').toLowerCase().includes(query));
+            if (!matchesId && !matchesItem) return false;
+          }
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          container.style.display = 'none';
+          emptyEl.style.display = 'flex';
+          return;
+        }
+
+        emptyEl.style.display = 'none';
+        container.style.display = 'flex';
+
+        container.innerHTML = filtered.map(order => {
+          const orderId = order.orderId || order.id || '';
+          const info = getStatusInfo(order);
+          const items = order.items || [];
+          const firstItem = items[0] || {};
+          const isEligibleCancel = !order.cancellation && ['placed', 'confirmed', 'processing', 'packed'].includes((order.status || '').toLowerCase());
+          const isEligibleReturn = info.dot === 'delivered';
+          const hasReview = !!order.review;
+
+          return `
+            <div class="order-card" id="order-card-${BrushAccount.escapeHtml(orderId)}">
+              <div class="order-card-header">
+                <div class="order-header-left">
+                  <span class="order-meta-item">Order <strong>#${BrushAccount.escapeHtml(orderId)}</strong></span>
+                  <span class="order-meta-item">Placed on <strong>${BrushAccount.formatDate(order.createdAt)}</strong></span>
+                  <span class="order-meta-item">Total <strong>${BrushAccount.formatINR(order.total)}</strong></span>
+                </div>
+                <div class="order-header-right">
+                  <a href="/api/orders/${encodeURIComponent(orderId)}/invoice" target="_blank" class="btn-action btn-action-subtle" title="Download Tax Invoice">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> Invoice
+                  </a>
+                </div>
+              </div>
+
+              <div class="order-card-body" onclick="window.selectOrder('${BrushAccount.escapeHtml(orderId)}')">
+                <div class="order-items-summary">
+                  ${items.slice(0, 2).map(item => `
+                    <div class="order-item-row">
+                      <div class="order-item-thumb">
+                        <img src="${BrushAccount.escapeHtml(item.image || '/img/site/patliputra-logo.png')}" alt="${BrushAccount.escapeHtml(item.name || 'Lighting Fixture')}" loading="lazy">
+                        ${item.quantity > 1 ? `<span class="qty-badge">${item.quantity}x</span>` : ''}
+                      </div>
+                      <div class="order-item-info">
+                        <h4 class="order-item-title">${BrushAccount.escapeHtml(item.name || 'Lighting Fixture')}</h4>
+                        <div class="order-item-variants">
+                          ${item.size ? `<span>Size: <strong>${BrushAccount.escapeHtml(item.size)}</strong></span>` : ''}
+                          ${item.material ? `<span>&bull; Material: <strong>${BrushAccount.escapeHtml(item.material)}</strong></span>` : ''}
+                          ${item.customPosters ? `<span>&bull; <strong>${item.customPosters.length} Custom Posters</strong></span>` : ''}
+                        </div>
+                        <div class="order-item-price">${BrushAccount.formatINR(item.subtotal || item.price * (item.quantity || 1))}</div>
+                      </div>
+                    </div>
+                  `).join('')}
+                  ${items.length > 2 ? `<div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">+ ${items.length - 2} more item${items.length - 2 > 1 ? 's' : ''}</div>` : ''}
+                </div>
+
+                <div class="order-status-col">
+                  <div class="order-status-pill">
+                    <span class="status-dot ${info.dot}"></span>
+                    <span class="status-text ${info.dot}">${info.text}</span>
+                  </div>
+                  <span class="order-status-subtext">${info.dateText}</span>
+                </div>
+              </div>
+
+              <div class="order-card-actions">
+                <button type="button" class="btn-action btn-action-outline" onclick="window.selectOrder('${BrushAccount.escapeHtml(orderId)}')">
+                  <i class="fa-solid fa-eye"></i> View Details & Track
+                </button>
+                <a href="track.html?awb=${encodeURIComponent(order.awbNumber || orderId)}&orderId=${encodeURIComponent(orderId)}${order.customer?.email ? `&verify=${encodeURIComponent(order.customer.email)}` : ''}" target="_blank" class="btn-action btn-action-primary">
+                  <i class="fa-solid fa-location-crosshairs"></i> Track Shipment
+                </a>
+                ${isEligibleReturn ? `
+                  <button type="button" class="btn-action btn-action-outline" onclick="window.openReviewModal('${BrushAccount.escapeHtml(orderId)}')">
+                    <i class="fa-solid fa-star" style="color:#fbbf24;"></i> ${hasReview ? 'Edit Review' : 'Rate & Review'}
+                  </button>
+                  <button type="button" class="btn-action btn-action-subtle" onclick="window.openReturnModal('${BrushAccount.escapeHtml(orderId)}')">
+                    <i class="fa-solid fa-arrows-rotate"></i> Request Replacement
+                  </button>
+                ` : ''}
+                ${isEligibleCancel ? `
+                  <button type="button" class="btn-action btn-action-danger" onclick="window.openCancelModal('${BrushAccount.escapeHtml(orderId)}')">
+                    Cancel Order
+                  </button>
+                ` : ''}
+                <button type="button" class="btn-action btn-action-subtle" onclick="window.openSupportModal('${BrushAccount.escapeHtml(orderId)}')">
+                  <i class="fa-regular fa-circle-question"></i> Need Help?
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Show Details View for Single Order
+      window.selectOrder = function(orderId) {
+        const order = allOrders.find(o => String(o.orderId || o.id) === orderId);
+        if (!order) return;
+        renderOrderDetail(order);
+      };
+
+      function renderOrderDetail(order) {
+        activeOrder = order;
+        const orderId = order.orderId || order.id || '';
+        const info = getStatusInfo(order);
+        const items = order.items || [];
+        const isEligibleCancel = !order.cancellation && ['placed', 'confirmed', 'processing', 'packed'].includes((order.status || '').toLowerCase());
+        const isEligibleReturn = info.dot === 'delivered';
+        const hasReview = !!order.review;
+
+        // Update history URL without reloading
+        const url = new URL(window.location);
+        url.searchParams.set('id', orderId);
+        window.history.pushState({}, '', url);
+
+        document.getElementById('orders-list-view').style.display = 'none';
+        document.getElementById('order-detail-view').style.display = 'block';
+
+        // Quick Actions in header
+        document.getElementById('detail-quick-actions').innerHTML = `
+          <a href="/api/orders/${encodeURIComponent(orderId)}/invoice" target="_blank" class="btn-action btn-action-outline">
+            <i class="fa-solid fa-file-invoice-dollar"></i> Download Invoice (PDF)
+          </a>
+          <button type="button" class="btn-action btn-action-subtle" onclick="window.openSupportModal('${BrushAccount.escapeHtml(orderId)}')">
+            <i class="fa-regular fa-circle-question"></i> Need Help?
+          </button>
+        `;
+
+        // Tracking Stepper Stages
+        const rawStatus = (order.status || 'Placed').toLowerCase();
+        const isCancelled = info.dot === 'cancelled';
+        
+        let stepsHtml = '';
+        if (isCancelled) {
+          stepsHtml = `
+            <div class="stepper-step completed">
+              <div class="stepper-node"><i class="fa-solid fa-check"></i></div>
+              <span class="stepper-label">Order Placed</span>
+              <span class="stepper-timestamp">${BrushAccount.formatDateTime(order.createdAt)}</span>
+            </div>
+            <div class="stepper-step active" style="color:var(--sale-red);">
+              <div class="stepper-node" style="background:var(--sale-red); border-color:var(--sale-red); color:#fff;"><i class="fa-solid fa-xmark"></i></div>
+              <span class="stepper-label" style="color:var(--sale-red);">Cancelled</span>
+              <span class="stepper-timestamp">${BrushAccount.formatDateTime(order.cancellation?.cancelledAt || order.updatedAt)}</span>
+            </div>
+          `;
+        } else {
+          // Standard stages: Placed -> Confirmed -> Packed -> Shipped -> Out for Delivery -> Delivered
+          const stages = [
+            { key: 'placed', label: 'Order Placed', time: order.createdAt },
+            { key: 'confirmed', label: 'Confirmed', time: order.confirmedAt || (order.status !== 'Placed' ? order.createdAt : null) },
+            { key: 'packed', label: 'Packed', time: order.packedAt },
+            { key: 'shipped', label: 'Shipped', time: order.shippedAt },
+            { key: 'out_for_delivery', label: 'Out for Delivery', time: order.outForDeliveryAt },
+            { key: 'delivered', label: 'Delivered', time: order.deliveredAt }
+          ];
+
+          // Determine current stage index
+          let activeIndex = 0;
+          if (rawStatus.includes('deliver')) activeIndex = 5;
+          else if (rawStatus.includes('out')) activeIndex = 4;
+          else if (rawStatus.includes('ship') || rawStatus.includes('transit')) activeIndex = 3;
+          else if (rawStatus.includes('pack') || rawStatus.includes('process')) activeIndex = 2;
+          else if (rawStatus.includes('confirm')) activeIndex = 1;
+
+          stepsHtml = stages.map((st, idx) => {
+            const isCompleted = idx < activeIndex || (idx === activeIndex && activeIndex === 5);
+            const isActive = idx === activeIndex && activeIndex < 5;
+            const cls = isCompleted ? 'completed' : (isActive ? 'active' : '');
+            return `
+              <div class="stepper-step ${cls}">
+                <div class="stepper-node">
+                  ${isCompleted ? '<i class="fa-solid fa-check"></i>' : (isActive ? '<i class="fa-solid fa-circle-dot"></i>' : (idx + 1))}
+                </div>
+                <span class="stepper-label">${st.label}</span>
+                ${st.time ? `<span class="stepper-timestamp">${BrushAccount.formatDateTime(st.time)}</span>` : ''}
+              </div>
+            `;
+          }).join('');
+        }
+
+        // Snapshot address from order
+        const addr = order.shippingAddress || order.address || order.customer?.address || {};
+        const cust = order.customer || {};
+        const recipientName = addr.name || cust.name || 'Customer';
+        const recipientPhone = addr.phone || cust.phone || '';
+        const addressLines = [
+          addr.street || addr.address || addr.addressLine1 || '',
+          addr.addressLine2 || addr.area || '',
+          addr.landmark ? `Landmark: ${addr.landmark}` : '',
+          `${addr.city || ''}${addr.state ? `, ${addr.state}` : ''} ${addr.pincode ? `— ${addr.pincode}` : ''}`
+        ].filter(Boolean).join('<br>');
+
+        document.getElementById('order-detail-content').innerHTML = `
+          <!-- Order Tracking Card -->
+          <div class="order-detail-card">
+            <h3 class="order-detail-card-title">
+              <span>Order Tracking</span>
+              <span class="order-status-pill">
+                <span class="status-dot ${info.dot}"></span>
+                <span class="status-text ${info.dot}">${info.text}</span>
+              </span>
+            </h3>
+
+            <div class="tracking-stepper-wrap">
+              <div class="tracking-stepper">${stepsHtml}</div>
+            </div>
+
+            <!-- Courier Partner Box -->
+            <div class="tracking-partner-box">
+              <div class="tracking-partner-left">
+                <span class="courier-badge"><i class="fa-solid fa-truck-fast"></i> ${BrushAccount.escapeHtml(order.courierPartner || 'DTDC')}</span>
+                <div class="tracking-partner-meta">
+                  Transit AWB: <strong>${BrushAccount.escapeHtml(order.awbNumber || orderId)}</strong>
+                  ${order.expectedDeliveryDate ? ` &bull; Expected by: <strong>${BrushAccount.formatDate(order.expectedDeliveryDate)}</strong>` : ''}
+                </div>
+              </div>
+              <a href="track.html?awb=${encodeURIComponent(order.awbNumber || orderId)}&orderId=${encodeURIComponent(orderId)}${order.customer?.email ? `&verify=${encodeURIComponent(order.customer.email)}` : ''}" target="_blank" class="btn-action btn-action-primary">
+                <i class="fa-solid fa-location-crosshairs"></i> Open Live Radar Tracking
+              </a>
+            </div>
+          </div>
+
+          <!-- 2-Column Grid: Items & Order Summary -->
+          <div class="order-detail-grid">
+            <!-- Left: Ordered Items -->
+            <div>
+              <div class="order-detail-card">
+                <h3 class="order-detail-card-title">Items Ordered (${items.length})</h3>
+                <div style="display:flex; flex-direction:column; gap:16px;">
+                  ${items.map(item => `
+                    <div style="display:flex; gap:16px; padding-bottom:16px; border-bottom:1px solid var(--border-light);">
+                      <div class="order-item-thumb" style="width:80px; height:100px;">
+                        <img src="${BrushAccount.escapeHtml(item.image || '/assets/misc/poster-placeholder.webp')}" alt="${BrushAccount.escapeHtml(item.name || 'Poster')}" loading="lazy">
+                        ${item.quantity > 1 ? `<span class="qty-badge">${item.quantity}x</span>` : ''}
+                      </div>
+                      <div style="flex:1;">
+                        <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:4px;">${BrushAccount.escapeHtml(item.name || 'Art Print')}</h4>
+                        <div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:6px;">
+                          ${item.size ? `Size: <strong>${BrushAccount.escapeHtml(item.size)}</strong> &bull; ` : ''}
+                          ${item.material ? `Material: <strong>${BrushAccount.escapeHtml(item.material)}</strong> &bull; ` : ''}
+                          Qty: <strong>${item.quantity || 1}</strong>
+                        </div>
+                        <div style="font-size:1rem; font-weight:700; color:var(--text-primary);">
+                          ${BrushAccount.formatINR(item.subtotal || item.price * (item.quantity || 1))}
+                        </div>
+
+                        ${Array.isArray(item.customPosters) && item.customPosters.length > 0 ? `
+                          <div style="margin-top:10px; background:var(--bg-primary); padding:10px; border-radius:6px; border:1px solid var(--border);">
+                            <div style="font-size:0.78rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">
+                              <i class="fa-solid fa-layer-group"></i> Pack Posters (${item.customPosters.length} Designs):
+                            </div>
+                            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                              ${item.customPosters.map((cp, idx) => `
+                                <div style="position:relative; width:40px; height:52px; border-radius:4px; overflow:hidden; border:1px solid var(--border);" title="${BrushAccount.escapeHtml(cp.name || cp.title || `Poster ${idx+1}`)} — Size: ${BrushAccount.escapeHtml(cp.size || 'A5')}">
+                                  <img src="${BrushAccount.escapeHtml(cp.image)}" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+                                  <span style="position:absolute; bottom:1px; right:1px; background:rgba(0,0,0,0.8); color:#fff; font-size:0.55rem; font-weight:700; padding:1px 3px; border-radius:2px;">${BrushAccount.escapeHtml(cp.size || 'A5')}</span>
+                                </div>
+                              `).join('')}
+                            </div>
+                          </div>
+                        ` : ''}
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+
+                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+                  ${isEligibleReturn ? `
+                    <button type="button" class="btn-action btn-action-outline" onclick="window.openReviewModal('${BrushAccount.escapeHtml(orderId)}')">
+                      <i class="fa-solid fa-star" style="color:#fbbf24;"></i> ${hasReview ? 'Edit Review' : 'Rate & Review'}
+                    </button>
+                    <button type="button" class="btn-action btn-action-subtle" onclick="window.openReturnModal('${BrushAccount.escapeHtml(orderId)}')">
+                      <i class="fa-solid fa-arrows-rotate"></i> Request Replacement
+                    </button>
+                  ` : ''}
+                  ${isEligibleCancel ? `
+                    <button type="button" class="btn-action btn-action-danger" onclick="window.openCancelModal('${BrushAccount.escapeHtml(orderId)}')">
+                      Cancel Order
+                    </button>
+                  ` : ''}
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Delivery Address & Price Breakdown -->
+            <div>
+              <!-- Delivery Address Snapshot -->
+              <div class="order-detail-card">
+                <h3 class="order-detail-card-title">Delivery Address</h3>
+                <div class="address-snapshot">
+                  <div class="address-snapshot-name">${BrushAccount.escapeHtml(recipientName)}</div>
+                  <div>${addressLines || 'No delivery address recorded'}</div>
+                  ${recipientPhone ? `<div class="address-snapshot-phone"><i class="fa-solid fa-phone" style="font-size:0.75rem;"></i> Phone: <strong>${BrushAccount.escapeHtml(recipientPhone)}</strong></div>` : ''}
+                </div>
+              </div>
+
+              <!-- Price Details -->
+              <div class="order-detail-card">
+                <h3 class="order-detail-card-title">Price Details</h3>
+                <div class="price-breakdown-table">
+                  <div class="price-breakdown-row">
+                    <span>List Price / Subtotal</span>
+                    <span>${BrushAccount.formatINR(order.subtotal || order.total)}</span>
+                  </div>
+                  ${order.discount ? `
+                    <div class="price-breakdown-row savings-row">
+                      <span>Discount</span>
+                      <span>-${BrushAccount.formatINR(order.discount)}</span>
+                    </div>
+                  ` : ''}
+                  <div class="price-breakdown-row">
+                    <span>Delivery Charges</span>
+                    <span style="color:#16a34a; font-weight:600;">FREE</span>
+                  </div>
+                  <div class="price-breakdown-row total-row">
+                    <span>Total Amount Paid</span>
+                    <span>${BrushAccount.formatINR(order.total)}</span>
+                  </div>
+                  <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">
+                    Payment Method: <strong>${BrushAccount.escapeHtml(order.paymentMethod || 'Razorpay / Prepaid')}</strong> &bull; Taxes included (GST)
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      window.showOrdersList = function() {
+        const url = new URL(window.location);
+        url.searchParams.delete('id');
+        window.history.pushState({}, '', url);
+
+        document.getElementById('order-detail-view').style.display = 'none';
+        document.getElementById('orders-list-view').style.display = 'block';
+        activeOrder = null;
+      };
+
+      // Filter Clicks
+      document.querySelectorAll('.orders-filter-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.orders-filter-chip').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.filter;
+          renderOrdersList();
+        });
+      });
+
+      // Search Inputs
+      const searchInput = document.getElementById('orders-search-input');
+      const searchBtn = document.getElementById('orders-search-btn');
+      searchInput.addEventListener('input', () => renderOrdersList());
+      searchBtn.addEventListener('click', () => renderOrdersList());
+
+      // Cancellation Modal logic
+      window.openCancelModal = function(orderId) {
+        const order = allOrders.find(o => String(o.orderId || o.id) === orderId);
+        if (!order) return;
+        activeOrder = order;
+        document.getElementById('cancel-order-id-label').textContent = '#' + orderId;
+        document.getElementById('cancel-reason-select').value = '';
+        document.getElementById('cancel-comments-input').value = '';
+        openModal('modal-cancel-order');
+      };
+
+      document.getElementById('btn-confirm-cancel').addEventListener('click', async () => {
+        if (!activeOrder) return;
+        const reason = document.getElementById('cancel-reason-select').value;
+        const comments = document.getElementById('cancel-comments-input').value.trim();
+        if (!reason) {
+          alert('Please select a reason for cancellation.');
+          return;
+        }
+
+        const btn = document.getElementById('btn-confirm-cancel');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cancelling...';
+
+        try {
+          const res = await BrushAccount.apiFetch(`/orders/${encodeURIComponent(activeOrder.orderId || activeOrder.id)}/cancel`, {
+            method: 'POST',
+            body: JSON.stringify({ reason, comments })
+          });
+
+          if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || 'Cancellation failed');
+          }
+
+          BrushAccount.showToast('Order cancelled successfully.');
+          closeModal('modal-cancel-order');
+          await loadOrders();
+          if (activeOrder) renderOrderDetail(activeOrder);
+        } catch (err) {
+          BrushAccount.showToast(err.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = 'Confirm Cancellation';
+        }
+      });
+
+      // Return Modal logic
+      window.openReturnModal = function(orderId) {
+        const order = allOrders.find(o => String(o.orderId || o.id) === orderId);
+        if (!order) return;
+        activeOrder = order;
+        document.getElementById('return-reason-select').value = '';
+        document.getElementById('return-comments-input').value = '';
+        openModal('modal-return-order');
+      };
+
+      document.getElementById('btn-confirm-return').addEventListener('click', async () => {
+        if (!activeOrder) return;
+        const reason = document.getElementById('return-reason-select').value;
+        const comments = document.getElementById('return-comments-input').value.trim();
+        const type = 'replacement';
+
+        if (!reason) {
+          alert('Please select a reason.');
+          return;
+        }
+        if (!comments) {
+          alert('Please provide details of the issue.');
+          return;
+        }
+
+        const btn = document.getElementById('btn-confirm-return');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+        try {
+          const res = await BrushAccount.apiFetch(`/orders/${encodeURIComponent(activeOrder.orderId || activeOrder.id)}/return`, {
+            method: 'POST',
+            body: JSON.stringify({ type, reason, comments, items: activeOrder.items })
+          });
+
+          if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || 'Submission failed');
+          }
+
+          BrushAccount.showToast('Replacement request submitted successfully.');
+          closeModal('modal-return-order');
+          await loadOrders();
+          if (activeOrder) renderOrderDetail(activeOrder);
+        } catch (err) {
+          BrushAccount.showToast(err.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = 'Submit Replacement Request';
+        }
+      });
+
+      // Review Modal logic
+      window.openReviewModal = function(orderId) {
+        const order = allOrders.find(o => String(o.orderId || o.id) === orderId);
+        if (!order) return;
+        activeOrder = order;
+        const rev = order.review || {};
+        reviewStarValue = rev.rating || 5;
+        reviewImages = Array.isArray(rev.images) ? [...rev.images] : [];
+
+        updateStarDisplay(reviewStarValue);
+        document.getElementById('modal-review-comment').value = rev.comment || '';
+        renderPhotoPreviews();
+        openModal('modal-review-order');
+      };
+
+      function updateStarDisplay(val) {
+        const starBtns = document.querySelectorAll('#modal-star-selector .star-btn');
+        starBtns.forEach(btn => {
+          const star = Number(btn.dataset.star);
+          if (star <= val) btn.classList.add('active');
+          else btn.classList.remove('active');
+        });
+        const hints = ['Select rating', '1 Star — Poor', '2 Stars — Fair', '3 Stars — Good', '4 Stars — Very Good', '5 Stars — Excellent'];
+        document.getElementById('modal-star-hint').textContent = hints[val] || '';
+      }
+
+      document.querySelectorAll('#modal-star-selector .star-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          reviewStarValue = Number(btn.dataset.star);
+          updateStarDisplay(reviewStarValue);
+        });
+      });
+
+      document.getElementById('modal-review-photos').addEventListener('change', function() {
+        const files = Array.from(this.files || []);
+        files.forEach(file => {
+          if (reviewImages.length >= 5) return;
+          const reader = new FileReader();
+          reader.onload = e => {
+            if (reviewImages.length < 5) {
+              reviewImages.push(e.target.result);
+              renderPhotoPreviews();
+            }
+          };
+          reader.readAsDataURL(file);
+        });
+        this.value = '';
+      });
+
+      function renderPhotoPreviews() {
+        const c = document.getElementById('modal-review-photo-previews');
+        c.innerHTML = reviewImages.map((src, i) => `
+          <div style="position:relative; width:50px; height:50px; border-radius:4px; overflow:hidden; border:1px solid var(--border);">
+            <img src="${src}" style="width:100%; height:100%; object-fit:cover;">
+            <button type="button" onclick="window.removeReviewPhoto(${i})" style="position:absolute; top:1px; right:1px; background:rgba(0,0,0,0.7); color:#fff; border:none; width:16px; height:16px; border-radius:50%; font-size:10px; cursor:pointer;">&times;</button>
+          </div>
+        `).join('');
+      }
+
+      window.removeReviewPhoto = function(i) {
+        reviewImages.splice(i, 1);
+        renderPhotoPreviews();
+      };
+
+      document.getElementById('btn-submit-review').addEventListener('click', async () => {
+        if (!activeOrder) return;
+        const comment = document.getElementById('modal-review-comment').value.trim();
+        const btn = document.getElementById('btn-submit-review');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+        try {
+          const res = await BrushAccount.apiFetch(`/orders/${encodeURIComponent(activeOrder.orderId || activeOrder.id)}/review`, {
+            method: 'POST',
+            body: JSON.stringify({ rating: reviewStarValue, comment, images: reviewImages })
+          });
+
+          if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || 'Failed to submit review');
+          }
+
+          BrushAccount.showToast('Thank you! Your review has been saved.');
+          closeModal('modal-review-order');
+          await loadOrders();
+          if (activeOrder) renderOrderDetail(activeOrder);
+        } catch (err) {
+          BrushAccount.showToast(err.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = 'Save Review';
+        }
+      });
+
+      // Support Modal logic
+      window.openSupportModal = function(orderId) {
+        const order = allOrders.find(o => String(o.orderId || o.id) === orderId);
+        if (!order) return;
+        activeOrder = order;
+        document.getElementById('support-message-input').value = '';
+        openModal('modal-support-order');
+      };
+
+      document.getElementById('btn-submit-support').addEventListener('click', async () => {
+        if (!activeOrder) return;
+        const issueType = document.getElementById('support-issue-select').value;
+        const message = document.getElementById('support-message-input').value.trim();
+
+        if (!message) {
+          alert('Please enter your query or issue.');
+          return;
+        }
+
+        const btn = document.getElementById('btn-submit-support');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+        try {
+          const user = BrushAccount.getUser();
+          const res = await BrushAccount.apiFetch(`/orders/${encodeURIComponent(activeOrder.orderId || activeOrder.id)}/support`, {
+            method: 'POST',
+            body: JSON.stringify({
+              issueType,
+              message,
+              email: user.email,
+              phone: user.phone || activeOrder.customer?.phone
+            })
+          });
+
+          if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || 'Failed to send support request');
+          }
+
+          BrushAccount.showToast('Your request has been submitted. Our team will contact you shortly.');
+          closeModal('modal-support-order');
+        } catch (err) {
+          BrushAccount.showToast(err.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = 'Send Message';
+        }
+      });
+
+      // Initial Load
+      document.addEventListener('DOMContentLoaded', loadOrders);
+    })();
+  </script>
+</body>
+</html>

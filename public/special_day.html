@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script src="api-base.js?v=2"></script>
+  <script src="theme.js?v=2"></script>
+  <title>Custom T-Shirts &amp; Event Poster Printing India – Brush</title>
+  <link rel="canonical" href="https://www.brush-art.in/special-day/">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="48x48">
+  <link rel="icon" href="/assets/misc/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/misc/favicon-48x48.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/misc/favicon-192x192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+  <meta name="description" content="Order personalized custom t-shirts, custom printed hoodies, and bespoke celebratory prints for special occasions, college fests, corporate teams and events in India.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.brush-art.in/special-day/">
+  <meta property="og:title" content="Custom T-Shirts &amp; Event Poster Printing India – Brush">
+  <meta property="og:description" content="Order personalized custom t-shirts, custom hoodies, and celebratory event prints across India.">
+  <meta property="og:image" content="https://www.brush-art.in/img/site/hero-10pack.webp">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.brush-art.in/special-day/">
+  <meta name="twitter:title" content="Custom T-Shirts &amp; Event Poster Printing India – Brush">
+  <meta name="twitter:description" content="Order personalized custom t-shirts, custom hoodies, and celebratory event prints across India.">
+  <meta name="twitter:image" content="https://www.brush-art.in/img/site/hero-10pack.webp">
+  <!-- The catalogue lives on Render; opening the connection during head
+       parsing removes a DNS + TLS handshake from the first API call,
+       which is the slowest request on every page. -->
+  <link rel="preconnect" href="https://brush-production.onrender.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <script src="https://kit.fontawesome.com/84df58c29a.js" crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="styles.css?v=38">
+  <style>
+
+    .b2b-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 24px;
+    }
+
+    .b2b-section-title {
+      font-family: var(--font-heading);
+      font-size: var(--text-h2);
+      font-weight: 800;
+      letter-spacing: var(--tracking-tight);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .b2b-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      margin-bottom: 5rem;
+    }
+
+    .b2b-showcase-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+    }
+
+    .b2b-showcase-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-color: var(--accent);
+    }
+
+    .b2b-showcase-image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .b2b-showcase-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .b2b-showcase-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--accent);
+      color: var(--on-accent);
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .b2b-showcase-content {
+      padding: 2.5rem;
+    }
+
+    .b2b-showcase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .b2b-showcase-header h3 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .b2b-showcase-desc {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 800px;
+      text-wrap: pretty;
+    }
+
+    .b2b-showcase-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .b2b-showcase-specs {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .b2b-showcase-specs span {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .b2b-showcase-specs i {
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .b2b-showcase-cta {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 1rem 2.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .b2b-showcase-cta:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 768px) {
+      .b2b-showcase-image-wrapper { height: 250px; }
+      .b2b-showcase-content { padding: 1.5rem; }
+      .b2b-showcase-header h3 { font-size: 1.5rem; }
+      .b2b-showcase-specs { flex-direction: column; gap: 0.8rem; }
+    }
+
+    .b2b-form-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .b2b-form-section h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .b2b-form-section > p {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .b2b-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .b2b-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .b2b-container { padding: 2.5rem 16px; }
+      .b2b-showcase { gap: 2.5rem; margin-bottom: 3.5rem; }
+      .b2b-form-section { padding: 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+      .b2b-form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 0.8rem 1rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255, 90, 90, 0.1);
+    }
+    .b2b-submit {
+      background: var(--accent);
+      color: var(--on-accent);
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .b2b-submit:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+
+    /* Multiselect checkboxes for product types */
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    .checkbox-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+  </style>
+  <script src="global-navbar.js?v=21" defer></script>
+  <script src="site-overlays.js?v=3" defer></script>
+  <script src="global-footer.js?v=4" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="interactions.js?v=1" defer></script>
+</head>
+<body>
+
+  <global-navbar></global-navbar>
+
+  <header class="page-header">
+    <div class="container">
+      <span class="section-tag">Moments & Memories</span>
+      <h1>Order designs for your special day</h1>
+      <p>Custom printed apparels, celebration cards, and accessories crafted to make your occasions unforgettable.</p>
+      <a href="#quote-form" class="hero-cta magnetic-btn">Get a Custom Quote</a>
+    </div>
+  </header>
+
+  <main id="main-content" class="b2b-container">
+    <h2 class="b2b-section-title">Curated for Your Occasion</h2>
+    <div class="b2b-showcase">
+      
+      <!-- Item 1: Apparels -->
+      <div class="b2b-showcase-card">
+        <div class="b2b-showcase-image-wrapper">
+          <img src="img/placeholders/cat-apparel.webp" width="1200" height="400" class="b2b-showcase-image" alt="Custom Apparels" loading="lazy" decoding="async">
+          <span class="b2b-showcase-badge">Custom</span>
+        </div>
+        <div class="b2b-showcase-content">
+          <div class="b2b-showcase-header">
+            <h3>Special Apparels</h3>
+          </div>
+          <p class="b2b-showcase-desc">High-quality custom t-shirts, hoodies, and matching outfits for weddings, birthdays, and group celebrations.</p>
+          <div class="b2b-showcase-footer">
+            <div class="b2b-showcase-specs">
+              <span><i class="fa-solid fa-shirt"></i> Premium Fabric</span>
+              <span><i class="fa-solid fa-palette"></i> Full Color Print</span>
+            </div>
+            <div class="b2b-cta-group" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="/style-options/?product=apparels" class="b2b-showcase-cta" style="background: transparent; color: var(--text-primary); border: 1px solid var(--border-color);">View Style Options</a>
+              <a href="#quote-form" class="b2b-showcase-cta">Request Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2: Cards -->
+      <div class="b2b-showcase-card">
+        <div class="b2b-showcase-image-wrapper">
+          <img src="img/placeholders/stickers-2.webp" width="1200" height="400" class="b2b-showcase-image" alt="Celebration Cards" loading="lazy" decoding="async" style="object-fit: cover;">
+          <span class="b2b-showcase-badge">Custom</span>
+        </div>
+        <div class="b2b-showcase-content">
+          <div class="b2b-showcase-header">
+            <h3>Greeting & Invitation Cards</h3>
+          </div>
+          <p class="b2b-showcase-desc">Beautifully printed invitations, thank-you cards, and greetings with premium paper stops and custom finishes.</p>
+          <div class="b2b-showcase-footer">
+            <div class="b2b-showcase-specs">
+              <span><i class="fa-solid fa-envelope-open-text"></i> Fine GSM Paper</span>
+              <span><i class="fa-solid fa-wand-magic-sparkles"></i> Spot UV / Foiled</span>
+            </div>
+            <div class="b2b-cta-group" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="/style-options/?product=cards" class="b2b-showcase-cta" style="background: transparent; color: var(--text-primary); border: 1px solid var(--border-color);">View Style Options</a>
+              <a href="#quote-form" class="b2b-showcase-cta">Request Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3: Accessories -->
+      <div class="b2b-showcase-card">
+        <div class="b2b-showcase-image-wrapper">
+          <img src="img/placeholders/collectibles-1.webp" width="1200" height="400" class="b2b-showcase-image" alt="Special Accessories" loading="lazy" decoding="async" style="object-fit: cover;">
+          <span class="b2b-showcase-badge">Custom</span>
+        </div>
+        <div class="b2b-showcase-content">
+          <div class="b2b-showcase-header">
+            <h3>Special Accessories</h3>
+          </div>
+          <p class="b2b-showcase-desc">From customized mugs and frames to unique badges, adding a personalized touch to your event favors.</p>
+          <div class="b2b-showcase-footer">
+            <div class="b2b-showcase-specs">
+              <span><i class="fa-solid fa-gift"></i> Personalized Favors</span>
+              <span><i class="fa-solid fa-gem"></i> Premium Crafting</span>
+            </div>
+            <div class="b2b-cta-group" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="/style-options/?product=accessories" class="b2b-showcase-cta" style="background: transparent; color: var(--text-primary); border: 1px solid var(--border-color);">View Style Options</a>
+              <a href="#quote-form" class="b2b-showcase-cta">Request Quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="b2b-form-section" id="quote-form">
+      <h2>Request a Bulk Quote</h2>
+      <p>Fill out the details below and our team will get back to you within 24 hours with a custom proposal.</p>
+
+      <form class="b2b-form" onsubmit="event.preventDefault(); alert('Request submitted! We will contact you soon.'); this.reset();">
+        <div class="b2b-form-row">
+          <div class="form-group">
+            <label for="org-name">Event / Family Name *</label>
+            <input type="text" id="org-name" required placeholder="e.g. Smith Wedding" autocomplete="organization">
+          </div>
+          <div class="form-group">
+            <label for="contact-name">Contact Person *</label>
+            <input type="text" id="contact-name" required placeholder="Your Name" autocomplete="name">
+          </div>
+        </div>
+
+        <div class="b2b-form-row">
+          <div class="form-group">
+            <label for="contact-email">Email Address *</label>
+            <input type="email" id="contact-email" required placeholder="name@example.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="contact-phone">Phone Number</label>
+            <input type="tel" id="contact-phone" placeholder="+91 00000 00000" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Services Required *</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" name="services" value="apparels"> Apparels</label>
+            <label class="checkbox-label"><input type="checkbox" name="services" value="cards"> Greeting & Invitation Cards</label>
+            <label class="checkbox-label"><input type="checkbox" name="services" value="accessories"> Accessories</label>
+            <label class="checkbox-label"><input type="checkbox" name="services" value="other"> Other Custom Items</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bulk-quantity">Estimated Quantity</label>
+          <select id="bulk-quantity">
+            <option value="50-100">50 - 100 units</option>
+            <option value="100-500">100 - 500 units</option>
+            <option value="500-1000">500 - 1000 units</option>
+            <option value="1000+">1000+ units</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="project-details">Project Details & Requirements</label>
+          <textarea id="project-details" rows="4" placeholder="Tell us more about your design requirements, paper quality preferences, and timeline..."></textarea>
+        </div>
+
+        <button type="submit" class="b2b-submit">Submit Request</button>
+      </form>
+    </div>
+  </main>
+
+  <global-footer></global-footer>
+
+  <site-overlays></site-overlays>
+
+  <script src="lenis.min.js"></script>
+  <script src="scroll.js" defer></script>
+  <script src="cart.js?v=12" defer></script>
+  <script src="product-copy.js?v=3" defer></script>
+  <script src="search-core.js?v=1" defer></script>
+  <script src="script.js?v=53" defer></script>
+</body>
+</html>

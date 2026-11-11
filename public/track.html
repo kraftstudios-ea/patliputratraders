@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <script src="api-base.js?v=2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script src="theme.js?v=2"></script>
+  <title>Track Your Shipment — Live Courier & Order Status | Patliputra Traders</title>
+  <meta name="description" content="Track your Patliputra Traders lighting fixture shipment live in real-time. View courier checkpoints, transit updates, and expected delivery date.">
+  <meta name="keywords" content="track lighting order, courier tracking, chandelier shipment tracking, patliputra traders track, order status">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="48x48">
+  <link rel="icon" href="/assets/misc/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/misc/favicon-48x48.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/misc/favicon-192x192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Track Your Shipment — Live Courier & Order Status | Patliputra Traders">
+  <meta property="og:description" content="Track your Patliputra Traders lighting fixture shipment live in real-time with verified courier checkpoints.">
+  <meta property="og:image" content="/img/site/patliputra-logo.png">
+
+  <!-- Fonts & Core Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <script src="https://kit.fontawesome.com/84df58c29a.js" crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="styles.css?v=46">
+  <link rel="stylesheet" href="store.css?v=2">
+  <script src="global-navbar.js?v=21" defer></script>
+  <script src="lenis.min.js"></script>
+  <script src="site-overlays.js?v=3" defer></script>
+  <script src="global-footer.js?v=5" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="scroll.js" defer></script>
+  <script src="interactions.js?v=1" defer></script>
+
+  <style>
+    .track-page {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 110px 24px 80px;
+      min-height: 80vh;
+    }
+
+    .track-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .track-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(var(--accent-rgb), 0.1);
+      border: 1px solid rgba(var(--accent-rgb), 0.25);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
+    }
+
+    .track-badge-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: track-pulse 1.8s infinite;
+    }
+
+    @keyframes track-pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(var(--accent-rgb), 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
+    }
+
+    .track-title {
+      font-family: var(--font-heading, 'Anton', sans-serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .track-subtitle {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* Search Box */
+    .track-search-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+      margin-bottom: 2rem;
+    }
+
+    .track-search-form {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .track-search-input-wrap {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .track-search-input-wrap i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .track-input {
+      width: 100%;
+      padding: 14px 16px 14px 44px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .track-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
+    }
+
+    .track-submit-btn {
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .track-submit-btn:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .track-submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Result Cards */
+    .track-result-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .track-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Status Banner */
+    .track-hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .track-hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #ff884d);
+    }
+
+    .track-hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .track-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .status-in-transit {
+      background: rgba(255, 149, 0, 0.12);
+      color: #e07700;
+      border: 1px solid rgba(255, 149, 0, 0.3);
+    }
+
+    .status-delivered {
+      background: rgba(47, 107, 70, 0.12);
+      color: #2f6b46;
+      border: 1px solid rgba(47, 107, 70, 0.3);
+    }
+
+    .status-booked {
+      background: rgba(0, 122, 255, 0.12);
+      color: #007aff;
+      border: 1px solid rgba(0, 122, 255, 0.3);
+    }
+
+    .status-cancelled {
+      background: rgba(229, 72, 77, 0.12);
+      color: #e5484d;
+      border: 1px solid rgba(229, 72, 77, 0.3);
+    }
+
+    .carrier-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-primary);
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* Route visualizer */
+    .track-route-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .route-node {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .route-node.right {
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    .route-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .route-city {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .route-line-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 0 16px;
+    }
+
+    .route-line {
+      width: 100%;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 8px, transparent 8px, transparent 14px);
+      position: relative;
+    }
+
+    .route-icon {
+      color: var(--accent);
+      font-size: 1.1rem;
+      animation: truck-bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes truck-bounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(6px); }
+    }
+
+    /* Key Meta Grid */
+    .track-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .meta-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-copy-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.82rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.15s ease;
+    }
+
+    .meta-copy-btn:hover {
+      background: rgba(var(--accent-rgb), 0.1);
+    }
+
+    /* Stepper Progress Bar */
+    .track-stepper {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 28px 0 16px;
+    }
+
+    .stepper-track-bg {
+      position: absolute;
+      top: 18px;
+      left: 24px;
+      right: 24px;
+      height: 4px;
+      background: var(--border);
+      z-index: 0;
+    }
+
+    .stepper-track-fill {
+      position: absolute;
+      top: 18px;
+      left: 24px;
+      height: 4px;
+      background: var(--accent);
+      z-index: 1;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .step-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+      flex: 1;
+      text-align: center;
+    }
+
+    .step-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+
+    .step-node.completed .step-circle {
+      background: #2f6b46;
+      border-color: #2f6b46;
+      color: #ffffff;
+    }
+
+    .step-node.active .step-circle {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.2);
+    }
+
+    .step-title {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .step-node.completed .step-title,
+    .step-node.active .step-title {
+      color: var(--text-primary);
+    }
+
+    /* Timeline Checkpoints */
+    .timeline-heading {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .events-list {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .events-list::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      bottom: 20px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .event-row {
+      position: relative;
+      padding-bottom: 24px;
+    }
+
+    .event-row:last-child {
+      padding-bottom: 0;
+    }
+
+    .event-dot {
+      position: absolute;
+      left: -28px;
+      top: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    .event-row.latest .event-dot {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.2);
+    }
+
+    .event-body {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      transition: border-color 0.2s ease;
+    }
+
+    .event-row.latest .event-body {
+      border-color: rgba(var(--accent-rgb), 0.4);
+      background: rgba(var(--accent-rgb), 0.03);
+    }
+
+    .event-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .event-status {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--text-primary);
+    }
+
+    .event-time {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .event-location {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .latest-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+    }
+
+    /* Linked Order Items Preview */
+    .order-items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .artwork-preview-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .artwork-thumb {
+      width: 48px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 4px;
+      background: var(--bg-secondary);
+      flex-shrink: 0;
+    }
+
+    .artwork-info h5 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .artwork-info p {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    /* Support Box */
+    .support-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+    }
+
+    .support-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .support-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: var(--radius-md);
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .support-btn-wa {
+      background: #25d366;
+      color: #ffffff;
+    }
+
+    .support-btn-wa:hover {
+      background: #1eb857;
+    }
+
+    .support-btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .support-btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Loading & Empty States */
+    .state-card {
+      text-align: center;
+      padding: 60px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .state-icon {
+      font-size: 2.4rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .state-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .state-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto 20px;
+      line-height: 1.5;
+    }
+
+    /* Preloader caption & enhancement */
+    .preloader-status {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: -8px;
+      transition: all 0.2s ease;
+    }
+
+    /* In-Page Skeleton Shimmer */
+    .track-skeleton-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .track-shimmer {
+      position: relative;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .track-shimmer::after {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      transform: translateX(-100%);
+      background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(var(--accent-rgb), 0.12) 40%,
+        rgba(255, 255, 255, 0.18) 50%,
+        rgba(var(--accent-rgb), 0.12) 60%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      animation: trackShimmerAnim 1.6s infinite;
+      content: '';
+    }
+
+    :root[data-theme="dark"] .track-shimmer::after {
+      background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(var(--accent-rgb), 0.15) 40%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(var(--accent-rgb), 0.15) 60%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+
+    @keyframes trackShimmerAnim {
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .track-radar-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 24px 0 16px;
+      text-align: center;
+    }
+
+    .track-radar-pulse {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(var(--accent-rgb), 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.4rem;
+    }
+
+    .track-radar-pulse::before, .track-radar-pulse::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(var(--accent-rgb), 0.4);
+      animation: trackRadarPing 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+
+    .track-radar-pulse::after {
+      animation-delay: 1s;
+    }
+
+    @keyframes trackRadarPing {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    @media (max-width: 640px) {
+      .track-page {
+        padding-top: 96px;
+      }
+      .track-stepper {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .stepper-track-bg, .stepper-track-fill {
+        display: none;
+      }
+      .step-node {
+        min-width: 45%;
+        flex-direction: row;
+        text-align: left;
+      }
+      .track-route-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .route-node.right {
+        text-align: left;
+        align-items: flex-start;
+      }
+      .route-line-wrap {
+        width: 100%;
+        padding: 8px 0;
+      }
+    }
+  </style>
+</head>
+<body class="preloader-active">
+  <!-- Patliputra Signature Preloader -->
+  <div class="preloader" id="preloader" role="status" aria-live="polite">
+    <img src="img/site/patliputra-logo.webp" alt="Patliputra Traders" class="preloader-logo" width="600" height="155">
+    <div class="preloader-bar"><div class="preloader-fill" id="preloader-fill"></div></div>
+    <span class="preloader-percent" id="preloader-percent">0%</span>
+    <span class="preloader-status" id="preloader-status">Connecting to Logistics Network...</span>
+  </div>
+  <script>
+    // Immediate preloader failsafe: guarantees preloader dismisses even if background scripts stall
+    (function () {
+      setTimeout(function () {
+        var p = document.getElementById('preloader');
+        if (p && !p.classList.contains('preloader-hidden')) {
+          p.classList.add('preloader-hidden');
+          document.body.classList.remove('preloader-active');
+          setTimeout(function () { try { p.remove(); } catch (_) {} }, 450);
+        }
+      }, 5500);
+    })();
+  </script>
+
+  <global-navbar></global-navbar>
+
+  <main id="main-content" class="track-page">
+    <div class="track-header">
+      <div class="track-badge">
+        <span class="track-badge-pulse"></span>
+        Live Logistics Tracking
+      </div>
+      <h1 class="track-title">TRACK YOUR SHIPMENT</h1>
+      <p class="track-subtitle">Enter your courier AWB tracking number or Patliputra Order ID to monitor live checkpoint updates, transit location, and delivery status.</p>
+    </div>
+
+    <!-- Search Form -->
+    <div class="track-search-card">
+      <form id="track-form" class="track-search-form" onsubmit="event.preventDefault(); window.runTrack();">
+        <div class="track-search-input-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="track-input" class="track-input" placeholder="Enter your AWB or Patliputra Order ID" autocomplete="off" spellcheck="false" required>
+        </div>
+        <button type="submit" id="track-submit-btn" class="track-submit-btn">
+          <i class="fa-solid fa-location-crosshairs"></i>
+          <span>Track Parcel</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Tracking Results Slot -->
+    <div id="track-container" class="track-result-wrap">
+      <!-- Default Prompt -->
+      <div class="state-card" id="initial-state">
+        <div class="state-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+        <h3 class="state-title">Ready to Track</h3>
+        <p class="state-desc">Enter your AWB / Waybill number or Order ID above to see real-time transit details from our logistics network.</p>
+      </div>
+    </div>
+  </main>
+
+  <global-footer></global-footer>
+
+  <script>
+    (function() {
+      const input = document.getElementById('track-input');
+      const submitBtn = document.getElementById('track-submit-btn');
+      const container = document.getElementById('track-container');
+
+      function formatDateIST(isoString) {
+        if (!isoString) return '—';
+        try {
+          const d = new Date(isoString);
+          if (isNaN(d.getTime())) return isoString;
+          return d.toLocaleDateString('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+          });
+        } catch (_) {
+          return isoString;
+        }
+      }
+
+      function formatDateTimeIST(isoString) {
+        if (!isoString) return '—';
+        try {
+          const d = new Date(isoString);
+          if (isNaN(d.getTime())) return isoString;
+          const dateStr = d.toLocaleDateString('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+          });
+          const timeStr = d.toLocaleTimeString('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+          });
+          return `${dateStr} · ${timeStr} IST`;
+        } catch (_) {
+          return isoString;
+        }
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>"']/g, function(m) {
+          switch (m) {
+            case '&': return '&amp;';
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '"': return '&quot;';
+            case "'": return '&#039;';
+            default: return m;
+          }
+        });
+      }
+
+      window.copyAwb = function(awb, btn) {
+        navigator.clipboard.writeText(awb).then(() => {
+          const prev = btn.innerHTML;
+          btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+          setTimeout(() => { btn.innerHTML = prev; }, 2000);
+        }).catch(() => {
+          prompt('Copy AWB:', awb);
+        });
+      };
+
+      function setPreloaderProgress(percent, statusText) {
+        const fill = document.getElementById('preloader-fill');
+        const pct = document.getElementById('preloader-percent');
+        const statusEl = document.getElementById('preloader-status');
+        if (fill) fill.style.width = Math.min(100, Math.max(0, percent)) + '%';
+        if (pct) pct.textContent = Math.round(percent) + '%';
+        if (statusEl && statusText) statusEl.textContent = statusText;
+      }
+
+      function dismissPreloader(delay = 140) {
+        const p = document.getElementById('preloader');
+        if (!p) {
+          document.body.classList.remove('preloader-active');
+          return;
+        }
+        setTimeout(() => {
+          p.classList.add('preloader-hidden');
+          document.body.classList.remove('preloader-active');
+          setTimeout(() => {
+            try { p.remove(); } catch (_) {}
+          }, 450);
+        }, delay);
+      }
+
+      window.runTrack = async function(verifyValue, explicitOrderId) {
+        const query = (input.value || '').trim();
+        if (!query) return;
+
+        // Update URL query string without reloading page
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('awb', query);
+        if (explicitOrderId && explicitOrderId !== query) {
+          newUrl.searchParams.set('orderId', explicitOrderId);
+        }
+        window.history.replaceState({}, '', newUrl.toString());
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Locating...</span>';
+
+        if (window.BrushPageLoader && window.BrushPageLoader.start) {
+          window.BrushPageLoader.start();
+        }
+
+        setPreloaderProgress(28, 'Connecting to Logistics Network...');
+
+        container.innerHTML = `
+          <div class="track-skeleton-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="track-shimmer" style="width: 140px; height: 32px; border-radius: 999px;"></div>
+                <div class="track-shimmer" style="width: 90px; height: 26px; border-radius: 6px;"></div>
+              </div>
+              <div class="track-shimmer" style="width: 180px; height: 24px; border-radius: 6px;"></div>
+            </div>
+
+            <div class="track-radar-box">
+              <div class="track-radar-pulse">
+                <i class="fa-solid fa-satellite-dish"></i>
+              </div>
+              <div>
+                <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">Querying Verified Courier Telemetry...</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted); max-width: 440px; margin: 0 auto;">Establishing handshake with DTDC / Express logistics network to retrieve live transit scans.</p>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin: 28px 0;">
+              <div style="text-align: center;">
+                <div class="track-shimmer" style="width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 8px;"></div>
+                <div class="track-shimmer" style="width: 70px; height: 12px; margin: 0 auto; border-radius: 4px;"></div>
+              </div>
+              <div style="text-align: center;">
+                <div class="track-shimmer" style="width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 8px;"></div>
+                <div class="track-shimmer" style="width: 70px; height: 12px; margin: 0 auto; border-radius: 4px;"></div>
+              </div>
+              <div style="text-align: center;">
+                <div class="track-shimmer" style="width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 8px;"></div>
+                <div class="track-shimmer" style="width: 70px; height: 12px; margin: 0 auto; border-radius: 4px;"></div>
+              </div>
+              <div style="text-align: center;">
+                <div class="track-shimmer" style="width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 8px;"></div>
+                <div class="track-shimmer" style="width: 70px; height: 12px; margin: 0 auto; border-radius: 4px;"></div>
+              </div>
+              <div style="text-align: center;">
+                <div class="track-shimmer" style="width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 8px;"></div>
+                <div class="track-shimmer" style="width: 70px; height: 12px; margin: 0 auto; border-radius: 4px;"></div>
+              </div>
+            </div>
+
+            <div class="track-shimmer" style="height: 72px; border-radius: 12px; margin-bottom: 24px;"></div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="track-shimmer" style="height: 52px; border-radius: 10px;"></div>
+              <div class="track-shimmer" style="height: 52px; border-radius: 10px;"></div>
+            </div>
+          </div>
+        `;
+
+        let progressInterval = setInterval(() => {
+          const fill = document.getElementById('preloader-fill');
+          if (fill) {
+            const current = parseInt(fill.style.width) || 28;
+            if (current < 85) {
+              setPreloaderProgress(current + 15, current > 60 ? 'Decoding Waybill Checkpoints...' : 'Syncing Live Telemetry Scans...');
+            }
+          }
+        }, 320);
+
+        try {
+          const adminToken = sessionStorage.getItem('brush_admin_token') || localStorage.getItem('brush_admin_token');
+          const user = JSON.parse(localStorage.getItem('brushUser') || 'null');
+          const headers = {};
+          if (adminToken) {
+            headers['Authorization'] = `Bearer ${adminToken}`;
+          } else if (user && user.token) {
+            headers['Authorization'] = `Bearer ${user.token}`;
+          }
+
+          let fetchUrl = `${window.API_BASE}/track?q=${encodeURIComponent(query)}`;
+          const currentUrlParams = new URLSearchParams(window.location.search);
+          const orderIdToPass = explicitOrderId || currentUrlParams.get('orderId');
+          if (orderIdToPass && orderIdToPass !== query) {
+            fetchUrl += `&orderId=${encodeURIComponent(orderIdToPass)}`;
+          }
+          const verifyToPass = verifyValue || currentUrlParams.get('verify');
+          if (verifyToPass) {
+            fetchUrl += `&verify=${encodeURIComponent(verifyToPass)}`;
+          }
+
+          const res = await fetch(fetchUrl, { headers });
+          const data = await res.json();
+
+          clearInterval(progressInterval);
+          setPreloaderProgress(100, data && data.success ? 'Shipment Located' : 'Lookup Complete');
+          if (window.BrushPageLoader && window.BrushPageLoader.done) {
+            window.BrushPageLoader.done();
+          }
+          dismissPreloader(140);
+
+          if (!res.ok || !data.success) {
+            renderNotFound(data.error || 'No orders found for this number in your associated account.');
+            return;
+          }
+
+          renderTracking(data);
+        } catch (err) {
+          clearInterval(progressInterval);
+          setPreloaderProgress(100, 'Network Error');
+          if (window.BrushPageLoader && window.BrushPageLoader.done) {
+            window.BrushPageLoader.done();
+          }
+          dismissPreloader(140);
+          renderError(err.message || 'Unable to connect to tracking server.');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> <span>Track Parcel</span>';
+        }
+      };
+
+      function renderNotFound(msg) {
+        const user = JSON.parse(localStorage.getItem('brushUser') || 'null');
+        const adminToken = sessionStorage.getItem('brush_admin_token') || localStorage.getItem('brush_admin_token');
+        const isAuth = !!(user || adminToken);
+        container.innerHTML = `
+          <div class="state-card">
+            <div class="state-icon" style="color: var(--sale-red, #e5484d);"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <h3 class="state-title">Shipment Not Found</h3>
+            <p class="state-desc">${escapeHtml(msg || 'No orders found for this number in your associated account.')}</p>
+            <div class="support-btns" style="justify-content: center;">
+              ${!isAuth ? `
+                <a href="/?login=1" class="support-btn" style="background: var(--accent); color: #fff; font-weight: 600;">
+                  <i class="fa-solid fa-user"></i> Log In to Track
+                </a>
+              ` : ''}
+              <a href="https://wa.me/919234755686?text=${encodeURIComponent('Hi Patliputra Traders, I need help tracking: ' + input.value)}" target="_blank" class="support-btn support-btn-wa">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp Concierge
+              </a>
+              <a href="mailto:patliputratraders01@gmail.com" class="support-btn support-btn-outline">
+                <i class="fa-solid fa-envelope"></i> Email Us
+              </a>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderError(msg) {
+        container.innerHTML = `
+          <div class="state-card">
+            <div class="state-icon" style="color: var(--sale-red, #e5484d);"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <h3 class="state-title">Network Error</h3>
+            <p class="state-desc">Could not reach logistics service. ${escapeHtml(msg)}</p>
+            <button type="button" class="track-submit-btn" style="margin: 0 auto;" onclick="window.runTrack()">Retry</button>
+          </div>
+        `;
+      }
+
+      function renderTracking(data) {
+        const shipment = data.shipment;
+        const order = data.order;
+
+        let statusClass = 'status-in-transit';
+        let statusLabel = 'In Transit';
+        let stepIndex = 3; // 0: confirmed, 1: printed, 2: dispatched, 3: in transit, 4: delivered
+
+        if (shipment && shipment.status) {
+          const statusRaw = String(shipment.status).toLowerCase();
+          statusLabel = shipment.status;
+          if (statusRaw.includes('delivered')) {
+            statusClass = 'status-delivered';
+            stepIndex = 4;
+          } else if (statusRaw.includes('out for delivery')) {
+            statusClass = 'status-in-transit';
+            stepIndex = 3;
+          } else if (statusRaw.includes('booked') || statusRaw.includes('pickup')) {
+            statusClass = 'status-booked';
+            stepIndex = 2;
+          }
+        } else if (order && order.status) {
+          const oStatus = String(order.status).toLowerCase();
+          if (oStatus === 'delivered') {
+            statusClass = 'status-delivered';
+            statusLabel = 'Delivered';
+            stepIndex = 4;
+          } else if (oStatus === 'transit' || oStatus === 'in-transit' || oStatus === 'out for delivery') {
+            statusClass = 'status-in-transit';
+            statusLabel = 'In Transit';
+            stepIndex = 3;
+          } else if (oStatus === 'shipped' || oStatus === 'dispatched') {
+            statusClass = 'status-booked';
+            statusLabel = 'Dispatched';
+            stepIndex = 2;
+          } else if (oStatus === 'printing' || oStatus === 'sent-for-printing') {
+            statusClass = 'status-booked';
+            statusLabel = 'In Printing';
+            stepIndex = 1;
+          } else if (oStatus === 'cancelled') {
+            statusClass = 'status-cancelled';
+            statusLabel = 'Order Cancelled';
+            stepIndex = -1;
+          } else {
+            statusClass = 'status-booked';
+            statusLabel = 'Order Confirmed';
+            stepIndex = 0;
+          }
+        }
+
+        const events = (shipment && Array.isArray(shipment.events)) ? shipment.events : [];
+        const carrierName = (shipment && shipment.carrier)
+          ? `${shipment.carrier} Express`
+          : (order && order.carrier ? `${order.carrier} Express` : 'DTDC Express');
+        const awb = (shipment && shipment.awb) || (order && order.awbNumber) || (order ? order.orderId : input.value);
+        const expectedDate = (shipment && shipment.expectedDelivery)
+          ? formatDateIST(shipment.expectedDelivery)
+          : (order && order.estimatedDelivery ? formatDateIST(order.estimatedDelivery) : 'Expected Shortly');
+        const lastUpdated = (shipment && shipment.lastUpdated)
+          ? formatDateTimeIST(shipment.lastUpdated)
+          : (events[0] ? formatDateTimeIST(events[0].time) : (order && order.createdAt ? formatDateTimeIST(order.createdAt) : 'Recent'));
+        const originLocation = (events.length > 0 && events[events.length - 1].location)
+          ? events[events.length - 1].location
+          : 'Patliputra Traders Showroom (Patna, BR)';
+        const destCity = (shipment && shipment.destCity)
+          ? `${shipment.destCity}${shipment.destState ? ', ' + shipment.destState : ''}`
+          : (order && order.customerCity ? `${order.customerCity}${order.customerState ? ', ' + order.customerState : ''}` : 'Customer Destination');
+
+        // Calculate progress percentage
+        const fillPercent = stepIndex >= 0 ? Math.min(100, (stepIndex / 4) * 100) : 0;
+
+        const eventsHtml = events.map((ev, idx) => {
+          const isLatest = idx === 0;
+          return `
+            <div class="event-row ${isLatest ? 'latest' : ''}">
+              <div class="event-dot"><i class="fa-solid fa-${isLatest ? 'circle-dot' : 'check'}"></i></div>
+              <div class="event-body">
+                <div class="event-top-row">
+                  <span class="event-status">${escapeHtml(ev.status)}${isLatest ? '<span class="latest-badge">Current Status</span>' : ''}</span>
+                  <span class="event-time">${formatDateTimeIST(ev.time)}</span>
+                </div>
+                <div class="event-location">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <span>${escapeHtml(ev.location || 'In Transit Hub')}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const orderArtworksHtml = (order && Array.isArray(order.items) && order.items.length > 0) ? `
+          <div class="track-card">
+            <h4 class="timeline-heading"><i class="fa-solid fa-lightbulb"></i> Fixtures in this Package</h4>
+            <div class="order-items-grid">
+              ${order.items.flatMap(item => {
+                return `
+                  <div class="artwork-preview-card">
+                    ${item.image ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" class="artwork-thumb" onerror="this.style.display='none'">` : ''}
+                    <div class="artwork-info">
+                      <h5>${escapeHtml(item.name)}</h5>
+                      <p>${escapeHtml(item.category || 'Lighting')} &middot; Qty ${item.quantity}</p>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        ` : '';
+
+        const emptyTimelineMsg = stepIndex === 4
+          ? `Parcel successfully delivered to ${escapeHtml(destCity)}. Thank you for shopping with Patliputra Traders!`
+          : (stepIndex === 3
+              ? `Package in transit with ${escapeHtml(carrierName)}. Checkpoint scans update upon regional hub arrival.`
+              : (stepIndex === 2
+                  ? `Package packed with protective luminaire padding and handed over to ${escapeHtml(carrierName)}.`
+                  : (stepIndex === 1
+                      ? 'Lighting fixture is being tested, inspected, and securely packed at our Patna showroom.'
+                      : (stepIndex === 0
+                          ? 'Order confirmed and registered in showroom fulfillment pipeline.'
+                          : 'Order has been cancelled.'))));
+
+        container.innerHTML = `
+          <!-- Hero Overview Card -->
+          <div class="track-hero-card">
+            <div class="track-hero-header">
+              <div>
+                <span class="track-status-pill ${statusClass}">
+                  <span class="track-badge-pulse" style="background: currentColor;"></span>
+                  ${escapeHtml(statusLabel)}
+                </span>
+              </div>
+              <span class="carrier-pill">
+                <i class="fa-solid fa-truck-fast"></i>
+                ${escapeHtml(carrierName)}
+              </span>
+            </div>
+
+            <!-- Route Visualizer -->
+            <div class="track-route-box">
+              <div class="route-node">
+                <span class="route-label">Dispatched From</span>
+                <span class="route-city">${escapeHtml(originLocation)}</span>
+              </div>
+              <div class="route-line-wrap">
+                <i class="fa-solid fa-truck-moving route-icon"></i>
+                <div class="route-line"></div>
+              </div>
+              <div class="route-node right">
+                <span class="route-label">Destination Address</span>
+                <span class="route-city">${escapeHtml(destCity)}</span>
+              </div>
+            </div>
+
+            <!-- 5-Stage Stepper -->
+            <div class="track-stepper">
+              <div class="stepper-track-bg"></div>
+              <div class="stepper-track-fill" style="width: ${fillPercent}%;"></div>
+
+              <div class="step-node ${stepIndex >= 0 ? (stepIndex === 0 ? 'active' : 'completed') : ''}">
+                <div class="step-circle"><i class="fa-solid fa-check"></i></div>
+                <span class="step-title">Confirmed</span>
+              </div>
+              <div class="step-node ${stepIndex >= 1 ? (stepIndex === 1 ? 'active' : 'completed') : ''}">
+                <div class="step-circle"><i class="fa-solid fa-print"></i></div>
+                <span class="step-title">Printed</span>
+              </div>
+              <div class="step-node ${stepIndex >= 2 ? (stepIndex === 2 ? 'active' : 'completed') : ''}">
+                <div class="step-circle"><i class="fa-solid fa-box-archive"></i></div>
+                <span class="step-title">Dispatched</span>
+              </div>
+              <div class="step-node ${stepIndex >= 3 ? (stepIndex === 3 ? 'active' : 'completed') : ''}">
+                <div class="step-circle"><i class="fa-solid fa-truck-fast"></i></div>
+                <span class="step-title">In Transit</span>
+              </div>
+              <div class="step-node ${stepIndex >= 4 ? 'completed' : ''}">
+                <div class="step-circle"><i class="fa-solid fa-house-chimney"></i></div>
+                <span class="step-title">Delivered</span>
+              </div>
+            </div>
+
+            <!-- Meta Details -->
+            <div class="track-meta-grid">
+              <div class="meta-box">
+                <span class="meta-label">Waybill / AWB Number</span>
+                <span class="meta-val">
+                  <span style="font-family: monospace;">${escapeHtml(awb)}</span>
+                  <button type="button" class="meta-copy-btn" onclick="window.copyAwb('${escapeHtml(awb)}', this)" title="Copy AWB">
+                    <i class="fa-solid fa-copy"></i>
+                  </button>
+                </span>
+              </div>
+              <div class="meta-box">
+                <span class="meta-label">Estimated Delivery</span>
+                <span class="meta-val"><i class="fa-solid fa-calendar-check" style="color: var(--accent);"></i> ${escapeHtml(expectedDate)}</span>
+              </div>
+              <div class="meta-box">
+                <span class="meta-label">Last Checked Scan</span>
+                <span class="meta-val"><i class="fa-solid fa-clock-rotate-left" style="color: var(--text-muted);"></i> ${escapeHtml(lastUpdated)}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Artwork Details (if found) -->
+          ${orderArtworksHtml}
+
+          <!-- Chronological Journey Timeline -->
+          <div class="track-card">
+            <h4 class="timeline-heading"><i class="fa-solid fa-timeline"></i> Transit Checkpoint History</h4>
+            ${events.length > 0 ? `<div class="events-list">${eventsHtml}</div>` : `<p class="state-desc" style="margin: 0; text-align: left;"><i class="fa-solid fa-circle-info" style="color: var(--accent); margin-right: 6px;"></i> ${escapeHtml(emptyTimelineMsg)}</p>`}
+          </div>
+
+          <!-- Order Rate & Review Section (Optional Star Rating, Comment, and Photos) -->
+          ${(order && order.orderId) ? (() => {
+            const safeOrderId = String(order.orderId);
+            let localReview = null;
+            try {
+              const cached = localStorage.getItem('brush_order_review_' + safeOrderId);
+              if (cached) localReview = JSON.parse(cached);
+            } catch (_) {}
+            const rev = order.review || localReview;
+            const hasReview = rev && (rev.rating != null || (rev.comment && rev.comment.trim()) || (Array.isArray(rev.images) && rev.images.length > 0));
+
+            if (!window._trackReviewState) window._trackReviewState = {};
+            window._trackReviewState[safeOrderId] = {
+              rating: rev?.rating != null ? Number(rev.rating) : null,
+              comment: rev?.comment || '',
+              images: Array.isArray(rev?.images) ? [...rev.images] : []
+            };
+
+            const starsActive = window._trackReviewState[safeOrderId].rating || 0;
+            const ratingHint = getTrackRatingLabel(starsActive);
+
+            const existingStarsHtml = (rev && rev.rating)
+              ? Array.from({length: 5}, (_, i) => `<i class="fa-solid fa-star" style="color: ${i < rev.rating ? '#fbbf24' : '#444'}; font-size:0.85rem;"></i>`).join('') + ` <span style="font-size:0.75rem; color:var(--text-secondary); margin-left:4px; font-weight:600;">${rev.rating}/5</span>`
+              : (hasReview ? '<span style="font-size:0.75rem; color:var(--text-secondary);">(No star rating)</span>' : '');
+
+            const existingPhotosHtml = (rev && Array.isArray(rev.images) && rev.images.length > 0)
+              ? `<div class="order-existing-photos">${rev.images.map(img => `<a href="${escapeHtml(img)}" target="_blank" rel="noopener"><img src="${escapeHtml(img)}" class="order-existing-photo" alt="Order review photo" loading="lazy"></a>`).join('')}</div>`
+              : '';
+
+            const revDate = rev?.updatedAt ? new Date(rev.updatedAt).toLocaleDateString() : '';
+
+            return `
+              <div class="track-card" id="track-review-section">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+                  <h4 class="timeline-heading" style="margin-bottom:0;"><i class="fa-solid fa-star" style="color:#fbbf24;"></i> Rate & Review Order</h4>
+                  <button type="button" class="order-rate-review-btn ${hasReview ? 'is-reviewed' : ''}" id="track-rate-btn-${escapeHtml(safeOrderId)}" onclick="window.toggleTrackReviewForm('${escapeHtml(safeOrderId)}')">
+                    <i class="fa-solid fa-star"></i> <span>${hasReview ? 'Edit Review' : 'Rate & Review'}</span>
+                  </button>
+                </div>
+
+                <!-- Existing Review Display -->
+                <div id="track-review-display-${escapeHtml(safeOrderId)}" class="order-existing-review" style="${hasReview ? '' : 'display:none;'}">
+                  <div class="order-existing-review-header">
+                    <span style="font-weight:700; font-size:0.8rem; color:var(--text-primary); display:flex; align-items:center; gap:5px;">
+                      <i class="fa-solid fa-circle-check" style="color:var(--accent);"></i> Your Order Review
+                    </span>
+                    <span class="order-existing-date">${escapeHtml(revDate)}</span>
+                  </div>
+                  <div class="order-existing-stars">${existingStarsHtml}</div>
+                  <div class="order-existing-comment">${escapeHtml(rev?.comment || '')}</div>
+                  <div>${existingPhotosHtml}</div>
+                </div>
+
+                <!-- Interactive Review Form -->
+                <div id="track-review-form-${escapeHtml(safeOrderId)}" class="order-review-form-wrap" style="display:none;">
+                  <div class="order-review-header">
+                    <span class="order-review-title"><i class="fa-solid fa-star" style="color:#fbbf24;"></i> Share Your Experience</span>
+                    <span style="font-size:0.72rem; color:var(--text-secondary); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:12px;">All fields optional</span>
+                  </div>
+
+                  <!-- Star Rating (Optional) -->
+                  <div>
+                    <div style="font-size:0.75rem; font-weight:600; color:var(--text-secondary); margin-bottom:4px;">
+                      Star Rating (Optional &mdash; tap to select or unselect)
+                    </div>
+                    <div class="order-star-select" id="track-star-select-${escapeHtml(safeOrderId)}">
+                      ${[1, 2, 3, 4, 5].map(star => `
+                        <button type="button" class="order-star-btn ${star <= starsActive ? 'active' : ''}" data-star="${star}" onclick="window.setTrackReviewRating('${escapeHtml(safeOrderId)}', ${star})" title="${star} Star${star > 1 ? 's' : ''}">
+                          <i class="fa-solid fa-star"></i>
+                        </button>
+                      `).join('')}
+                      <span class="order-star-hint" id="track-star-hint-${escapeHtml(safeOrderId)}">${ratingHint}</span>
+                    </div>
+                  </div>
+
+                  <!-- Comment (Optional) -->
+                  <div>
+                    <div style="font-size:0.75rem; font-weight:600; color:var(--text-secondary); margin-bottom:4px;">
+                      Comments & Feedback (Optional)
+                    </div>
+                    <textarea class="order-review-comment" id="track-review-comment-${escapeHtml(safeOrderId)}" rows="3" placeholder="Share how your poster looks, packaging quality, delivery speed...">${escapeHtml(rev?.comment || '')}</textarea>
+                  </div>
+
+                  <!-- Photos (Optional) -->
+                  <div>
+                    <div style="font-size:0.75rem; font-weight:600; color:var(--text-secondary); margin-bottom:4px;">
+                      Photos (Optional &mdash; up to 5)
+                    </div>
+                    <div class="order-review-upload-row">
+                      <label class="order-review-upload-btn">
+                        <i class="fa-solid fa-camera"></i>
+                        <span>Add Photos</span>
+                        <input type="file" accept="image/*" multiple style="display:none;" onchange="window.handleTrackReviewImages('${escapeHtml(safeOrderId)}', this)">
+                      </label>
+                      <span style="font-size:0.72rem; color:var(--text-secondary);">Upload snapshots of your framed art or prints on wall</span>
+                    </div>
+                    <div class="order-review-previews" id="track-review-previews-${escapeHtml(safeOrderId)}"></div>
+                  </div>
+
+                  <!-- Actions -->
+                  <div class="order-review-actions">
+                    <button type="button" class="order-review-submit-btn" id="track-review-submit-btn-${escapeHtml(safeOrderId)}" onclick="window.submitTrackReview('${escapeHtml(safeOrderId)}')">
+                      <i class="fa-solid fa-check"></i> Submit Review
+                    </button>
+                    <button type="button" class="order-review-cancel-btn" onclick="window.toggleTrackReviewForm('${escapeHtml(safeOrderId)}')">
+                      Cancel
+                    </button>
+                    <span id="track-review-msg-${escapeHtml(safeOrderId)}" style="font-size:0.75rem; margin-left:auto;"></span>
+                  </div>
+                </div>
+              </div>
+            `;
+          })() : ''}
+
+          <!-- Support & Guarantee Card -->
+          <div class="support-card">
+            <div>
+              <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: var(--text-primary);">Need Delivery Assistance?</h4>
+              <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0;">Our studio concierge team is available to assist with address adjustments, transit inquiries, or delivery updates.</p>
+            </div>
+            <div class="support-btns">
+              <a href="https://wa.me/919234755686?text=${encodeURIComponent('Hi Patliputra Traders, regarding tracking for ' + awb + ': ')}" target="_blank" class="support-btn support-btn-wa">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </a>
+              <a href="mailto:patliputratraders01@gmail.com?subject=${encodeURIComponent('Tracking Inquiry - ' + awb)}" class="support-btn support-btn-outline">
+                <i class="fa-solid fa-envelope"></i> Email
+              </a>
+            </div>
+          </div>
+        `;
+
+        if (order && order.orderId && window._renderTrackReviewPreviews) {
+          window._renderTrackReviewPreviews(String(order.orderId));
+        }
+      }
+
+      // Track Rate & Review Helpers
+      window._trackReviewState = window._trackReviewState || {};
+
+      function getTrackRatingLabel(val) {
+        if (val === 5) return '5 Stars &mdash; Excellent';
+        if (val === 4) return '4 Stars &mdash; Very Good';
+        if (val === 3) return '3 Stars &mdash; Good';
+        if (val === 2) return '2 Stars &mdash; Fair';
+        if (val === 1) return '1 Star &mdash; Poor';
+        return 'Select rating (optional)';
+      }
+
+      window.toggleTrackReviewForm = function(orderId) {
+        const form = document.getElementById(`track-review-form-${orderId}`);
+        if (!form) return;
+        const isHidden = form.style.display === 'none' || !form.style.display;
+        form.style.display = isHidden ? 'flex' : 'none';
+        if (isHidden && window._renderTrackReviewPreviews) {
+          window._renderTrackReviewPreviews(orderId);
+        }
+      };
+
+      window.setTrackReviewRating = function(orderId, star) {
+        if (!window._trackReviewState[orderId]) {
+          window._trackReviewState[orderId] = { rating: null, comment: '', images: [] };
+        }
+        const current = window._trackReviewState[orderId].rating;
+        const newRating = current === star ? null : star;
+        window._trackReviewState[orderId].rating = newRating;
+
+        const container = document.getElementById(`track-star-select-${orderId}`);
+        if (container) {
+          const starBtns = container.querySelectorAll('.order-star-btn');
+          starBtns.forEach(btn => {
+            const s = Number(btn.getAttribute('data-star'));
+            if (newRating != null && s <= newRating) {
+              btn.classList.add('active');
+            } else {
+              btn.classList.remove('active');
+            }
+          });
+          const hint = document.getElementById(`track-star-hint-${orderId}`);
+          if (hint) hint.innerHTML = getTrackRatingLabel(newRating);
+        }
+      };
+
+      window.handleTrackReviewImages = function(orderId, inputEl) {
+        if (!inputEl || !inputEl.files || inputEl.files.length === 0) return;
+        if (!window._trackReviewState[orderId]) {
+          window._trackReviewState[orderId] = { rating: null, comment: '', images: [] };
+        }
+        const files = Array.from(inputEl.files);
+
+        files.forEach(file => {
+          if (window._trackReviewState[orderId].images.length >= 5) {
+            alert('Maximum 5 images allowed');
+            return;
+          }
+          if (!file.type.startsWith('image/')) return;
+
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+              const maxDim = 800;
+              let w = img.width;
+              let h = img.height;
+              if (w > maxDim || h > maxDim) {
+                if (w > h) {
+                  h = Math.round((h * maxDim) / w);
+                  w = maxDim;
+                } else {
+                  w = Math.round((w * maxDim) / h);
+                  h = maxDim;
+                }
+              }
+              const canvas = document.createElement('canvas');
+              canvas.width = w;
+              canvas.height = h;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0, w, h);
+              const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+
+              if (window._trackReviewState[orderId].images.length < 5) {
+                window._trackReviewState[orderId].images.push(dataUrl);
+                window._renderTrackReviewPreviews(orderId);
+              }
+            };
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+        inputEl.value = '';
+      };
+
+      window.removeTrackReviewImage = function(orderId, index) {
+        if (!window._trackReviewState[orderId] || !window._trackReviewState[orderId].images) return;
+        window._trackReviewState[orderId].images.splice(index, 1);
+        window._renderTrackReviewPreviews(orderId);
+      };
+
+      window._renderTrackReviewPreviews = function(orderId) {
+        const previewContainer = document.getElementById(`track-review-previews-${orderId}`);
+        if (!previewContainer) return;
+        const imgs = (window._trackReviewState[orderId] && window._trackReviewState[orderId].images) || [];
+        if (imgs.length === 0) {
+          previewContainer.innerHTML = '';
+          return;
+        }
+        previewContainer.innerHTML = imgs.map((imgSrc, idx) => `
+          <div class="order-review-preview-thumb">
+            <img src="${imgSrc}" alt="Preview ${idx + 1}">
+            <button type="button" class="order-review-remove-img" onclick="window.removeTrackReviewImage('${escapeHtml(orderId)}', ${idx})" title="Remove image">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        `).join('');
+      };
+
+      window.submitTrackReview = async function(orderId) {
+        const btn = document.getElementById(`track-review-submit-btn-${orderId}`);
+        const msg = document.getElementById(`track-review-msg-${orderId}`);
+        const commentEl = document.getElementById(`track-review-comment-${orderId}`);
+
+        const state = window._trackReviewState[orderId] || { rating: null, comment: '', images: [] };
+        const rating = state.rating;
+        const comment = commentEl ? commentEl.value.trim() : '';
+        const images = state.images || [];
+
+        if (btn) {
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+        }
+        if (msg) msg.textContent = '';
+
+        try {
+          let token = '';
+          try {
+            const u = JSON.parse(localStorage.getItem('brushUser'));
+            if (u && u.token) token = u.token;
+          } catch (_) {}
+
+          const res = await fetch(`${window.API_BASE}/orders/${encodeURIComponent(orderId)}/review`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+            },
+            body: JSON.stringify({ rating, comment, images })
+          });
+
+          if (!res.ok) throw new Error('Failed to save review');
+          const data = await res.json();
+          const savedReview = data.review || { rating, comment, images, updatedAt: new Date().toISOString() };
+
+          try {
+            localStorage.setItem('brush_order_review_' + orderId, JSON.stringify(savedReview));
+          } catch (_) {}
+
+          const displayWrap = document.getElementById(`track-review-display-${orderId}`);
+          if (displayWrap) {
+            const hasContent = savedReview.rating != null || (savedReview.comment && savedReview.comment.trim()) || (savedReview.images && savedReview.images.length > 0);
+            if (hasContent) {
+              const starsHtml = savedReview.rating
+                ? Array.from({length: 5}, (_, i) => `<i class="fa-solid fa-star" style="color: ${i < savedReview.rating ? '#fbbf24' : '#444'}; font-size:0.85rem;"></i>`).join('') + ` <span style="font-size:0.75rem; color:var(--text-secondary); margin-left:4px; font-weight:600;">${savedReview.rating}/5</span>`
+                : '<span style="font-size:0.75rem; color:var(--text-secondary);">(No star rating)</span>';
+
+              const commentHtml = savedReview.comment
+                ? `<div class="order-existing-comment">${escapeHtml(savedReview.comment)}</div>`
+                : '';
+
+              const photosHtml = (savedReview.images && savedReview.images.length > 0)
+                ? `<div class="order-existing-photos">${savedReview.images.map(img => `<a href="${escapeHtml(img)}" target="_blank" rel="noopener"><img src="${escapeHtml(img)}" class="order-existing-photo" alt="Order review photo" loading="lazy"></a>`).join('')}</div>`
+                : '';
+
+              displayWrap.innerHTML = `
+                <div class="order-existing-review-header">
+                  <span style="font-weight:700; font-size:0.8rem; color:var(--text-primary); display:flex; align-items:center; gap:5px;">
+                    <i class="fa-solid fa-circle-check" style="color:var(--accent);"></i> Your Order Review
+                  </span>
+                  <span class="order-existing-date">${new Date().toLocaleDateString()}</span>
+                </div>
+                <div class="order-existing-stars">${starsHtml}</div>
+                ${commentHtml}
+                ${photosHtml}
+              `;
+              displayWrap.style.display = 'block';
+            } else {
+              displayWrap.style.display = 'none';
+            }
+          }
+
+          const rateBtn = document.getElementById(`track-rate-btn-${orderId}`);
+          if (rateBtn) {
+            rateBtn.classList.add('is-reviewed');
+            rateBtn.innerHTML = '<i class="fa-solid fa-star"></i> <span>Edit Review</span>';
+          }
+
+          if (data && data.ratingStats && data.ratingStats.average) {
+            try { localStorage.setItem('brush_cached_rating', data.ratingStats.average); } catch (_) {}
+          }
+
+          const form = document.getElementById(`track-review-form-${orderId}`);
+          if (form) form.style.display = 'none';
+
+          if (msg) {
+            msg.textContent = 'Review saved! Thank you.';
+            msg.style.color = 'var(--success, #22c55e)';
+          }
+        } catch (err) {
+          console.error('Error submitting track review:', err);
+          if (msg) {
+            msg.textContent = 'Error saving review. Please try again.';
+            msg.style.color = 'var(--sale-red)';
+          }
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Submit Review';
+          }
+        }
+      };
+
+      // Check query parameter on page load
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramAwb = (urlParams.get('awb') || '').trim();
+      const paramOrderId = (urlParams.get('orderId') || '').trim();
+      const paramQ = (urlParams.get('q') || '').trim();
+      const paramVerify = (urlParams.get('verify') || '').trim();
+
+      const candidate = (paramAwb && paramAwb !== 'null' && paramAwb !== 'undefined' ? paramAwb : '') ||
+                        (paramOrderId && paramOrderId !== 'null' && paramOrderId !== 'undefined' ? paramOrderId : '') ||
+                        (paramQ && paramQ !== 'null' && paramQ !== 'undefined' ? paramQ : '');
+
+      if (candidate) {
+        input.value = candidate;
+        window.runTrack(paramVerify, paramOrderId);
+      } else {
+        // Direct visit with empty query -> quick fluid preloader dismiss
+        setPreloaderProgress(50, 'Ready to Track');
+        setTimeout(() => {
+          setPreloaderProgress(100, 'Welcome');
+          dismissPreloader(100);
+        }, 150);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+name: Keep Render backend warm
+
+on:
+  schedule:
+    # Runs every 10 minutes, 24/7 (keeps single Render instance within 750h monthly free allowance)
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Ping Render backend
+        env:
+          API_URL: https://brush-production.onrender.com/api/health
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$API_URL")
+          if [ "$STATUS" -ne 200 ] && [ "$STATUS" -ne 429 ]; then
+            echo "Ping failed with HTTP status: $STATUS"
+            exit 1
+          fi
+          echo "Render backend pinged (Status: $STATUS) at $(TZ=Asia/Kolkata date '+%Y-%m-%d %H:%M:%S %Z')"

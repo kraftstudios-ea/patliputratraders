@@ -1,0 +1,3925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script src="api-base.js?v=2"></script>
+  <script src="theme.js?v=2"></script>
+  <title>Build Your Own Poster Pack — Custom Gallery Wall Sets | Brush</title>
+  <link rel="canonical" href="https://www.brush-art.in/build-pack/">
+  <meta name="description" content="Custom build your dream gallery wall with Brush. Pick 5, 10, 15, or 20 posters across our Global Poster archive or Curated Mini sets in A5, A4, or A3, unframed or gallery framed with live interactive wall preview, photo wall mockup, and fluid drag-to-adjust positioning.">
+  <meta name="keywords" content="build your own poster pack, custom gallery wall, wall collage kit india, poster pack 10 20 30, aesthetic room decor pack india, mini posters pack">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="48x48">
+  <link rel="icon" href="/assets/misc/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/misc/favicon-48x48.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/misc/favicon-192x192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.brush-art.in/build-pack/">
+  <meta property="og:title" content="Build Your Own Poster Pack — Custom Gallery Wall Sets | Brush">
+  <meta property="og:description" content="Pick 5, 10, 15, or 20 posters across Global Posters and Mini Sets in A5, A4, or A3, unframed or framed, with drag-to-adjust, photo wall mockup, and live interactive preview.">
+  <meta property="og:image" content="https://www.brush-art.in/posters/packs/mockups/byop-hero.webp">
+
+  <!-- Schema.org WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Build Your Own Poster Pack — Custom Gallery Wall Sets | Brush",
+    "url": "https://www.brush-art.in/build-pack/",
+    "description": "Custom build your dream gallery wall with Brush. Pick 5, 10, 15, or 20 posters across our Global Poster archive or Curated Mini sets in A5, A4, or A3, unframed or gallery framed with live interactive wall preview, photo wall mockup, and fluid drag-to-adjust positioning.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Brush Art Store",
+      "url": "https://www.brush-art.in/"
+    }
+  }
+  </script>
+
+  <!-- Fonts & Core Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <script src="https://kit.fontawesome.com/84df58c29a.js" crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="styles.css?v=46">
+  <link rel="stylesheet" href="store.css?v=2">
+  <script src="global-navbar.js?v=21" defer></script>
+  <script src="site-overlays.js?v=3" defer></script>
+  <script src="global-footer.js?v=5" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="interactions.js?v=1" defer></script>
+
+  <style>
+    :root {
+      --builder-accent: var(--accent);
+      --builder-bg: var(--bg-primary);
+      --surface: var(--bg-card);
+      --surface-muted: var(--bg-secondary);
+    }
+    .byop-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 104px 24px 80px;
+    }
+    .byop-header {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+    .byop-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--accent);
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-radius: var(--radius-sm, 2px);
+      margin-bottom: 14px;
+      border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+    }
+    .byop-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5.2vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: var(--tracking-tight, -0.03em);
+      margin-bottom: 14px;
+      color: var(--text-primary);
+      text-wrap: balance;
+    }
+    .byop-title-br {
+      display: none;
+    }
+    .byop-sub {
+      font-family: var(--font-body);
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 740px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Step Selector Ribbon */
+    .byop-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md, 2px);
+      padding: 18px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+    .byop-control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .control-label {
+      font-family: var(--font-heading);
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pill-btn {
+      flex: 1 1 auto;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      border-radius: var(--radius-md, 2px);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.86rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all var(--transition-fast, 0.2s ease);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      user-select: none;
+    }
+    .pill-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+      background: var(--bg-card-hover);
+    }
+    .pill-btn.active {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+    .pill-btn small {
+      font-size: 0.72rem;
+      opacity: 0.8;
+      font-weight: 500;
+    }
+
+    /* Live Studio Grid Layout */
+    .byop-studio {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+      gap: 30px;
+      align-items: start;
+      width: 100%;
+      min-width: 0;
+    }
+    @media (max-width: 1024px) {
+      .byop-studio {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Wall Canvas Container */
+    .wall-preview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md, 2px);
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      position: sticky;
+      top: 90px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    /* Room Switcher Top Ribbon */
+    .wall-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .wall-room-tabs {
+      display: inline-flex;
+      background: var(--bg-primary);
+      padding: 3px;
+      border-radius: var(--radius-md, 2px);
+      border: 1px solid var(--border);
+      gap: 2px;
+    }
+    .room-tab {
+      padding: 5px 11px;
+      font-family: var(--font-heading);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-radius: var(--radius-sm, 2px);
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all var(--transition-fast, 0.2s ease);
+      white-space: nowrap;
+    }
+    .room-tab:hover {
+      color: var(--text-primary);
+    }
+    .room-tab.active {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .wall-top-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .wall-top-btn {
+      padding: 6px 11px;
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-radius: var(--radius-md, 2px);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--transition-fast, 0.2s ease);
+      user-select: none;
+    }
+    .wall-top-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .wall-top-btn.active {
+      background: var(--accent);
+      color: var(--on-accent);
+      border-color: var(--accent);
+    }
+    .wall-upload-btn {
+      padding: 6px 12px;
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-radius: var(--radius-md, 2px);
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      color: var(--accent);
+      border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--transition-fast, 0.2s ease);
+      user-select: none;
+    }
+    .wall-upload-btn:hover {
+      background: var(--accent);
+      color: var(--on-accent);
+      transform: translateY(-1px);
+    }
+
+    .wall-canvas-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 13.5;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      user-select: none;
+      background: #0d0d0c;
+      cursor: zoom-in;
+    }
+    .wall-canvas-box.is-zoomed {
+      cursor: grab;
+    }
+    .wall-canvas-box.is-panning {
+      cursor: grabbing !important;
+    }
+    .wall-zoom-stage {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('posters/packs/mockups/studio-wall.webp');
+      background-size: cover;
+      background-position: center;
+      transform-origin: 50% 50%;
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), background-image 0.3s ease, aspect-ratio 0.3s ease;
+      will-change: transform;
+    }
+    .wall-canvas-box[data-room="spacious"] .wall-zoom-stage,
+    .wall-zoom-stage[data-room="spacious"] {
+      background-image: url('posters/packs/mockups/spacious-wall.webp');
+    }
+    .wall-canvas-box[data-room="loft"] .wall-zoom-stage,
+    .wall-zoom-stage[data-room="loft"] {
+      background-image: url('posters/packs/mockups/loft-wall.webp');
+    }
+    .wall-canvas-box[data-room="custom"] .wall-zoom-stage,
+    .wall-zoom-stage[data-room="custom"] {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* Floating Zoom Controls Pill on Canvas */
+    .wall-zoom-pill {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(10, 10, 9, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius-sm, 2px);
+      padding: 3px 5px;
+      z-index: 30;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+      opacity: 0.92;
+      transition: opacity 0.2s ease;
+    }
+    .wall-zoom-pill:hover {
+      opacity: 1;
+    }
+    .zoom-pill-btn {
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border-radius: var(--radius-sm, 2px);
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .zoom-pill-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .zoom-pill-label {
+      font-family: var(--font-heading);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.92);
+      min-width: 38px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .zoom-pill-reset {
+      font-family: var(--font-heading);
+      font-size: 0.64rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 0 6px;
+      width: auto;
+    }
+
+    /* Live Posters Layer - Absolutely Positioned & Fluid Drag */
+    .wall-posters-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Wall Slot - Fluid Coordinates & Proportional Sizing */
+    .wall-slot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      pointer-events: auto;
+      aspect-ratio: 1 / 1.414;
+      background: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+      transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1), top 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, transform 0.15s ease;
+      overflow: visible;
+    }
+    .wall-slot.filled {
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      background: #fff;
+    }
+    .wall-slot.filled:hover,
+    .wall-slot.filled.is-active,
+    .wall-slot.filled:focus-within {
+      z-index: 250 !important;
+    }
+    .wall-slot.is-active-drag {
+      cursor: grabbing !important;
+      z-index: 300 !important;
+      transform: translate(-50%, -50%) scale(1.06);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6) !important;
+      transition: none !important;
+    }
+    .wall-slot.is-active-drag .slot-inspector {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    .wall-empty-prompt {
+      position: absolute;
+      top: 36%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(18, 18, 22, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 10px 22px;
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+      z-index: 5;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .wall-empty-prompt i {
+      color: var(--accent);
+    }
+    .wall-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      border-radius: 2px;
+    }
+
+    /* Corner Size Indicator Badge */
+    .slot-size-badge {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      background: rgba(10, 10, 9, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 0.62rem;
+      font-weight: 800;
+      padding: 2px 5px;
+      border-radius: var(--radius-sm, 2px);
+      letter-spacing: 0.3px;
+      z-index: 4;
+      pointer-events: auto;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      line-height: 1;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+    .slot-size-badge:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    /* Direct Remove Button in Top-Right Corner */
+    .slot-direct-remove {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(10, 10, 9, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      font-size: 9px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 4;
+      pointer-events: auto;
+      transition: all 0.15s ease;
+      padding: 0;
+    }
+    .wall-slot.filled:hover .slot-direct-remove,
+    .wall-slot.filled.is-active .slot-direct-remove {
+      display: flex;
+    }
+    .slot-direct-remove:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.15);
+    }
+
+    /* Gallery Framed Styling */
+    .wall-posters-layer.wall-framed .wall-slot {
+      border: 4px solid #141414;
+      border-radius: var(--radius-sm, 2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+    }
+    .wall-posters-layer.wall-framed .wall-slot.filled img {
+      filter: contrast(1.02);
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Floating Inspector Toolbar: Outside Poster Slot with Roomy Controls */
+    .slot-inspector {
+      position: absolute;
+      bottom: calc(100% + 7px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10, 10, 9, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: var(--radius-md, 2px);
+      padding: 4px 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 260;
+      white-space: nowrap;
+      pointer-events: auto;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.18s ease, transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.18s ease;
+    }
+    .slot-inspector::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 12px;
+      pointer-events: auto;
+    }
+    .slot-inspector:not(.inspector-bottom)::before {
+      bottom: -10px;
+    }
+    .slot-inspector.inspector-bottom::before {
+      top: -10px;
+    }
+    .slot-inspector.inspector-bottom {
+      bottom: auto;
+      top: calc(100% + 7px);
+    }
+    .wall-slot.filled:hover .slot-inspector,
+    .wall-slot.filled.is-active .slot-inspector {
+      opacity: 1;
+      visibility: visible;
+    }
+    .insp-order-label {
+      font-family: var(--font-heading);
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.65);
+      padding: 0 4px;
+    }
+    .inspector-sz-group {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm, 2px);
+      padding: 2px;
+      gap: 2px;
+    }
+    .insp-sz-btn {
+      min-width: 32px;
+      height: 26px;
+      padding: 0 8px;
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 800;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.85);
+      border-radius: var(--radius-sm, 2px);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .insp-sz-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+    .insp-sz-btn.active {
+      background: var(--accent);
+      color: var(--on-accent);
+      box-shadow: 0 2px 8px rgba(var(--accent-rgb), 0.45);
+    }
+    .inspector-btn-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .insp-action-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-sm, 2px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      padding: 0;
+    }
+    .insp-action-btn:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.28);
+      transform: scale(1.08);
+    }
+    .insp-action-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .insp-remove-btn {
+      background: rgba(var(--accent-rgb), 0.18);
+      border-color: rgba(var(--accent-rgb), 0.35);
+      color: var(--accent);
+    }
+    .insp-remove-btn:hover {
+      background: var(--accent) !important;
+      color: var(--on-accent) !important;
+    }
+
+    /* Wall Canvas Helper Caption */
+    .wall-drag-hint {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-heading);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.92);
+      background: rgba(10, 10, 9, 0.7);
+      padding: 4px 14px;
+      border-radius: var(--radius-sm, 2px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.2px;
+      z-index: 10;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* Dynamic Canvas Floating Toolbar for Layout Presets & Spacing */
+    .wall-canvas-toolbar {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(10, 10, 9, 0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 6px 14px;
+      border-radius: var(--radius-md, 2px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+      z-index: 25;
+      max-width: 95%;
+      overflow-x: auto;
+    }
+    .preset-group {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm, 2px);
+      padding: 2px;
+      gap: 2px;
+    }
+    .canvas-preset-btn {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: var(--radius-sm, 2px);
+      padding: 4px 10px;
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .canvas-preset-btn:hover {
+      color: #fff;
+    }
+    .canvas-preset-btn.active {
+      background: #fff;
+      color: #111;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+    .canvas-gap-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255, 255, 255, 0.85);
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0 4px;
+    }
+    .canvas-gap-slider {
+      width: 65px;
+      height: 4px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .canvas-tool-btn {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-sm, 2px);
+      padding: 4px 10px;
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .canvas-tool-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+
+    /* Wall Summary Bar */
+    .wall-summary-bar {
+      padding: 18px 22px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+    }
+    .wall-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .wall-counter {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: var(--tracking-tight);
+      color: var(--text-primary);
+    }
+    .wall-counter span {
+      color: var(--accent);
+    }
+    .wall-config-tag {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .wall-pricing {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .wall-price-now {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    .wall-price-mrp {
+      font-family: var(--font-body);
+      text-decoration: line-through;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .wall-save-tag {
+      font-family: var(--font-heading);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--success);
+      background: color-mix(in srgb, var(--success) 12%, transparent);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm, 2px);
+    }
+    .wall-offer-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-heading);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm, 2px);
+      margin-left: 6px;
+    }
+    .wall-next-offer-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-heading);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #38bdf8;
+      background: color-mix(in srgb, #38bdf8 12%, transparent);
+      border: 1px solid color-mix(in srgb, #38bdf8 25%, transparent);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm, 2px);
+      margin-left: 6px;
+    }
+    .catalog-milestone-hint {
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .catalog-milestone-applied {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .catalog-milestone-next {
+      color: #38bdf8;
+      font-weight: 500;
+    }
+    .slot-free-badge {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: #10b981;
+      color: #ffffff;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 2px 6px;
+      border-radius: 3px;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+      z-index: 4;
+      pointer-events: none;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .byop-add-btn {
+      padding: 13px 26px;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border: 1px solid var(--text-primary);
+      border-radius: var(--radius-md, 2px);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--transition-fast, 0.2s ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .byop-add-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      background: var(--surface-muted);
+      border-color: var(--border);
+      color: var(--text-muted);
+    }
+    .byop-add-btn:not(:disabled):hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--on-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.25);
+    }
+
+    /* Poster Palette Drawer / Grid */
+    .catalog-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md, 2px);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    }
+    .catalog-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .catalog-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .catalog-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: var(--tracking-tight);
+      color: var(--text-primary);
+    }
+
+    /* Catalog Source Mode Switcher (Global vs Minis) */
+    .catalog-mode-switch {
+      display: inline-flex;
+      background: var(--bg-primary);
+      padding: 3px;
+      border-radius: var(--radius-md, 2px);
+      border: 1px solid var(--border);
+    }
+    .mode-tab {
+      padding: 6px 14px;
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-radius: var(--radius-sm, 2px);
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast, 0.2s ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mode-tab:hover {
+      color: var(--text-primary);
+    }
+    .mode-tab.active {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Mini Search Bar */
+    .byop-search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    .byop-search-box i.search-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+    .byop-search-input {
+      width: 100%;
+      padding: 10px 38px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md, 2px);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 0.88rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .byop-search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.18);
+    }
+    .byop-search-clear {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+    .byop-search-clear:hover {
+      color: var(--text-primary);
+      background: var(--surface-muted);
+    }
+    .byop-search-clear.visible {
+      display: flex;
+    }
+
+    /* Filter Chips Bar */
+    .catalog-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+    }
+    .catalog-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .catalog-tab {
+      padding: 6px 12px;
+      font-family: var(--font-heading);
+      font-size: 0.76rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm, 2px);
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all var(--transition-fast);
+      flex-shrink: 0;
+    }
+    .catalog-tab:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+    .catalog-tab.active {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
+    }
+
+    /* Catalog Results Count */
+    .catalog-status-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding: 0 2px;
+    }
+
+    /* Catalog Poster Grid */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 12px;
+      max-height: 560px;
+      overflow-y: auto;
+      padding-right: 6px;
+      scrollbar-width: thin;
+    }
+    .catalog-grid::-webkit-scrollbar {
+      width: 5px;
+    }
+    .catalog-grid::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: var(--radius-sm, 2px);
+    }
+
+    .poster-item {
+      aspect-ratio: 1 / 1.414;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md, 2px);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid var(--border-light);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    .poster-item:hover {
+      border-color: var(--border);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    }
+    .poster-item.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .poster-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+    .poster-item:hover img {
+      transform: scale(1.04);
+    }
+    .poster-item .select-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 22px;
+      height: 22px;
+      border-radius: var(--radius-sm, 2px);
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .poster-item.selected .select-badge {
+      background: var(--accent);
+      transform: scale(1.08);
+    }
+    .poster-item .poster-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0) 100%);
+      padding: 18px 6px 6px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 0.95;
+    }
+
+    .catalog-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px 10px;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+    }
+    .catalog-empty i {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      opacity: 0.5;
+    }
+
+    /* Floating Bottom Action Bar on Mobile */
+    .byop-mobile-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+      background: color-mix(in srgb, var(--bg-card) 94%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12);
+    }
+    .byop-mobile-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .byop-mobile-count {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .byop-mobile-count strong {
+      color: var(--accent);
+      font-size: 0.92rem;
+    }
+    .byop-mobile-price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .m-price-now {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+    .m-price-mrp {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+    .byop-mobile-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .byop-mobile-view-btn {
+      padding: 10px 12px;
+      border-radius: var(--radius-md, 2px);
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+    .byop-mobile-add-btn {
+      padding: 10px 16px;
+      border-radius: var(--radius-md, 2px);
+      border: 1px solid var(--text-primary);
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      min-height: 44px;
+      touch-action: manipulation;
+      transition: all var(--transition-fast, 0.2s ease);
+    }
+    .byop-mobile-add-btn:not(:disabled):hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--on-accent);
+    }
+
+    /* High-Resolution Full View Zoom Modal */
+    .byop-zoom-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      background: rgba(10, 10, 9, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease;
+    }
+    .byop-zoom-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .zoom-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    .zoom-modal-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+    .zoom-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: rgba(18, 18, 18, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 10;
+      color: #fff;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .zoom-modal-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: var(--tracking-tight);
+    }
+    .zoom-modal-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.15);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm, 2px);
+      border: 1px solid rgba(var(--accent-rgb), 0.3);
+    }
+    .zoom-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .zoom-modal-slider-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm, 2px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      color: #fff;
+    }
+    .zoom-modal-slider-box input[type="range"] {
+      width: 90px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .modal-zoom-btn {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-sm, 2px);
+      color: #fff;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .modal-zoom-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .modal-reset-btn {
+      width: auto;
+      padding: 0 7px;
+      font-weight: 700;
+    }
+    .zoom-modal-close-btn {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius-sm, 2px);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .zoom-modal-close-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+    .zoom-modal-body {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-in;
+    }
+    .zoom-modal-body.is-zoomed {
+      cursor: grab;
+    }
+    .zoom-modal-body.is-panning {
+      cursor: grabbing !important;
+    }
+    .zoom-modal-stage {
+      position: relative;
+      width: 88vw;
+      max-width: 1300px;
+      aspect-ratio: 16 / 11;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transform-origin: 50% 50%;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    .zoom-modal-wall {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .zoom-modal-wall .wall-slot {
+      pointer-events: none;
+    }
+    .zoom-modal-hint {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-heading);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(0, 0, 0, 0.65);
+      padding: 5px 16px;
+      border-radius: var(--radius-sm, 2px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .byop-mobile-add-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      background: var(--surface-muted);
+      color: var(--text-muted);
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 900px) {
+      .byop-wrap {
+        padding: 85px 12px 110px;
+        overflow-x: hidden;
+      }
+      .byop-title {
+        font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+        text-wrap: balance;
+        word-break: break-word;
+      }
+      .byop-title-br {
+        display: inline;
+      }
+      .byop-studio {
+        min-width: 0;
+        width: 100%;
+        overflow: hidden;
+      }
+      .catalog-panel {
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+        padding: 16px 14px;
+      }
+      .catalog-header {
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .catalog-tabs {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+      }
+      .byop-controls {
+        grid-template-columns: 1fr;
+        padding: 14px;
+        gap: 12px;
+        min-width: 0;
+        max-width: 100%;
+      }
+      #target-pills {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+      }
+      #size-pills {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+      }
+      #frame-pills {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+      }
+      .pill-btn {
+        flex: none;
+        padding: 8px 4px;
+        font-size: 0.8rem;
+        min-width: 0;
+      }
+      .pill-btn strong {
+        font-size: 0.88rem;
+      }
+      .pill-btn small {
+        font-size: 0.68rem;
+      }
+      .wall-preview-card {
+        position: static;
+        top: auto;
+      }
+      .wall-summary-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 16px;
+      }
+      .byop-add-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.92rem;
+        padding: 12px 16px;
+      }
+      .wall-drag-hint {
+        top: auto;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 90%;
+        font-size: 0.68rem;
+        padding: 3px 10px;
+        text-align: center;
+        white-space: normal;
+      }
+      .wall-canvas-toolbar {
+        bottom: 8px;
+        padding: 4px 10px;
+        gap: 6px;
+      }
+      .canvas-preset-btn {
+        padding: 3px 7px;
+        font-size: 0.68rem;
+      }
+      .canvas-gap-group {
+        font-size: 0.68rem;
+      }
+      .canvas-gap-slider {
+        width: 45px;
+      }
+      .catalog-top-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+      }
+      .catalog-mode-switch {
+        width: 100%;
+        display: flex;
+      }
+      .mode-tab {
+        flex: 1 1 0;
+        justify-content: center;
+        padding: 7px 6px;
+        font-size: 0.76rem;
+        white-space: nowrap;
+      }
+      .byop-mobile-bar {
+        display: flex;
+      }
+      .catalog-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        max-height: none;
+        overflow-y: visible;
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wall-posters-layer.wall-framed .wall-slot {
+        border-width: 3px;
+      }
+      .slot-actions {
+        display: flex;
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .slot-remove-btn {
+        width: 18px;
+        height: 18px;
+        font-size: 9px;
+      }
+      .slot-shift-btn {
+        width: 18px;
+        height: 18px;
+        font-size: 8px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      #target-pills .pill-btn, #size-pills .pill-btn {
+        padding: 7px 2px;
+        font-size: 0.74rem;
+        gap: 2px;
+      }
+      .target-unit {
+        font-size: 0.68rem;
+      }
+    }
+
+    /* Ultra narrow screen adjustments */
+    @media (max-width: 360px) {
+      .byop-wrap {
+        padding: 75px 10px 120px;
+      }
+      #target-pills .pill-btn, #size-pills .pill-btn {
+        padding: 6px 2px;
+        font-size: 0.7rem;
+        gap: 2px;
+      }
+      .target-unit {
+        font-size: 0.65rem;
+      }
+      .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+      .byop-mobile-view-btn {
+        padding: 8px 8px;
+        font-size: 0.75rem;
+      }
+      .byop-mobile-add-btn {
+        padding: 8px 12px;
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <global-navbar announcement></global-navbar>
+
+  <main class="byop-wrap" id="main-content">
+    <div class="byop-header">
+      <div class="byop-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Custom Wall Studio</div>
+      <h1 class="byop-title">Build Your Own <br class="byop-title-br">Poster Pack</h1>
+      <p class="byop-sub">Design your signature gallery wall. Build any quantity of posters with zero restrictions across our Global Poster archive or Curated Mini sets, choose your size and framing, slide and adjust frame positions freely, or upload your own wall photo.</p>
+    </div>
+
+    <!-- Step Controls Ribbon -->
+    <div class="byop-controls" role="region" aria-label="Pack Customization Controls">
+      <!-- 1. Pack Presets & Offer Milestones -->
+      <div class="byop-control-group">
+        <span class="control-label"><i class="fa-solid fa-layer-group"></i> 1. Pack Milestones (Any Quantity):</span>
+        <div class="pills" id="target-pills" role="radiogroup" aria-label="Pack Milestone Presets">
+          <button type="button" class="pill-btn" data-target="3" role="radio" aria-checked="false" title="3-Poster Pack Rate">
+            <strong>3</strong> <span class="target-unit">Pack of 3</span>
+          </button>
+          <button type="button" class="pill-btn" data-target="5" role="radio" aria-checked="false" title="Buy 5 Get 1 Free!">
+            <strong>5</strong> <span class="target-unit">Buy 5 (1 Free)</span>
+          </button>
+          <button type="button" class="pill-btn active" data-target="10" role="radio" aria-checked="true" title="Buy 10 Get 3 Free!">
+            <strong>10</strong> <span class="target-unit">Buy 10 (3 Free)</span>
+          </button>
+          <button type="button" class="pill-btn" data-target="20" role="radio" aria-checked="false" title="Buy 20 Get 4 Free!">
+            <strong>20</strong> <span class="target-unit">Buy 20 (4 Free)</span>
+          </button>
+          <button type="button" class="pill-btn" data-target="30" role="radio" aria-checked="false" title="Buy 30 Get 6 Free!">
+            <strong>30</strong> <span class="target-unit">Buy 30 (6 Free)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Variable Sizes (A5, A4, A3, Mixed) -->
+      <div class="byop-control-group">
+        <span class="control-label"><i class="fa-solid fa-ruler-combined"></i> 2. Poster Size:</span>
+        <div class="pills" id="size-pills" role="radiogroup" aria-label="Poster Dimensions">
+          <button type="button" class="pill-btn active" data-size="A5" role="radio" aria-checked="true">
+            A5 <small>Compact</small>
+          </button>
+          <button type="button" class="pill-btn" data-size="A4" role="radio" aria-checked="false">
+            A4 <small>Standard</small>
+          </button>
+          <button type="button" class="pill-btn" data-size="A3" role="radio" aria-checked="false">
+            A3 <small>Statement</small>
+          </button>
+          <button type="button" class="pill-btn" data-size="mixed" role="radio" aria-checked="false" id="size-mixed-pill">
+            Mixed <small>Custom</small>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Type Toggle (Just Posters vs Framed Posters) -->
+      <div class="byop-control-group">
+        <span class="control-label"><i class="fa-solid fa-border-all"></i> 3. Framing Style:</span>
+        <div class="pills" id="frame-pills" role="radiogroup" aria-label="Framing Type">
+          <button type="button" class="pill-btn active" data-frame="unframed" role="radio" aria-checked="true">
+            <i class="fa-regular fa-image"></i> Just Posters
+          </button>
+          <button type="button" class="pill-btn" data-frame="framed" role="radio" aria-checked="false">
+            <i class="fa-solid fa-square"></i> Framed Posters
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Studio Grid -->
+    <div class="byop-studio">
+      <!-- Left: Interactive Wall Mockup -->
+      <div class="wall-preview-card">
+        <!-- Room Selector & Custom Wall Ribbon -->
+        <div class="wall-top-bar">
+          <div class="wall-room-tabs" id="room-tabs" role="tablist" aria-label="Wall Backdrop Options">
+            <button type="button" class="room-tab active" data-room="studio" role="tab" aria-selected="true" title="Cozy Studio Wall">
+              <i class="fa-solid fa-couch"></i> <span>Studio</span>
+            </button>
+            <button type="button" class="room-tab" data-room="spacious" role="tab" aria-selected="false" title="Spacious Lounge Wall">
+              <i class="fa-solid fa-house"></i> <span>Spacious</span>
+            </button>
+            <button type="button" class="room-tab" data-room="loft" role="tab" aria-selected="false" title="Modern Loft Wall">
+              <i class="fa-solid fa-building"></i> <span>Loft</span>
+            </button>
+            <button type="button" class="room-tab" data-room="custom" role="tab" aria-selected="false" id="my-wall-tab" style="display:none;" title="My Uploaded Wall Photo">
+              <i class="fa-solid fa-camera"></i> <span>My Wall</span>
+            </button>
+          </div>
+          <div class="wall-top-actions">
+            <button type="button" class="wall-top-btn" id="wall-zoom-btn" title="Click to Zoom Wall (or double-click wall)" aria-label="Click to zoom wall">
+              <i class="fa-solid fa-magnifying-glass-plus"></i> <span id="wall-zoom-label">Zoom In</span>
+            </button>
+            <button type="button" class="wall-top-btn" id="wall-fullscreen-btn" title="Open Fullscreen Detailed Lightbox" aria-label="Open fullscreen view">
+              <i class="fa-solid fa-expand"></i> <span>Full View</span>
+            </button>
+            <label class="wall-upload-btn" title="Upload a photo of your own wall to see real-world mockup">
+              <i class="fa-solid fa-camera"></i> <span>Upload Wall</span>
+              <input type="file" id="wall-file-input" accept="image/*" style="display:none;">
+            </label>
+          </div>
+        </div>
+
+        <div class="wall-canvas-box" id="wall-canvas-box" data-lenis-prevent>
+          <div class="wall-zoom-stage" id="wall-zoom-stage">
+            <div class="wall-posters-layer" id="wall-layer" data-count="10" role="region" aria-label="Interactive Wall Display">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+          <div class="wall-drag-hint" id="wall-drag-hint">
+            <i class="fa-solid fa-arrows-up-down-left-right" aria-hidden="true"></i> Drag posters to adjust · Click Zoom or double-click to inspect
+          </div>
+
+          <!-- Floating Zoom Controls Pill on Canvas -->
+          <div class="wall-zoom-pill" id="wall-zoom-pill" aria-label="Zoom controls">
+            <button type="button" class="zoom-pill-btn" id="zoom-out-btn" title="Zoom Out" aria-label="Zoom Out"><i class="fa-solid fa-minus"></i></button>
+            <span class="zoom-pill-label" id="zoom-level-text">100%</span>
+            <button type="button" class="zoom-pill-btn" id="zoom-in-btn" title="Zoom In" aria-label="Zoom In"><i class="fa-solid fa-plus"></i></button>
+            <button type="button" class="zoom-pill-btn zoom-pill-reset" id="zoom-reset-btn" title="Reset Zoom" aria-label="Reset Zoom"><i class="fa-solid fa-rotate-left"></i></button>
+          </div>
+
+          <!-- Dynamic Canvas Floating Toolbar for Layout Presets & Spacing -->
+          <div class="wall-canvas-toolbar" id="wall-canvas-toolbar">
+            <div class="preset-group" id="preset-group" role="tablist" aria-label="Pre-made Layouts">
+              <button type="button" class="canvas-preset-btn active" data-preset="grid" title="Clean Rows & Columns">
+                <i class="fa-solid fa-border-all"></i> Grid
+              </button>
+              <button type="button" class="canvas-preset-btn" data-preset="salon" title="Statement Centerpiece Gallery">
+                <i class="fa-solid fa-shapes"></i> Salon
+              </button>
+              <button type="button" class="canvas-preset-btn" data-preset="staggered" title="Modern Staggered Rows">
+                <i class="fa-solid fa-bars-staggered"></i> Staggered
+              </button>
+            </div>
+            <div class="canvas-gap-group" title="Adjust spacing between poster frames">
+              <span>Gap:</span>
+              <input type="range" class="canvas-gap-slider" id="canvas-gap-range" min="4" max="32" value="14" step="2" aria-label="Poster Gap Spacing Slider">
+              <span id="canvas-gap-val" style="font-size: 0.68rem; opacity: 0.85; min-width: 22px;">14px</span>
+            </div>
+            <button type="button" class="canvas-tool-btn" id="canvas-auto-align" title="Re-align all posters to clean layout">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Re-Align
+            </button>
+            <button type="button" class="canvas-tool-btn" id="canvas-zoom-quick-btn" title="Toggle Click-to-Zoom">
+              <i class="fa-solid fa-magnifying-glass-plus"></i> Zoom
+            </button>
+            <label class="canvas-tool-btn" id="custom-wall-alt-btn" style="cursor:pointer; display:none;" title="Choose another room photo">
+              <i class="fa-solid fa-camera-rotate"></i> Change Photo
+              <input type="file" id="wall-file-input-alt" accept="image/*" style="display:none;">
+            </label>
+          </div>
+        </div>
+
+        <div class="wall-summary-bar">
+          <div class="wall-stats">
+            <div class="wall-counter"><span id="selected-counter">0</span> Posters Selected · <span id="target-counter">Milestone 10</span></div>
+            <div class="wall-config-tag" id="config-tag">
+              <span>Size: <strong>A5</strong></span> · <span>Type: <strong>Just Posters</strong></span>
+            </div>
+            <div class="wall-pricing">
+              <span class="wall-price-now" id="price-display">₹169</span>
+              <span class="wall-price-mrp" id="mrp-display">₹299</span>
+              <span class="wall-save-tag" id="save-display">Save ₹130</span>
+              <span class="wall-offer-tag" id="offer-tag" style="display:none;"></span>
+              <span class="wall-next-offer-tag" id="next-offer-tag" style="display:none;"></span>
+            </div>
+          </div>
+          <button type="button" class="byop-add-btn" id="add-pack-btn">
+            <i class="fa-solid fa-bag-shopping"></i> Select Posters to Start Pack
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Poster Catalog Drawer -->
+      <div class="catalog-panel">
+        <div class="catalog-header">
+          <div class="catalog-top-row">
+            <div class="catalog-title">Add to Pack</div>
+            <!-- Global vs Minis Switcher -->
+            <div class="catalog-mode-switch" id="mode-switcher" role="tablist" aria-label="Poster Catalog Source">
+              <button type="button" class="mode-tab active" data-mode="global" role="tab" aria-selected="true">
+                <i class="fa-solid fa-globe"></i> Global Posters (<span id="global-total-count">...</span>)
+              </button>
+              <button type="button" class="mode-tab" data-mode="minis" role="tab" aria-selected="false">
+                <i class="fa-solid fa-shapes"></i> Mini Posters (<span id="minis-total-count">116</span>)
+              </button>
+            </div>
+          </div>
+
+          <!-- Mini Search Bar -->
+          <div class="byop-search-box">
+            <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+            <input type="search" id="byop-search" class="byop-search-input" placeholder="Search posters by title, genre, keyword..." aria-label="Search posters">
+            <button type="button" id="byop-search-clear" class="byop-search-clear" aria-label="Clear search">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Genre Filter Tabs (dynamically swapped between global & minis) -->
+          <div class="catalog-tabs" id="catalog-tabs" data-lenis-prevent role="tablist" aria-label="Genre Filters">
+            <!-- Rendered by JS based on active mode -->
+          </div>
+
+          <div class="catalog-status-line">
+            <span id="catalog-count-label">Loading catalog...</span>
+            <span id="catalog-hint" class="catalog-milestone-hint">Tap any poster to add or remove</span>
+          </div>
+        </div>
+
+        <div class="catalog-grid" id="catalog-grid" data-lenis-prevent role="region" aria-label="Poster Selection Grid">
+          <!-- Loaded via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticky Mobile Action & Progress Bar -->
+    <aside class="byop-mobile-bar" id="byop-mobile-bar" aria-label="Pack status and action bar">
+      <div class="byop-mobile-info">
+        <div class="byop-mobile-count">
+          Selected <strong id="m-selected">0</strong> Posters
+          <div id="m-offer-tag" class="m-offer-tag" style="font-size: 0.72rem; color: var(--accent); margin-top: 2px;"></div>
+        </div>
+        <div class="byop-mobile-price">
+          <span class="m-price-now" id="m-price">₹169</span>
+          <span class="m-price-mrp" id="m-mrp">₹299</span>
+        </div>
+      </div>
+      <div class="byop-mobile-actions">
+        <button type="button" class="byop-mobile-view-btn" id="m-view-wall-btn" aria-label="View wall preview">
+          <i class="fa-solid fa-eye" aria-hidden="true"></i> View Wall
+        </button>
+        <button type="button" class="byop-mobile-add-btn" id="m-add-btn" disabled>
+          <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i> Add Pack
+        </button>
+      </div>
+    </aside>
+  </main>
+
+  <global-footer></global-footer>
+  <site-overlays></site-overlays>
+
+  <!-- High-Resolution Full View Zoom Modal -->
+  <div class="byop-zoom-modal" id="byop-zoom-modal" role="dialog" aria-modal="true" aria-label="High-Resolution Wall Detail View" style="display:none;">
+    <div class="zoom-modal-backdrop" id="zoom-modal-backdrop"></div>
+    <div class="zoom-modal-container">
+      <div class="zoom-modal-header">
+        <div class="zoom-modal-title">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Built Wall Detail Inspector</span>
+          <span class="zoom-modal-tag" id="zoom-modal-tag">10 Posters · A5</span>
+        </div>
+        <div class="zoom-modal-actions">
+          <div class="zoom-modal-slider-box">
+            <button type="button" class="modal-zoom-btn" id="modal-zoom-out" title="Zoom Out" aria-label="Zoom out"><i class="fa-solid fa-minus"></i></button>
+            <input type="range" id="modal-zoom-slider" min="100" max="300" value="100" step="10" aria-label="Zoom percentage">
+            <span id="modal-zoom-pct">100%</span>
+            <button type="button" class="modal-zoom-btn" id="modal-zoom-in" title="Zoom In" aria-label="Zoom in"><i class="fa-solid fa-plus"></i></button>
+            <button type="button" class="modal-zoom-btn modal-reset-btn" id="modal-zoom-reset" title="Reset to 1x">1x</button>
+          </div>
+          <button type="button" class="zoom-modal-close-btn" id="zoom-modal-close" title="Close Inspector" aria-label="Close full view">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+      <div class="zoom-modal-body" id="zoom-modal-body">
+        <div class="zoom-modal-stage" id="zoom-modal-stage">
+          <div class="zoom-modal-wall" id="zoom-modal-wall">
+            <!-- Dynamically cloned wall slots -->
+          </div>
+        </div>
+        <div class="zoom-modal-hint">
+          <i class="fa-solid fa-hand-pointer"></i> Click wall to toggle zoom · Drag to pan around
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="lenis.min.js"></script>
+  <script src="scroll.js" defer></script>
+  <script src="img-utils.js?v=4"></script>
+  <script src="cart.js?v=12"></script>
+  <script>
+    (function() {
+      // Pricing Matrix calibrated with Backend/productTypes.js
+      const PRICING = {
+        5: {
+          unframed: {
+            A5: { price: 99, mrp: 199, save: 'Save ₹100', type: 'poster_pack_5' },
+            A4: { price: 149, mrp: 299, save: 'Save ₹150', type: 'poster_pack_5' },
+            A3: { price: 249, mrp: 499, save: 'Save ₹250', type: 'poster_pack_5' }
+          },
+          framed: {
+            A5: { price: 299, mrp: 599, save: 'Save ₹300', type: 'poster_pack_5' },
+            A4: { price: 499, mrp: 999, save: 'Save ₹500', type: 'poster_pack_5' },
+            A3: { price: 899, mrp: 1699, save: 'Save ₹800', type: 'poster_pack_5' }
+          }
+        },
+        10: {
+          unframed: {
+            A5: { price: 169, mrp: 299, save: 'Save ₹130', type: 'poster_pack_10' },
+            A4: { price: 259, mrp: 449, save: 'Save ₹190', type: 'poster_pack_10' },
+            A3: { price: 449, mrp: 799, save: 'Save ₹350', type: 'poster_pack_10' }
+          },
+          framed: {
+            A5: { price: 549, mrp: 1099, save: 'Save ₹550', type: 'poster_pack_10' },
+            A4: { price: 899, mrp: 1799, save: 'Save ₹900', type: 'poster_pack_10' },
+            A3: { price: 1599, mrp: 2999, save: 'Save ₹1,400', type: 'poster_pack_10' }
+          }
+        },
+        15: {
+          unframed: {
+            A5: { price: 239, mrp: 449, save: 'Save ₹210', type: 'poster_pack_15' },
+            A4: { price: 349, mrp: 599, save: 'Save ₹250', type: 'poster_pack_15' },
+            A3: { price: 629, mrp: 1099, save: 'Save ₹470', type: 'poster_pack_15' }
+          },
+          framed: {
+            A5: { price: 799, mrp: 1599, save: 'Save ₹800', type: 'poster_pack_15' },
+            A4: { price: 1299, mrp: 2499, save: 'Save ₹1,200', type: 'poster_pack_15' },
+            A3: { price: 2299, mrp: 4299, save: 'Save ₹2,000', type: 'poster_pack_15' }
+          }
+        },
+        20: {
+          unframed: {
+            A5: { price: 309, mrp: 599, save: 'Save ₹290', type: 'poster_pack_20' },
+            A4: { price: 449, mrp: 799, save: 'Save ₹350', type: 'poster_pack_20' },
+            A3: { price: 799, mrp: 1399, save: 'Save ₹600', type: 'poster_pack_20' }
+          },
+          framed: {
+            A5: { price: 999, mrp: 1999, save: 'Save ₹1,000', type: 'poster_pack_20' },
+            A4: { price: 1699, mrp: 3299, save: 'Save ₹1,600', type: 'poster_pack_20' },
+            A3: { price: 2899, mrp: 5499, save: 'Save ₹2,600', type: 'poster_pack_20' }
+          }
+        }
+      };
+
+      // Room Safe Zones (boundary percentages preventing overlap with desk, sofa, furniture)
+      const ROOM_ZONES = {
+        studio: { minX: 12, maxX: 88, minY: 7, maxY: 51, centerY: 28, aspect: 16 / 13.5 },
+        spacious: { minX: 12, maxX: 88, minY: 6, maxY: 51, centerY: 28, aspect: 16 / 10.7 },
+        loft: { minX: 12, maxX: 88, minY: 7, maxY: 53, centerY: 29, aspect: 16 / 13.5 },
+        custom: { minX: 8, maxX: 92, minY: 8, maxY: 90, centerY: 48, aspect: 16 / 12 }
+      };
+
+      let state = {
+        target: 10,       // 5, 10, 15, or 20
+        size: 'A5',       // 'A5', 'A4', 'A3', or 'mixed'
+        frame: 'unframed', // 'unframed' or 'framed'
+        room: 'studio',   // 'studio', 'spacious', 'loft', or 'custom'
+        customWallUrl: null,
+        customWallRatio: null,
+        layoutPreset: 'grid', // 'grid', 'salon', 'staggered'
+        layoutGap: 14,    // in px
+        hasCustomMoved: false,
+        catalogMode: 'global', // 'global' or 'minis'
+        filter: 'all',
+        searchQuery: '',
+        selected: [],     // array of { id, name, image, category, size: 'A5'|'A4'|'A3', posX: %, posY: % }
+        globalCatalog: [],
+        miniCatalog: [],
+        draggedIdx: null
+      };
+
+      // Elements
+      const wallLayer = document.getElementById('wall-layer');
+      const wallCanvasBox = document.getElementById('wall-canvas-box');
+      const wallZoomStage = document.getElementById('wall-zoom-stage');
+      const wallZoomBtn = document.getElementById('wall-zoom-btn');
+      const wallZoomLabel = document.getElementById('wall-zoom-label');
+      const wallFullscreenBtn = document.getElementById('wall-fullscreen-btn');
+      const canvasZoomQuickBtn = document.getElementById('canvas-zoom-quick-btn');
+      const wallZoomPill = document.getElementById('wall-zoom-pill');
+      const zoomLevelText = document.getElementById('zoom-level-text');
+      const zoomInBtn = document.getElementById('zoom-in-btn');
+      const zoomOutBtn = document.getElementById('zoom-out-btn');
+      const zoomResetBtn = document.getElementById('zoom-reset-btn');
+
+      const byopZoomModal = document.getElementById('byop-zoom-modal');
+      const zoomModalClose = document.getElementById('zoom-modal-close');
+      const zoomModalBackdrop = document.getElementById('zoom-modal-backdrop');
+      const zoomModalSlider = document.getElementById('modal-zoom-slider');
+      const zoomModalPct = document.getElementById('modal-zoom-pct');
+      const modalZoomIn = document.getElementById('modal-zoom-in');
+      const modalZoomOut = document.getElementById('modal-zoom-out');
+      const modalZoomReset = document.getElementById('modal-zoom-reset');
+      const zoomModalStage = document.getElementById('zoom-modal-stage');
+      const zoomModalWall = document.getElementById('zoom-modal-wall');
+      const zoomModalBody = document.getElementById('zoom-modal-body');
+      const zoomModalTag = document.getElementById('zoom-modal-tag');
+
+      const roomTabs = document.getElementById('room-tabs');
+      const myWallTab = document.getElementById('my-wall-tab');
+      const customWallAltBtn = document.getElementById('custom-wall-alt-btn');
+      const presetGroup = document.getElementById('preset-group');
+      const canvasGapRange = document.getElementById('canvas-gap-range');
+      const canvasAutoAlign = document.getElementById('canvas-auto-align');
+
+      const wallFileInput = document.getElementById('wall-file-input');
+      const wallFileInputAlt = document.getElementById('wall-file-input-alt');
+
+      const catalogGrid = document.getElementById('catalog-grid');
+      const catalogTabs = document.getElementById('catalog-tabs');
+      const searchInput = document.getElementById('byop-search');
+      const searchClear = document.getElementById('byop-search-clear');
+      const catalogCountLabel = document.getElementById('catalog-count-label');
+      const globalTotalCount = document.getElementById('global-total-count');
+      const minisTotalCount = document.getElementById('minis-total-count');
+
+      const selectedCounter = document.getElementById('selected-counter');
+      const targetCounter = document.getElementById('target-counter');
+      const configTag = document.getElementById('config-tag');
+      const priceDisplay = document.getElementById('price-display');
+      const mrpDisplay = document.getElementById('mrp-display');
+      const saveDisplay = document.getElementById('save-display');
+      const offerTag = document.getElementById('offer-tag');
+      const addPackBtn = document.getElementById('add-pack-btn');
+
+      // Mobile Bar Elements
+      const mSelected = document.getElementById('m-selected');
+      const mTarget = document.getElementById('m-target');
+      const mPrice = document.getElementById('m-price');
+      const mMrp = document.getElementById('m-mrp');
+      const mAddBtn = document.getElementById('m-add-btn');
+      const mViewWallBtn = document.getElementById('m-view-wall-btn');
+
+      // 1. Fetch Both Catalogs
+      async function loadGlobalProducts() {
+        if (window.BrushCatalog && typeof window.BrushCatalog.getProducts === 'function') {
+          try {
+            const list = await window.BrushCatalog.getProducts();
+            if (Array.isArray(list) && list.length > 0) return list;
+          } catch (_) {}
+        }
+        try {
+          const r = await fetch('/data/products.json');
+          if (r.ok) {
+            const list = await r.json();
+            if (Array.isArray(list) && list.length > 0) return list;
+          }
+        } catch (_) {}
+        try {
+          const r = await fetch('data/products.json');
+          if (r.ok) {
+            const list = await r.json();
+            if (Array.isArray(list) && list.length > 0) return list;
+          }
+        } catch (_) {}
+        try {
+          const base = (typeof API_BASE !== 'undefined' && API_BASE) ? API_BASE : 'https://brush-production.onrender.com/api';
+          const r = await fetch(base + '/products');
+          if (r.ok) return await r.json();
+        } catch (_) {}
+        return [];
+      }
+
+      const fetchGlobal = loadGlobalProducts()
+        .then(list => {
+          function isPosterProduct(p) {
+            if (!p || !p.image) return false;
+            const pt = String(p.productType || '').trim().toLowerCase();
+            const cat = String(p.category || '').trim().toLowerCase();
+            const name = String(p.name || '').toLowerCase();
+
+            // Explicit non-poster productTypes
+            const nonPosterTypes = [
+              'collectibles', 'collectible', 'figurine', 'figurines', 'toy', 'toys',
+              'wallpapers', 'wallpaper',
+              'stickers', 'sticker', 'sticker sheet', 'sticker_sheet',
+              'tapestry', 'tapestries',
+              'metal posters', 'metal poster', 'metal',
+              'apparel', 'hoodie', 'hoodies', 't-shirt', 'tshirt', 't-shirts',
+              'plate', 'plates',
+              'digital assets', 'digital', 'digital_asset'
+            ];
+            if (nonPosterTypes.includes(pt)) return false;
+
+            // Explicit non-poster categories
+            const nonPosterCats = [
+              'collectibles', 'figurines', 'wallpapers', 'stickers', 'tapestries',
+              'metal posters', 't-shirts', 'hoodies', 'plates', 'digital assets', 'wall setup packs'
+            ];
+            if (nonPosterCats.includes(cat)) return false;
+
+            // Exclude pre-made packs and bundles (BYOP is for picking individual posters)
+            if (pt.startsWith('poster_pack_') || pt === 'poster_3_pack') return false;
+            if (name.includes('pack') || name.includes('set of')) return false;
+
+            // Accept valid poster productTypes
+            if (pt === 'poster' || pt === 'posters') return true;
+
+            if (!pt || pt === 'generic') {
+              return !nonPosterCats.includes(cat);
+            }
+
+            return false;
+          }
+
+          const BESTSELLER_PRIORITY = [
+            122, 135, 504, 143, 345, 619, 614, 535, 153, 133, 157, 208, 156, 313, 206, 529,
+            223, 533, 177, 532, 137, 337, 134, 294, 144, 2, 4, 6, 43, 318, 302, 307
+          ];
+          const bsRank = id => {
+            const idx = BESTSELLER_PRIORITY.indexOf(Number(id));
+            return idx === -1 ? 999 : idx;
+          };
+
+          const userClicks = (window.BrushAnalytics && window.BrushAnalytics.getClicks)
+            ? window.BrushAnalytics.getClicks()
+            : (() => {
+                try { return JSON.parse(localStorage.getItem('brush_analytics_clicks') || '{}') || {}; }
+                catch (_) { return {}; }
+              })();
+          const currentEpoch = (window.BrushAnalytics && window.BrushAnalytics.get2DayEpoch)
+            ? window.BrushAnalytics.get2DayEpoch()
+            : Math.floor(Date.now() / (2 * 24 * 60 * 60 * 1000));
+
+          function calculate2DayPopularity(p) {
+            if (window.BrushAnalytics && window.BrushAnalytics.computePopularityScore) {
+              return window.BrushAnalytics.computePopularityScore(p, userClicks, currentEpoch);
+            }
+            const rawId = String(p.id || '').replace(/^global_|^minis_/, '');
+            const orders = Number(p.orderFrequency) || 0;
+            const clicks = (Number(userClicks[rawId]) || 0) + (orders * 12) + ((p.reviews || []).length * 15) + (p.showInBestsellers ? 45 : 15);
+            const clickRate = clicks / Math.max(60, clicks * 3.5 + 80);
+            const buyRate = orders / Math.max(1, clicks);
+            const r = (p.reviews || []).map(x => Number(x.rating)).filter(x => x >= 1 && x <= 5);
+            const rAvg = r.length ? r.reduce((a, b) => a + b, 0) / r.length : 0;
+            const base = Math.min(50, (buyRate * 200) + (orders * 3.5))
+              + Math.min(35, clickRate * 120)
+              + Math.min(20, rAvg * r.length * 1.5)
+              + (/best/i.test(p.badge || '') ? 20 : 0)
+              + (p.showInGrossing ? 15 : 0)
+              + (p.showInBestsellers ? 30 : 0);
+            let h = ((Number(rawId) || 1) * 2654435761) ^ (currentEpoch * 2246822519);
+            h = Math.imul(h ^ (h >>> 16), 2246822519);
+            h = Math.imul(h ^ (h >>> 13), 3266489917);
+            const hash = ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+            return base + (hash - 0.5) * 24;
+          }
+
+          const rawPosters = list.filter(isPosterProduct);
+
+          // Sort by 2-day engagement popularity (incorporating click rate, buy rate, and 48hr rotation)
+          rawPosters.sort((a, b) => {
+            const outA = (a.stockQuantity !== undefined && a.stockQuantity <= 0) ? 1 : 0;
+            const outB = (b.stockQuantity !== undefined && b.stockQuantity <= 0) ? 1 : 0;
+            if (outA !== outB) return outA - outB;
+
+            const scoreA = calculate2DayPopularity(a);
+            const scoreB = calculate2DayPopularity(b);
+            if (Math.abs(scoreB - scoreA) > 0.001) return scoreB - scoreA;
+
+            const rankA = bsRank(a.id);
+            const rankB = bsRank(b.id);
+            if (rankA !== rankB) return rankA - rankB;
+
+            return (Number(b.id) || 0) - (Number(a.id) || 0);
+          });
+
+          return rawPosters.map(p => ({
+            id: 'global_' + p.id,
+            rawId: p.id,
+            sku: p.sku || `POST-${p.id}`,
+            name: p.name || 'Art Poster',
+            image: p.image,
+            category: p.category || 'General',
+            keywords: p.keywords || '',
+            orderFrequency: Number(p.orderFrequency) || 0,
+            showInBestsellers: Boolean(p.showInBestsellers),
+            badge: p.badge || ''
+          }));
+        })
+        .catch(err => {
+          console.warn('Failed to load global products API, using fallback:', err);
+          return [];
+        });
+
+      const fetchMinis = (async function() {
+        try {
+          const r = await fetch('/posters/packs/packs-catalog.json');
+          if (r.ok) return await r.json();
+        } catch (_) {}
+        try {
+          const r = await fetch('posters/packs/packs-catalog.json');
+          if (r.ok) return await r.json();
+        } catch (_) {}
+        return { minis: [], pink: [], artist: [] };
+      })()
+        .then(data => {
+          return [
+            ...(data.minis || []).map(p => ({
+              id: 'minis_' + p.index,
+              sku: p.sku || `MN-MINI-${String(p.index).padStart(3, '0')}`,
+              name: p.filename.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' '),
+              image: p.rel_path,
+              category: 'Minis',
+              group: 'minis'
+            })),
+            ...(data.pink || []).map(p => ({
+              id: 'pink_' + p.index,
+              sku: p.sku || `MN-PINK-${String(p.index).padStart(3, '0')}`,
+              name: p.filename.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' '),
+              image: p.rel_path,
+              category: 'Pink Aesthetic',
+              group: 'pink'
+            })),
+            ...(data.artist || []).map(p => ({
+              id: 'artist_' + p.index,
+              sku: p.sku || `MN-ART-${String(p.index).padStart(3, '0')}`,
+              name: p.filename.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' '),
+              image: p.rel_path,
+              category: 'Artist Masters',
+              group: 'artist'
+            }))
+          ];
+        })
+        .catch(err => {
+          console.warn('Failed to load mini catalog:', err);
+          return [];
+        });
+
+      Promise.all([fetchGlobal, fetchMinis]).then(([globalList, miniList]) => {
+        state.globalCatalog = globalList;
+        state.miniCatalog = miniList;
+
+        if (globalTotalCount) globalTotalCount.textContent = globalList.length || '250+';
+        if (minisTotalCount) minisTotalCount.textContent = miniList.length || '116';
+
+        // Pre-populate wall if posters are provided via URL (?posters=id1,id2,id3 or ?ids=...)
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const posterParam = urlParams.get('posters') || urlParams.get('ids');
+          if (posterParam) {
+            const rawIds = posterParam.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+            const allCatalog = [...globalList, ...miniList];
+            const matched = [];
+            for (const rawId of rawIds) {
+              const found = allCatalog.find(item => {
+                const sid = String(item.id || '').toLowerCase();
+                const sraw = String(item.rawId || '').toLowerCase();
+                const ssku = String(item.sku || '').toLowerCase();
+                return sid === rawId ||
+                       sraw === rawId ||
+                       ssku === rawId ||
+                       sid === 'global_' + rawId ||
+                       sid === 'minis_' + rawId ||
+                       sid === 'pink_' + rawId ||
+                       sid === 'artist_' + rawId;
+              });
+              if (found && !matched.some(m => m.id === found.id)) {
+                matched.push(found);
+              }
+            }
+            if (matched.length > 0) {
+              state.selected = [];
+              const defaultSlotSize = state.size === 'mixed' ? 'A5' : state.size;
+              matched.forEach(p => {
+                state.selected.push({
+                  ...p,
+                  size: defaultSlotSize,
+                  posX: 50,
+                  posY: 30
+                });
+              });
+              state.target = Math.max(state.selected.length, 3);
+            }
+          }
+        } catch (e) {
+          console.warn('Could not parse URL posters parameter:', e);
+        }
+
+        renderGenreTabs();
+        updateRoomView();
+        applyAutoPositions();
+        renderWallSlots();
+        renderCatalog();
+        updatePricing();
+        updateUI();
+      });
+
+      // 2. Room Backdrops Management
+      function updateRoomView() {
+        wallCanvasBox.setAttribute('data-room', state.room);
+        if (wallZoomStage) wallZoomStage.setAttribute('data-room', state.room);
+
+        document.querySelectorAll('#room-tabs .room-tab').forEach(tab => {
+          const isActive = tab.dataset.room === state.room;
+          tab.classList.toggle('active', isActive);
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        if (state.room === 'custom' && state.customWallUrl) {
+          wallCanvasBox.style.backgroundImage = `url('${state.customWallUrl}')`;
+          if (wallZoomStage) wallZoomStage.style.backgroundImage = `url('${state.customWallUrl}')`;
+          if (state.customWallRatio) {
+            wallCanvasBox.style.aspectRatio = String(Math.max(1, Math.min(2.1, state.customWallRatio)));
+          }
+          if (myWallTab) myWallTab.style.display = 'inline-flex';
+          if (customWallAltBtn) customWallAltBtn.style.display = 'inline-flex';
+        } else {
+          wallCanvasBox.style.removeProperty('background-image');
+          if (wallZoomStage) wallZoomStage.style.removeProperty('background-image');
+          wallCanvasBox.style.removeProperty('aspect-ratio');
+          if (customWallAltBtn) customWallAltBtn.style.display = 'none';
+        }
+      }
+
+      // ========================================================
+      // 2B. Click-to-Zoom & Pan Manager for Built Wall Canvas
+      // ========================================================
+      let zoomState = {
+        level: 1.0,
+        min: 1.0,
+        max: 2.8,
+        panX: 0,
+        panY: 0,
+        isPanning: false,
+        panStartX: 0,
+        panStartY: 0,
+        initPanX: 0,
+        initPanY: 0
+      };
+
+      function applyZoom(level, isLivePan = false) {
+        zoomState.level = Math.max(zoomState.min, Math.min(zoomState.max, +Number(level).toFixed(2)));
+        const isZoomed = zoomState.level > 1.001;
+
+        if (!isZoomed) {
+          zoomState.panX = 0;
+          zoomState.panY = 0;
+        } else if (wallCanvasBox) {
+          const maxPanX = (wallCanvasBox.offsetWidth * (zoomState.level - 1)) / 2;
+          const maxPanY = (wallCanvasBox.offsetHeight * (zoomState.level - 1)) / 2;
+          zoomState.panX = Math.max(-maxPanX, Math.min(maxPanX, zoomState.panX));
+          zoomState.panY = Math.max(-maxPanY, Math.min(maxPanY, zoomState.panY));
+        }
+
+        if (wallZoomStage) {
+          if (isLivePan) {
+            wallZoomStage.style.transition = 'none';
+          } else {
+            wallZoomStage.style.transition = 'transform 0.32s cubic-bezier(0.16, 1, 0.3, 1)';
+          }
+
+          if (isZoomed) {
+            wallZoomStage.style.transform = `translate(${zoomState.panX}px, ${zoomState.panY}px) scale(${zoomState.level})`;
+          } else {
+            wallZoomStage.style.transform = 'none';
+          }
+        }
+
+        if (wallCanvasBox) {
+          wallCanvasBox.classList.toggle('is-zoomed', isZoomed);
+        }
+
+        if (wallZoomBtn) {
+          wallZoomBtn.classList.toggle('active', isZoomed);
+          if (wallZoomLabel) wallZoomLabel.textContent = isZoomed ? 'Reset Zoom' : 'Zoom In';
+        }
+        if (canvasZoomQuickBtn) {
+          canvasZoomQuickBtn.classList.toggle('active', isZoomed);
+        }
+
+        if (zoomLevelText) {
+          zoomLevelText.textContent = Math.round(zoomState.level * 100) + '%';
+        }
+      }
+
+      function zoomToPoint(clientX, clientY, targetZoom = 1.85) {
+        if (!wallCanvasBox) return;
+        const rect = wallCanvasBox.getBoundingClientRect();
+        const clickX = clientX - rect.left;
+        const clickY = clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        zoomState.level = targetZoom;
+        zoomState.panX = (centerX - clickX) * (targetZoom - 1);
+        zoomState.panY = (centerY - clickY) * (targetZoom - 1);
+        applyZoom(targetZoom);
+      }
+
+      function resetZoom() {
+        zoomState.level = 1.0;
+        zoomState.panX = 0;
+        zoomState.panY = 0;
+        applyZoom(1.0);
+      }
+
+      function toggleZoom() {
+        if (zoomState.level > 1.001) {
+          resetZoom();
+        } else {
+          zoomState.panX = 0;
+          zoomState.panY = 0;
+          applyZoom(1.85);
+        }
+      }
+
+      // Wire zoom buttons
+      if (wallZoomBtn) wallZoomBtn.addEventListener('click', toggleZoom);
+      if (canvasZoomQuickBtn) canvasZoomQuickBtn.addEventListener('click', toggleZoom);
+      if (zoomInBtn) {
+        zoomInBtn.addEventListener('click', () => applyZoom(zoomState.level + 0.35));
+      }
+      if (zoomOutBtn) {
+        zoomOutBtn.addEventListener('click', () => {
+          if (zoomState.level <= 1.35) resetZoom();
+          else applyZoom(zoomState.level - 0.35);
+        });
+      }
+      if (zoomResetBtn) zoomResetBtn.addEventListener('click', resetZoom);
+
+      // Canvas double-click to toggle zoom at mouse location
+      if (wallCanvasBox) {
+        wallCanvasBox.addEventListener('dblclick', (e) => {
+          if (e.target.closest('button') || e.target.closest('.slot-inspector') || e.target.closest('input')) return;
+          if (zoomState.level > 1.001) {
+            resetZoom();
+          } else {
+            zoomToPoint(e.clientX, e.clientY, 1.85);
+          }
+        });
+
+        // Pointerdown for panning when zoomed
+        wallCanvasBox.addEventListener('pointerdown', (e) => {
+          if (zoomState.level <= 1.001) return;
+          if (e.target.closest('button') || e.target.closest('.slot-inspector') || e.target.closest('.slot-size-badge') || e.target.closest('.wall-canvas-toolbar') || e.target.closest('.wall-zoom-pill') || e.target.closest('input')) return;
+
+          if (activeDrag) return;
+
+          zoomState.isPanning = true;
+          zoomState.panStartX = e.clientX;
+          zoomState.panStartY = e.clientY;
+          zoomState.initPanX = zoomState.panX;
+          zoomState.initPanY = zoomState.panY;
+          wallCanvasBox.classList.add('is-panning');
+        });
+      }
+
+      window.addEventListener('pointermove', (e) => {
+        if (!zoomState.isPanning) return;
+        const dx = e.clientX - zoomState.panStartX;
+        const dy = e.clientY - zoomState.panStartY;
+        const maxPanX = (wallCanvasBox.offsetWidth * (zoomState.level - 1)) / 2;
+        const maxPanY = (wallCanvasBox.offsetHeight * (zoomState.level - 1)) / 2;
+        zoomState.panX = Math.max(-maxPanX, Math.min(maxPanX, zoomState.initPanX + dx));
+        zoomState.panY = Math.max(-maxPanY, Math.min(maxPanY, zoomState.initPanY + dy));
+        applyZoom(zoomState.level, true);
+      }, { passive: true });
+
+      window.addEventListener('pointerup', () => {
+        if (zoomState.isPanning) {
+          zoomState.isPanning = false;
+          if (wallCanvasBox) wallCanvasBox.classList.remove('is-panning');
+        }
+      });
+      window.addEventListener('pointercancel', () => {
+        if (zoomState.isPanning) {
+          zoomState.isPanning = false;
+          if (wallCanvasBox) wallCanvasBox.classList.remove('is-panning');
+        }
+      });
+
+      // ========================================================
+      // 2C. Fullscreen High-Resolution Lightbox Modal
+      // ========================================================
+      let modalZoomLevel = 1.0;
+      let modalPanX = 0;
+      let modalPanY = 0;
+      let modalPanning = false;
+      let modalPanStartX = 0;
+      let modalPanStartY = 0;
+      let modalInitPanX = 0;
+      let modalInitPanY = 0;
+
+      function updateModalZoom(level, isLivePan = false) {
+        modalZoomLevel = Math.max(1.0, Math.min(3.0, +Number(level).toFixed(2)));
+        const isZoomed = modalZoomLevel > 1.001;
+
+        if (!isZoomed) {
+          modalPanX = 0;
+          modalPanY = 0;
+        }
+
+        if (zoomModalStage) {
+          zoomModalStage.style.transition = isLivePan ? 'none' : 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+          if (isZoomed) {
+            zoomModalStage.style.transform = `translate(${modalPanX}px, ${modalPanY}px) scale(${modalZoomLevel})`;
+          } else {
+            zoomModalStage.style.transform = 'none';
+          }
+        }
+        if (zoomModalBody) {
+          zoomModalBody.classList.toggle('is-zoomed', isZoomed);
+        }
+        if (zoomModalSlider) {
+          zoomModalSlider.value = String(Math.round(modalZoomLevel * 100));
+        }
+        if (zoomModalPct) {
+          zoomModalPct.textContent = Math.round(modalZoomLevel * 100) + '%';
+        }
+      }
+
+      function openZoomModal() {
+        if (!byopZoomModal) return;
+
+        // Clone current wall slots into modal wall
+        if (zoomModalWall && wallLayer) {
+          zoomModalWall.innerHTML = wallLayer.innerHTML;
+          if (state.frame === 'framed') {
+            zoomModalWall.classList.add('wall-framed');
+          } else {
+            zoomModalWall.classList.remove('wall-framed');
+          }
+        }
+
+        // Set background on modal stage
+        if (zoomModalStage) {
+          if (state.room === 'custom' && state.customWallUrl) {
+            zoomModalStage.style.backgroundImage = `url('${state.customWallUrl}')`;
+          } else if (state.room === 'spacious') {
+            zoomModalStage.style.backgroundImage = "url('posters/packs/mockups/spacious-wall.webp')";
+          } else if (state.room === 'loft') {
+            zoomModalStage.style.backgroundImage = "url('posters/packs/mockups/loft-wall.webp')";
+          } else {
+            zoomModalStage.style.backgroundImage = "url('posters/packs/mockups/studio-wall.webp')";
+          }
+        }
+
+        if (zoomModalTag) {
+          zoomModalTag.textContent = `${state.selected.length} Posters · ${state.size.toUpperCase()} · ${state.frame === 'framed' ? 'Framed' : 'Unframed'}`;
+        }
+
+        modalZoomLevel = 1.0;
+        modalPanX = 0;
+        modalPanY = 0;
+        updateModalZoom(1.0);
+
+        byopZoomModal.style.display = 'flex';
+        byopZoomModal.offsetHeight;
+        byopZoomModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeZoomModal() {
+        if (!byopZoomModal) return;
+        byopZoomModal.classList.remove('active');
+        setTimeout(() => {
+          byopZoomModal.style.display = 'none';
+          document.body.style.overflow = '';
+        }, 260);
+      }
+
+      if (wallFullscreenBtn) wallFullscreenBtn.addEventListener('click', openZoomModal);
+      if (zoomModalClose) zoomModalClose.addEventListener('click', closeZoomModal);
+      if (zoomModalBackdrop) zoomModalBackdrop.addEventListener('click', closeZoomModal);
+
+      if (zoomModalSlider) {
+        zoomModalSlider.addEventListener('input', (e) => {
+          updateModalZoom(Number(e.target.value) / 100);
+        });
+      }
+      if (modalZoomIn) {
+        modalZoomIn.addEventListener('click', () => updateModalZoom(modalZoomLevel + 0.35));
+      }
+      if (modalZoomOut) {
+        modalZoomOut.addEventListener('click', () => updateModalZoom(modalZoomLevel - 0.35));
+      }
+      if (modalZoomReset) {
+        modalZoomReset.addEventListener('click', () => updateModalZoom(1.0));
+      }
+
+      if (zoomModalBody) {
+        zoomModalBody.addEventListener('click', (e) => {
+          if (e.target.closest('button') || e.target.closest('input')) return;
+          if (modalZoomLevel > 1.001) {
+            updateModalZoom(1.0);
+          } else {
+            const rect = zoomModalStage.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            modalPanX = (centerX - clickX) * 0.85;
+            modalPanY = (centerY - clickY) * 0.85;
+            updateModalZoom(1.85);
+          }
+        });
+
+        zoomModalBody.addEventListener('pointerdown', (e) => {
+          if (modalZoomLevel <= 1.001) return;
+          if (e.target.closest('button') || e.target.closest('input')) return;
+          modalPanning = true;
+          modalPanStartX = e.clientX;
+          modalPanStartY = e.clientY;
+          modalInitPanX = modalPanX;
+          modalInitPanY = modalPanY;
+          zoomModalBody.classList.add('is-panning');
+        });
+      }
+
+      window.addEventListener('pointermove', (e) => {
+        if (!modalPanning) return;
+        const dx = e.clientX - modalPanStartX;
+        const dy = e.clientY - modalPanStartY;
+        modalPanX = modalInitPanX + dx;
+        modalPanY = modalInitPanY + dy;
+        updateModalZoom(modalZoomLevel, true);
+      }, { passive: true });
+
+      window.addEventListener('pointerup', () => {
+        if (modalPanning) {
+          modalPanning = false;
+          if (zoomModalBody) zoomModalBody.classList.remove('is-panning');
+        }
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (byopZoomModal && byopZoomModal.classList.contains('active')) {
+            closeZoomModal();
+          } else if (zoomState.level > 1.001) {
+            resetZoom();
+          }
+        }
+      });
+
+
+      // 3. Pre-made Layout Positioning & Non-Overlapping Math
+      function getBaseSlotDimensions(count) {
+        if (count >= 30) return { baseW: 34, baseH: 48 };
+        if (count >= 20) return { baseW: 42, baseH: 59 };
+        if (count >= 15) return { baseW: 50, baseH: 71 };
+        if (count >= 10) return { baseW: 58, baseH: 82 };
+        if (count >= 6) return { baseW: 66, baseH: 93 };
+        if (count >= 3) return { baseW: 84, baseH: 118 };
+        return { baseW: 104, baseH: 146 }; // 1 or 2 posters
+      }
+
+      function getSizeMultiplier(sz) {
+        if (sz === 'A3') return 2.0;
+        if (sz === 'A4') return 1.414;
+        return 1.0; // A5
+      }
+
+      function computePresetPositions(preset, count, gapPx) {
+        const zone = ROOM_ZONES[state.room] || ROOM_ZONES.studio;
+        const positions = [];
+        const effCount = Math.max(1, count);
+        const { baseW, baseH } = getBaseSlotDimensions(effCount);
+        const fitScale = computeLayoutFitScale();
+        const effectiveGap = Math.max(4, Math.min(36, Number(gapPx) || 14));
+
+        // Proportional percentages based on reference canvas (1600x1200 virtual grid)
+        const wPct = (baseW * fitScale / 780) * 100;
+        const hPct = (baseH * fitScale / 620) * 100;
+        const gapPctX = (effectiveGap / 780) * 100;
+        const gapPctY = (effectiveGap / 620) * 100;
+
+        const centerX = 50;
+        const centerY = zone.centerY || 28;
+
+        const stepX = wPct + gapPctX;
+        const stepY = hPct + gapPctY;
+
+        if (preset === 'salon') {
+          let rowCounts = [];
+          if (effCount <= 2) {
+            rowCounts = [effCount];
+          } else if (effCount === 3) {
+            rowCounts = [3];
+          } else if (effCount <= 5) {
+            rowCounts = [2, 3];
+          } else if (effCount <= 10) {
+            rowCounts = [3, 4, 3];
+          } else if (effCount <= 15) {
+            rowCounts = [4, 7, 4];
+          } else if (effCount <= 24) {
+            rowCounts = [4, 6, 6, 4];
+          } else {
+            const cols = 6;
+            const rows = Math.ceil(effCount / cols);
+            rowCounts = Array(rows).fill(cols);
+            if (effCount % cols !== 0) rowCounts[rows - 1] = effCount % cols;
+          }
+
+          const totalSlots = rowCounts.reduce((a, b) => a + b, 0);
+          if (totalSlots !== effCount) {
+            const cols = effCount <= 3 ? effCount : (effCount <= 6 ? 3 : (effCount <= 15 ? 5 : 6));
+            const rows = Math.ceil(effCount / cols);
+            rowCounts = Array(rows).fill(cols);
+            if (effCount % cols !== 0) rowCounts[rows - 1] = effCount % cols;
+          }
+
+          const numRows = rowCounts.length;
+          const startY = centerY - ((numRows - 1) * stepY) / 2;
+
+          let slotIdx = 0;
+          rowCounts.forEach((rCount, rIdx) => {
+            const rowY = startY + rIdx * stepY;
+            const rowStartX = centerX - ((rCount - 1) * stepX) / 2;
+            for (let c = 0; c < rCount; c++) {
+              if (slotIdx < effCount) {
+                positions.push({
+                  posX: +(rowStartX + c * stepX).toFixed(2),
+                  posY: +(rowY).toFixed(2)
+                });
+                slotIdx++;
+              }
+            }
+          });
+
+        } else if (preset === 'staggered') {
+          const cols = effCount <= 3 ? effCount : (effCount === 4 ? 2 : (effCount <= 6 ? 3 : (effCount <= 15 ? 5 : 6)));
+          const rows = Math.ceil(effCount / cols);
+          const startX = centerX - ((cols - 1) * stepX) / 2;
+          const startY = centerY - ((rows - 1) * stepY) / 2;
+
+          for (let i = 0; i < effCount; i++) {
+            const r = Math.floor(i / cols);
+            const c = i % cols;
+            const staggerOffset = (r % 2 === 1) ? (stepX * 0.22) : (-stepX * 0.22);
+            positions.push({
+              posX: +(startX + c * stepX + (rows > 1 ? staggerOffset : 0)).toFixed(2),
+              posY: +(startY + r * stepY).toFixed(2)
+            });
+          }
+
+        } else {
+          // Classic Grid Layout (Default)
+          const cols = effCount <= 3 ? effCount : (effCount === 4 ? 2 : (effCount <= 6 ? 3 : (effCount <= 10 ? 5 : (effCount <= 18 ? 5 : 6))));
+          const rows = Math.ceil(effCount / cols);
+          const startX = centerX - ((cols - 1) * stepX) / 2;
+          const startY = centerY - ((rows - 1) * stepY) / 2;
+
+          for (let i = 0; i < effCount; i++) {
+            const r = Math.floor(i / cols);
+            const c = i % cols;
+            positions.push({
+              posX: +(startX + c * stepX).toFixed(2),
+              posY: +(startY + r * stepY).toFixed(2)
+            });
+          }
+        }
+
+        return positions;
+      }
+
+      function applyAutoPositions() {
+        const count = state.selected.length || state.target;
+        const positions = computePresetPositions(state.layoutPreset, count, state.layoutGap);
+        for (let i = 0; i < state.selected.length; i++) {
+          const pos = positions[i] || { posX: 50, posY: 28 };
+          if (state.selected[i]) {
+            state.selected[i].posX = pos.posX;
+            state.selected[i].posY = pos.posY;
+          }
+        }
+        state.hasCustomMoved = false;
+      }
+
+      // Calculate safe fit scale so large posters (A3/A4) never exceed safe wall zone
+      function computeLayoutFitScale() {
+        const zone = ROOM_ZONES[state.room] || ROOM_ZONES.studio;
+        const count = Math.max(1, state.selected.length || state.target);
+        const { baseW, baseH } = getBaseSlotDimensions(count);
+
+        let maxMultiplier = 1.0;
+        let a3Count = 0;
+        for (let i = 0; i < count; i++) {
+          const item = state.selected[i];
+          const sz = (item && item.size) ? item.size : (state.size === 'mixed' ? 'A5' : state.size);
+          const m = getSizeMultiplier(sz);
+          if (m > maxMultiplier) maxMultiplier = m;
+          if (sz === 'A3') a3Count++;
+        }
+
+        // If many A3 or A4 posters are active, scale composition slightly to guarantee no overlap with furniture
+        if (state.room === 'custom') return 1.0;
+        if (maxMultiplier >= 2.0) {
+          if (count >= 15) return 0.72;
+          if (count >= 10) return 0.82;
+          return 0.90;
+        } else if (maxMultiplier >= 1.414) {
+          if (count >= 15) return 0.82;
+          if (count >= 10) return 0.88;
+          return 0.95;
+        }
+        return 1.0;
+      }
+
+      // ========================================================
+      // 4. Centralized High-Precision Drag Manager
+      // ========================================================
+      let activeDrag = null;
+
+      function terminateDrag() {
+        if (!activeDrag) return;
+        if (activeDrag.slot) {
+          activeDrag.slot.classList.remove('is-active-drag');
+          activeDrag.slot.style.transition = '';
+        }
+        activeDrag = null;
+      }
+
+      window.addEventListener('pointermove', (e) => {
+        if (!activeDrag) return;
+
+        const dx = e.clientX - activeDrag.startX;
+        const dy = e.clientY - activeDrag.startY;
+
+        // Intentional movement threshold: must move at least 4px to activate drag!
+        // This completely prevents accidental dragging when clicking or tapping!
+        if (!activeDrag.hasMoved) {
+          if (Math.hypot(dx, dy) < 4) return;
+          activeDrag.hasMoved = true;
+          activeDrag.slot.classList.add('is-active-drag');
+          activeDrag.slot.style.transition = 'none';
+        }
+
+        if (e.cancelable) e.preventDefault();
+
+        const canvasRect = wallCanvasBox.getBoundingClientRect();
+        if (!canvasRect.width || !canvasRect.height) return;
+
+        const deltaXPct = (dx / canvasRect.width) * 100;
+        const deltaYPct = (dy / canvasRect.height) * 100;
+
+        const zone = ROOM_ZONES[state.room] || ROOM_ZONES.studio;
+        // Sub-pixel accuracy with 2 decimal places - smooth and 1:1 responsive
+        const newX = Math.max(zone.minX, Math.min(zone.maxX, +(activeDrag.initLeft + deltaXPct).toFixed(2)));
+        const newY = Math.max(zone.minY, Math.min(zone.maxY, +(activeDrag.initTop + deltaYPct).toFixed(2)));
+
+        const poster = state.selected[activeDrag.index];
+        if (poster) {
+          poster.posX = newX;
+          poster.posY = newY;
+        }
+        activeDrag.slot.style.left = newX + '%';
+        activeDrag.slot.style.top = newY + '%';
+        state.hasCustomMoved = true;
+      }, { passive: false });
+
+      window.addEventListener('pointerup', terminateDrag);
+      window.addEventListener('pointercancel', terminateDrag);
+      window.addEventListener('blur', terminateDrag);
+
+      // Render Wall Slots with Slide & Drag Interactivity
+      function createSlotElement(i, isFree) {
+        const slot = document.createElement('div');
+        slot.className = 'wall-slot';
+        slot.dataset.slotIndex = i;
+        const poster = state.selected[i];
+
+        const slotSize = (poster && poster.size) ? poster.size : (state.size === 'mixed' ? 'A5' : state.size);
+        slot.dataset.size = slotSize;
+
+        // Compute proportional width & height
+        const totalCount = Math.max(1, state.selected.length || state.target);
+        const { baseW, baseH } = getBaseSlotDimensions(totalCount);
+        const multiplier = getSizeMultiplier(slotSize);
+        const fitScale = computeLayoutFitScale();
+
+        // Responsive mobile scale down
+        const isMobile = window.innerWidth <= 640;
+        const mobileRatio = isMobile ? 0.70 : (window.innerWidth <= 900 ? 0.82 : 1.0);
+
+        const slotWidth = Math.round(baseW * multiplier * fitScale * mobileRatio);
+        const slotHeight = Math.round(baseH * multiplier * fitScale * mobileRatio);
+
+        slot.style.width = slotWidth + 'px';
+        slot.style.height = slotHeight + 'px';
+
+        // Position coordinates
+        const posX = (poster && poster.posX !== undefined) ? poster.posX : 50;
+        const posY = (poster && poster.posY !== undefined) ? poster.posY : 28;
+        slot.style.left = posX + '%';
+        slot.style.top = posY + '%';
+
+        if (poster) {
+          slot.classList.add('filled');
+          if (isFree) slot.classList.add('is-free-slot');
+          slot.setAttribute('title', `Poster #${i + 1}: ${poster.name} (${slotSize})${isFree ? ' · [FREE OFFER POSTER]' : ''} · Drag to position freely`);
+
+          const isNearTop = posY < 24;
+
+          slot.innerHTML = `
+            <img src="${poster.image}" alt="Slot ${i + 1}: ${poster.name}" loading="lazy">
+            <span class="slot-size-badge" title="Poster Size: ${slotSize} (Click to switch size)">${slotSize}</span>
+            ${isFree ? `<span class="slot-free-badge"><i class="fa-solid fa-gift"></i> FREE</span>` : ''}
+            <button type="button" class="slot-direct-remove" title="Remove poster" aria-label="Remove poster">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Floating Inspector Toolbar - Outside Poster Slot for Easy Clicking -->
+            <div class="slot-inspector ${isNearTop ? 'inspector-bottom' : ''}">
+              <span class="insp-order-label">#${i + 1}</span>
+              <div class="inspector-sz-group" role="radiogroup" aria-label="Poster Size">
+                <button type="button" class="insp-sz-btn ${slotSize==='A5'?'active':''}" data-sz="A5" title="A5 Compact">A5</button>
+                <button type="button" class="insp-sz-btn ${slotSize==='A4'?'active':''}" data-sz="A4" title="A4 Standard">A4</button>
+                <button type="button" class="insp-sz-btn ${slotSize==='A3'?'active':''}" data-sz="A3" title="A3 Statement">A3</button>
+              </div>
+              <div class="inspector-btn-group">
+                <button type="button" class="insp-action-btn shift-left" ${i === 0 ? 'disabled' : ''} title="Move Earlier" aria-label="Move left">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button type="button" class="insp-action-btn shift-right" ${i === state.selected.length - 1 ? 'disabled' : ''} title="Move Later" aria-label="Move right">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <button type="button" class="insp-action-btn insp-remove-btn" title="Remove poster" aria-label="Remove poster">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+          `;
+
+          // Size Badge quick-cycle click directly on the card
+          const sizeBadge = slot.querySelector('.slot-size-badge');
+          if (sizeBadge) {
+            sizeBadge.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const nextSize = slotSize === 'A5' ? 'A4' : (slotSize === 'A4' ? 'A3' : 'A5');
+              setSlotSize(i, nextSize);
+            });
+          }
+
+          // Direct corner remove button
+          const directRemove = slot.querySelector('.slot-direct-remove');
+          if (directRemove) {
+            directRemove.addEventListener('click', (e) => {
+              e.stopPropagation();
+              removePosterAt(i);
+            });
+          }
+
+          // Size button clicks in floating inspector
+          slot.querySelectorAll('.insp-sz-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              setSlotSize(i, btn.dataset.sz);
+            });
+          });
+
+          // Shift Buttons
+          const leftBtn = slot.querySelector('.shift-left');
+          if (leftBtn) {
+            leftBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              if (i > 0) reorderPosters(i, i - 1);
+            });
+          }
+          const rightBtn = slot.querySelector('.shift-right');
+          if (rightBtn) {
+            rightBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              if (i < state.selected.length - 1) reorderPosters(i, i + 1);
+            });
+          }
+
+          // Remove Button in inspector
+          const inspRemove = slot.querySelector('.insp-remove-btn');
+          if (inspRemove) {
+            inspRemove.addEventListener('click', (e) => {
+              e.stopPropagation();
+              removePosterAt(i);
+            });
+          }
+
+          // Pointerdown initiates drag preparation
+          slot.addEventListener('pointerdown', (e) => {
+            // Only primary click (left button) or touch
+            if (e.button !== undefined && e.button !== 0) return;
+            // Ignore clicks on control buttons, inspector, and size badges
+            if (e.target.closest('button') || e.target.closest('.slot-inspector') || e.target.closest('.slot-size-badge')) return;
+
+            const curPoster = state.selected[i];
+            if (!curPoster) return;
+
+            activeDrag = {
+              index: i,
+              slot: slot,
+              startX: e.clientX,
+              startY: e.clientY,
+              initLeft: Number(curPoster.posX !== undefined ? curPoster.posX : 50),
+              initTop: Number(curPoster.posY !== undefined ? curPoster.posY : 28),
+              hasMoved: false
+            };
+          });
+
+          // Tap to activate controls on mobile
+          slot.addEventListener('click', (e) => {
+            if (activeDrag && activeDrag.hasMoved) return;
+            if (e.target.closest('button') || e.target.closest('.slot-size-badge')) return;
+            document.querySelectorAll('.wall-slot.filled').forEach(s => {
+              if (s !== slot) s.classList.remove('is-active');
+            });
+            slot.classList.toggle('is-active');
+          });
+
+        } else {
+          // Empty slot placeholder
+          slot.innerHTML = `<span>+ ${i + 1}</span>`;
+          slot.setAttribute('title', `Empty Slot ${i + 1} (${slotSize}) — Select a poster below`);
+          slot.addEventListener('click', () => {
+            const panel = document.querySelector('.catalog-panel');
+            if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+        }
+
+        return slot;
+      }
+
+      function setSlotSize(idx, newSize) {
+        if (!state.selected[idx]) return;
+        state.selected[idx].size = newSize;
+
+        const allSizes = state.selected.map(p => p.size || state.size);
+        const first = allSizes[0] || 'A5';
+        const isAllSame = allSizes.every(s => s === first);
+        state.size = isAllSame ? first : 'mixed';
+
+        document.querySelectorAll('#size-pills .pill-btn').forEach(b => {
+          const isActive = b.dataset.size === state.size;
+          b.classList.toggle('active', isActive);
+          b.setAttribute('aria-checked', isActive ? 'true' : 'false');
+        });
+
+        renderWallSlots();
+        updatePricing();
+      }
+
+      function reorderPosters(fromIdx, toIdx) {
+        if (fromIdx < 0 || fromIdx >= state.selected.length || toIdx < 0 || toIdx >= state.selected.length) return;
+        const item = state.selected.splice(fromIdx, 1)[0];
+        state.selected.splice(toIdx, 0, item);
+        updateUI();
+      }
+
+      function removePosterAt(idx) {
+        state.selected.splice(idx, 1);
+        updateUI();
+      }
+
+      function getFreeSlotIndices(selected, freeCount) {
+        if (!freeCount || freeCount <= 0 || !selected || !selected.length) return new Set();
+        const costMap = { A5: 1, A4: 2, A3: 3 };
+        const withIdx = selected.map((p, idx) => ({ idx, cost: costMap[(p && p.size) || 'A5'] || 1 }));
+        withIdx.sort((a, b) => a.cost - b.cost);
+        return new Set(withIdx.slice(0, freeCount).map(x => x.idx));
+      }
+
+      function renderWallSlots() {
+        terminateDrag();
+        const count = state.selected.length;
+        wallLayer.dataset.count = count;
+        if (state.frame === 'framed') {
+          wallLayer.classList.add('wall-framed');
+        } else {
+          wallLayer.classList.remove('wall-framed');
+        }
+        wallLayer.innerHTML = '';
+
+        if (count === 0) {
+          const welcome = document.createElement('div');
+          welcome.className = 'wall-empty-prompt';
+          welcome.innerHTML = `
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Select posters below to build your custom wall pack (Any quantity · Auto-offers applied)</span>
+          `;
+          wallLayer.appendChild(welcome);
+          return;
+        }
+
+        const pricing = calculatePricing();
+        const freeIndices = getFreeSlotIndices(state.selected, pricing.freeCount);
+
+        for (let i = 0; i < count; i++) {
+          wallLayer.appendChild(createSlotElement(i, freeIndices.has(i)));
+        }
+      }
+
+      // 5. Render Catalog Items
+      function renderGenreTabs() {
+        catalogTabs.innerHTML = '';
+        if (state.catalogMode === 'global') {
+          const catMap = {};
+          state.globalCatalog.forEach(p => {
+            if (p.category) catMap[p.category] = (catMap[p.category] || 0) + 1;
+          });
+          const categories = ['all', ...Object.keys(catMap).sort()];
+
+          categories.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'catalog-tab' + (state.filter === cat ? ' active' : '');
+            btn.dataset.filter = cat;
+            const count = cat === 'all' ? state.globalCatalog.length : (catMap[cat] || 0);
+            btn.textContent = (cat === 'all' ? 'All' : cat) + ` (${count})`;
+            catalogTabs.appendChild(btn);
+          });
+        } else {
+          const miniGroups = [
+            { id: 'all', label: 'All', count: state.miniCatalog.length },
+            { id: 'minis', label: 'Minis', count: state.miniCatalog.filter(p => p.group === 'minis').length },
+            { id: 'pink', label: 'Pink Aesthetic', count: state.miniCatalog.filter(p => p.group === 'pink').length },
+            { id: 'artist', label: 'Artist Masters', count: state.miniCatalog.filter(p => p.group === 'artist').length }
+          ];
+          miniGroups.forEach(g => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'catalog-tab' + (state.filter === g.id ? ' active' : '');
+            btn.dataset.filter = g.id;
+            btn.textContent = `${g.label} (${g.count})`;
+            catalogTabs.appendChild(btn);
+          });
+        }
+      }
+
+      function renderCatalog() {
+        catalogGrid.innerHTML = '';
+        const list = state.catalogMode === 'global' ? state.globalCatalog : state.miniCatalog;
+        const query = state.searchQuery.trim().toLowerCase();
+
+        const filtered = list.filter(item => {
+          if (state.filter !== 'all') {
+            if (state.catalogMode === 'global') {
+              if (item.category !== state.filter) return false;
+            } else {
+              if (item.group !== state.filter) return false;
+            }
+          }
+          if (query) {
+            const haystack = `${item.name} ${item.category || ''} ${item.keywords || ''}`.toLowerCase();
+            return haystack.includes(query);
+          }
+          return true;
+        });
+
+        if (catalogCountLabel) {
+          catalogCountLabel.textContent = `Showing ${filtered.length} of ${list.length} posters`;
+        }
+
+        if (filtered.length === 0) {
+          catalogGrid.innerHTML = `
+            <div class="catalog-empty">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <p>No posters matched "${escapeHtml(state.searchQuery)}".</p>
+              <button type="button" class="pill-btn" id="reset-search-btn" style="margin: 10px auto;">Clear Search</button>
+            </div>
+          `;
+          const resetBtn = document.getElementById('reset-search-btn');
+          if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+              searchInput.value = '';
+              state.searchQuery = '';
+              if (searchClear) searchClear.classList.remove('visible');
+              renderCatalog();
+            });
+          }
+          return;
+        }
+
+        filtered.forEach(poster => {
+          const isSelected = state.selected.some(p => p.id === poster.id);
+          const el = document.createElement('div');
+          el.className = 'poster-item' + (isSelected ? ' selected' : '');
+          el.setAttribute('role', 'button');
+          el.setAttribute('tabindex', '0');
+          el.setAttribute('aria-label', `${poster.name} - ${isSelected ? 'Selected' : 'Click to add'}`);
+
+          const imgSrc = (window.BrushImg && poster.image) ? BrushImg.src(poster, 480) : poster.image;
+          el.innerHTML = `
+            <img src="${imgSrc}" alt="${poster.name}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${poster.image}'">
+            <div class="select-badge" aria-hidden="true">
+              <i class="fa-solid ${isSelected ? 'fa-check' : 'fa-plus'}"></i>
+            </div>
+            <div class="poster-info">${escapeHtml(poster.name)}</div>
+          `;
+
+          const toggleAction = () => togglePoster(poster);
+          el.addEventListener('click', toggleAction);
+          el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              toggleAction();
+            }
+          });
+
+          catalogGrid.appendChild(el);
+        });
+      }
+
+      function togglePoster(poster) {
+        const idx = state.selected.findIndex(p => p.id === poster.id);
+        if (idx > -1) {
+          state.selected.splice(idx, 1);
+        } else {
+          // Track engagement click
+          if (window.BrushAnalytics && window.BrushAnalytics.trackClick) {
+            window.BrushAnalytics.trackClick(poster.rawId || poster.id, {
+              name: poster.name,
+              category: poster.category,
+              listName: 'Build Your Own Pack'
+            });
+          }
+          // No hard limits! The user can select any quantity they desire.
+          const defaultSlotSize = state.size === 'mixed' ? 'A5' : state.size;
+          const nextIdx = state.selected.length;
+          const presetPositions = computePresetPositions(state.layoutPreset, nextIdx + 1, state.layoutGap);
+          const defaultPos = presetPositions[nextIdx] || { posX: 50, posY: 30 };
+          state.selected.push({
+            ...poster,
+            size: defaultSlotSize,
+            posX: defaultPos.posX,
+            posY: defaultPos.posY
+          });
+          if (!state.hasCustomMoved) {
+            applyAutoPositions();
+          }
+        }
+        updateUI();
+      }
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/[&<>"']/g, m => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[m]);
+      }
+
+      function getNextMilestoneMsg(count) {
+        if (count < 3) return `Add ${3 - count} more to unlock 3-Poster Pack Rate!`;
+        if (count === 3) return `Add 2 more to unlock Buy 5 Get 1 FREE!`;
+        if (count === 4) return `Add 1 more to unlock Buy 5 Get 1 FREE!`;
+        if (count >= 5 && count < 10) return `Add ${10 - count} more to unlock Buy 10 Get 3 FREE!`;
+        if (count >= 10 && count < 20) return `Add ${20 - count} more to unlock Buy 20 Get 4 FREE!`;
+        if (count >= 20 && count < 30) return `Add ${30 - count} more to unlock Buy 30 Get 6 FREE!`;
+        return `🌟 Maximum combo discount unlocked!`;
+      }
+
+      // 6. Dynamic Pricing Calculation (supports Uniform & Mixed Sizes + Offer Segments)
+      function calculatePricing() {
+        const count = state.selected.length;
+        const isFramed = state.frame === 'framed';
+        const frameKey = isFramed ? 'framed' : 'unframed';
+
+        const SINGLE_RATES = {
+          unframed: { A5: 19, A4: 29, A3: 39 },
+          framed:   { A5: 299, A4: 499, A3: 759 }
+        };
+        const SINGLE_MRP = {
+          unframed: { A5: 39, A4: 59, A3: 89 },
+          framed:   { A5: 599, A4: 999, A3: 1699 }
+        };
+
+        const PACK_3_RATES = {
+          unframed: { A5: 49 / 3, A4: 79 / 3, A3: 109 / 3 },
+          framed:   { A5: 749 / 3, A4: 1199 / 3, A3: 1999 / 3 }
+        };
+
+        const PACK_5_RATES = {
+          unframed: { A5: 99 / 5, A4: 149 / 5, A3: 249 / 5 },
+          framed:   { A5: 299 / 5, A4: 499 / 5, A3: 899 / 5 }
+        };
+
+        const PACK_10_RATES = {
+          unframed: { A5: 169 / 10, A4: 259 / 10, A3: 449 / 10 },
+          framed:   { A5: 549 / 10, A4: 899 / 10, A3: 1599 / 10 }
+        };
+
+        const PACK_20_RATES = {
+          unframed: { A5: 309 / 20, A4: 449 / 20, A3: 799 / 20 },
+          framed:   { A5: 999 / 20, A4: 1699 / 20, A3: 2899 / 20 }
+        };
+
+        const PACK_30_RATES = {
+          unframed: { A5: 435 / 30, A4: 630 / 30, A3: 1125 / 30 },
+          framed:   { A5: 1410 / 30, A4: 2370 / 30, A3: 4050 / 30 }
+        };
+
+        const counts = { A5: 0, A4: 0, A3: 0 };
+        let totalMrp = 0;
+        state.selected.forEach(p => {
+          const sz = (p && p.size && SINGLE_MRP[frameKey][p.size]) ? p.size : (state.size === 'mixed' ? 'A5' : state.size);
+          counts[sz] = (counts[sz] || 0) + 1;
+          totalMrp += SINGLE_MRP[frameKey][sz];
+        });
+
+        if (count === 0) {
+          const previewSize = state.size === 'mixed' ? 'A5' : state.size;
+          const target = state.target || 10;
+          let previewUnit = SINGLE_RATES[frameKey][previewSize];
+          if (target >= 30) previewUnit = PACK_30_RATES[frameKey][previewSize];
+          else if (target >= 20) previewUnit = PACK_20_RATES[frameKey][previewSize];
+          else if (target >= 10) previewUnit = PACK_10_RATES[frameKey][previewSize];
+          else if (target >= 5) previewUnit = PACK_5_RATES[frameKey][previewSize];
+          else if (target === 3) previewUnit = PACK_3_RATES[frameKey][previewSize];
+
+          const pPrice = Math.round(previewUnit * target);
+          const pMrp = SINGLE_MRP[frameKey][previewSize] * target;
+          return {
+            price: pPrice,
+            mrp: pMrp,
+            save: `Save ₹${pMrp - pPrice}`,
+            counts: { [previewSize]: target },
+            appliedOffer: `Milestone: ${target} Posters`,
+            freeCount: target >= 30 ? 6 : (target >= 20 ? 4 : (target >= 10 ? 3 : (target >= 5 ? 1 : 0))),
+            nextMilestone: getNextMilestoneMsg(0)
+          };
+        }
+
+        let rawPrice = 0;
+        let appliedOffer = 'Standard Single Pricing';
+        let freeCount = 0;
+
+        if (count < 3) {
+          state.selected.forEach(p => {
+            const sz = (p && p.size && SINGLE_RATES[frameKey][p.size]) ? p.size : (state.size === 'mixed' ? 'A5' : state.size);
+            rawPrice += SINGLE_RATES[frameKey][sz];
+          });
+          appliedOffer = count === 1 ? 'Single Poster Rate' : '2 Posters Rate';
+        } else if (count === 3) {
+          state.selected.forEach(p => {
+            const sz = (p && p.size && PACK_3_RATES[frameKey][p.size]) ? p.size : (state.size === 'mixed' ? 'A5' : state.size);
+            rawPrice += PACK_3_RATES[frameKey][sz];
+          });
+          appliedOffer = '⚡ 3-Poster Pack Rate Applied';
+        } else if (count === 4) {
+          const sorted = [...state.selected].sort((a, b) => {
+            const szA = (a && a.size) || (state.size === 'mixed' ? 'A5' : state.size);
+            const szB = (b && b.size) || (state.size === 'mixed' ? 'A5' : state.size);
+            return SINGLE_RATES[frameKey][szB] - SINGLE_RATES[frameKey][szA];
+          });
+          for (let i = 0; i < 3; i++) {
+            const sz = sorted[i].size || (state.size === 'mixed' ? 'A5' : state.size);
+            rawPrice += PACK_3_RATES[frameKey][sz];
+          }
+          const sz4 = sorted[3].size || (state.size === 'mixed' ? 'A5' : state.size);
+          rawPrice += SINGLE_RATES[frameKey][sz4];
+          appliedOffer = '3-Pack Rate + 1 Single';
+        } else if (count >= 5 && count < 10) {
+          const rates = PACK_5_RATES[frameKey];
+          const posterCosts = state.selected.map(p => {
+            const sz = (p && p.size && rates[p.size]) ? p.size : (state.size === 'mixed' ? 'A5' : state.size);
+            return { ...p, unitCost: rates[sz] };
+          });
+          posterCosts.sort((a, b) => a.unitCost - b.unitCost);
+
+          freeCount = 1;
+          appliedOffer = '🎁 Buy 5 Get 1 FREE Applied!';
+          for (let i = freeCount; i < posterCosts.length; i++) {
+            rawPrice += posterCosts[i].unitCost;
+          }
+        } else if (count >= 10 && count < 20) {
+          const rates = PACK_10_RATES[frameKey];
+          const posterCosts = state.selected.map(p => {
+            const sz = (p && p.size && rates[p.size]) ? p.size : (state.size === 'mixed' ? 'A5' : state.size);
+            return { ...p, unitCost: rates[sz] };
+          });
+          posterCosts.sort((a, b) => a.unitCost - b.unitCost);
+
+          freeCount = 3;
+          appliedOffer = '🔥 Buy 10 Get 3 FREE Applied!';
+          for (let i = freeCount; i < posterCosts.length; i++) {
+            rawPrice += posterCosts[i].unitCost;
+          }
+        } else if (count >= 20 && count < 30) {
+          const rates = PACK_20_RATES[frameKey];
+          const posterCosts = state.selected.map(p => {
+            const sz = (p && p.size && rates[p.size]) ? p.size : (state.size === 'mixed' ? 'A5' : state.size);
+            return { ...p, unitCost: rates[sz] };
+          });
+          posterCosts.sort((a, b) => a.unitCost - b.unitCost);
+
+          freeCount = 4;
+          appliedOffer = '🎉 Buy 20 Get 4 FREE Applied!';
+          for (let i = freeCount; i < posterCosts.length; i++) {
+            rawPrice += posterCosts[i].unitCost;
+          }
+        } else {
+          const rates = PACK_30_RATES[frameKey];
+          const posterCosts = state.selected.map(p => {
+            const sz = (p && p.size && rates[p.size]) ? p.size : (state.size === 'mixed' ? 'A5' : state.size);
+            return { ...p, unitCost: rates[sz] };
+          });
+          posterCosts.sort((a, b) => a.unitCost - b.unitCost);
+
+          freeCount = 6;
+          appliedOffer = '🌟 Buy 30 Get 6 FREE Applied!';
+          for (let i = freeCount; i < posterCosts.length; i++) {
+            rawPrice += posterCosts[i].unitCost;
+          }
+        }
+
+        const finalPrice = Math.round(rawPrice);
+        const save = Math.max(0, totalMrp - finalPrice);
+
+        return {
+          price: finalPrice,
+          mrp: totalMrp,
+          save: `Save ₹${save}`,
+          counts,
+          appliedOffer,
+          freeCount,
+          nextMilestone: getNextMilestoneMsg(count)
+        };
+      }
+
+      function updatePricing() {
+        const pricing = calculatePricing();
+        priceDisplay.textContent = '₹' + pricing.price;
+        mrpDisplay.textContent = '₹' + pricing.mrp;
+        saveDisplay.textContent = pricing.save;
+
+        if (offerTag) {
+          if (pricing.appliedOffer) {
+            offerTag.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${escapeHtml(pricing.appliedOffer)}`;
+            offerTag.style.display = 'inline-flex';
+          } else {
+            offerTag.style.display = 'none';
+          }
+        }
+
+        const nextOfferTag = document.getElementById('next-offer-tag');
+        if (nextOfferTag) {
+          if (pricing.nextMilestone) {
+            nextOfferTag.innerHTML = `<i class="fa-solid fa-arrow-trend-up"></i> ${escapeHtml(pricing.nextMilestone)}`;
+            nextOfferTag.style.display = 'inline-flex';
+          } else {
+            nextOfferTag.style.display = 'none';
+          }
+        }
+
+        const catalogHint = document.getElementById('catalog-hint');
+        if (catalogHint) {
+          catalogHint.innerHTML = `
+            <span class="catalog-milestone-applied"><i class="fa-solid fa-tag"></i> ${escapeHtml(pricing.appliedOffer)}</span>
+            ${pricing.nextMilestone ? `<span class="catalog-milestone-next"><i class="fa-solid fa-arrow-right"></i> ${escapeHtml(pricing.nextMilestone)}</span>` : ''}
+          `;
+        }
+
+        const mOfferTag = document.getElementById('m-offer-tag');
+        if (mOfferTag) {
+          mOfferTag.innerHTML = `<span>${escapeHtml(pricing.appliedOffer)}</span>${pricing.nextMilestone ? ` · <span style="color:#38bdf8;">${escapeHtml(pricing.nextMilestone)}</span>` : ''}`;
+        }
+
+        const frameLabel = state.frame === 'framed' ? 'Framed Posters' : 'Just Posters';
+        let sizeTag = state.size;
+        if (state.size === 'mixed' || Object.values(pricing.counts).filter(c => c > 0).length > 1) {
+          const parts = [];
+          if (pricing.counts.A3) parts.push(`${pricing.counts.A3}× A3`);
+          if (pricing.counts.A4) parts.push(`${pricing.counts.A4}× A4`);
+          if (pricing.counts.A5) parts.push(`${pricing.counts.A5}× A5`);
+          sizeTag = `Mixed (${parts.join(', ')})`;
+        }
+        configTag.innerHTML = `<span>Size: <strong>${sizeTag}</strong></span> · <span>Type: <strong>${frameLabel}</strong></span>`;
+
+        if (mPrice) mPrice.textContent = '₹' + pricing.price;
+        if (mMrp) mMrp.textContent = '₹' + pricing.mrp;
+      }
+
+      // 7. Master UI Update
+      function updateUI() {
+        const count = state.selected.length;
+        if (selectedCounter) selectedCounter.textContent = count;
+        if (targetCounter) targetCounter.textContent = count > 0 ? `${count} Posters Selected` : `Milestone ${state.target}`;
+
+        if (mSelected) mSelected.textContent = count;
+        if (mTarget) mTarget.textContent = count > 0 ? count : state.target;
+
+        // Sync active milestone pill with current selection count or chosen target
+        let matchedMilestone = state.target;
+        if (count >= 30) matchedMilestone = 30;
+        else if (count >= 20) matchedMilestone = 20;
+        else if (count >= 10) matchedMilestone = 10;
+        else if (count >= 5) matchedMilestone = 5;
+        else if (count >= 3) matchedMilestone = 3;
+
+        document.querySelectorAll('#target-pills .pill-btn').forEach(b => {
+          const t = parseInt(b.dataset.target, 10);
+          const isAct = t === matchedMilestone;
+          b.classList.toggle('active', isAct);
+          b.setAttribute('aria-checked', isAct ? 'true' : 'false');
+        });
+
+        renderWallSlots();
+        renderCatalog();
+        updatePricing();
+
+        const pricing = calculatePricing();
+        if (count >= 1) {
+          addPackBtn.disabled = false;
+          addPackBtn.classList.remove('is-incomplete');
+          addPackBtn.style.opacity = '1';
+          addPackBtn.style.cursor = 'pointer';
+
+          const label = count === 1 ? '1 Poster' : `${count}-Poster Pack`;
+          const freeBadge = pricing.freeCount > 0 ? ` · ${pricing.freeCount} FREE` : '';
+          addPackBtn.innerHTML = `<i class="fa-solid fa-bag-shopping"></i> Add ${label} to Cart (₹${pricing.price})${freeBadge}`;
+
+          if (mAddBtn) {
+            mAddBtn.disabled = false;
+            mAddBtn.classList.remove('is-incomplete');
+            mAddBtn.style.opacity = '1';
+            mAddBtn.style.cursor = 'pointer';
+            mAddBtn.innerHTML = `<i class="fa-solid fa-bag-shopping"></i> Add ₹${pricing.price}`;
+          }
+        } else {
+          addPackBtn.disabled = false;
+          addPackBtn.classList.add('is-incomplete');
+          addPackBtn.style.opacity = '0.7';
+          addPackBtn.style.cursor = 'pointer';
+          addPackBtn.innerHTML = `<i class="fa-solid fa-plus"></i> Select Posters to Start Pack`;
+
+          if (mAddBtn) {
+            mAddBtn.disabled = false;
+            mAddBtn.classList.add('is-incomplete');
+            mAddBtn.style.opacity = '0.7';
+            mAddBtn.style.cursor = 'pointer';
+            mAddBtn.innerHTML = `<i class="fa-solid fa-plus"></i> Pick Posters`;
+          }
+        }
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById('toast');
+        const toastText = document.getElementById('toast-text');
+        if (toast && toastText) {
+          toastText.textContent = msg;
+          toast.classList.add('visible');
+          setTimeout(() => toast.classList.remove('visible'), 3200);
+        }
+      }
+
+      // 8. Add to Cart Handler
+      function handleAddToCart() {
+        if (state.selected.length === 0) {
+          showToast(`Please pick at least 1 poster below to start your pack.`);
+          const catalogGrid = document.getElementById('catalog-grid');
+          if (catalogGrid) catalogGrid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          return;
+        }
+
+        const count = state.selected.length;
+        const pricing = calculatePricing();
+        const frameLabel = state.frame === 'framed' ? 'Gallery Framed' : 'Unframed';
+        const frameVal = state.frame === 'framed' ? 'framed' : 'none';
+
+        let sizeDesc = state.size;
+        if (state.size === 'mixed' || Object.values(pricing.counts).filter(c => c > 0).length > 1) {
+          const parts = [];
+          if (pricing.counts.A3) parts.push(`${pricing.counts.A3}× A3`);
+          if (pricing.counts.A4) parts.push(`${pricing.counts.A4}× A4`);
+          if (pricing.counts.A5) parts.push(`${pricing.counts.A5}× A5`);
+          sizeDesc = `Mixed (${parts.join(', ')})`;
+        }
+
+        let tierType = 'poster';
+        if (count >= 25) tierType = 'poster_pack_25';
+        else if (count >= 20) tierType = 'poster_pack_20';
+        else if (count >= 15) tierType = 'poster_pack_15';
+        else if (count >= 10) tierType = 'poster_pack_10';
+        else if (count >= 5) tierType = 'poster_pack_5';
+        else if (count === 3) tierType = 'poster_3_pack';
+        else if (count === 2) tierType = 'poster_2_pack';
+
+        const item = {
+          id: 9990 + count,
+          name: `Custom ${count}-Poster Pack (${sizeDesc} · ${frameLabel})`,
+          price: pricing.price,
+          category: 'Wall Setup Packs',
+          productType: tierType,
+          image: state.selected[0]?.image || 'posters/packs/mockups/byop-hero.webp',
+          variants: { size: sizeDesc, frame: frameVal },
+          customPosters: state.selected.map((p, idx) => ({
+            id: p.id,
+            sku: p.sku || (p.id ? (String(p.id).startsWith('MN-') ? p.id : `POST-${p.id}`) : `POST-${idx + 1}`),
+            image: p.image,
+            name: p.name,
+            size: p.size || 'A5'
+          })),
+          quantity: 1
+        };
+
+        const cartApi = (typeof Cart !== 'undefined' && Cart) || (typeof window !== 'undefined' && window.Cart);
+        if (cartApi && typeof cartApi.addItem === 'function') {
+          cartApi.addItem(item, 1, { size: sizeDesc, frame: frameVal }, pricing.price);
+        } else {
+          console.error('Cart API not available on page!');
+        }
+
+        addPackBtn.innerHTML = `<i class="fa-solid fa-check"></i> Added! Proceeding to Checkout...`;
+        addPackBtn.style.pointerEvents = 'none';
+        if (mAddBtn) {
+          mAddBtn.innerHTML = `<i class="fa-solid fa-check"></i> Added! Proceeding...`;
+          mAddBtn.style.pointerEvents = 'none';
+        }
+
+        showToast(`Added your Custom ${count}-Poster Pack to cart! Taking you to checkout...`);
+
+        setTimeout(() => {
+          const isFlatHtml = window.location.pathname.endsWith('.html') || window.location.protocol === 'file:';
+          window.location.href = isFlatHtml ? 'checkout.html' : '/checkout/';
+        }, 750);
+      }
+
+      // 9. Event Listeners
+
+      // Step 1: Pack Target Milestones
+      document.getElementById('target-pills').addEventListener('click', (e) => {
+        const btn = e.target.closest('.pill-btn');
+        if (!btn) return;
+        document.querySelectorAll('#target-pills .pill-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-checked', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-checked', 'true');
+        state.target = parseInt(btn.dataset.target, 10);
+
+        // Curated Backdrops: large sets switch to Spacious lounge wall
+        if (state.room !== 'custom') {
+          if (state.target >= 15 || state.selected.length >= 15) {
+            state.room = 'spacious';
+          } else {
+            state.room = 'studio';
+          }
+          updateRoomView();
+        }
+
+        applyAutoPositions();
+        updateUI();
+
+        // Smooth scroll to catalog so user can easily pick up to their chosen milestone
+        if (state.selected.length < state.target) {
+          const catalogGrid = document.getElementById('catalog-grid');
+          if (catalogGrid) catalogGrid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+
+      // Step 2: Size Pills (A5, A4, A3, Mixed)
+      document.getElementById('size-pills').addEventListener('click', (e) => {
+        const btn = e.target.closest('.pill-btn');
+        if (!btn) return;
+        document.querySelectorAll('#size-pills .pill-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-checked', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-checked', 'true');
+        state.size = btn.dataset.size;
+
+        if (state.size !== 'mixed') {
+          state.selected.forEach(p => { p.size = state.size; });
+        }
+        if (!state.hasCustomMoved) {
+          applyAutoPositions();
+        }
+        updateUI();
+      });
+
+      // Step 3: Framing Pills (Unframed vs Framed)
+      document.getElementById('frame-pills').addEventListener('click', (e) => {
+        const btn = e.target.closest('.pill-btn');
+        if (!btn) return;
+        document.querySelectorAll('#frame-pills .pill-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-checked', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-checked', 'true');
+        state.frame = btn.dataset.frame;
+        updateUI();
+      });
+
+      // Room Tabs Switcher
+      roomTabs.addEventListener('click', (e) => {
+        const btn = e.target.closest('.room-tab');
+        if (!btn) return;
+        state.room = btn.dataset.room;
+        updateRoomView();
+        applyAutoPositions();
+        renderWallSlots();
+      });
+
+      // Layout Presets Group
+      presetGroup.addEventListener('click', (e) => {
+        const btn = e.target.closest('.canvas-preset-btn');
+        if (!btn) return;
+        document.querySelectorAll('#preset-group .canvas-preset-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.layoutPreset = btn.dataset.preset;
+        applyAutoPositions();
+        renderWallSlots();
+      });
+
+      // Spacing / Gap Slider
+      if (canvasGapRange) {
+        canvasGapRange.addEventListener('input', (e) => {
+          state.layoutGap = parseInt(e.target.value, 10);
+          const gapVal = document.getElementById('canvas-gap-val');
+          if (gapVal) gapVal.textContent = state.layoutGap + 'px';
+          applyAutoPositions();
+          renderWallSlots();
+        });
+      }
+
+      // Auto Align / Reset Button
+      if (canvasAutoAlign) {
+        canvasAutoAlign.addEventListener('click', () => {
+          applyAutoPositions();
+          renderWallSlots();
+          if (window.Cart && Cart.toast) {
+            Cart.toast('Re-aligned posters to ' + state.layoutPreset + ' layout!');
+          }
+        });
+      }
+
+      // Custom Wall Photo File Input Handlers
+      function handleWallFileUpload(file) {
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          const img = new Image();
+          img.onload = () => {
+            state.customWallUrl = evt.target.result;
+            state.customWallRatio = img.naturalWidth / img.naturalHeight;
+            state.room = 'custom';
+            updateRoomView();
+            applyAutoPositions();
+            renderWallSlots();
+            if (window.Cart && Cart.toast) {
+              Cart.toast('Wall photo loaded! You can now freely slide and adjust your posters.');
+            }
+          };
+          img.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      if (wallFileInput) {
+        wallFileInput.addEventListener('change', (e) => handleWallFileUpload(e.target.files && e.target.files[0]));
+      }
+      if (wallFileInputAlt) {
+        wallFileInputAlt.addEventListener('change', (e) => handleWallFileUpload(e.target.files && e.target.files[0]));
+      }
+
+      // Catalog Source Mode Switcher (Global vs Minis)
+      document.getElementById('mode-switcher').addEventListener('click', (e) => {
+        const btn = e.target.closest('.mode-tab');
+        if (!btn) return;
+        document.querySelectorAll('#mode-switcher .mode-tab').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        state.catalogMode = btn.dataset.mode;
+        state.filter = 'all';
+        renderGenreTabs();
+        renderCatalog();
+      });
+
+      // Mini Search Bar Input
+      let searchDebounce = null;
+      searchInput.addEventListener('input', (e) => {
+        const val = e.target.value;
+        state.searchQuery = val;
+        if (searchClear) {
+          searchClear.classList.toggle('visible', val.length > 0);
+        }
+        clearTimeout(searchDebounce);
+        searchDebounce = setTimeout(() => {
+          renderCatalog();
+        }, 120);
+      });
+
+      if (searchClear) {
+        searchClear.addEventListener('click', () => {
+          searchInput.value = '';
+          state.searchQuery = '';
+          searchClear.classList.remove('visible');
+          renderCatalog();
+          searchInput.focus();
+        });
+      }
+
+      // Genre Tabs Delegation
+      catalogTabs.addEventListener('click', (e) => {
+        const btn = e.target.closest('.catalog-tab');
+        if (!btn) return;
+        document.querySelectorAll('#catalog-tabs .catalog-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.filter = btn.dataset.filter;
+        renderCatalog();
+      });
+
+      // Add to Cart Buttons
+      addPackBtn.addEventListener('click', handleAddToCart);
+      if (mAddBtn) {
+        mAddBtn.addEventListener('click', handleAddToCart);
+      }
+
+      // Smooth scroll to wall preview on mobile
+      if (mViewWallBtn) {
+        mViewWallBtn.addEventListener('click', () => {
+          const previewCard = document.querySelector('.wall-preview-card');
+          if (previewCard) {
+            if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+              window.lenis.scrollTo(previewCard);
+            } else {
+              previewCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      }
+
+    })();
+  </script>
+</body>
+</html>

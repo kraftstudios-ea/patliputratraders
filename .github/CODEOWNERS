@@ -1,0 +1,8 @@
+# ==============================================================================
+# GitHub Code Owners Configuration
+# ==============================================================================
+# All pull requests and modifications require mandatory review and approval
+# from @ImMortaL0P before changes can be merged into main and deployed.
+# ==============================================================================
+
+* @ImMortaL0P

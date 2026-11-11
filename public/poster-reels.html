@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script src="api-base.js?v=2"></script>
+  <script src="theme.js?v=2"></script>
+  <title>Aesthetic Posters &amp; Wall Art Reels — Brush India</title>
+  <link rel="canonical" href="https://www.brush-art.in/shop/posters/">
+  <meta name="robots" content="noindex, follow">
+  <meta name="description" content="Swipe through aesthetic room decor posters in full-screen reels: anime, movies, motorsport, pop-culture and music wall art on 300 GSM matte card.">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="48x48">
+  <link rel="icon" href="/assets/misc/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/misc/favicon-48x48.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/misc/favicon-192x192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.brush-art.in/reels/">
+  <meta property="og:title" content="Aesthetic Posters &amp; Wall Art Reels — Brush India">
+  <meta property="og:description" content="Swipe through aesthetic room decor posters in full-screen reels: anime, movies, motorsport, pop-culture and music wall art on 300 GSM matte card.">
+  <meta property="og:image" content="https://www.brush-art.in/img/site/hero-10pack.webp">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.brush-art.in/reels/">
+  <meta name="twitter:title" content="Aesthetic Posters &amp; Wall Art Reels — Brush India">
+  <meta name="twitter:description" content="Swipe through aesthetic room decor posters in full-screen reels: anime, movies, motorsport, pop-culture and music wall art on 300 GSM matte card.">
+  <meta name="twitter:image" content="https://www.brush-art.in/img/site/hero-10pack.webp">
+  <!-- The catalogue lives on Render; opening the connection during head
+       parsing removes a DNS + TLS handshake from the first API call,
+       which is the slowest request on every page. -->
+  <link rel="preconnect" href="https://brush-production.onrender.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <script src="https://kit.fontawesome.com/84df58c29a.js" crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="styles.css?v=38">
+  <link rel="stylesheet" href="reels.css?v=2">
+  <script src="lenis.min.js"></script>
+  <script src="scroll.js" defer></script>
+  <script src="global-navbar.js?v=21" defer></script>
+  <script src="site-overlays.js?v=3" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="interactions.js?v=1" defer></script>
+</head>
+<body class="reels-page">
+
+  <header class="reels-bar">
+    <a href="all_products.html?type=Posters" class="reels-bar-btn" aria-label="Back to posters"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></a>
+    <div class="reels-bar-title">
+      <h1 style="font-size:inherit; font-weight:inherit; font-family:inherit; margin:0;">Browse Posters</h1>
+      <label class="reels-genre">
+        <span class="sr-only">Genre</span>
+        <select id="reels-genre"><option value="">All genres</option></select>
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </label>
+      <a href="build-pack.html" class="reels-bar-btn" title="Build Your Own Pack" aria-label="Build Your Own Pack" style="margin-right: 4px; color: var(--accent);">
+        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+      </a>
+      <a href="checkout.html" class="reels-bar-btn reels-cart nav-action-btn" aria-label="Cart">
+        <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+        <span class="cart-count" style="display: none;">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content" class="reels">
+    <div class="reels-feed" id="reels-feed" tabindex="-1" data-lenis-prevent aria-label="Poster feed">
+      <div class="reels-empty"><div class="reels-loader" aria-hidden="true"></div><p>Loading posters…</p></div>
+    </div>
+
+    <div class="reels-nav" aria-label="Feed navigation">
+      <button type="button" id="reels-prev" aria-label="Previous poster"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
+      <button type="button" id="reels-next" aria-label="Next poster"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="reels-hint" id="reels-hint" hidden>
+      <div class="reels-hint-card">
+        <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i>
+        <p><strong>Swipe up</strong> for the next poster</p>
+        <p><strong>Double-tap</strong> to add it to your cart</p>
+      </div>
+    </div>
+  </main>
+
+  <site-overlays></site-overlays>
+
+  <script src="img-utils.js?v=4"></script>
+  <script src="cart.js?v=12"></script>
+  <script src="product-copy.js?v=3"></script>
+  <script src="search-core.js?v=1"></script>
+  <script src="script.js?v=53"></script>
+  <script src="reels.js?v=2"></script>
+</body>
+</html>

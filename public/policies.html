@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script src="api-base.js?v=2"></script>
+  <script src="theme.js?v=2"></script>
+  <title>Customer Policies, Shipping &amp; Returns — Patliputra Traders</title>
+  <meta name="description" content="Read Patliputra Traders customer terms: transparent shipping timelines, cancellation window, 100% transit guarantee, privacy policy, and terms of service.">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="48x48">
+  <link rel="icon" href="/assets/misc/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/misc/favicon-48x48.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/misc/favicon-192x192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Customer Policies, Shipping &amp; Returns — Patliputra Traders">
+  <meta property="og:description" content="Read Patliputra Traders customer policies: safe transit packaging, cancellation window, return guidelines, and privacy terms.">
+  <meta property="og:image" content="/img/site/patliputra-logo.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.brush-art.in/policies/">
+  <meta name="twitter:title" content="Customer Policies, Shipping &amp; Returns — Brush">
+  <meta name="twitter:description" content="Read Brush customer policies: fast transparent shipping, cancellation window, return guidelines, and privacy terms.">
+  <meta name="twitter:image" content="https://www.brush-art.in/img/site/hero-10pack.webp">
+  <!-- The catalogue lives on Render; opening the connection during head
+       parsing removes a DNS + TLS handshake from the first API call,
+       which is the slowest request on every page. -->
+  <link rel="preconnect" href="https://brush-production.onrender.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <script src="https://kit.fontawesome.com/84df58c29a.js" crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="styles.css?v=38">
+  <style>
+    .policies-nav {
+      position: sticky;
+      top: 84px;
+      background: var(--bg-primary);
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-start;
+      gap: 18px;
+      padding: 4px 16px;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .policies-nav::-webkit-scrollbar {
+      display: none;
+    }
+    @media (min-width: 769px) {
+      .policies-nav {
+        justify-content: center;
+        padding: 5px 20px;
+        gap: 24px;
+      }
+    }
+    .policies-nav a {
+      padding: 10px 4px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: color 0.25s;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      touch-action: manipulation;
+    }
+    .policies-nav a:hover, .policies-nav a.active {
+      color: var(--accent);
+    }
+    .policies-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+    .policy-section {
+      margin-bottom: 60px;
+      scroll-margin-top: 150px;
+    }
+    .policy-section h2 {
+      font-family: var(--font-heading);
+      font-size: var(--text-h2);
+      font-weight: 800;
+      letter-spacing: var(--tracking-tight);
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+    .policy-section h3 {
+      font-size: 1.3rem;
+      margin: 20px 0 10px;
+    }
+    .policy-section p, .policy-section ul {
+      margin-bottom: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    .policy-section ul {
+      padding-left: 20px;
+    }
+  
+      .policy-scope {
+        border-left: 3px solid var(--accent);
+        background: rgba(255, 159, 41, 0.07);
+        padding: 12px 16px;
+        border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        margin: 0 0 24px;
+        font-size: 0.92rem;
+      }
+</style>
+  <script src="global-navbar.js?v=21" defer></script>
+  <script src="global-footer.js?v=4" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="interactions.js?v=1" defer></script>
+</head>
+<body>
+  <div class="scroll-progress" id="scroll-progress"></div>
+  <!-- Navbar -->
+  <global-navbar></global-navbar>
+
+  <header class="page-header">
+    <div class="container">
+      <span class="section-tag">Help Centre</span>
+      <h1>Our Policies</h1>
+      <p>Everything you need to know about our services and guidelines.</p>
+    </div>
+  </header>
+
+  <div class="policies-nav">
+    <a href="#shipping-policy">Shipping &amp; Delivery</a>
+    <a href="#cancellation-returns">Cancellation & Returns</a>
+    <a href="#refund-policy">Refunds &amp; Claims</a>
+    <a href="#privacy-policy">Privacy</a>
+    <a href="#terms-of-service">Terms of Service</a>
+  </div>
+
+  <main id="main-content" class="policies-container">
+    <section id="shipping-policy" class="policy-section">
+      <h2>Shipping &amp; Delivery</h2>
+      <p>This policy covers how your order is curated, quality-inspected, packed and delivered. Patliputra Traders ensures every chandelier, wall lamp, fan, and architectural fixture undergoes rigorous electrical and physical inspection before dispatch.</p>
+
+      <h3>Where Your Order Is Dispatched</h3>
+      <p>Every lighting fixture is handled and dispatched from our primary showroom and distribution hub in <strong>Patna, Bihar</strong>. Express delivery is available across Patna and nearby districts, while pan-India shipments are handled via priority air and surface logistics.</p>
+
+      <h3>Serviceable Locations</h3>
+      <p>We deliver to any PIN code served by our courier partners across India. In the rare case that your PIN code is not serviceable, we will contact you promptly and refund you in full. For bulk architect or builder orders to custom project sites, write to us at <a href="mailto:patliputratraders01@gmail.com">patliputratraders01@gmail.com</a> or WhatsApp us directly.</p>
+
+      <h3>Processing &amp; Dispatch</h3>
+      <p>In-stock fixtures are tested, safely packaged with shock-absorbing foam/bubble wrap, and dispatched within 1 to 2 working days. Custom chandelier assemblies or large profile runs may take 2 to 4 working days.</p>
+
+      <h3>Estimated Delivery Timelines</h3>
+      <ul>
+        <li><strong>Patna &amp; Bihar:</strong> 2 to 4 working days.</li>
+        <li><strong>Delhi NCR &amp; Metros:</strong> 4 to 7 working days.</li>
+        <li><strong>Rest of India:</strong> 6 to 10 working days.</li>
+      </ul>
+
+      <h3>Delivery Charges</h3>
+      <ul>
+        <li>Standard insured delivery is a flat <strong>&#8377;59</strong>.</li>
+        <li>Delivery is <strong>free</strong> on orders with a cart value of <strong>&#8377;599 or more</strong>.</li>
+      </ul>
+
+      <h3>100% Transit Break-Free Guarantee</h3>
+      <p>Lighting products contain delicate elements such as crystals, blown glass, and optical lenses. Every package is sealed in heavy-duty multi-layer crating. If any component arrives damaged, we replace the broken part or entire fixture free of charge with no hassle.</p>
+    </section>
+
+    <section id="cancellation-returns" class="policy-section">
+      <h2>Cancellation &amp; Replacements</h2>
+      <p>You can cancel your order free of charge at any time before dispatch. Once dispatched, tracking is generated and the package cannot be cancelled in transit.</p>
+      <p>If any item arrives damaged or non-functional, email us at <a href="mailto:patliputratraders01@gmail.com">patliputratraders01@gmail.com</a> within <strong>48 hours of delivery</strong> along with photos and an unboxing video. We will promptly dispatch a replacement part or fixture.</p>
+    </section>
+
+    <section id="refund-policy" class="policy-section">
+      <h2>Refunds &amp; Claims</h2>
+      <p>Approved refunds are processed back to the original payment source within <strong>5 to 7 working days</strong>. For COD or direct bank transfers, refunds are credited directly to your bank account via NEFT/UPI.</p>
+    </section>
+
+    <section id="privacy-policy" class="policy-section">
+      <h2>Privacy Policy</h2>
+      <p>Patliputra Traders operates this platform to offer a seamless lighting showroom experience. We respect your privacy and never sell or rent your personal information to third parties.</p>
+    </section>
+
+    <section id="terms-of-service" class="policy-section">
+      <h2>Terms of Service</h2>
+      <p>By placing an order on Patliputra Traders, you agree to our terms of service. Products are warranted against manufacturing defects according to the specifications listed for each luminaire.</p>
+    </section>
+  </main>
+
+  <global-footer></global-footer>
+
+  <script src="lenis.min.js"></script>
+  <script src="scroll.js" defer></script>
+  <script>
+    document.querySelectorAll('.policies-nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetEl = document.querySelector(targetId);
+        // Route through Lenis when it's running — native scrollIntoView
+        // fights Lenis's own rAF-driven position updates and produces a jitter.
+        if (window.lenis) {
+          window.lenis.scrollTo(targetEl);
+        } else {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.querySelectorAll('.policies-nav a').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      document.querySelectorAll('.policy-section').forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+      document.querySelectorAll('.policies-nav a').forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === `#${current}`) {
+          a.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

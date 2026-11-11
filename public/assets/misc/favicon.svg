@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121318"/>
+      <stop offset="100%" stop-color="#08080a"/>
+    </linearGradient>
+    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4c24" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ff4c24" stop-opacity="0.5"/>
+    </linearGradient>
+    <radialGradient id="emberGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ff9f29"/>
+      <stop offset="70%" stop-color="#ff4c24"/>
+      <stop offset="100%" stop-color="#c83200"/>
+    </radialGradient>
+  </defs>
+  <!-- 100% Solid opaque dark canvas with circular ember rim - prevents Google SERP white circular washout -->
+  <rect width="512" height="512" fill="#0a0b0e"/>
+  <circle cx="256" cy="256" r="244" fill="url(#bgGrad)" stroke="url(#rimGrad)" stroke-width="6"/>
+  <!-- Bold Brush B Letterform -->
+  <path d="M 148 116 L 244 116 C 286 116 322 142 322 186 C 322 216 304 238 276 248 C 314 258 336 284 336 324 C 336 368 298 396 252 396 L 148 396 Z M 208 162 L 208 214 L 242 214 C 262 214 274 204 274 188 C 274 172 262 162 242 162 Z M 208 294 L 208 350 L 250 350 C 272 350 286 338 286 322 C 286 306 272 294 250 294 Z" fill="#ffffff"/>
+  <!-- Signature Flame Ember Accent -->
+  <circle cx="250" cy="322" r="16" fill="url(#emberGrad)"/>
+</svg>

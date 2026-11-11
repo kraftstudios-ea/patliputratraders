@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-11-09T19:09:40.323Z",
+  "totalProducts": 561,
+  "byType": {
+    "Posters": 290,
+    "apparel": 8,
+    "Stickers": 24,
+    "Wallpapers": 6,
+    "Collectibles": 4,
+    "poster": 116,
+    "hoodie": 6,
+    "poster_3_pack": 8,
+    "poster_pack_10": 4,
+    "Tapestry": 6,
+    "Digital Assets": 46,
+    "poster_pack_15": 3,
+    "poster_pack_20": 3,
+    "poster_pack_25": 4,
+    "poster_2_pack": 3,
+    "Metal Posters": 30
+  },
+  "zeroStockCount": 70,
+  "errorCount": 0,
+  "warningCount": 0,
+  "errors": [],
+  "warnings": []
+}

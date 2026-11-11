@@ -1,0 +1,16 @@
+node_modules/
+Backend/node_modules/
+.env
+Backend/.env
+.DS_Store
+*.log
+
+# Service accounts and credentials
+serviceAccountKey.json
+*serviceAccountKey*.json
+*service-account*.json
+*search-console*.json
+Backend/serviceAccountKey.json
+Backend/assets/*search-console*.json
+*.pem
+*.key

@@ -1,0 +1,1513 @@
+/* ==========================================================================
+   BRUSH — ACCOUNT & ORDERS STYLING (Flipkart-Inspired Architecture)
+   Uses Brush brand tokens: var(--accent), var(--bg-primary), var(--bg-card), etc.
+   ========================================================================== */
+
+/* Page Container */
+.account-page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 104px 20px 80px;
+  min-height: 85vh;
+}
+
+.account-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ==========================================================================
+   LEFT SIDEBAR (Flipkart-style Profile & Navigation)
+   ========================================================================== */
+.account-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 96px;
+}
+
+/* User Greeting Card */
+.account-user-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.account-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(var(--accent-rgb), 0.25);
+}
+
+.account-greeting-meta {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.account-greeting-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.account-user-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sidebar Navigation Card */
+.account-nav-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.account-nav-section {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.account-nav-section:last-child {
+  border-bottom: none;
+}
+
+.account-nav-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.account-nav-header i {
+  font-size: 0.95rem;
+  color: var(--accent);
+  width: 18px;
+  text-align: center;
+}
+
+.account-nav-header a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.account-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.account-nav-item a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px 12px 50px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.account-nav-item a:hover {
+  background: rgba(var(--accent-rgb), 0.05);
+  color: var(--accent);
+}
+
+.account-nav-item.active a {
+  background: rgba(var(--accent-rgb), 0.08);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.account-nav-item.active a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+}
+
+.account-nav-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 999px;
+  line-height: 1.2;
+}
+
+.account-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 20px;
+  background: transparent;
+  border: none;
+  color: var(--sale-red);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+
+.account-logout-btn i {
+  width: 18px;
+  text-align: center;
+}
+
+.account-logout-btn:hover {
+  background: rgba(var(--sale-red-rgb), 0.08);
+}
+
+/* ==========================================================================
+   RIGHT CONTENT AREA (Main Panel)
+   ========================================================================== */
+.account-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.account-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.account-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.account-panel-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ==========================================================================
+   MY ORDERS: Search, Filters & Controls
+   ========================================================================== */
+.orders-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.orders-search-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 6px 4px 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.orders-search-wrap:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
+}
+
+.orders-search-icon {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-right: 10px;
+}
+
+.orders-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-family: var(--font-body);
+  outline: none;
+  padding: 8px 0;
+}
+
+.orders-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.orders-search-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease;
+}
+
+.orders-search-btn:hover {
+  background: var(--accent-hover);
+}
+
+.orders-filter-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.orders-filter-chip {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.orders-filter-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.orders-filter-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.orders-filter-chip .chip-count {
+  font-size: 0.72rem;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.orders-filter-chip.active .chip-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+/* ==========================================================================
+   ORDER CARDS (Flipkart Style)
+   ========================================================================== */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-card:hover {
+  border-color: rgba(var(--accent-rgb), 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 18px;
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.82rem;
+}
+
+.order-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.order-meta-item {
+  color: var(--text-muted);
+}
+
+.order-meta-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.order-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-card-body {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.order-items-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.order-item-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.order-item-thumb {
+  width: 72px;
+  height: 90px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.order-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.order-item-thumb .qty-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.order-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.order-item-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.order-item-variants {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.order-item-price {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.order-status-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  text-align: right;
+  min-width: 180px;
+}
+
+.order-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot.delivered { background: #16a34a; box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2); }
+.status-dot.transit { background: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
+.status-dot.confirmed { background: #d97706; box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2); }
+.status-dot.cancelled { background: var(--sale-red); box-shadow: 0 0 0 3px rgba(var(--sale-red-rgb), 0.2); }
+.status-dot.returned { background: #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2); }
+
+.status-text.delivered { color: #16a34a; }
+.status-text.transit { color: #2563eb; }
+.status-text.confirmed { color: #d97706; }
+.status-text.cancelled { color: var(--sale-red); }
+.status-text.returned { color: #7c3aed; }
+
+.order-status-subtext {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.order-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 18px;
+  background: rgba(0, 0, 0, 0.015);
+  border-top: 1px solid var(--border-light);
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  background: transparent;
+}
+
+.btn-action-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.btn-action-primary:hover {
+  background: var(--accent-hover);
+  color: #fff;
+}
+
+.btn-action-outline {
+  border-color: var(--border);
+  color: var(--text-primary);
+  background: var(--bg-card);
+}
+
+.btn-action-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-action-subtle {
+  color: var(--text-muted);
+}
+
+.btn-action-subtle:hover {
+  color: var(--text-primary);
+}
+
+.btn-action-danger {
+  color: var(--sale-red);
+  border-color: rgba(var(--sale-red-rgb), 0.3);
+}
+
+.btn-action-danger:hover {
+  background: rgba(var(--sale-red-rgb), 0.08);
+}
+
+/* ==========================================================================
+   ORDER DETAILS VIEW (Flipkart Style Detailed Page)
+   ========================================================================== */
+.order-detail-header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Order Snapshot Card */
+.order-detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.order-detail-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.order-detail-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Flipkart-style Stepper Timeline */
+.tracking-stepper-wrap {
+  padding: 10px 0 20px;
+}
+
+.tracking-stepper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.tracking-stepper::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background: var(--border);
+  z-index: 1;
+}
+
+.stepper-step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.stepper-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.stepper-step.completed .stepper-node {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #fff;
+}
+
+.stepper-step.active .stepper-node {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.2);
+  animation: pulse-node 2s infinite;
+}
+
+@keyframes pulse-node {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.stepper-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  max-width: 90px;
+  line-height: 1.25;
+}
+
+.stepper-step.completed .stepper-label,
+.stepper-step.active .stepper-label {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.stepper-timestamp {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* Tracking Details Box */
+.tracking-partner-box {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tracking-partner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.courier-badge {
+  background: rgba(var(--accent-rgb), 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tracking-partner-meta {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.tracking-partner-meta strong {
+  color: var(--text-primary);
+}
+
+/* Delivery Address Snapshot */
+.address-snapshot {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.address-snapshot-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.address-snapshot-phone {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+}
+
+/* Price Details Card */
+.price-breakdown-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.88rem;
+}
+
+.price-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.price-breakdown-row.total-row {
+  border-top: 1px dashed var(--border);
+  padding-top: 12px;
+  margin-top: 4px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.price-breakdown-row.savings-row {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   MY PROFILE & ADDRESS BOOK (Flipkart Style)
+   ========================================================================== */
+.profile-section-block {
+  margin-bottom: 30px;
+}
+
+.profile-section-title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.profile-section-heading {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.profile-edit-toggle {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.profile-edit-toggle:hover {
+  text-decoration: underline;
+}
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.profile-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile-field-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.profile-input-action-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.profile-input-action-group .profile-input {
+  flex: 1;
+}
+
+.profile-input-action-group .btn-action {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.profile-security-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.profile-input {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.92rem;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: text;
+}
+
+.profile-input:focus {
+  border-color: var(--accent);
+}
+
+.profile-input[readonly],
+.profile-input:disabled {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  border-color: var(--border-light);
+}
+
+/* Gender Selection Radio Pills */
+.gender-radio-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.gender-radio-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.gender-radio-chip input {
+  accent-color: var(--accent);
+}
+
+.gender-radio-chip.selected {
+  border-color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.06);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Manage Addresses: "+ ADD A NEW ADDRESS" Button & Cards */
+.add-address-trigger-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(var(--accent-rgb), 0.04);
+  border: 1px dashed var(--accent);
+  border-radius: 8px;
+  color: var(--accent);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.add-address-trigger-card:hover {
+  background: rgba(var(--accent-rgb), 0.08);
+}
+
+.address-form-box {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.saved-addresses-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.saved-address-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  position: relative;
+  transition: border-color 0.2s ease;
+}
+
+.saved-address-card:hover {
+  border-color: rgba(var(--accent-rgb), 0.4);
+}
+
+.saved-address-card.is-default {
+  border-color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.02);
+}
+
+.address-card-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.address-type-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-secondary);
+}
+
+.address-default-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent);
+}
+
+.address-card-name-phone {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.address-card-body {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.address-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+.address-action-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s ease;
+}
+
+.address-action-btn:hover {
+  text-decoration: underline;
+}
+
+.address-action-btn.delete {
+  color: var(--sale-red);
+}
+
+/* ==========================================================================
+   MODALS & DIALOGS (Cancellation, Return, Support, Reviews)
+   ========================================================================== */
+.account-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.account-modal-overlay.active {
+  display: flex;
+}
+
+.account-modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.account-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.account-modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.account-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.account-modal-close:hover {
+  color: var(--text-primary);
+}
+
+.account-modal-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.account-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-light);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Rating Stars */
+.star-rating-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.star-rating-selector .star-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #555;
+  cursor: pointer;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.star-rating-selector .star-btn:hover,
+.star-rating-selector .star-btn.active {
+  color: #fbbf24;
+  transform: scale(1.15);
+}
+
+/* Toast System */
+.account-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.account-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.account-toast.success { border-left-color: #16a34a; }
+.account-toast.error { border-left-color: var(--sale-red); }
+
+/* Empty state */
+.orders-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.empty-icon {
+  font-size: 3.5rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.empty-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.empty-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  max-width: 420px;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (< 860px)
+   ========================================================================== */
+@media (max-width: 860px) {
+  .account-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .account-sidebar {
+    position: static;
+  }
+
+  .account-nav-list {
+    display: flex;
+    overflow-x: auto;
+    padding: 6px;
+    background: var(--bg-card);
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .account-nav-item a {
+    padding: 10px 16px;
+    white-space: nowrap;
+    border-radius: 6px;
+    min-height: 42px;
+  }
+
+  .account-nav-item.active a::before {
+    display: none;
+  }
+
+  .order-card-body {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .order-status-col {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .order-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tracking-stepper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-left: 20px;
+  }
+
+  .tracking-stepper::before {
+    top: 10px;
+    bottom: 10px;
+    left: 36px;
+    width: 2px;
+    height: auto;
+    right: auto;
+  }
+
+  .stepper-step {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .stepper-label {
+    max-width: none;
+  }
+
+  .profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   MOBILE & TOUCH ENHANCEMENTS (< 640px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Prevent iOS Safari automatic auto-zoom on input focus */
+  .profile-input,
+  select.profile-input,
+  textarea.profile-input,
+  .orders-search-input {
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .account-page {
+    padding: 86px 14px 60px;
+  }
+
+  .account-panel {
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .account-panel-header {
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+
+  .account-panel-title {
+    font-size: 1.25rem;
+  }
+
+  .profile-section-block {
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+  }
+
+  .gender-radio-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .gender-radio-chip {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 14px;
+  }
+
+  .btn-action {
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 0.86rem;
+  }
+
+  .orders-toolbar {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .orders-search-wrap {
+    flex-wrap: wrap;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .orders-search-input {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .orders-search-wrap .btn-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .orders-filters-scroller {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .orders-filter-chip {
+    min-height: 40px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+  }
+
+  .order-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .order-header-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .order-header-right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .order-card-body {
+    padding: 14px;
+  }
+
+  .order-item-row {
+    gap: 12px;
+  }
+
+  .order-item-thumb {
+    width: 60px;
+    height: 76px;
+  }
+
+  .order-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 12px 14px;
+  }
+
+  .order-card-actions .btn-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tracking-partner-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .tracking-partner-box .btn-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .account-modal-overlay {
+    padding: 10px;
+    align-items: flex-end; /* Sheet appearance on small devices */
+  }
+
+  .account-modal-box {
+    max-height: 92vh;
+    border-radius: 16px 16px 0 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .account-modal-header {
+    padding: 16px 18px;
+  }
+
+  .account-modal-body {
+    padding: 16px 18px;
+  }
+
+  .account-modal-footer {
+    padding: 12px 18px 24px;
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .account-modal-footer .btn-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .saved-address-card .address-card-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .address-action-btn {
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+  }
+}

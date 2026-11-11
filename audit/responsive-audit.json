@@ -1,0 +1,122 @@
+{
+  "timestamp": "2026-11-09T15:48:30.029Z",
+  "viewportsTested": [
+    {
+      "name": "mobile-small",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "name": "mobile-iphone",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "mobile-promax",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "name": "tablet-portrait",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "name": "tablet-landscape",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "name": "laptop-1366",
+      "width": 1366,
+      "height": 900
+    },
+    {
+      "name": "desktop-1080p",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "captures": [
+    {
+      "page": "profile",
+      "viewport": "390x844",
+      "file": "profile-mobile-iphone.png",
+      "size": 60029,
+      "elapsed": 1067,
+      "status": "passed"
+    },
+    {
+      "page": "profile",
+      "viewport": "1920x1080",
+      "file": "profile-desktop-1080p.png",
+      "size": 107010,
+      "elapsed": 758,
+      "status": "passed"
+    },
+    {
+      "page": "orders",
+      "viewport": "390x844",
+      "file": "orders-mobile-iphone.png",
+      "size": 58284,
+      "elapsed": 589,
+      "status": "passed"
+    },
+    {
+      "page": "orders",
+      "viewport": "1920x1080",
+      "file": "orders-desktop-1080p.png",
+      "size": 103766,
+      "elapsed": 695,
+      "status": "passed"
+    },
+    {
+      "page": "storefront",
+      "viewport": "390x844",
+      "file": "storefront-mobile-iphone.png",
+      "size": 29261,
+      "elapsed": 703,
+      "status": "passed"
+    },
+    {
+      "page": "storefront",
+      "viewport": "1920x1080",
+      "file": "storefront-desktop-1080p.png",
+      "size": 38811,
+      "elapsed": 576,
+      "status": "passed"
+    },
+    {
+      "page": "metal-collection",
+      "viewport": "390x844",
+      "file": "metal-collection-mobile-iphone.png",
+      "size": 14170,
+      "elapsed": 679,
+      "status": "passed"
+    },
+    {
+      "page": "metal-collection",
+      "viewport": "1920x1080",
+      "file": "metal-collection-desktop-1080p.png",
+      "size": 21017,
+      "elapsed": 595,
+      "status": "passed"
+    },
+    {
+      "page": "metal-detail",
+      "viewport": "390x844",
+      "file": "metal-detail-mobile-iphone.png",
+      "size": 14170,
+      "elapsed": 670,
+      "status": "passed"
+    },
+    {
+      "page": "metal-detail",
+      "viewport": "1920x1080",
+      "file": "metal-detail-desktop-1080p.png",
+      "size": 21017,
+      "elapsed": 706,
+      "status": "passed"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <script>
+    // Instant smart recovery: route old or misspelled product links directly to classic shop modal
+    (function () {
+      var p = window.location.pathname;
+      var prodMatch = p.match(/^\/p\/(\d+)(?:-[^\/]*)?\/?$/);
+      if (prodMatch) {
+        window.location.replace('/shop/?product=' + prodMatch[1]);
+        return;
+      }
+      var sp = new URLSearchParams(window.location.search);
+      var id = sp.get('product') || sp.get('id');
+      if (id && /^\d+$/.test(id)) {
+        window.location.replace('/shop/?product=' + encodeURIComponent(id));
+        return;
+      }
+      var f1Match = p.match(/^\/(?:shop\/)?f1(?:\/|-posters\/?.*)?$/i);
+      if (f1Match) {
+        window.location.replace('/shop/?type=Posters&category=F1');
+        return;
+      }
+    })();
+  </script>
+  <script src="/api-base.js?v=3"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script src="/theme.js?v=2"></script>
+  <title>Page Not Found — Patliputra Traders</title>
+  <meta name="description" content="The page you're looking for couldn't be found. Browse Patliputra Traders luxury chandeliers, wall lamps and modern lighting.">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="48x48">
+  <link rel="icon" href="/assets/misc/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/misc/favicon-48x48.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/misc/favicon-192x192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+  <meta name="robots" content="noindex">
+  <!-- The catalogue lives on Render; opening the connection during head
+       parsing removes a DNS + TLS handshake from the first API call,
+       which is the slowest request on every page. -->
+  <link rel="preconnect" href="https://brush-production.onrender.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <script src="https://kit.fontawesome.com/84df58c29a.js" crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=38">
+  <style>
+    .not-found-main {
+      min-height: calc(100dvh - 70px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px;
+    }
+
+    .not-found-code {
+      font-family: var(--font-heading);
+      font-size: clamp(4rem, 14vw, 8rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -2px;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--text-muted);
+      text-stroke: 2px var(--text-muted);
+    }
+
+    .not-found-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      margin: 12px 0 10px;
+    }
+
+    .not-found-text {
+      color: var(--text-secondary);
+      max-width: 440px;
+      margin: 0 0 32px;
+      text-wrap: pretty;
+    }
+
+    .not-found-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+  <script src="/lenis.min.js"></script>
+  <script src="/scroll.js" defer></script>
+  <script src="/global-navbar.js?v=21"></script>
+  <script src="/global-footer.js?v=4" defer></script>
+  <script src="/analytics.js" defer></script>
+  <script src="/interactions.js?v=1"></script>
+</head>
+<body>
+
+  <global-navbar></global-navbar>
+
+  <main id="main-content" class="not-found-main">
+    <div class="not-found-code">404</div>
+    <h1 class="not-found-title">This page took a wrong turn</h1>
+    <p class="not-found-text">The page you're looking for doesn't exist, moved, or the link's just plain broken. Let's get you back on track.</p>
+    <div class="not-found-actions">
+      <a href="/" class="hero-cta">Back to Home →</a>
+      <a href="all_products.html" class="btn-ghost">Shop All Products</a>
+    </div>
+  </main>
+
+  <global-footer></global-footer>
+</body>
+</html>

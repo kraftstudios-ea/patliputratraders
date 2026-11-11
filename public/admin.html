@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="api-base.js?v=3"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <script src="theme.js?v=2"></script>
+  <title>Admin — Patliputra Traders</title>
+  <link rel="icon" href="/favicon.ico?v=3" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="48x48" href="/img/site/patliputra-logo.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" media="print" onload="this.media='all'">
+  <script src="https://kit.fontawesome.com/84df58c29a.js" crossorigin="anonymous" defer></script>
+  <link rel="stylesheet" href="admin.css?v=9">
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-overlay" id="login-overlay">
+    <div class="login-box">
+      <img src="img/site/patliputra-logo.webp" alt="Patliputra Traders" width="64" height="64" style="border-radius:12px; margin-bottom:12px; box-shadow:0 4px 16px rgba(223,168,74,0.3);">
+      <h2 style="font-weight:800; letter-spacing:-0.02em;">Patliputra Traders</h2>
+      <p style="font-size:0.85rem; color:var(--text-secondary,#64748b); margin-bottom:16px;">Lighting Management &amp; Orders Portal</p>
+      <form id="login-form">
+        <label>Username
+          <input type="text" id="admin-user" class="field" autocomplete="username" autocapitalize="off" spellcheck="false" required>
+        </label>
+        <label>Password
+          <input type="password" id="admin-pass" class="field" autocomplete="current-password" required>
+        </label>
+        <button type="submit" class="btn btn-primary" id="login-btn" style="background:#dfa84a; color:#0f172a; font-weight:700;">Sign in to Dashboard</button>
+        <p class="login-error" id="login-error" role="alert"></p>
+      </form>
+    </div>
+  </div>
+
+  <nav class="sidebar" id="admin-sidebar" aria-label="Admin sections">
+    <div class="sidebar-head">
+      <a href="/" aria-label="Patliputra Traders storefront" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
+        <img src="img/site/patliputra-logo.webp" alt="Patliputra Traders" width="32" height="32" style="border-radius:6px;">
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:0.92rem; color:var(--text, #f8fafc);">PATLIPUTRA</span>
+      </a>
+      <button type="button" class="icon-btn" id="sidebar-toggle" aria-label="Collapse sidebar" aria-expanded="true">
+        <i class="fa-solid fa-chevron-left" id="sidebar-toggle-icon" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <button type="button" class="nav-item active" data-target="orders" data-short="Orders">
+      <i class="fa-solid fa-box-open" aria-hidden="true"></i> <span class="sidebar-text">Orders</span>
+      <span class="nav-badge" id="badge-orders" title="Orders waiting to ship"></span>
+    </button>
+    <button type="button" class="nav-item" data-target="inventory" data-short="Stock">
+      <i class="fa-solid fa-warehouse" aria-hidden="true"></i> <span class="sidebar-text">Inventory</span>
+      <span class="nav-badge" id="badge-inventory" title="Out of stock"></span>
+    </button>
+    <button type="button" class="nav-item" data-target="manual-order" data-short="Order" id="nav-manual-order">
+      <i class="fa-solid fa-cart-plus" aria-hidden="true"></i> <span class="sidebar-text">Manual order</span>
+    </button>
+    <button type="button" class="nav-item" data-target="add-product" data-short="Add" id="nav-add-product">
+      <i class="fa-solid fa-circle-plus" aria-hidden="true"></i> <span class="sidebar-text">Add product</span>
+    </button>
+    <button type="button" class="nav-item" data-target="pricing" data-short="Pricing">
+      <i class="fa-solid fa-indian-rupee-sign" aria-hidden="true"></i> <span class="sidebar-text">Pricing</span>
+    </button>
+    <button type="button" class="nav-item" data-target="tracking-portal" data-short="Track" id="nav-tracking-portal">
+      <i class="fa-solid fa-truck-fast" aria-hidden="true"></i> <span class="sidebar-text">Tracking Portal</span>
+      <span class="nav-badge" id="badge-tracking" title="Active shipments"></span>
+    </button>
+    <button type="button" class="nav-item" data-target="reachout" data-short="Messages" id="nav-reachout">
+      <i class="fa-solid fa-inbox" aria-hidden="true"></i> <span class="sidebar-text">Reach Out</span>
+      <span class="nav-badge" id="badge-reachout" title="New messages"></span>
+    </button>
+    <button type="button" class="nav-item" data-target="reviews" data-short="Reviews" id="nav-reviews">
+      <i class="fa-solid fa-star" aria-hidden="true"></i> <span class="sidebar-text">Reviews</span>
+      <span class="nav-badge" id="badge-reviews" title="Customer reviews"></span>
+    </button>
+    <button type="button" class="nav-item" data-target="logs" data-short="Logs" id="nav-logs" hidden>
+      <i class="fa-solid fa-list-check" aria-hidden="true"></i> <span class="sidebar-text">Activity log</span>
+    </button>
+
+    <div class="sidebar-foot">
+      <a href="/" class="nav-item store-link" target="_blank" rel="noopener">
+        <i class="fa-solid fa-store" aria-hidden="true"></i> <span class="sidebar-text">View store</span>
+      </a>
+      <button type="button" class="nav-item" data-theme-toggle data-short="Theme" aria-label="Toggle light / dark mode">
+        <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i> <span class="sidebar-text">Light / dark</span>
+      </button>
+      <div class="user-section">
+        <div class="user-info">
+          <i class="fa-solid fa-user-shield" aria-hidden="true"></i> <strong id="logged-in-user">admin</strong><br>
+          <span class="role-pill" id="logged-in-role">superadmin</span>
+        </div>
+        <button type="button" class="icon-btn logout-btn" id="logout-btn" aria-label="Log out" title="Log out">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content" id="main-content">
+
+    <!-- Orders -->
+    <section class="view-section active" id="orders-view" aria-labelledby="orders-title">
+      <div class="header">
+        <h1 id="orders-title">Orders</h1>
+        <div class="header-actions">
+          <button type="button" class="btn" id="orders-refresh"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Refresh</button>
+        </div>
+      </div>
+
+      <div class="stats" id="order-stats"></div>
+
+      <div class="toolbar">
+        <label class="search-field">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="orders-search" class="field" placeholder="Search order ID, name, phone, email, city…" aria-label="Search orders" autocomplete="off">
+        </label>
+        <div class="chips" id="orders-status-chips" role="group" aria-label="Filter by status"></div>
+      </div>
+
+      <div class="data-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Placed</th>
+              <th>Customer</th>
+              <th class="right">Total</th>
+              <th>Payment</th>
+              <th>Status</th>
+              <th>Fulfilment</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="orders-table-body">
+            <tr><td colspan="7" class="empty"><span class="skeleton"></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pager" id="orders-pager"></div>
+    </section>
+
+    <!-- Inventory -->
+    <section class="view-section" id="inventory-view" aria-labelledby="inventory-title">
+      <div class="header">
+        <h1 id="inventory-title">Inventory</h1>
+        <div class="header-actions">
+          <button type="button" class="btn btn-success" id="save-all-btn" disabled><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> <span>No unsaved changes</span></button>
+          <button type="button" class="btn" id="discard-btn" hidden><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Discard</button>
+          <button type="button" class="btn" id="inventory-refresh"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Refresh</button>
+        </div>
+      </div>
+
+      <div class="stats" id="inventory-stats"></div>
+
+      <div class="toolbar">
+        <label class="search-field">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="inventory-search" class="field" placeholder="Search name, SKU or ID…" aria-label="Search products" autocomplete="off">
+        </label>
+        <select id="inventory-type-filter" class="field" aria-label="Product type">
+          <option value="all">All types</option>
+        </select>
+        <select id="inventory-cat-filter" class="field" aria-label="Category">
+          <option value="All">All categories</option>
+        </select>
+        <select id="inventory-stock-filter" class="field" aria-label="Stock">
+          <option value="all">Any stock</option>
+          <option value="out">Out of stock</option>
+          <option value="low">Low stock (≤ 5)</option>
+          <option value="in">In stock</option>
+        </select>
+        <select id="inventory-sort" class="field" aria-label="Sort">
+          <option value="none">Sort: catalogue order</option>
+          <option value="stock-asc">Stock: low → high</option>
+          <option value="stock-desc">Stock: high → low</option>
+          <option value="freq-desc">Most ordered</option>
+          <option value="name">Name A → Z</option>
+          <option value="newest">Newest first</option>
+        </select>
+      </div>
+
+      <div class="data-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>SKU</th>
+              <th>Badge &amp; keywords</th>
+              <th>Price (pre-tax)</th>
+              <th>Stock</th>
+              <th class="right">Ordered</th>
+              <th>Homepage</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="inventory-table-body">
+            <tr><td colspan="8" class="empty"><span class="skeleton"></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pager" id="inventory-pager"></div>
+    </section>
+
+    <!-- Manual order -->
+    <section class="view-section" id="manual-order-view" aria-labelledby="manual-order-title">
+      <div class="header">
+        <h1 id="manual-order-title">Create manual order</h1>
+        <p class="muted small">Server pricing and stock checks apply. Only the flat discount is adjustable.</p>
+      </div>
+      <form id="manual-order-form">
+        <div class="manual-order-grid">
+          <div class="panel">
+            <h2 class="bulk-step-title">Customer &amp; shipping</h2>
+            <div class="form-grid">
+              <label>Full name *<input class="field" id="manual-customer-name" required maxlength="120"></label>
+              <label>Email *<input class="field" id="manual-customer-email" type="email" required maxlength="160"></label>
+              <label>Phone *<input class="field" id="manual-customer-phone" required maxlength="20"></label>
+              <label class="full">Address *<input class="field" id="manual-customer-address" required maxlength="400"></label>
+              <label>City *<input class="field" id="manual-customer-city" required maxlength="80"></label>
+              <label>State *<input class="field" id="manual-customer-state" required maxlength="80"></label>
+              <label>PIN code *<input class="field" id="manual-customer-pincode" inputmode="numeric" maxlength="6" required></label>
+            </div>
+          </div>
+          <div class="panel">
+            <h2 class="bulk-step-title">Products</h2>
+            <div class="form-grid">
+              <label class="full">Product ID, SKU or exact name
+                <input class="field" id="manual-product-search" list="manual-product-options" autocomplete="off" placeholder="Search the catalogue…">
+                <datalist id="manual-product-options"></datalist>
+              </label>
+              <label>Quantity<input class="field" id="manual-product-quantity" type="number" min="1" step="1" value="1"></label>
+              <div id="manual-variant-fields" class="manual-variant-fields full"></div>
+              <button type="button" class="btn btn-secondary full" id="manual-add-item"><i class="fa-solid fa-plus" aria-hidden="true"></i> Add product</button>
+            </div>
+            <div class="data-table-wrapper manual-lines-wrap"><table><thead><tr><th>Product</th><th>Options</th><th>Qty</th><th>Unit</th><th>Total</th><th></th></tr></thead><tbody id="manual-lines-body"><tr><td colspan="6" class="empty">No products added.</td></tr></tbody></table></div>
+          </div>
+          <div class="panel">
+            <h2 class="bulk-step-title">Payment &amp; pricing</h2>
+            <div class="form-grid">
+              <label>Flat discount (₹)<input class="field" id="manual-flat-discount" type="number" min="0" step="0.01" value="0"></label>
+              <label>Payment method<select class="field" id="manual-payment-method"><option value="cash">Cash</option><option value="direct">Bank / UPI transfer</option><option value="upi">UPI</option><option value="card">Card</option><option value="cod">Cash on delivery</option><option value="complimentary">Complimentary</option></select></label>
+              <label>Initial status<select class="field" id="manual-status"><option value="awaiting-payment">Awaiting payment</option><option value="confirmed">Confirmed</option></select></label>
+              <label>Payment reference<input class="field" id="manual-payment-reference" maxlength="40" placeholder="Receipt / UTR (required when confirming)"></label>
+              <label class="full">Internal note<textarea class="field" id="manual-internal-notes" rows="2" maxlength="500"></textarea></label>
+              <label class="check full"><input type="checkbox" id="manual-send-email" checked> Send confirmation email with invoice</label>
+            </div>
+            <div id="manual-order-breakdown" class="manual-order-breakdown muted">Add a product to see the server-calculated total.</div>
+            <button type="submit" class="btn btn-primary" id="manual-create-btn"><i class="fa-solid fa-check" aria-hidden="true"></i> Create order</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Add product -->
+    <section class="view-section" id="add-product-view" aria-labelledby="add-title">
+      <div class="header">
+        <h1 id="add-title">Add products</h1>
+        <div class="segmented" role="tablist" aria-label="How many products">
+          <button type="button" class="seg-btn active" role="tab" aria-selected="true" data-add-mode="single">Single product</button>
+          <button type="button" class="seg-btn" role="tab" aria-selected="false" data-add-mode="bulk">Multiple products</button>
+        </div>
+      </div>
+      <div class="panel" id="add-single-panel">
+        <form id="add-product-form" class="form-grid">
+          <label class="full">Product name *
+            <input type="text" id="new-prod-name" class="field" required maxlength="140">
+          </label>
+          <label>Product type *
+            <select id="new-prod-type" class="field" required></select>
+          </label>
+          <label>Category / Genres * <span class="hint">comma-separated for multiple</span>
+            <input type="text" id="new-prod-cat" class="field" list="category-options" required placeholder="e.g. Gaming, Anime">
+            <datalist id="category-options"></datalist>
+          </label>
+          <p class="hint full" id="new-prod-price-note"></p>
+          <label>Price (₹) *
+            <input type="number" id="new-prod-price" class="field" min="1" step="1" required>
+          </label>
+          <label>Original price (₹) <span class="hint">shown struck through</span>
+            <input type="number" id="new-prod-original-price" class="field" min="1" step="1">
+          </label>
+          <label>Stock quantity *
+            <input type="number" id="new-prod-stock" class="field" min="0" step="1" required value="50">
+          </label>
+          <label>SKU / custom ID <span class="hint">optional</span>
+            <input type="text" id="new-prod-sku" class="field mono">
+          </label>
+          <label>Badge <span class="hint">e.g. New, Sale</span>
+            <input type="text" id="new-prod-badge" class="field" maxlength="20">
+          </label>
+          <label class="full">Keywords <span class="hint">comma separated — used by search</span>
+            <input type="text" id="new-prod-keywords" class="field">
+          </label>
+          <label class="full">Short description
+            <textarea id="new-prod-desc" class="field" rows="3" maxlength="600"></textarea>
+          </label>
+          <div class="full">
+            <div class="dropzone">
+              <img id="new-prod-preview" alt="Selected image preview" hidden>
+              <label>Product image * <span class="hint">PNG, JPG or PDF (first page is converted) · max 20 MB</span>
+                <input type="file" id="new-prod-image" accept="image/png, image/jpeg, application/pdf" required>
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary full" id="add-prod-btn">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i> Add product
+          </button>
+        </form>
+      </div>
+
+      <!-- Bulk add: shared details once, one row per image -->
+      <div id="add-bulk-panel" hidden>
+        <div class="panel bulk-step">
+          <h2 class="bulk-step-title"><span class="step-num">1</span> Details shared by every product</h2>
+          <p class="hint">Filled in on every row. You can still change any row below before uploading.</p>
+          <div class="form-grid">
+            <label>Product type *
+              <select id="bulk-type" class="field"></select>
+            </label>
+            <label>Category / Genres * <span class="hint">e.g. Gaming, Anime</span>
+              <input type="text" id="bulk-cat" class="field" list="category-options" placeholder="e.g. Gaming, Anime">
+            </label>
+            <label>Price (₹) *
+              <input type="number" id="bulk-price" class="field" min="1" step="1">
+            </label>
+            <label>Original price (₹) <span class="hint">optional</span>
+              <input type="number" id="bulk-original-price" class="field" min="1" step="1">
+            </label>
+            <label>Stock per product *
+              <input type="number" id="bulk-stock" class="field" min="0" step="1" value="50">
+            </label>
+            <label>Badge <span class="hint">optional</span>
+              <input type="text" id="bulk-badge" class="field" maxlength="20" placeholder="e.g. New">
+            </label>
+            <label class="full">Extra keywords <span class="hint">comma separated · each product's name is added automatically</span>
+              <input type="text" id="bulk-keywords" class="field">
+            </label>
+            <p class="hint full" id="bulk-price-note"></p>
+          </div>
+        </div>
+
+        <div class="panel bulk-step">
+          <h2 class="bulk-step-title"><span class="step-num">2</span> Add images</h2>
+          <label class="bulk-drop" id="bulk-drop">
+            <i class="fa-solid fa-images" aria-hidden="true"></i>
+            <strong>Drop images here, or click to choose</strong>
+            <span class="hint">PNG, JPG or PDF · up to 50 at a time · max 20 MB each · the file name becomes the product name</span>
+            <input type="file" id="bulk-files" accept="image/png, image/jpeg, application/pdf" multiple>
+          </label>
+        </div>
+
+        <div class="panel bulk-step" id="bulk-review" hidden>
+          <div class="bulk-review-head">
+            <h2 class="bulk-step-title"><span class="step-num">3</span> Review &amp; upload <span class="muted small" id="bulk-count"></span></h2>
+            <div class="header-actions">
+              <button type="button" class="btn btn-sm" id="bulk-clear-done" hidden>Clear added</button>
+              <button type="button" class="btn btn-sm btn-danger" id="bulk-clear-all">Remove all</button>
+            </div>
+          </div>
+          <div class="data-table-wrapper">
+            <table class="bulk-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name *</th>
+                  <th>Category *</th>
+                  <th>Price (₹)</th>
+                  <th>Stock</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="bulk-rows"></tbody>
+            </table>
+          </div>
+          <div class="bulk-footer">
+            <div class="bulk-progress" id="bulk-progress" hidden>
+              <div class="bulk-progress-bar"><span id="bulk-progress-fill"></span></div>
+              <span id="bulk-progress-text" aria-live="polite"></span>
+            </div>
+            <button type="button" class="btn" id="bulk-stop" hidden>Stop after current</button>
+            <button type="button" class="btn btn-primary" id="bulk-upload"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> <span>Upload</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="view-section" id="pricing-view" aria-labelledby="pricing-title">
+      <div class="header">
+        <h1 id="pricing-title">Pricing</h1>
+        <div class="header-actions">
+          <button type="button" class="btn" id="pricing-refresh"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Refresh</button>
+        </div>
+      </div>
+      <div id="pricing-content"></div>
+    </section>
+
+    <!-- Logs -->
+    <section class="view-section" id="logs-view" aria-labelledby="logs-title">
+      <div class="header">
+        <h1 id="logs-title">Activity log</h1>
+        <div class="header-actions">
+          <button type="button" class="btn" id="logs-refresh"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Refresh</button>
+        </div>
+      </div>
+      <p class="muted small">Entries older than 72 hours are removed automatically unless starred.</p>
+      <div class="toolbar">
+        <label class="search-field">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="logs-search" class="field" placeholder="Filter by user, action or details…" aria-label="Filter log" autocomplete="off">
+        </label>
+      </div>
+      <div class="data-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>When</th>
+              <th>User</th>
+              <th>Action</th>
+              <th>Details</th>
+              <th>Keep</th>
+            </tr>
+          </thead>
+          <tbody id="logs-table-body">
+            <tr><td colspan="5" class="empty"><span class="skeleton"></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tracking Portal -->
+    <section class="view-section" id="tracking-portal-view" aria-labelledby="tracking-title">
+      <div class="header">
+        <div>
+          <h1 id="tracking-title">Logistics &amp; Tracking Portal</h1>
+          <p class="muted small">Monitor active dispatches, live DTDC/carrier transit checkpoints, and manage tracking links.</p>
+        </div>
+        <div class="header-actions">
+          <button type="button" class="btn" id="tracking-refresh"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Refresh</button>
+        </div>
+      </div>
+
+      <!-- Live AWB / Order Telemetry Inspector -->
+      <div class="card p-3 mb-3" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 20px;">
+        <h3 style="font-size: 0.95rem; margin-bottom: 8px;"><i class="fa-solid fa-satellite-dish" style="color: var(--accent);"></i> Live Courier Telemetry Lookup</h3>
+        <p class="muted small" style="margin-bottom: 12px;">Inspect real-time carrier GPS/transit checkpoints for any AWB or partner link instantly without navigating away.</p>
+        <form id="tracking-inspect-form" style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <input type="text" class="field" id="tracking-inspect-input" placeholder="Enter AWB (e.g. Z1005500933) or Order ID" style="flex: 1; min-width: 240px;" required>
+          <button type="submit" class="btn btn-primary" id="tracking-inspect-btn"><i class="fa-solid fa-magnifying-glass-location"></i> Inspect Telemetry</button>
+        </form>
+        <div id="tracking-inspect-result" style="display: none; margin-top: 16px;"></div>
+      </div>
+
+      <div class="stats" id="tracking-stats"></div>
+
+      <div class="toolbar">
+        <label class="search-field">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="tracking-search" class="field" placeholder="Search order ID, AWB, customer, courier…" aria-label="Search shipments" autocomplete="off">
+        </label>
+        <div class="chips" id="tracking-filter-chips" role="group" aria-label="Filter shipments"></div>
+      </div>
+
+      <div class="data-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Customer</th>
+              <th>Courier &amp; AWB</th>
+              <th>Status</th>
+              <th>Delivery Est.</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tracking-table-body">
+            <tr><td colspan="6" class="empty"><span class="skeleton"></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Reach Out Messages -->
+    <section class="view-section" id="reachout-view" aria-labelledby="reachout-title">
+      <div class="header">
+        <div>
+          <h1 id="reachout-title">Reach Out Messages</h1>
+          <p class="muted small">Artist collaboration applications, customer poster recommendations, and curator proposals.</p>
+        </div>
+        <div class="header-actions">
+          <button type="button" class="btn" id="reachout-refresh"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Refresh</button>
+        </div>
+      </div>
+
+      <div class="stats" id="reachout-stats"></div>
+
+      <div class="toolbar">
+        <label class="search-field">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="reachout-search" class="field" placeholder="Search by name, email, style, or idea…" aria-label="Search messages" autocomplete="off">
+        </label>
+        <div class="chips" id="reachout-filter-chips" role="group" aria-label="Filter messages"></div>
+      </div>
+
+      <div id="reachout-list" style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="empty"><span class="skeleton"></span></div>
+      </div>
+    </section>
+
+    <!-- Customer & Product Reviews -->
+    <section class="view-section" id="reviews-view" aria-labelledby="reviews-title">
+      <div class="header">
+        <div>
+          <h1 id="reviews-title">Customer Reviews &amp; Ratings</h1>
+          <p class="muted small">All reviews across delivered orders and product pages in one unified feed.</p>
+        </div>
+        <div class="header-actions">
+          <button type="button" class="btn" id="reviews-refresh"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Refresh</button>
+        </div>
+      </div>
+
+      <div class="stats" id="reviews-stats"></div>
+
+      <div class="toolbar">
+        <label class="search-field">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="reviews-search" class="field" placeholder="Search by customer name, product, comment, order ID…" aria-label="Search reviews" autocomplete="off">
+        </label>
+        <div class="chips" id="reviews-filter-chips" role="group" aria-label="Filter reviews"></div>
+      </div>
+
+      <div id="reviews-list" style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="empty"><span class="skeleton"></span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+    <span id="toast-text"></span>
+  </div>
+
+  <script src="lenis.min.js"></script>
+  <script src="scroll.js" defer></script>
+  <script src="cart.js?v=12"></script>
+  <script src="img-utils.js?v=4"></script>
+  <script src="admin.js?v=11"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-11-09T19:09:47.938Z",
+  "totalSuites": 6,
+  "passedSuites": 5,
+  "failedSuites": 1,
+  "blockers": [
+    {
+      "area": "Production Deployment",
+      "status": "Blocked",
+      "reason": "Current verified worktree (including /orders/ and /profile/ clean routes) has not been deployed to production hosting (Vercel commit 3f4790d4 is running)."
+    },
+    {
+      "area": "Metal Poster Supplier Rate Card & Specs",
+      "status": "Confirmation Needed",
+      "reason": "Manufacturer pricing, size tolerances, magnet bracket specifications, and transit packaging must be confirmed before marking inventory > 0."
+    },
+    {
+      "area": "Live Payment Callbacks",
+      "status": "Blocked by Policy",
+      "reason": "Live gateway payments and real charges are disallowed in test runs to prevent financial impact."
+    }
+  ],
+  "suites": [
+    {
+      "name": "Pricing & Cart Parity",
+      "status": "PASSED",
+      "durationMs": 46,
+      "scope": "Client/Server calculation parity, buy-N-get-M tiers, discounts, taxes, COD fees, delivery estimates"
+    },
+    {
+      "name": "AR Poster Contract",
+      "status": "PASSED",
+      "durationMs": 51,
+      "scope": "USDZ / Quick Look dimensions, aspect ratio invariants"
+    },
+    {
+      "name": "Progressive Product Feed & Pagination",
+      "status": "PASSED",
+      "durationMs": 66,
+      "scope": "Non-terminating discovery feeds, New Arrivals chronological sort, featured ranking, hard vs soft filters"
+    },
+    {
+      "name": "Catalog-Wide Integrity",
+      "status": "PASSED",
+      "durationMs": 49,
+      "scope": "555 products, artwork references, unique IDs & SKUs, positive prices, zero-stock safety for metal posters"
+    },
+    {
+      "name": "Page Route & SEO Audit",
+      "status": "PASSED",
+      "durationMs": 7535,
+      "scope": "17 clean directory routes, meta tags, schema markup, title tags"
+    },
+    {
+      "name": "Profile Security & OTP Flow",
+      "status": "FAILED",
+      "durationMs": 73,
+      "error": "Command failed: node Backend/tests/profile-otp-test.js\n\nFAILED TEST: fetch failed\n",
+      "scope": "Account isolation, OTP verification for email/phone, rate limiting, persistence"
+    }
+  ]
+}

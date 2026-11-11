@@ -1,0 +1,2420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script src="api-base.js?v=2"></script>
+  <script src="theme.js?v=2"></script>
+  <title>Checkout — Patliputra Traders</title>
+  <link rel="icon" href="/favicon.ico?v=3" sizes="48x48">
+  <link rel="icon" href="/assets/misc/favicon.svg?v=3" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/misc/favicon-48x48.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/misc/favicon-192x192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+  <meta name="description" content="Complete your purchase at Patliputra Traders. Secure checkout for luxury lighting fixtures and chandeliers.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <!-- The catalogue lives on Render; opening the connection during head
+       parsing removes a DNS + TLS handshake from the first API call,
+       which is the slowest request on every page. -->
+  <link rel="preconnect" href="https://brush-production.onrender.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <script src="https://kit.fontawesome.com/84df58c29a.js" crossorigin="anonymous" defer></script>
+  <!-- Only needed once "Place Order" is clicked — async so it never blocks the page. -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js" async></script>
+  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+  <link rel="stylesheet" href="styles.css?v=53">
+  <style>
+    /* ===== CHECKOUT PAGE STYLES ===== */
+    .checkout-page {
+      padding-top: 100px;
+      min-height: 100vh;
+    }
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .checkout-heading {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .checkout-breadcrumb {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: -10px 0 22px;
+    }
+
+    .checkout-breadcrumb a {
+      display: inline-block;
+      padding: 10px 0;
+      color: var(--accent);
+    }
+
+    /* ---- Form Styles ---- */
+    .form-section {
+      margin-bottom: 36px;
+    }
+
+    .form-section-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-section-title .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--on-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Saved Addresses Selector (Flipkart Style) */
+    .checkout-saved-addresses-wrapper {
+      margin-bottom: 20px;
+    }
+    .checkout-saved-addresses-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .checkout-saved-addr-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .checkout-saved-addr-card:hover {
+      border-color: rgba(var(--accent-rgb), 0.5);
+    }
+    .checkout-saved-addr-card.selected {
+      border-color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.04);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    .checkout-saved-addr-radio {
+      margin-top: 4px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .checkout-saved-addr-info {
+      flex: 1;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--text-secondary);
+    }
+    .checkout-saved-addr-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .checkout-saved-addr-name {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+    .checkout-saved-addr-type {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.06);
+      color: var(--text-secondary);
+    }
+    .checkout-saved-addr-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(var(--accent-rgb), 0.12);
+      color: var(--accent);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-row.single {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      padding: 13px 16px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
+    }
+
+    .form-group input.error,
+    .form-group select.error {
+      border-color: var(--sale-red);
+      box-shadow: 0 0 0 3px rgba(var(--sale-red-rgb), 0.15);
+    }
+
+    .form-group .error-msg {
+      font-size: 0.75rem;
+      color: var(--sale-red);
+      display: none;
+    }
+
+    .form-group .error-msg.visible {
+      display: block;
+    }
+
+    .form-group input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+
+    /* ---- Payment Method ---- */
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .payment-option:hover {
+      border-color: var(--border-light);
+      background: var(--bg-card-hover);
+    }
+
+    .payment-option.selected {
+      border-color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.05);
+    }
+
+    .payment-option input[type="radio"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border-light);
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
+      transition: border-color var(--transition-fast);
+    }
+
+    .payment-option.selected input[type="radio"] {
+      border-color: var(--accent);
+    }
+
+    .payment-option.selected input[type="radio"]::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .payment-label {
+      flex: 1;
+    }
+
+    .payment-label h5 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .payment-label p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .payment-icon {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+    }
+
+    /* ---- Order Summary Sidebar ---- */
+    /* The card itself never scrolls. It is a flex column pinned to the
+       viewport; if the contents are too tall, only the item list scrolls, so
+       the totals and Place Order stay visible instead of disappearing below
+       the card's own fold. Previously both the card AND the list scrolled,
+       which meant the wheel moved through three separate scroll stages. */
+    .order-summary {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      position: sticky;
+      top: 90px;
+      align-self: start;
+      max-height: calc(100dvh - 100px);
+      display: flex;
+      flex-direction: column;
+      /* Normally nothing scrolls here: the list absorbs the overflow and this
+         stays exactly at its max-height. This is the fallback for a viewport
+         too short to fit the totals plus the list's minimum — without it the
+         floor below could push Place Order out of reach. */
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    /* Everything except the item list keeps its natural height. */
+    .order-summary > *:not(.summary-items) { flex: 0 0 auto; }
+
+    .order-summary h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .order-summary h3 .item-count {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .summary-items {
+      /* flex: 1 with min-height: 0 is what lets this shrink inside the card
+         instead of forcing it taller than the viewport. */
+      flex: 1 1 auto;
+      /* min-height: 0 is what allows a flex item to shrink below its content;
+         the floor keeps it from shrinking so far it stops looking like a list. */
+      min-height: 0;
+      max-height: none;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      margin-bottom: 12px;
+      padding-right: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-light) transparent;
+    }
+
+    /* Only shown when there is actually more below — set from JS, so a short
+       cart gets no phantom fade over its last item. */
+    /* No minimum height here on purpose: a floor tall enough to be useful
+       pushed the card past the viewport and took Place Order off-screen with
+       it. Keeping the action visible matters more than showing a second row,
+       and the fade below already signals that the list continues. On a tall
+       screen there is room for both. */
+    @media (min-height: 940px) {
+      .summary-items.is-scrollable { min-height: 172px; }
+    }
+
+    /* Laptop-height screens: the card's fixed furniture (heading, totals,
+       coupon, action) leaves the item list very little room. Tightening the
+       padding and the gaps around them hands that space back to the list,
+       which is the only part a shopper actually needs to scroll. */
+    @media (max-height: 900px) {
+      .order-summary {
+        padding: 12px 16px;
+        top: 80px;
+        max-height: calc(100dvh - 88px);
+      }
+      .order-summary h3 { margin-bottom: 8px; }
+      .summary-items { margin-bottom: 8px; }
+      .place-order-btn { margin-top: 8px; }
+      .coupon-section { margin-top: 0.5rem; padding-top: 0.5rem; }
+    }
+
+    .summary-items.is-scrollable {
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent 100%);
+      mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent 100%);
+    }
+    .summary-items.is-scrollable.is-at-end {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    .summary-items::-webkit-scrollbar {
+      width: 4px;
+    }
+    .summary-items::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .summary-items::-webkit-scrollbar-thumb {
+      background: var(--border-light);
+      border-radius: var(--radius-md);
+    }
+
+    .summary-item {
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .summary-item-remove-wrapper {
+      margin-left: auto;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .summary-item-remove-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+    }
+
+    .summary-item-remove-btn:hover,
+    .summary-item-remove-btn:focus-visible {
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .summary-item-image {
+      width: 48px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+      background: var(--bg-card);
+    }
+
+    .summary-item-image .qty-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--accent);
+      color: var(--on-accent);
+      font-size: 0.65rem;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .summary-item-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .summary-item-details h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+
+    .summary-item-details .item-price {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .summary-pack-gallery {
+      margin-top: 8px;
+      padding: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    .summary-pack-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .summary-pack-thumbs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .summary-pack-thumb {
+      position: relative;
+      width: 44px;
+      height: 60px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .summary-pack-thumb:hover {
+      transform: scale(1.08);
+      z-index: 2;
+      border-color: var(--accent);
+    }
+
+    .summary-pack-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .summary-pack-thumb .pack-size-tag {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: rgba(0, 0, 0, 0.82);
+      color: #fff;
+      font-size: 0.55rem;
+      font-weight: 700;
+      padding: 1px 3px;
+      border-radius: 2px;
+      line-height: 1;
+      letter-spacing: 0.2px;
+    }
+
+    /* ---- Pricing breakdown ---- */
+    .price-breakdown {
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      font-size: 0.85rem;
+    }
+
+    .price-row .label {
+      color: var(--text-secondary);
+    }
+
+    .price-row .value {
+      font-weight: 600;
+    }
+
+    .price-row.free .value {
+      color: var(--success);
+    }
+
+    .price-row.discount .value {
+      color: var(--success);
+    }
+
+    .item-variants {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin: 1px 0 2px;
+    }
+    .price-note {
+      margin: 0.3rem 0 0;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+    .summary-plain-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+    }
+    .price-row.total {
+      padding-top: 16px;
+      margin-top: 8px;
+      border-top: 2px solid var(--border-light);
+      font-size: 1.1rem;
+    }
+
+    .price-row.total .value {
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .price-row.savings {
+      padding: 10px 14px;
+      background: rgba(var(--success-rgb), 0.12);
+      border-radius: var(--radius-sm);
+      margin-top: 10px;
+      font-size: 0.82rem;
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    /* ---- Place Order Button ---- */
+    .place-order-btn {
+      width: 100%;
+      background: var(--accent);
+      color: var(--on-accent);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 24px;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .place-order-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(var(--accent-rgb), 0.3);
+    }
+
+    .place-order-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .place-order-btn .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid transparent;
+      border-top-color: var(--on-accent);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      display: none;
+    }
+
+    .place-order-btn.loading .spinner {
+      display: block;
+    }
+
+    .place-order-btn.loading .btn-text {
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .secure-note {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .secure-note i {
+      color: var(--success);
+      margin-right: 4px;
+    }
+
+    /* ---- Empty Cart State ---- */
+    .empty-checkout {
+      text-align: center;
+      padding: 80px 24px;
+      grid-column: 1 / -1;
+    }
+
+    .empty-checkout i {
+      font-size: 4rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .empty-checkout h2 {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .empty-checkout p {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      /* Below the form on one column: nothing is pinned and nothing scrolls
+         inside — the whole card just flows with the page. */
+      .order-summary {
+        position: static;
+        max-height: none;
+        display: block;
+        overflow: visible;
+      }
+
+      .summary-items {
+        max-height: none;
+        overflow: visible;
+      }
+
+      .summary-items.is-scrollable {
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Phones: the summary sits below the whole form, so keep the total
+       and the Place Order action in a slim bar until it scrolls into view. */
+    .checkout-mobile-bar { display: none; }
+
+    @media (max-width: 768px) {
+      .checkout-mobile-bar:not([hidden]) {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 900;
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+        background: color-mix(in srgb, var(--bg-primary) 94%, transparent);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border);
+        transition: transform var(--transition-med);
+      }
+
+      .checkout-mobile-bar.is-tucked { transform: translateY(110%); }
+
+      .checkout-mobile-total { flex: 1; display: flex; flex-direction: column; line-height: 1.2; }
+      .checkout-mobile-total small { font-size: var(--text-micro); color: var(--text-muted); }
+      .checkout-mobile-total strong { font-family: var(--font-heading); font-size: 1.2rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+      .checkout-mobile-total button { align-self: flex-start; padding: 4px 0; font-size: var(--text-micro); font-weight: 600; color: var(--text-secondary); text-decoration: underline; }
+      .checkout-mobile-bar .place-order-btn { width: auto; margin: 0; padding: 14px 22px; }
+
+      .checkout-page { padding-bottom: 80px; }
+    }
+    .coupon-section {
+      margin: 0.6rem 0 0;
+      padding-top: 0.6rem;
+      border-top: 1px solid var(--border-light);
+    }
+    .coupon-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0;
+      background: none;
+      border: 0;
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      text-align: left;
+    }
+    .coupon-toggle:hover { color: var(--accent); }
+    .coupon-toggle i:first-child { color: var(--accent); margin-right: 7px; }
+    .coupon-chevron { transition: transform 0.2s ease; font-size: 0.72rem; color: var(--text-secondary); }
+    .coupon-toggle.is-open .coupon-chevron { transform: rotate(180deg); }
+    .coupon-body { padding-top: 12px; }
+    .coupon-body[hidden] { display: none; }
+    .coupon-input-group {
+      display: flex;
+      gap: 10px;
+    }
+    .coupon-input-group input {
+      flex: 1;
+      padding: 12px 14px;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      font-family: inherit;
+      background: var(--bg-card);
+      color: var(--text-main);
+      text-transform: uppercase;
+    }
+    .coupon-input-group input:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+    .coupon-input-group button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      font-family: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .coupon-input-group button:hover:not(:disabled) {
+      background: var(--border-light);
+    }
+    .coupon-input-group button.applied {
+      background: var(--sale-red);
+      color: white;
+    }
+    .coupon-input-group button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .coupon-message {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .coupon-message.success {
+      color: #10b981;
+    }
+    .coupon-message.error {
+      color: var(--sale-red);
+    }
+  
+      /* ---- Delivery options ---- */
+      .delivery-eta {
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        margin: 0 0 14px;
+      }
+      /* ---- Prepaid-only notice ---- */
+      .prepaid-note {
+        display: flex;
+        gap: 9px;
+        align-items: flex-start;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: var(--text-secondary);
+        background: color-mix(in srgb, var(--accent) 8%, transparent);
+        border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+        border-radius: var(--radius-md);
+        padding: 11px 13px;
+        margin: 0 0 14px;
+      }
+      .prepaid-note i { color: var(--accent); margin-top: 2px; }
+      .payment-option.is-disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      /* ---- Summary rows ---- */
+      .price-row.is-saving .label,
+      .price-row.is-saving .value { color: #10b981; font-weight: 600; }
+      .price-row .is-free { color: #10b981; }
+      .price-nudge { color: var(--accent) !important; font-weight: 600; }
+      .tax-info-btn {
+        background: none;
+        border: 0;
+        padding: 0 0 0 5px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-size: 0.8rem;
+        line-height: 1;
+        vertical-align: baseline;
+      }
+      .tax-info-btn:hover { color: var(--accent); }
+      #tax-info-modal[hidden] { display: none; }
+
+      .label-optional { font-weight: 400; color: var(--text-secondary); }
+      .courier-pref-note {
+        display: flex;
+        gap: 9px;
+        align-items: flex-start;
+        font-size: 0.79rem;
+        line-height: 1.55;
+        color: var(--text-secondary);
+        margin: 4px 0 0;
+      }
+      .courier-pref-note i { color: var(--accent); margin-top: 3px; flex: 0 0 auto; }
+      #preferred-courier:disabled { opacity: 0.55; cursor: not-allowed; }
+      .cod-unavailable { color: var(--sale-red); font-size: 0.75rem; font-weight: 600; }
+
+      /* ---- Direct transfer panel ---- */
+      .direct-pay-panel {
+        margin-top: 16px;
+        padding: 18px 20px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        background: var(--bg-card);
+      }
+      .direct-pay-panel[hidden] { display: none; }
+      .direct-pay-steps {
+        margin: 0;
+        padding-left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        font-size: 0.85rem;
+        line-height: 1.55;
+        color: var(--text-secondary);
+      }
+      .direct-pay-steps strong { color: var(--text-primary); }
+      .direct-pay-details {
+        margin-top: 10px;
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+      }
+      .dp-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 9px 12px;
+        font-size: 0.82rem;
+      }
+      .dp-row + .dp-row { border-top: 1px solid var(--border-light); }
+      .dp-label { color: var(--text-secondary); }
+      .dp-value { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--text-primary); }
+      .dp-value code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.85rem;
+        letter-spacing: 0.02em;
+      }
+      .dp-copy {
+        background: none;
+        border: 0;
+        padding: 2px 4px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-size: 0.85rem;
+        line-height: 1;
+      }
+      .dp-copy:hover { color: var(--accent); }
+      .direct-pay-ref { margin-top: 10px; }
+      .direct-pay-ref label { display: block; margin-bottom: 6px; font-size: 0.78rem; }
+      .direct-pay-ref .error-msg { display: none; }
+</style>
+  <script src="global-navbar.js?v=21" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="interactions.js?v=1" defer></script>
+</head>
+
+<body class="page-layered">
+
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  
+  <global-navbar></global-navbar>
+
+
+
+  <!-- Checkout -->
+  <main id="main-content" class="checkout-page">
+    <div class="checkout-layout" id="checkout-layout">
+
+      <!-- Left: Form -->
+      <div class="checkout-form-col" id="checkout-form-col">
+        <h1 class="checkout-heading">Checkout</h1>
+        <p class="checkout-breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="all_products.html">Shop</a> &nbsp;/&nbsp; Checkout</p>
+
+        <form id="checkout-form" novalidate>
+          <!-- Section 1: Contact -->
+          <div class="form-section">
+            <h3 class="form-section-title"><span class="step-num">1</span>Contact Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" autocomplete="name" readonly aria-readonly="true" required>
+                <span class="error-msg" id="name-error">Please enter your name</span>
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" readonly aria-readonly="true" required>
+                <span class="error-msg" id="email-error">Please enter a valid email</span>
+              </div>
+            </div>
+            <div class="form-row single">
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" autocomplete="tel" inputmode="tel" readonly aria-readonly="true" required>
+                <span class="error-msg" id="phone-error">Please enter a valid 10-digit phone number</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Shipping -->
+          <div class="form-section">
+            <h3 class="form-section-title"><span class="step-num">2</span>Shipping Address</h3>
+
+            <!-- Saved Addresses Selector (Flipkart-Style) -->
+            <div id="checkout-saved-addresses-wrapper" class="checkout-saved-addresses-wrapper" style="display:none;">
+              <div id="checkout-saved-addresses-list" class="checkout-saved-addresses-list"></div>
+              <button type="button" id="btn-toggle-new-address" style="display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:none; border:none; color:var(--accent); font-size:0.85rem; font-weight:700; cursor:pointer;">
+                <i class="fa-solid fa-plus"></i> <span id="toggle-new-addr-text">Deliver to a different / new address</span>
+              </button>
+            </div>
+
+            <div id="checkout-address-fields">
+              <div class="form-row single">
+                <div class="form-group">
+                  <label for="address">Address *</label>
+                  <input type="text" id="address" name="address" placeholder="House no, Street, Locality" autocomplete="street-address" required>
+                  <span class="error-msg" id="address-error">Please enter your address</span>
+                </div>
+              </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">City *</label>
+                <input type="text" id="city" name="city" placeholder="City" autocomplete="address-level2" required>
+                <span class="error-msg" id="city-error">Please enter your city</span>
+              </div>
+              <div class="form-group">
+                <label for="state">State *</label>
+                <select id="state" name="state" autocomplete="address-level1" required>
+                  <option value="" disabled selected>Select State</option>
+                  <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+                  <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option>
+                  <option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option>
+                  <option>Jharkhand</option><option>Karnataka</option><option>Kerala</option>
+                  <option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
+                  <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option>
+                  <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+                  <option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option>
+                  <option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
+                  <option>West Bengal</option><option>Delhi</option><option>Chandigarh</option>
+                </select>
+                <span class="error-msg" id="state-error">Please select your state</span>
+              </div>
+            </div>
+            <div class="form-row single">
+              <div class="form-group">
+                <label for="pincode">PIN Code *</label>
+                <input type="text" id="pincode" name="pincode" placeholder="6-digit PIN code" maxlength="6" inputmode="numeric" autocomplete="postal-code" required>
+                <span class="error-msg" id="pincode-error">Please enter a valid 6-digit PIN code</span>
+              </div>
+            </div>
+            </div> <!-- End checkout-address-fields -->
+          </div>
+
+          <!-- Section 3: Delivery -->
+          <div class="form-section">
+            <h3 class="form-section-title"><span class="step-num">3</span>Delivery</h3>
+            <p class="delivery-eta" id="delivery-eta"></p>
+            <div class="form-row single">
+              <div class="form-group">
+                <label for="preferred-courier">Preferred courier partner <span class="label-optional">(optional)</span></label>
+                <select id="preferred-courier" name="preferredCourier">
+                  <option value="">No preference — fastest available</option>
+                </select>
+              </div>
+            </div>
+            <p class="courier-pref-note">
+              <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+              A preference is a request, not a booking. Our team will check whether it
+              works for your PIN code and, if it carries an additional charge, will
+              contact you with the amount and the revised timeline <strong>before</strong>
+              we dispatch. Nothing extra is charged here, and nothing at all until you
+              agree to it.
+            </p>
+          </div>
+
+          <!-- Section 4: Payment -->
+          <div class="form-section">
+            <h3 class="form-section-title"><span class="step-num">4</span>Payment Method</h3>
+            <p class="prepaid-note" id="prepaid-note" hidden>
+              <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+              Your order includes print-to-order items, which we can only accept prepaid.
+              Please pay by UPI or card.
+            </p>
+            <div class="payment-options" id="payment-options">
+              <label class="payment-option is-disabled" data-method="cod">
+                <input type="radio" name="payment" value="cod" disabled>
+                <div class="payment-label">
+                  <h5>Cash on Delivery <span style="font-size: 0.7rem; background: var(--accent); color: var(--on-accent); padding: 2px 6px; border-radius: var(--radius-md); margin-left: 6px; font-weight: 700;">+ ₹34 fee</span></h5>
+                  <p>Currently unavailable</p>
+                </div>
+                <span class="payment-icon"><i class="fa-solid fa-money-bill-wave"></i></span>
+              </label>
+              <label class="payment-option selected" data-method="cashfree">
+                <input type="radio" name="payment" value="cashfree" checked>
+                <div class="payment-label">
+                  <h5>Cashfree Payment Gateway <span style="font-size: 0.8em; font-weight: normal; color: var(--text-secondary);">(UPI, Card, NEFT, RTGS)</span></h5>
+                  <p>Credit/Debit Cards, UPI, Wallets, Netbanking</p>
+                </div>
+                <span class="payment-icon"><i class="fa-solid fa-bolt"></i></span>
+              </label>
+              <label class="payment-option is-disabled" data-method="razorpay">
+                <input type="radio" name="payment" value="razorpay" disabled>
+                <div class="payment-label">
+                  <h5>Razorpay Payment Gateway</h5>
+                  <p>Integration underway, will be live shortly</p>
+                </div>
+                <span class="payment-icon"><i class="fa-solid fa-shield-halved"></i></span>
+              </label>
+              <label class="payment-option" data-method="direct" id="direct-pay-option">
+                <input type="radio" name="payment" value="direct">
+                <div class="payment-label">
+                  <h5>Wired Directly</h5>
+                  <p>Send the amount to us directly, then enter your reference number</p>
+                </div>
+                <span class="payment-icon"><i class="fa-solid fa-building-columns"></i></span>
+              </label>
+            </div>
+
+            <div class="direct-pay-panel" id="direct-pay-panel">
+              <div style="margin-bottom: 16px; background: rgba(0,0,0,0.03); padding: 14px; border-radius: 8px; border: 1px dashed rgba(0,0,0,0.15);">
+                <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; margin: 0;">
+                  <input type="checkbox" id="to-be-paid-by-upi" style="margin-top: 2px; width: 18px; height: 18px;">
+                  <span style="font-size: 14.5px; line-height: 1.4; color: var(--text-primary); font-weight: 500;">To be paid by UPI later (We will send you an email containing our UPI QR code and NEFT details to collect payment)</span>
+                </label>
+              </div>
+              <ol class="direct-pay-steps">
+                <li>
+                  <strong>Send <span id="direct-pay-amount">the order total</span></strong> to the details below
+                  from any UPI app or by bank transfer.
+                  <div class="direct-pay-details" id="direct-pay-details"></div>
+                </li>
+                <li>
+                  <strong id="ref-instruction">Enter the reference number</strong> your bank or UPI app gives you
+                  (the UTR or transaction ID) so we can match your payment.
+                  <div class="form-group direct-pay-ref" id="ref-input-group">
+                    <label for="payment-reference">UPI / Bank reference number <span id="ref-asterisk">*</span></label>
+                    <input type="text" id="payment-reference" name="paymentReference"
+                           placeholder="e.g. 412345678901" maxlength="40"
+                           autocomplete="off" autocapitalize="characters" spellcheck="false">
+                    <span class="error-msg" id="payment-reference-error">Please enter the reference number from your transfer</span>
+                  </div>
+                </li>
+                <li>
+                  <strong>Place your order.</strong> We will check it against our bank and email you
+                  as soon as it clears &mdash; usually within a few hours on working days. Nothing is
+                  printed until then, and your items are held for you in the meantime.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right: Order Summary -->
+      <div class="order-summary" id="order-summary">
+        <h3>Order Summary <span class="item-count" id="summary-count"></span></h3>
+        <div class="summary-items" id="summary-items" data-lenis-prevent>
+          <!-- Rendered by JS -->
+        </div>
+        <div class="price-breakdown" id="price-breakdown">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="coupon-section" id="coupon-section">
+          <button type="button" class="coupon-toggle" id="coupon-toggle" aria-expanded="false" aria-controls="coupon-body">
+            <span><i class="fa-solid fa-tag" aria-hidden="true"></i> Have a coupon code?</span>
+            <i class="fa-solid fa-chevron-down coupon-chevron" aria-hidden="true"></i>
+          </button>
+          <div class="coupon-body" id="coupon-body" hidden>
+            <div class="coupon-input-group">
+              <input type="text" id="coupon-code" placeholder="Enter code" autocomplete="off" autocapitalize="characters" spellcheck="false">
+              <button type="button" id="apply-coupon-btn" class="secondary-btn">Apply</button>
+            </div>
+            <div id="coupon-message" class="coupon-message"></div>
+          </div>
+        </div>
+        <button class="place-order-btn" id="place-order-btn" type="button">
+          <span class="spinner"></span>
+          <span class="btn-text">Place Order</span>
+        </button>
+        <p class="secure-note"><i class="fa-solid fa-lock"></i> Secure checkout — Your data is protected</p>
+      </div>
+
+    </div>
+    <div class="checkout-mobile-bar" id="checkout-mobile-bar" hidden>
+      <div class="checkout-mobile-total">
+        <small>Total</small>
+        <strong id="checkout-mobile-amount">₹0</strong>
+        <button type="button" id="checkout-mobile-details">View price details</button>
+      </div>
+      <button type="button" class="place-order-btn" id="checkout-mobile-place">Place Order</button>
+    </div>
+  </main>
+
+  <script src="lenis.min.js"></script>
+  <script src="scroll.js" defer></script>
+  <script src="img-utils.js?v=4"></script>
+  <script src="cart.js?v=12"></script>
+
+  <!-- Checkout toast notification (replaces blocking alert() popups) -->
+  <div class="toast" id="checkout-toast" role="alert" aria-live="assertive">
+    <span id="checkout-toast-text"></span>
+  </div>
+
+  <!-- Taxes info -->
+  <div id="tax-info-modal" class="modal">
+    <div class="modal-content" data-lenis-prevent>
+      <span class="close-modal" id="close-tax-modal">&times;</span>
+      <h3>About taxes</h3>
+      <p style="margin: 16px 0; color: var(--text-secondary); line-height: 1.6;">
+        All poster and product prices are <strong>inclusive of 18% GST</strong>. The consolidated GST shown on your order is already included in the item subtotal and is never charged as an extra fee.
+      </p>
+      <p style="margin: 16px 0; color: var(--text-secondary); line-height: 1.6;">
+        Depending on your delivery address, statutory tax is accounted as <strong>CGST and SGST</strong> (within Bihar) or as <strong>IGST</strong> (across other states). Only offers, discounts, handling, and delivery fees are applied to calculate the final payable amount. Your tax invoice shows the complete breakdown.
+      </p>
+      <button id="close-tax-modal-btn" class="place-order-btn" style="margin-top: 8px; padding: 12px; cursor: pointer; font-size: 0.9rem;">Got it</button>
+    </div>
+  </div>
+
+  <!-- COD Confirmation Modal -->
+  <div id="cod-confirm-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="close-cod-modal">&times;</span>
+      <h3>Confirm Cash on Delivery</h3>
+      <p style="margin: 16px 0; color: var(--text-secondary); line-height: 1.5;">An additional fee of <strong>₹34</strong> is charged for Cash on Delivery. You can pay online using <strong>"Wired Directly"</strong> to skip this fee.</p>
+      <div style="display: flex; gap: 12px; margin-top: 24px;">
+        <button id="cancel-cod-btn" style="flex: 1; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-weight: 600; font-family: inherit; background: var(--bg-card); color: var(--text-primary); cursor: pointer; font-size: 0.9rem;">Cancel</button>
+        <button id="confirm-cod-btn" class="place-order-btn" style="flex: 1; margin-top: 0; padding: 12px; cursor: pointer; font-size: 0.9rem;">Proceed</button>
+      </div>
+    </div>
+  </div>
+  <style>
+    #tax-info-modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: var(--font-body, Arial, sans-serif);
+    }
+    #tax-info-modal.visible { display: flex; }
+    #tax-info-modal .modal-content {
+      background-color: var(--bg-card, #fff);
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 460px;
+      max-height: 85dvh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      position: relative;
+    }
+    #tax-info-modal h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      margin: 0 24px 0 0;
+    }
+    #tax-info-modal .close-modal {
+      position: absolute;
+      right: 16px;
+      top: 10px;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--text-secondary);
+      cursor: pointer;
+      background: none;
+      border: 0;
+    }
+    #tax-info-modal .close-modal:hover { color: var(--accent); }
+
+    #cod-confirm-modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body, Arial, sans-serif);
+    }
+    #cod-confirm-modal.visible {
+      display: flex;
+    }
+    #cod-confirm-modal .modal-content {
+      background-color: var(--bg-card, #fff);
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+    }
+    #cod-confirm-modal .close-modal {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--text-muted, #767676);
+    }
+    #cod-confirm-modal h3 {
+      font-family: var(--font-heading, "Times New Roman", Times, serif);
+      margin: 0;
+      font-size: 1.4rem;
+    }
+  </style>
+
+  <script>
+
+    // Cart lines come from localStorage — escape before interpolating.
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Lightweight toast for checkout — matches the pattern used on other pages
+    let checkoutToastTimer;
+    function showCheckoutToast(message) {
+      const toast = document.getElementById('checkout-toast');
+      const text = document.getElementById('checkout-toast-text');
+      if (!toast || !text) return;
+      text.textContent = message;
+      toast.classList.add('visible');
+      clearTimeout(checkoutToastTimer);
+      checkoutToastTimer = setTimeout(() => toast.classList.remove('visible'), 4000);
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+
+      const currentUser = localStorage.getItem('brushUser');
+      if (!currentUser) {
+        // Was a blocking window.alert() + immediate redirect - jarring on
+        // any browser and especially ugly on mobile, and it's the one
+        // spot on this page that didn't follow the inline-message pattern
+        // already used for the empty-cart state right below. index.html
+        // is where the actual login modal lives (checkout.html doesn't
+        // load script.js?v=53), so this links there with ?login=1, which
+        // script.js?v=53's auth init checks for and opens the modal on arrival.
+        document.getElementById('checkout-layout').innerHTML = `
+          <div class="empty-checkout">
+            <i class="fa-solid fa-user-lock"></i>
+            <h2>Log in to continue</h2>
+            <p>You'll need an account to check out - it's quick, and lets you track this order afterwards.</p>
+            <a href="index.html?login=1" class="hero-cta">Log In →</a>
+          </div>
+        `;
+        return;
+      }
+      let user;
+      try {
+        user = JSON.parse(currentUser);
+      } catch (e) {
+        localStorage.removeItem('brushUser');
+        window.location.href = 'index.html?login=1';
+        return;
+      }
+      const token = typeof user.token === 'string' ? user.token : '';
+      if (!token || !user.userId) {
+        window.location.href = 'index.html?login=1';
+        return;
+      }
+
+      // Refresh identity from the authenticated profile rather than treating
+      // localStorage as a source of truth. The backend repeats this check.
+      try {
+        const profileResponse = await fetch(`${API_BASE}/auth/profile/${encodeURIComponent(user.userId)}`, {
+          headers: { Authorization: `Bearer ${token}` },
+          cache: 'no-store'
+        });
+        if (!profileResponse.ok) throw new Error('Profile unavailable');
+        user = { ...user, ...(await profileResponse.json()) };
+        localStorage.setItem('brushUser', JSON.stringify(user));
+      } catch (e) {
+        localStorage.removeItem('brushUser');
+        window.location.href = 'index.html?login=1';
+        return;
+      }
+
+      setTimeout(() => {
+        // The form may have been swapped for the empty-cart state by now.
+        const fill = (id, v) => { const el = document.getElementById(id); if (el && v) el.value = v; };
+        const uid = String(user.userId || user.id || '');
+        fill('name', user.name);
+        fill('email', user.email || (uid.includes('@') ? uid : ''));
+        fill('phone', user.phone || (uid && !uid.includes('@') ? uid : ''));
+        fill('address', user.address);
+      }, 100);
+
+      // Initialize Flipkart-style Saved Addresses for Logged-In User
+      (async function initSavedAddresses() {
+        const wrapper = document.getElementById('checkout-saved-addresses-wrapper');
+        const listEl = document.getElementById('checkout-saved-addresses-list');
+        const fieldsWrapper = document.getElementById('checkout-address-fields');
+        const toggleBtn = document.getElementById('btn-toggle-new-address');
+        const toggleText = document.getElementById('toggle-new-addr-text');
+        if (!wrapper || !listEl || !token) return;
+
+        try {
+          const res = await fetch(`${API_BASE}/user/addresses`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          if (!res.ok) return;
+          const data = await res.json();
+          const addresses = Array.isArray(data.addresses) ? data.addresses : [];
+          if (addresses.length === 0) return;
+
+          wrapper.style.display = 'block';
+
+          function applyAddress(addr) {
+            const fill = (id, v) => {
+              const el = document.getElementById(id);
+              if (el && v != null) {
+                el.value = v;
+                el.dispatchEvent(new Event('input', { bubbles: true }));
+                el.dispatchEvent(new Event('change', { bubbles: true }));
+              }
+            };
+            const streetVal = [addr.street || addr.address || '', addr.locality || addr.area || '', addr.landmark ? `Near ${addr.landmark}` : ''].filter(Boolean).join(', ');
+            fill('address', streetVal);
+            fill('city', addr.city || '');
+            fill('state', addr.state || '');
+            fill('pincode', addr.pincode || '');
+            if (addr.name) fill('name', addr.name);
+            if (addr.phone) fill('phone', addr.phone);
+          }
+
+          let selectedAddrId = (addresses.find(a => a.isDefault) || addresses[0])?.id || '';
+
+          function renderAddressCards() {
+            listEl.innerHTML = addresses.map(addr => {
+              const addrId = addr.id || addr._id;
+              const isSel = addrId === selectedAddrId;
+              const streetLine = [addr.street || addr.address || '', addr.locality || addr.area || '', addr.landmark ? `Near ${addr.landmark}` : ''].filter(Boolean).join(', ');
+              const cityState = `${addr.city || ''}${addr.state ? `, ${addr.state}` : ''} ${addr.pincode ? `— ${addr.pincode}` : ''}`;
+              return `
+                <div class="checkout-saved-addr-card ${isSel ? 'selected' : ''}" data-id="${escapeHtml(addrId)}">
+                  <input type="radio" name="selected_saved_address" value="${escapeHtml(addrId)}" class="checkout-saved-addr-radio" ${isSel ? 'checked' : ''}>
+                  <div class="checkout-saved-addr-info">
+                    <div class="checkout-saved-addr-header">
+                      <span class="checkout-saved-addr-name">${escapeHtml(addr.name || user.name || 'Recipient')}</span>
+                      <span class="checkout-saved-addr-type">${escapeHtml((addr.type || 'HOME').toUpperCase())}</span>
+                      ${addr.isDefault ? '<span class="checkout-saved-addr-badge">DEFAULT</span>' : ''}
+                    </div>
+                    <div>${escapeHtml(streetLine)}</div>
+                    <div><strong>${escapeHtml(cityState)}</strong> &bull; Phone: ${escapeHtml(addr.phone || user.phone || '')}</div>
+                  </div>
+                </div>
+              `;
+            }).join('');
+
+            listEl.querySelectorAll('.checkout-saved-addr-card').forEach(card => {
+              card.addEventListener('click', () => {
+                selectedAddrId = card.dataset.id;
+                const chosen = addresses.find(a => (a.id || a._id) === selectedAddrId);
+                if (chosen) {
+                  applyAddress(chosen);
+                  renderAddressCards();
+                }
+              });
+            });
+          }
+
+          renderAddressCards();
+          const defaultAddr = addresses.find(a => (a.id || a._id) === selectedAddrId) || addresses[0];
+          if (defaultAddr) applyAddress(defaultAddr);
+
+          let fieldsVisible = false;
+          fieldsWrapper.style.display = 'none';
+
+          toggleBtn.addEventListener('click', () => {
+            fieldsVisible = !fieldsVisible;
+            fieldsWrapper.style.display = fieldsVisible ? 'block' : 'none';
+            toggleText.textContent = fieldsVisible ? 'Hide custom address form' : 'Deliver to a different / new address';
+            if (fieldsVisible) {
+              document.getElementById('address')?.focus();
+            }
+          });
+        } catch (_) {}
+      })();
+
+      // ---- Check if cart is empty ----
+      const cart = Cart.getCart();
+      if (cart.length === 0) {
+        document.getElementById('checkout-layout').innerHTML = `
+          <div class="empty-checkout">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <h2>Your cart is empty</h2>
+            <p>Looks like you haven't added anything to your cart yet.</p>
+            <a href="index.html#bestsellers" class="hero-cta">Start Shopping →</a>
+          </div>
+        `;
+        return;
+      }
+
+      // The prepaid rule lives in applyPrepaidRule() below, which reads it from
+      // the shared config and re-runs on every summary render. An earlier
+      // inline copy of it lived here and called a helper cart.js does not
+      // export, so it threw and took the rest of this initialiser with it.
+
+      // ---- Coupon Logic ----
+      const applyCouponBtn = document.getElementById('apply-coupon-btn');
+      const couponInput = document.getElementById('coupon-code');
+      const couponMessage = document.getElementById('coupon-message');
+
+      const inrFmt = (n) => '₹' + (Number.isInteger(n) ? n : Number(n).toFixed(2));
+
+      function clearCoupon() {
+        window.appliedCouponCode = null;
+        window.couponDiscountAmount = 0;
+        couponInput.value = '';
+        couponInput.disabled = false;
+        applyCouponBtn.classList.remove('applied');
+        applyCouponBtn.textContent = 'Apply';
+        couponMessage.className = 'coupon-message';
+        couponMessage.textContent = '';
+        renderSummary();
+      }
+
+      async function applyCoupon() {
+        const code = couponInput.value.trim().toUpperCase();
+        if (!code) return;
+
+        applyCouponBtn.disabled = true;
+        applyCouponBtn.textContent = '...';
+        couponMessage.className = 'coupon-message';
+        couponMessage.textContent = '';
+
+        try {
+          // The server re-prices the whole cart to validate a coupon, so it
+          // needs productId and quantity — the same shape the order payload
+          // uses. Sending price/productType instead was rejected outright with
+          // 'Invalid product in order', so no coupon could ever be applied.
+          const items = Cart.getCart().map(i => ({
+            productId: i.id,
+            quantity: i.quantity,
+            variants: i.variants
+          }));
+          const res = await fetch(`${API_BASE}/coupons/validate`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ couponCode: code, items })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'That code could not be applied.');
+
+          window.appliedCouponCode = data.code;
+          window.couponDiscountAmount = data.discount;
+
+          couponInput.value = data.code;
+          couponInput.disabled = true;
+          applyCouponBtn.classList.add('applied');
+          applyCouponBtn.textContent = 'Remove';
+          couponMessage.textContent = data.discount > 0
+            ? `${data.code} applied — you save ${inrFmt(data.discount)}.`
+            : `${data.code} applied.`;
+          couponMessage.classList.add('success');
+          renderSummary();
+        } catch (err) {
+          window.appliedCouponCode = null;
+          window.couponDiscountAmount = 0;
+          couponMessage.textContent = err.message;
+          couponMessage.classList.add('error');
+          renderSummary();
+        } finally {
+          applyCouponBtn.disabled = false;
+          if (!window.appliedCouponCode) applyCouponBtn.textContent = 'Apply';
+        }
+      }
+
+      applyCouponBtn.addEventListener('click', () => {
+        if (window.appliedCouponCode) clearCoupon();
+        else applyCoupon();
+      });
+      couponInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); if (!window.appliedCouponCode) applyCoupon(); }
+      });
+
+      // ---- Delivery, taxes, prepaid ----------------------------------------
+      const ORDER_CHARGES = Cart.ORDER_CHARGES;
+
+      // There is one priced tier. A courier preference is collected separately
+      // and never charged here, so this always resolves to the standard option.
+      function selectedDelivery() {
+        return ORDER_CHARGES.defaultDeliveryOption;
+      }
+
+      function selectedCourier() {
+        const el = document.getElementById('preferred-courier');
+        return el && el.value ? el.value : null;
+      }
+
+      function renderCourierOptions() {
+        const sel = document.getElementById('preferred-courier');
+        if (!sel) return;
+        // Falls back to a literal list rather than rendering an empty dropdown:
+        // a stale cached cart.js would otherwise leave the field with nothing
+        // in it and no sign that anything was wrong. The server validates the
+        // value against its own list either way.
+        const partners = (Cart && Cart.COURIER_PARTNERS && Cart.COURIER_PARTNERS.length)
+          ? Cart.COURIER_PARTNERS
+          : ['DTDC', 'Delhivery', 'FedEx', 'Xpressbees'];
+        // Re-render rather than append, so calling this twice can't duplicate.
+        sel.innerHTML = '<option value="">No preference — fastest available</option>' +
+          partners.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+      }
+
+      // Free delivery means we pick the carrier, so a preference can't be
+      // honoured on that order — say so rather than quietly ignoring it.
+      function refreshCourierAvailability() {
+        const sel = document.getElementById('preferred-courier');
+        const note = document.querySelector('.courier-pref-note');
+        if (!sel || !note) return;
+        const charges = Cart.getCharges('prepaid', { couponDiscount: window.couponDiscountAmount || 0 });
+        const isFree = charges.shipping === 0 && charges.subtotal > 0;
+        sel.disabled = isFree;
+        if (isFree) {
+          sel.value = '';
+          note.innerHTML = '<i class="fa-solid fa-circle-info" aria-hidden="true"></i> ' +
+            'Your delivery is free on this order, which means we choose the carrier &mdash; ' +
+            'so a courier preference can\'t be applied here. Need the parcel faster? ' +
+            'Write to us with your order number after checkout and our team will see what is possible.';
+        }
+      }
+
+      // Everything ships from the Delhi distribution centre, so NCR pincodes
+      // are quoted the faster band. Mirrors the server's deliveryPromiseFor().
+      function deliveryEstimate() {
+        const pin = (document.getElementById('pincode').value || '').trim();
+        const opt = Cart.deliveryOptionFor(selectedDelivery());
+        const promise = (Cart.deliveryPromiseFor && typeof Cart.deliveryPromiseFor === 'function')
+          ? Cart.deliveryPromiseFor(pin, Cart.getCart(), opt)
+          : { minDays: 4, maxDays: 9, ncr: false };
+        const upperLimitDate = (Cart.calculateEstimatedDelivery && typeof Cart.calculateEstimatedDelivery === 'function')
+          ? Cart.calculateEstimatedDelivery(new Date(), promise.maxDays)
+          : null;
+        return {
+          lo: promise.minDays,
+          hi: promise.maxDays,
+          known: promise.ncr,
+          pin: pin.length === 6,
+          date: upperLimitDate
+        };
+      }
+
+      function renderDeliveryEta() {
+        const el = document.getElementById('delivery-eta');
+        if (!el) return;
+        const hasPhysical = Cart.hasPhysicalItems ? Cart.hasPhysicalItems() : true;
+        if (!hasPhysical) {
+          el.innerHTML = '<i class="fa-solid fa-bolt" style="color:#10b981;margin-right:6px;"></i><strong>Instant Digital Delivery</strong> &mdash; Download link will be sent straight to your email inbox immediately upon payment.';
+          return;
+        }
+        const e = deliveryEstimate();
+        if (!e.pin) {
+          el.innerHTML = 'Enter your PIN code above for an accurate delivery date. Designed at our Patna studio, dispatched from our Delhi distribution centre.';
+          return;
+        }
+        let dateStr = '';
+        if (e.date) {
+          dateStr = e.date.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
+        }
+        const dateDisplay = dateStr ? `Estimated by <strong>${dateStr}</strong> (${e.lo}–${e.hi} working days)` : `Arriving in <strong>${e.lo}–${e.hi} working days</strong>`;
+        el.innerHTML = `${dateDisplay} — ${e.known ? 'Delhi NCR' : 'outside Delhi NCR'}. <span style="font-size:0.85em;opacity:0.85;display:block;margin-top:3px;">Cutoff 2:00 PM IST · Non-working days & national holidays accounted. Delivery time may vary depending upon shipping address. Dispatched from Delhi.</span>`;
+      }
+
+      // Visibility here is driven by a class, not the `hidden` attribute —
+      // same as the COD dialog. Setting `hidden = false` did nothing, because
+      // nothing styles this element as a dialog until `.visible` is on it.
+      function showTaxInfo() {
+        const modal = document.getElementById('tax-info-modal');
+        if (modal) modal.classList.add('visible');
+      }
+
+      // Print-to-order items are settled prepaid, so COD is not offered for
+      // them. The server refuses such an order too — this only keeps the
+      // shopper from picking an option that would then fail.
+      function applyPrepaidRule() {
+        const needsPrepaid = Cart.requiresPrepaid();
+        const note = document.getElementById('prepaid-note');
+        const codOption = document.querySelector('.payment-option[data-method="cod"]');
+        const codInput = codOption && codOption.querySelector('input[type="radio"]');
+        if (note) note.hidden = !needsPrepaid;
+        if (!codOption || !codInput) return;
+        codOption.classList.toggle('is-disabled', needsPrepaid);
+        codInput.disabled = needsPrepaid;
+
+        // Say why on the option itself, not only in the note above it.
+        const sub = codOption.querySelector('.payment-label p');
+        if (sub) {
+          sub.innerHTML = needsPrepaid
+            ? 'Pay when your order arrives<br><span class="cod-unavailable">Not available for this order</span>'
+            : 'Pay when your order arrives';
+        }
+        if (needsPrepaid && codInput.checked) {
+          codInput.checked = false;
+          codOption.classList.remove('selected');
+          const cashfree = document.querySelector('.payment-option[data-method="cashfree"]');
+          if (cashfree) {
+            cashfree.classList.add('selected');
+            cashfree.querySelector('input[type="radio"]').checked = true;
+          }
+        }
+      }
+
+      // The item list is the card's only scroll region. The fade at its bottom
+      // is a hint that there is more below, so it is applied only when the
+      // list actually overflows and removed once the end is reached.
+      const summaryList = document.getElementById('summary-items');
+      function updateSummaryScrollHint() {
+        if (!summaryList) return;
+        const overflows = summaryList.scrollHeight - summaryList.clientHeight > 4;
+        summaryList.classList.toggle('is-scrollable', overflows);
+        const atEnd = summaryList.scrollTop + summaryList.clientHeight >= summaryList.scrollHeight - 4;
+        summaryList.classList.toggle('is-at-end', atEnd);
+      }
+      if (summaryList) {
+        summaryList.addEventListener('scroll', updateSummaryScrollHint, { passive: true });
+        // The card's height is viewport-derived, so a resize or a phone
+        // rotating changes whether the list overflows at all.
+        window.addEventListener('resize', updateSummaryScrollHint);
+
+        // Remove item from cart directly on checkout page
+        summaryList.addEventListener('click', (e) => {
+          const btn = e.target.closest('.summary-item-remove-btn');
+          if (!btn) return;
+          const cartId = btn.dataset.cartId;
+          if (!cartId) return;
+          Cart.removeItem(cartId);
+          renderSummary();
+          renderDeliveryEta();
+        });
+      }
+
+      // ---- Render summary ----
+      function renderSummary() {
+        const items = Cart.getCart();
+        const summaryItems = document.getElementById('summary-items');
+        const priceBreakdown = document.getElementById('price-breakdown');
+        const summaryCount = document.getElementById('summary-count');
+
+        if (items.length === 0) {
+          const layout = document.getElementById('checkout-layout');
+          if (layout) {
+            layout.innerHTML = `
+              <div class="empty-checkout">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <h2>Your cart is empty</h2>
+                <p>Looks like you haven't added anything to your cart yet.</p>
+                <a href="index.html#bestsellers" class="hero-cta">Start Shopping →</a>
+              </div>
+            `;
+          }
+          const mobileBar = document.getElementById('checkout-mobile-bar');
+          if (mobileBar) mobileBar.hidden = true;
+          return;
+        }
+
+        summaryCount.textContent = `(${Cart.getItemCount()} item${Cart.getItemCount() !== 1 ? 's' : ''})`;
+
+        summaryItems.innerHTML = items.map(item => {
+          const hasCustom = Array.isArray(item.customPosters) && item.customPosters.length > 0;
+          const itemId = item.cartId || item.id;
+          return `
+          <div class="summary-item">
+            <div class="summary-item-image">
+              ${(Cart.typeConfigFor(item.productType) === Cart.PRODUCT_TYPES.poster && !hasCustom) ? `
+              <div class="mockup-wrapper">
+                <img src="assets/mockup_2-w480.webp" class="mockup-frame" alt="" width="480" height="733" decoding="async">
+                <img ${BrushImg.urlAttrs(item.image, 480)} class="mockup-poster" alt="${escapeHtml(item.name)}">
+                <img ${BrushImg.urlAttrs(item.image, 480)} class="mockup-hover" alt="${escapeHtml(item.name)}">
+              </div>` : `<img ${BrushImg.urlAttrs(item.image, 480)} class="summary-plain-img" alt="${escapeHtml(item.name)}">`}
+              <span class="qty-badge">${item.quantity}</span>
+            </div>
+            <div class="summary-item-details">
+              <h4>${escapeHtml(item.name)}</h4>
+              ${(() => { const cfg = Cart.typeConfigFor(item.productType); const line = (cfg.variantGroups || []).map(g => { const o = g.options.find(o => o.value === (item.variants || {})[g.key]); return o ? o.label : ''; }).filter(Boolean).join(' · '); return line ? `<span class="item-variants">${line}</span>` : ''; })()}
+              <span class="item-price">₹${item.price} × ${item.quantity} = ₹${item.price * item.quantity}</span>
+              ${hasCustom ? `
+                <div class="summary-pack-gallery">
+                  <div class="summary-pack-label"><i class="fa-solid fa-layer-group"></i> Pack Contents (${item.customPosters.length} Posters):</div>
+                  <div class="summary-pack-thumbs">
+                    ${item.customPosters.map((cp, idx) => `
+                      <div class="summary-pack-thumb" title="${escapeHtml(cp.name || cp.title || `Poster ${idx+1}`)} — Size: ${escapeHtml(cp.size || 'A5')}">
+                        <img src="${escapeHtml(cp.image)}" alt="${escapeHtml(cp.name || cp.title || 'Poster')}" loading="lazy">
+                        <span class="pack-size-tag">${escapeHtml(cp.size || 'A5')}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+            <div class="summary-item-remove-wrapper">
+              <button type="button" class="summary-item-remove-btn" data-cart-id="${escapeHtml(itemId)}" title="Remove ${escapeHtml(item.name)}" aria-label="Remove ${escapeHtml(item.name)} from cart">
+                <i class="fa-regular fa-trash-can" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        `;}).join('');
+
+        // Shelf prices already include tax; delivery and fees are added once
+        // per order here, mirroring the server's orderCharges().
+        const selectedPayment = (document.querySelector('input[name="payment"]:checked') || {}).value || 'cod';
+        const couponDisc = window.couponDiscountAmount || 0;
+        const c = Cart.getCharges(selectedPayment, { couponDiscount: couponDisc, deliveryOption: selectedDelivery() });
+        const inr = (n) => '₹' + (Number.isInteger(n) ? n : n.toFixed(2));
+        const free = ORDER_CHARGES.freeShippingThreshold;
+        const shortOfFree = Math.max(0, free - c.subtotal);
+
+        let breakdownHTML = `
+          <div class="price-row">
+            <span class="label">Subtotal <small style="font-size:0.82em;color:var(--text-muted);font-weight:normal;">(Inc. Tax)</small></span>
+            <span class="value">${inr(c.subtotal)}</span>
+          </div>
+          ${c.launchDiscount ? `
+          <div class="price-row is-saving">
+            <span class="label">Launch offer</span>
+            <span class="value">-${inr(c.launchDiscount)}</span>
+          </div>` : ''}
+          ${c.bundleDiscount ? `
+          <div class="price-row is-saving">
+            <span class="label">${c.bundleLabel || 'Poster offer'} — ${c.bundleFreeCount} free</span>
+            <span class="value">-${inr(c.bundleDiscount)}</span>
+          </div>` : ''}
+          ${c.couponDiscount ? `
+          <div class="price-row is-saving">
+            <span class="label">Coupon</span>
+            <span class="value">-${inr(c.couponDiscount)}</span>
+          </div>` : ''}
+          <div class="price-row">
+            <span class="label">Delivery</span>
+            <span class="value">${c.shipping === 0 ? '<strong class="is-free">Free</strong>' : inr(c.shipping)}</span>
+          </div>
+          ${c.processingFee ? `
+          <div class="price-row">
+            <span class="label">Handling fee</span>
+            <span class="value">${inr(c.processingFee)}</span>
+          </div>` : ''}
+          ${c.codFee ? `
+          <div class="price-row">
+            <span class="label">Cash on delivery fee</span>
+            <span class="value">${inr(c.codFee)}</span>
+          </div>` : ''}
+          ${(c.tax || c.gst) ? `
+          <div class="price-row" style="color:var(--text-secondary);font-size:0.88rem;">
+            <span class="label">Includes 18% GST</span>
+            <span class="value">${inr(c.tax || c.gst)}</span>
+          </div>` : ''}
+          <div class="price-row total">
+            <span class="label">Total</span>
+            <span class="value">₹${c.total}</span>
+          </div>
+          ${(shortOfFree > 0 && (Cart.hasPhysicalItems ? Cart.hasPhysicalItems() : true)) ? `
+          <p class="price-note price-nudge">Add ${inr(shortOfFree)} more to get free delivery.</p>` : ''}
+          <p class="price-note">All product prices are inclusive of 18% GST. Only offers/discounts, handling, and delivery fees are applied to calculate the final total.${c.codFee ? ' Pay online to skip the cash-on-delivery fee.' : ((Cart.hasPhysicalItems && !Cart.hasPhysicalItems()) ? ' Digital items have no shipping or processing fee — download links will be sent directly to your inbox.' : '')}</p>
+        `;
+
+        priceBreakdown.innerHTML = breakdownHTML;
+        const taxBtn = document.getElementById('tax-info-btn');
+        if (taxBtn) taxBtn.addEventListener('click', showTaxInfo);
+        updateSummaryScrollHint();
+        if (typeof refreshCourierAvailability === 'function') refreshCourierAvailability();
+        // The cart can change while this page is open (quantity edits, a line
+        // removed), so the payment rule is re-evaluated with the summary
+        // rather than only once at load.
+        if (typeof applyPrepaidRule === 'function') applyPrepaidRule();
+        if (typeof refreshDirectPayPanel === 'function') refreshDirectPayPanel();
+        document.getElementById('checkout-mobile-amount').textContent = `₹${c.total}`;
+        document.getElementById('checkout-mobile-bar').hidden = false;
+      }
+
+      // ---- Phone sticky total bar ----
+      const mobileBar = document.getElementById('checkout-mobile-bar');
+      document.getElementById('checkout-mobile-place').addEventListener('click', () => {
+        document.getElementById('place-order-btn').click();
+      });
+      document.getElementById('checkout-mobile-details').addEventListener('click', () => {
+        document.getElementById('order-summary').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      new IntersectionObserver(([entry]) => {
+        mobileBar.classList.toggle('is-tucked', entry.isIntersecting);
+      }).observe(document.getElementById('place-order-btn'));
+
+      // ---- Coupon panel ----
+      const couponToggle = document.getElementById('coupon-toggle');
+      const couponBody = document.getElementById('coupon-body');
+      function setCouponOpen(open) {
+        couponBody.hidden = !open;
+        couponToggle.setAttribute('aria-expanded', String(open));
+        couponToggle.classList.toggle('is-open', open);
+      }
+      couponToggle.addEventListener('click', () => setCouponOpen(couponBody.hidden));
+      // A code already applied this session stays visible, so the shopper can
+      // see what was applied rather than hunting for it behind a toggle.
+      if (window.appliedCouponCode) setCouponOpen(true);
+
+      // ---- Direct transfer (interim prepaid route) -------------------------
+      // The option only exists if the server says it is configured, so nobody
+      // is ever shown payment details that do not work.
+      let directPay = { enabled: false };
+      async function setUpDirectPay() {
+        try {
+          directPay = await fetch(`${API_BASE}/config/direct-pay`).then(r => r.json());
+        } catch (e) { directPay = { enabled: false }; }
+        if (!directPay.enabled) return;
+
+        const opt = document.getElementById('direct-pay-option');
+        if (opt) opt.hidden = false;
+
+        const rows = [];
+        if (directPay.upiVpa) {
+          rows.push(copyRow('UPI ID', directPay.upiVpa));
+          if (directPay.payeeName) rows.push(plainRow('Payee name', directPay.payeeName));
+        }
+        if (directPay.bank) {
+          const b = directPay.bank;
+          if (b.accountName) rows.push(plainRow('Account name', b.accountName));
+          if (b.accountNumber) rows.push(copyRow('Account number', b.accountNumber));
+          if (b.ifsc) rows.push(copyRow('IFSC', b.ifsc));
+          if (b.bankName) rows.push(plainRow('Bank', b.bankName));
+        }
+        document.getElementById('direct-pay-details').innerHTML = rows.join('');
+        bindCopyButtons();
+      }
+
+      const plainRow = (label, value) =>
+        `<div class="dp-row"><span class="dp-label">${escapeHtml(label)}</span><span class="dp-value">${escapeHtml(value)}</span></div>`;
+
+      // Typing a UPI ID or an account number by hand is where mistakes happen,
+      // so each one is copyable in a tap.
+      const copyRow = (label, value) =>
+        `<div class="dp-row"><span class="dp-label">${escapeHtml(label)}</span>` +
+        `<span class="dp-value"><code>${escapeHtml(value)}</code>` +
+        `<button type="button" class="dp-copy" data-copy="${escapeHtml(value)}" aria-label="Copy ${escapeHtml(label)}">` +
+        `<i class="fa-regular fa-copy" aria-hidden="true"></i></button></span></div>`;
+
+      function bindCopyButtons() {
+        document.querySelectorAll('.dp-copy').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText(btn.dataset.copy);
+              const icon = btn.querySelector('i');
+              icon.className = 'fa-solid fa-check';
+              setTimeout(() => { icon.className = 'fa-regular fa-copy'; }, 1400);
+            } catch (e) {
+              showCheckoutToast('Could not copy — please select and copy it manually.');
+            }
+          });
+        });
+      }
+
+      // Shows the panel only for this method, and keeps the amount in step
+      // with the running total so the shopper transfers the right figure.
+      function refreshDirectPayPanel() {
+        const panel = document.getElementById('direct-pay-panel');
+        if (!panel) return;
+        const chosen = (document.querySelector('input[name="payment"]:checked') || {}).value;
+        const active = chosen === 'direct' && directPay.enabled;
+        panel.hidden = !active;
+        if (active) {
+          const c = Cart.getCharges('direct', { couponDiscount: window.couponDiscountAmount || 0 });
+          const amt = document.getElementById('direct-pay-amount');
+          if (amt) amt.textContent = '₹' + c.total;
+        }
+      }
+
+      // Not awaited: the rest of checkout must render immediately whether or
+      // not this config call is slow, and the option reveals itself when it
+      // resolves.
+      setUpDirectPay().then(refreshDirectPayPanel);
+
+      renderCourierOptions();
+      applyPrepaidRule();
+      renderSummary();
+      renderDeliveryEta();
+      refreshCourierAvailability();
+      document.getElementById('pincode').addEventListener('input', renderDeliveryEta);
+
+
+      // ---- Payment method selection ----
+      const paymentOptions = document.querySelectorAll('.payment-option');
+      paymentOptions.forEach(opt => {
+        opt.addEventListener('click', () => {
+          const input = opt.querySelector('input[type="radio"]');
+          if (input.disabled) return;
+          paymentOptions.forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          input.checked = true;
+          renderSummary();
+          refreshDirectPayPanel();
+        });
+      });
+
+      const toBePaidByUpiInput = document.getElementById('to-be-paid-by-upi');
+      if (toBePaidByUpiInput) {
+        toBePaidByUpiInput.addEventListener('change', () => {
+          const refGroup = document.getElementById('ref-input-group');
+          const refAsterisk = document.getElementById('ref-asterisk');
+          const instruction = document.getElementById('ref-instruction');
+          if (toBePaidByUpiInput.checked) {
+            refGroup.style.opacity = '0.4';
+            refGroup.style.pointerEvents = 'none';
+            if (refAsterisk) refAsterisk.style.display = 'none';
+            if (instruction) instruction.style.opacity = '0.4';
+            document.getElementById('payment-reference').value = '';
+          } else {
+            refGroup.style.opacity = '1';
+            refGroup.style.pointerEvents = 'auto';
+            if (refAsterisk) refAsterisk.style.display = 'inline';
+            if (instruction) instruction.style.opacity = '1';
+          }
+        });
+      }
+
+
+      // ---- Input normalization ----
+      // Autofill and copy-paste bring numbers in as "+91 92347 55686" or
+      // "09234755686", which the strict 10-digit check below would reject.
+      // Reduce to the bare 10-digit mobile number instead of erroring.
+      const phoneInput = document.getElementById('phone');
+      phoneInput.addEventListener('change', () => {
+        let digits = phoneInput.value.replace(/\D/g, '');
+        if (digits.length === 12 && digits.startsWith('91')) digits = digits.slice(2);
+        else if (digits.length === 11 && digits.startsWith('0')) digits = digits.slice(1);
+        if (digits.length === 10) phoneInput.value = digits;
+      });
+      const pincodeInput = document.getElementById('pincode');
+      pincodeInput.addEventListener('input', () => {
+        const digits = pincodeInput.value.replace(/\D/g, '').slice(0, 6);
+        if (digits !== pincodeInput.value) pincodeInput.value = digits;
+      });
+
+      // ---- Form validation ----
+      function validateField(id, validFn) {
+        const input = document.getElementById(id);
+        const error = document.getElementById(id + '-error');
+        const valid = validFn(input.value.trim());
+        input.classList.toggle('error', !valid);
+        if (error) error.classList.toggle('visible', !valid);
+        return valid;
+      }
+
+      function validateForm() {
+        let valid = true;
+        valid = validateField('name', v => v.length >= 2) && valid;
+        valid = validateField('email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) && valid;
+        valid = validateField('phone', v => /^\d{10}$/.test(v)) && valid;
+        valid = validateField('address', v => v.length >= 5) && valid;
+        valid = validateField('city', v => v.length >= 2) && valid;
+        valid = validateField('state', v => v.length > 0) && valid;
+        valid = validateField('pincode', v => /^\d{6}$/.test(v)) && valid;
+        return valid;
+      }
+
+      // Remove error styling on input
+      ['name', 'email', 'phone', 'address', 'city', 'state', 'pincode'].forEach(id => {
+        const el = document.getElementById(id);
+        el.addEventListener('input', () => {
+          el.classList.remove('error');
+          const errEl = document.getElementById(id + '-error');
+          if (errEl) errEl.classList.remove('visible');
+        });
+      });
+
+
+      // ---- Place Order ----
+      const placeOrderBtn = document.getElementById('place-order-btn');
+      let pendingOrderData = null;
+
+      document.getElementById('cancel-cod-btn').addEventListener('click', () => {
+        document.getElementById('cod-confirm-modal').classList.remove('visible');
+      });
+
+      const taxModal = document.getElementById('tax-info-modal');
+      const hideTaxModal = () => { taxModal.classList.remove('visible'); };
+      document.getElementById('close-tax-modal').addEventListener('click', hideTaxModal);
+      document.getElementById('close-tax-modal-btn').addEventListener('click', hideTaxModal);
+      taxModal.addEventListener('click', (e) => { if (e.target === taxModal) hideTaxModal(); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && taxModal.classList.contains('visible')) hideTaxModal();
+      });
+
+      document.getElementById('close-cod-modal').addEventListener('click', () => {
+        document.getElementById('cod-confirm-modal').classList.remove('visible');
+      });
+
+      document.getElementById('confirm-cod-btn').addEventListener('click', async () => {
+        document.getElementById('cod-confirm-modal').classList.remove('visible');
+
+        placeOrderBtn.classList.add('loading');
+        placeOrderBtn.disabled = true;
+
+        try {
+          const order = await Cart.placeOrder(pendingOrderData.customerData, pendingOrderData.paymentMethod, null, null, null, window.appliedCouponCode, selectedDelivery(), selectedCourier());
+          window.location.href = `order-confirmation.html?orderId=${encodeURIComponent(order.order.orderId)}`;
+        } catch (err) {
+          showCheckoutToast('Order failed: ' + err.message);
+          placeOrderBtn.classList.remove('loading');
+          placeOrderBtn.disabled = false;
+        }
+      });
+
+      placeOrderBtn.addEventListener('click', async () => {
+        if (!validateForm()) {
+          // Scroll to first error
+          const firstError = document.querySelector('.form-group input.error, .form-group select.error');
+          if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+
+        const customerData = {
+          name: document.getElementById('name').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          address: document.getElementById('address').value.trim(),
+          city: document.getElementById('city').value.trim(),
+          state: document.getElementById('state').value,
+          pincode: document.getElementById('pincode').value.trim()
+        };
+
+        const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+        // The reference is what lets us find the transfer on the statement, so
+        // it is checked here as well as on the server.
+        let isToBePaidLater = document.getElementById('to-be-paid-by-upi') ? document.getElementById('to-be-paid-by-upi').checked : false;
+
+        if (paymentMethod === 'direct' && !isToBePaidLater) {
+          const refInput = document.getElementById('payment-reference');
+          const ref = refInput.value.trim();
+          const ok = ref.length >= 6;
+          refInput.classList.toggle('error', !ok);
+          document.getElementById('payment-reference-error').style.display = ok ? 'none' : 'block';
+          if (!ok) {
+            refInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            refInput.focus();
+            return;
+          }
+        } else if (paymentMethod === 'direct' && isToBePaidLater) {
+          document.getElementById('payment-reference-error').style.display = 'none';
+          document.getElementById('payment-reference').classList.remove('error');
+        }
+
+        placeOrderBtn.classList.add('loading');
+        placeOrderBtn.disabled = true;
+
+        if (paymentMethod === 'direct') {
+          // No payment gateway in this path: the money has already been sent
+          // by the shopper, so the order is simply recorded and waits for a
+          // human to match it against the bank.
+          try {
+            const order = await Cart.placeOrder(
+              customerData, 'direct', null, null, null,
+              window.appliedCouponCode, selectedDelivery(), selectedCourier(),
+              document.getElementById('payment-reference').value.trim(),
+              isToBePaidLater
+            );
+            window.location.href = `order-confirmation.html?orderId=${encodeURIComponent(order.order.orderId)}`;
+          } catch (err) {
+            showCheckoutToast('Order failed: ' + err.message);
+            placeOrderBtn.classList.remove('loading');
+            placeOrderBtn.disabled = false;
+          }
+        } else if (paymentMethod === 'cod') {
+          pendingOrderData = { customerData, paymentMethod };
+          document.getElementById('cod-confirm-modal').classList.add('visible');
+          placeOrderBtn.classList.remove('loading');
+          placeOrderBtn.disabled = false;
+        } else if (paymentMethod === 'cashfree') {
+          // Cashfree Flow
+          try {
+            const orderItems = Cart.getCart().map(item => ({
+              productId: item.id,
+              name: item.name,
+              quantity: item.quantity,
+              variants: item.variants,
+              customPosters: Array.isArray(item.customPosters) ? item.customPosters : undefined
+            }));
+            let authToken = null;
+            try { const u = JSON.parse(localStorage.getItem('brushUser')); if (u) authToken = u.token; } catch (e) {}
+
+            const res = await fetch(`${API_BASE}/payment/cashfree/create-order`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                ...(authToken ? { 'Authorization': `Bearer ${authToken}` } : {})
+              },
+              body: JSON.stringify({
+                items: orderItems,
+                customer: customerData,
+                couponCode: window.appliedCouponCode,
+                deliveryOption: selectedDelivery(),
+                preferredCourier: selectedCourier()
+              })
+            });
+            if (!res.ok) {
+              const errData = await res.json().catch(() => ({}));
+              throw new Error(errData.error || 'Could not start payment');
+            }
+            const cfOrder = await res.json();
+
+            const cashfree = Cashfree({ mode: "production" });
+            let checkoutOptions = {
+              paymentSessionId: cfOrder.payment_session_id,
+              redirectTarget: "_modal"
+            };
+
+            cashfree.checkout(checkoutOptions).then(async (result) => {
+              if (result.error) {
+                showCheckoutToast(result.error.message === 'payment_cancelled' ? 'Payment cancelled by user' : 'Payment failed: ' + result.error.message);
+                placeOrderBtn.classList.remove('loading');
+                placeOrderBtn.disabled = false;
+              } else if (result.paymentDetails) {
+                try {
+                  placeOrderBtn.classList.add('loading');
+                  placeOrderBtn.disabled = true;
+                  showCheckoutToast('Verifying payment...');
+
+                  const finalOrder = await Cart.placeOrder(
+                    customerData, 
+                    'cashfree', 
+                    null, null, null, 
+                    window.appliedCouponCode,
+                    selectedDelivery(),
+                    selectedCourier(),
+                    null, false,
+                    cfOrder.order_id
+                  );
+                  window.location.href = `order-confirmation.html?orderId=${encodeURIComponent(finalOrder.order.orderId)}`;
+                } catch (err) {
+                  showCheckoutToast('Payment verification failed: ' + err.message);
+                  placeOrderBtn.classList.remove('loading');
+                  placeOrderBtn.disabled = false;
+                }
+              } else {
+                showCheckoutToast('Payment cancelled');
+                placeOrderBtn.classList.remove('loading');
+                placeOrderBtn.disabled = false;
+              }
+            });
+          } catch (err) {
+            showCheckoutToast('Failed to initiate payment: ' + err.message);
+            placeOrderBtn.classList.remove('loading');
+            placeOrderBtn.disabled = false;
+          }
+        } else {
+          // Razorpay Flow
+          try {
+            // Sends cart items, not a client-computed amount — the server
+            // prices them itself and remembers what it charged, so the
+            // amount can't be tampered with between here and /api/orders.
+            const orderItems = Cart.getCart().map(item => ({
+              productId: item.id,
+              name: item.name,
+              quantity: item.quantity,
+              variants: item.variants,
+              customPosters: Array.isArray(item.customPosters) ? item.customPosters : undefined
+            }));
+            // Signed in? Send the token, so an order the webhook builds still
+            // lands in the right account — the server derives the user from
+            // this, never from anything in the body.
+            let authToken = null;
+            try { const u = JSON.parse(localStorage.getItem('brushUser')); if (u) authToken = u.token; } catch (e) {}
+
+            const res = await fetch(`${API_BASE}/payment/create-order`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                ...(authToken ? { 'Authorization': `Bearer ${authToken}` } : {})
+              },
+              // The address goes with the payment request, not only with the order
+              // afterwards. If the browser never comes back from the payment
+              // window, the webhook needs this to build the order on its own.
+              body: JSON.stringify({
+                items: orderItems,
+                customer: customerData,
+                couponCode: window.appliedCouponCode,
+                deliveryOption: selectedDelivery(),
+                preferredCourier: selectedCourier()
+              })
+            });
+            if (!res.ok) {
+              const errData = await res.json().catch(() => ({}));
+              throw new Error(errData.error || 'Could not start payment');
+            }
+            const rzpOrder = await res.json();
+            
+            const configRes = await fetch(`${API_BASE}/config/razorpay`);
+            const configData = await configRes.json();
+            
+            const options = {
+              key: configData.key_id,
+              amount: rzpOrder.amount,
+              currency: rzpOrder.currency,
+              name: "Patliputra Traders",
+              description: "Lighting Fixtures Order",
+              image: "img/site/patliputra-logo.png",
+              order_id: rzpOrder.id,
+              handler: async function (response) {
+                try {
+                  const finalOrder = await Cart.placeOrder(
+                    customerData, 
+                    paymentMethod, 
+                    response.razorpay_order_id, 
+                    response.razorpay_payment_id, 
+                    response.razorpay_signature,
+                    window.appliedCouponCode,
+                    selectedDelivery(),
+                    selectedCourier()
+                  );
+                  window.location.href = `order-confirmation.html?orderId=${encodeURIComponent(finalOrder.order.orderId)}`;
+                } catch (err) {
+                  showCheckoutToast('Payment verification failed: ' + err.message);
+                  placeOrderBtn.classList.remove('loading');
+                  placeOrderBtn.disabled = false;
+                }
+              },
+              prefill: {
+                name: customerData.name,
+                email: customerData.email,
+                contact: customerData.phone
+              },
+              theme: {
+                color: "#FF9F29" // Accent color — keep in sync with --accent in styles.css
+              },
+              modal: {
+                ondismiss: function() {
+                  showCheckoutToast('Payment cancelled by user');
+                  placeOrderBtn.classList.remove('loading');
+                  placeOrderBtn.disabled = false;
+                }
+              }
+            };
+            
+            // Mock orders exist so the checkout can be exercised without live
+            // Razorpay keys. The server only accepts them when ALLOW_MOCK_PAYMENTS
+            // is set, and this branch is gated on a local host as well, so a
+            // production page can never short-circuit a real payment.
+            if (rzpOrder.id.startsWith('order_mock_') && IS_LOCAL_HOST) {
+              options.handler({
+                razorpay_order_id: rzpOrder.id,
+                razorpay_payment_id: "pay_mock_" + Date.now(),
+                razorpay_signature: "mock_signature_bypass"
+              });
+            } else if (rzpOrder.id.startsWith('order_mock_')) {
+              throw new Error('payments are not configured — please try Cash on Delivery');
+            } else {
+              if (typeof Razorpay === 'undefined') {
+                throw new Error('the payment window is still loading — please try again in a moment');
+              }
+              const rzp = new Razorpay(options);
+              rzp.on('payment.failed', function (response){
+                showCheckoutToast('Payment Failed: ' + response.error.description);
+                placeOrderBtn.classList.remove('loading');
+                placeOrderBtn.disabled = false;
+              });
+              rzp.open();
+            }
+            
+          } catch (err) {
+            showCheckoutToast('Failed to initiate payment: ' + err.message);
+            placeOrderBtn.classList.remove('loading');
+            placeOrderBtn.disabled = false;
+          }
+        }
+      });
+
+
+
+    });
+  </script>
+
+</body>
+</html>
