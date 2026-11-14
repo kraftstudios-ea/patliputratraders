@@ -6,7 +6,7 @@ set -u
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-API_URL="${API_URL:-https://brush-production.onrender.com/api/health}"
+API_URL="${API_URL:-https://patliputratraders.onrender.com/api/health}"
 INTERVAL_SECONDS="${INTERVAL_SECONDS:-720}" # 12 minutes (prevents Render 15-min idle sleep)
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting 24/7 keepalive pings for $API_URL (interval: ${INTERVAL_SECONDS}s)..."

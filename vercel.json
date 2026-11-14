@@ -6,7 +6,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://brush-production.onrender.com/api/:path*"
+      "destination": "https://patliputratraders.onrender.com/api/:path*"
     },
     {
       "source": "/shop",

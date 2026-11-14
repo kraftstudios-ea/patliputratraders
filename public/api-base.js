@@ -24,7 +24,7 @@ const getApiBase = () => {
     return `${window.location.protocol}//${hostname}:${backendPort}/api`;
   }
   if (hostname.endsWith('.vercel.app') || hostname === 'patliputratraders.com' || hostname === 'www.patliputratraders.com') {
-    return 'https://brush-production.onrender.com/api';
+    return 'https://patliputratraders.onrender.com/api';
   }
   return `${window.location.origin}/api`;
 };

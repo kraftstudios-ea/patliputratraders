@@ -844,7 +844,7 @@ app.use(helmet({
       // console check — every fetch to it was being silently blocked here,
       // which is why every fa-* icon on the site was rendering as an empty
       // circle/box: the glyph font never loaded, not a markup bug).
-      connectSrc: ["'self'", 'https://www.google-analytics.com', 'https://www.googletagmanager.com', 'https://brush-art.in', 'https://www.brush-art.in', 'https://brush-production.onrender.com', 'https://checkout.razorpay.com', 'https://api.razorpay.com', 'https://lumberjack.razorpay.com', 'https://sandbox.cashfree.com', 'https://api.cashfree.com', 'https://kit.fontawesome.com', 'https://ka-f.fontawesome.com'],
+      connectSrc: ["'self'", 'https://www.google-analytics.com', 'https://www.googletagmanager.com', 'https://patliputratraders.onrender.com', 'https://patliputratraders.vercel.app', 'https://brush-art.in', 'https://www.brush-art.in', 'https://brush-production.onrender.com', 'https://checkout.razorpay.com', 'https://api.razorpay.com', 'https://lumberjack.razorpay.com', 'https://sandbox.cashfree.com', 'https://api.cashfree.com', 'https://kit.fontawesome.com', 'https://ka-f.fontawesome.com'],
       frameSrc: ['https://checkout.razorpay.com', 'https://api.razorpay.com', 'https://sdk.cashfree.com', 'https://sandbox.cashfree.com', 'https://api.cashfree.com'],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
@@ -870,6 +870,10 @@ app.use(helmet({
 // etc.) with no way to tell that traffic apart from the real frontend.
 // Locked to the actual deployed origin plus local dev.
 const ALLOWED_ORIGINS = [
+  'https://patliputratraders.onrender.com',
+  'https://patliputratraders.vercel.app',
+  'https://patliputratraders.com',
+  'https://www.patliputratraders.com',
   'https://immortal0p.github.io',
   'https://brush-production.onrender.com',
   'https://brushposters.com',

@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Ping Render backend
         env:
-          API_URL: https://brush-production.onrender.com/api/health
+          API_URL: https://patliputratraders.onrender.com/api/health
         run: |
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$API_URL")
           if [ "$STATUS" -ne 200 ] && [ "$STATUS" -ne 429 ]; then
