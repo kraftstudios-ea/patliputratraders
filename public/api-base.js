@@ -23,10 +23,7 @@ const getApiBase = () => {
     const backendPort = (port === '9000' || port === '3000' || port === '8080' || port === '5500' || !port) ? '9050' : port;
     return `${window.location.protocol}//${hostname}:${backendPort}/api`;
   }
-  if (hostname.endsWith('.vercel.app') || hostname === 'patliputratraders.com' || hostname === 'www.patliputratraders.com') {
-    return 'https://patliputratraders.onrender.com/api';
-  }
-  return `${window.location.origin}/api`;
+  return 'https://patliputratraders.onrender.com/api';
 };
 
 window.API_BASE = getApiBase();
@@ -35,15 +32,15 @@ var IS_LOCAL_HOST = window.IS_LOCAL_HOST;
 var API_BASE = window.API_BASE;
 
 // ============================================================================
-// BRUSH UNIFIED CATALOG CACHE & FAST DATA LOADER
-// - Instant 0ms loads from sessionStorage across internal navigations
+// PATLIPUTRA TRADERS LIGHTING CATALOG CACHE & FAST DATA LOADER
+// - Live Light Database queries served directly from Backend API
 // - Stale-While-Revalidate background updates
 // - In-flight promise deduplication
-// - Automatic graceful fallback to production API if local backend is offline
+// - Automatic graceful fallback to edge /data/products.json if backend is sleeping
 // ============================================================================
 (function() {
-  const CACHE_KEY = 'brush_catalog_v2';
-  const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+  const CACHE_KEY = 'patliputra_lighting_catalog_v3';
+  const CACHE_TTL = 3 * 60 * 1000; // 3 minutes
   let inFlight = null;
 
   function readCache() {
@@ -74,7 +71,18 @@ var API_BASE = window.API_BASE;
   }
 
   async function loadFresh() {
-    // 1. Static Edge Catalogue: same-origin, 0ms CORS, CDN-cached, fast ~15ms load
+    // 1. Live Light Database via Backend API
+    try {
+      const data = await fetchNetwork(`${window.API_BASE}/products`);
+      const list = Array.isArray(data) ? data : (data && Array.isArray(data.products) ? data.products : null);
+      if (list && list.length > 0) {
+        return list;
+      }
+    } catch (err) {
+      console.warn('⚠️ Backend API unreachable or loading, checking edge fallback:', err.message);
+    }
+
+    // 2. Static Edge Catalogue fallback (if backend is cold/sleeping or offline)
     try {
       const edgeData = await fetchNetwork('/data/products.json');
       const edgeList = Array.isArray(edgeData) ? edgeData : (edgeData && Array.isArray(edgeData.products) ? edgeData.products : null);
@@ -83,19 +91,7 @@ var API_BASE = window.API_BASE;
       }
     } catch (_) {}
 
-    // 2. Production or Local API
-    try {
-      const data = await fetchNetwork(`${window.API_BASE}/products`);
-      return Array.isArray(data) ? data : (data && Array.isArray(data.products) ? data.products : []);
-    } catch (err) {
-      try {
-        console.warn('⚠️ Backend API unreachable, falling back to static /data/products.json:', err.message);
-        const fallback = await fetchNetwork('/data/products.json');
-        return Array.isArray(fallback) ? fallback : (fallback && Array.isArray(fallback.products) ? fallback.products : []);
-      } catch (fallbackErr) {
-        throw err;
-      }
-    }
+    return [];
   }
 
   function revalidateInBackground() {

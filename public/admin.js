@@ -859,11 +859,21 @@
     const tbody = $('inventory-table-body');
     if (!silent) tbody.innerHTML = '<tr><td colspan="8" class="empty"><span class="skeleton"></span></td></tr>';
     try {
-      const res = await fetch(`${API_BASE}/products`);
+      const url = `${API_BASE}/products${force ? `?_t=${Date.now()}` : ''}`;
+      const res = await fetch(url, {
+        cache: 'no-cache',
+        headers: {
+          'Cache-Control': 'no-cache',
+          Authorization: `Bearer ${adminToken}`
+        }
+      });
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
       products = await res.json();
       renderManualProductOptions();
       fillFilterOptions();
+      if ($('category-options')) {
+        $('category-options').innerHTML = allCategories().map(c => `<option value="${escapeHtml(c)}">`).join('');
+      }
       updateDirtyUi();
       renderInventory();
     } catch (e) {
@@ -998,7 +1008,7 @@
                 ${TYPES.map(t => `<option value="${t.value}" ${t.key === tk ? 'selected' : ''}>${t.label}</option>`).join('')}
                 ${!typeMeta(p.productType) ? `<option value="${escapeHtml(p.productType)}" selected>${escapeHtml(p.productType)}</option>` : ''}
               </select>
-              <input type="text" class="field field-sm" data-field="category" list="category-options" value="${escapeHtml(Array.isArray(p.categories) && p.categories.length ? p.categories.join(', ') : (p.category || ''))}" placeholder="Categories (e.g. Gaming, Anime)" ${dis} aria-label="Category" title="Enter one or multiple categories separated by comma, e.g. Gaming, Anime">
+              <input type="text" class="field field-sm" data-field="category" list="category-options" value="${escapeHtml(Array.isArray(p.categories) && p.categories.length ? p.categories.join(', ') : (p.category || ''))}" placeholder="Categories (e.g. Chandeliers, Wall Lamps)" ${dis} aria-label="Category" title="Enter one or multiple categories separated by comma">
             </div>
           </div>
         </td>
@@ -1128,6 +1138,8 @@
         await api(`/products/${encodeURIComponent(id)}`, { method: 'DELETE' });
         products = products.filter(x => String(x.id) !== id);
         edits.delete(id);
+        try { sessionStorage.removeItem('brush_catalog_v2'); sessionStorage.removeItem('patliputra_lighting_catalog_v3'); } catch (_) {}
+        if (window.BrushCatalog?.invalidate) window.BrushCatalog.invalidate();
         showToast(`Deleted “${p.name}”.`);
         fillFilterOptions(); renderInventory(); updateDirtyUi();
       } catch (ex) { showToast(ex.message, true); }
@@ -1305,6 +1317,8 @@
       $('add-product-form').reset();
       $('new-prod-preview').hidden = true;
       syncNewProductPriceField();
+      try { sessionStorage.removeItem('brush_catalog_v2'); sessionStorage.removeItem('patliputra_lighting_catalog_v3'); } catch (_) {}
+      if (window.BrushCatalog?.invalidate) window.BrushCatalog.invalidate();
       if (products && data.product) { products.push(data.product); fillFilterOptions(); }
     } catch (ex) {
       showToast(ex.message, true);

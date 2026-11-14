@@ -10,7 +10,8 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "setup-admin": "node setupAdmin.js",
-    "seed:categories": "node scripts/seed_new_categories.js"
+    "seed:categories": "node scripts/seed_new_categories.js",
+    "seed:lighting": "node scripts/seed-lighting-products.js"
   },
   "dependencies": {
     "@google-cloud/storage": "^8.2.0",

@@ -9,6 +9,7 @@
     "serve:build": "npx -y http-server .pages-site -a 0.0.0.0 -p 9000 -c-1",
     "dev:backend": "cd Backend && node server.js",
     "dev:frontend": "node scripts/serve-frontend.js",
+    "seed:lighting": "cd Backend && node scripts/seed-lighting-products.js",
     "start": "node server.js"
   }
 }

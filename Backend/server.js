@@ -632,7 +632,7 @@ function revokeAllSessionsFor(userId, keepToken) {
   }
 }
 const PENDING_PAYMENT_TTL_MS = 60 * 60 * 1000; // 1 hour
-const port = process.env.PORT || 5500;
+const port = process.env.PORT || 9050;
 
 // Sessions previously never expired - a token stayed valid until the
 // process restarted, so a leaked admin or user token was a standing
@@ -2417,10 +2417,12 @@ function optimizeProductForListing(doc) {
     stockQuantity: item.stockQuantity !== undefined ? item.stockQuantity : 50,
     sku: item.sku,
     image: item.image,
-    productType: item.productType || 'Posters',
+    images: Array.isArray(item.images) && item.images.length ? item.images : (item.image ? [item.image] : []),
+    productType: item.productType || 'Lights',
     showInBestsellers: Boolean(item.showInBestsellers),
     showInNewArrivals: Boolean(item.showInNewArrivals),
     showInGrossing: Boolean(item.showInGrossing),
+    showInHero: Boolean(item.showInHero),
     orderFrequency: item.orderFrequency || 0,
     createdAt: item.createdAt,
     keywords: kw,
@@ -4711,6 +4713,19 @@ app.delete('/api/products/:id', requireAdmin, async (req, res) => {
     if (result.deletedCount === 0) return res.status(404).json({ error: 'Product not found' });
 
     invalidateProductsCache();
+
+    // Keep local static catalogue in sync with MongoDB deletion
+    try {
+      const edgeFilePath = path.join(__dirname, '../public/data/products.json');
+      if (fs.existsSync(edgeFilePath)) {
+        const localList = JSON.parse(fs.readFileSync(edgeFilePath, 'utf8'));
+        const nextList = localList.filter(p => Number(p.id) !== productId);
+        fs.writeFileSync(edgeFilePath, JSON.stringify(nextList, null, 2), 'utf8');
+      }
+    } catch (edgeSyncErr) {
+      console.warn('Could not sync delete to edge products.json:', edgeSyncErr.message);
+    }
+
     logAdminActivity(req.adminSession.username, 'Delete Product', `Deleted product ID: ${req.params.id}`);
     res.json({ success: true });
   } catch (error) {
@@ -4790,6 +4805,18 @@ app.post('/api/products', requireAdmin, upload.single('image'), async (req, res)
 
     await productsRef.insertOne(newProduct);
     invalidateProductsCache();
+
+    // Keep local static catalogue in sync with MongoDB creation
+    try {
+      const edgeFilePath = path.join(__dirname, '../public/data/products.json');
+      if (fs.existsSync(edgeFilePath)) {
+        const localList = JSON.parse(fs.readFileSync(edgeFilePath, 'utf8'));
+        localList.push(stripId(newProduct));
+        fs.writeFileSync(edgeFilePath, JSON.stringify(localList, null, 2), 'utf8');
+      }
+    } catch (edgeSyncErr) {
+      console.warn('Could not sync insert to edge products.json:', edgeSyncErr.message);
+    }
 
     logAdminActivity(req.adminSession.username, 'Add Product', `Added product ID: ${newId} (${name})`);
 
@@ -5454,18 +5481,28 @@ async function start() {
     console.error('⚠️ Catalogue price sync failed (storefront still prices from productTypes.js):', err.message);
   }
 
-  // Real sticker sheets + wallpapers in, their placeholders out.
+  // Lighting catalogue verification and auto-seed for Patliputra Traders
   try {
-    // Disabled Brush poster merchandise seeds for Patliputra Traders lighting showroom
-    // await seedStickerSheets(productsRef);
-    // await seedWallpapers(productsRef);
-    // await seedCollectibles(productsRef);
-    // await seedTapestries(productsRef);
-    // await seedMetalPosters(productsRef);
-    // await seedDigitalAssets(productsRef);
-    // await removePlaceholders(productsRef);
+    const productCount = await productsRef.countDocuments();
+    if (productCount === 0) {
+      console.log('📦 Products collection is empty. Auto-seeding lighting products...');
+      const productsJsonPath = path.join(__dirname, '../public/data/products.json');
+      if (fs.existsSync(productsJsonPath)) {
+        const lightingProducts = JSON.parse(fs.readFileSync(productsJsonPath, 'utf8'));
+        if (Array.isArray(lightingProducts) && lightingProducts.length > 0) {
+          await productsRef.insertMany(lightingProducts);
+          console.log(`✅ Successfully auto-seeded ${lightingProducts.length} lighting products into MongoDB.`);
+          await productsRef.createIndex({ id: 1 }, { unique: true });
+          await productsRef.createIndex({ sku: 1 });
+          await productsRef.createIndex({ category: 1 });
+          await productsRef.createIndex({ name: 'text', description: 'text', keywords: 'text' });
+        }
+      }
+    } else {
+      console.log(`💡 Lighting catalogue verified: ${productCount} products ready in MongoDB.`);
+    }
   } catch (err) {
-    console.error('⚠️ Catalogue seed failed:', err.message);
+    console.error('⚠️ Lighting catalogue seed/verify check failed:', err.message);
   }
 
 

@@ -15,9 +15,9 @@ function initBrushMain() {
     if (_productsCachePromise) return _productsCachePromise;
     const loader = window.BrushCatalog
       ? window.BrushCatalog.getProducts()
-      : fetch('/data/products.json')
-          .then(r => r.ok ? r.json() : fetch(`${API_BASE}/products`).then(res => res.json()))
-          .catch(() => fetch(`${API_BASE}/products`).then(res => res.json()));
+      : fetch(`${API_BASE}/products`)
+          .then(r => r.ok ? r.json() : fetch('/data/products.json').then(res => res.json()))
+          .catch(() => fetch('/data/products.json').then(res => res.json()));
     _productsCachePromise = loader.then(raw => {
       const list = Array.isArray(raw) ? raw : (raw && Array.isArray(raw.products) ? raw.products : []);
       return list.map(applyCatalogPrice);
@@ -49,12 +49,10 @@ function initBrushMain() {
   const isGarment = (p) => ['apparel', 'hoodie'].includes(String(p && p.productType || '').toLowerCase());
   const isSinglePosterProduct = (p) => {
     if (!p) return false;
-    const t = String(p.productType || 'poster').toLowerCase().trim();
+    const t = String(p.productType || '').toLowerCase().trim();
     const c = String(p.category || '').toLowerCase().trim();
-    const isPack = t.includes('pack') || c.includes('pack') || c.includes('wall setup') || t.includes('split');
-    const isMetal = t.includes('metal') || c.includes('metal');
-    const isOther = ['apparel', 'hoodie', 'stickers', 'wallpapers', 'collectibles', 'tapestry', 'tapestries', 'digital assets'].some(x => t.includes(x) || c.includes(x));
-    return !isPack && !isMetal && !isOther && (t === 'poster' || t === 'posters' || t === '' || !p.productType);
+    if (t.includes('digital') || c.includes('digital') || t.includes('pack')) return false;
+    return true;
   };
   const isSplitProduct = (p) => {
     if (!p || Number(p.id) === 540) return false;
@@ -385,8 +383,8 @@ function initBrushMain() {
           if (matched.length > 0) {
             suggestionsBox.innerHTML = `
               <div class="search-results-bar">
-                <span class="search-results-count"><i class="fa-solid fa-sparkles"></i> ${totalCount} ${totalCount === 1 ? 'Poster' : 'Posters'} Found</span>
-                <span class="search-results-hint">Click poster to preview • Press Enter for all</span>
+                <span class="search-results-count"><i class="fa-solid fa-sparkles"></i> ${totalCount} ${totalCount === 1 ? 'Product' : 'Products'} Found</span>
+                <span class="search-results-hint">Click product to preview • Press Enter for all</span>
               </div>
               <div class="search-results-grid">
                 ${matched.map(p => `
@@ -396,9 +394,9 @@ function initBrushMain() {
                       ${p.badge ? `<span class="search-product-badge">${escapeHtml(p.badge)}</span>` : ''}
                     </div>
                     <div class="search-product-info">
-                      <span class="search-product-cat">${escapeHtml(p.category || 'Poster')}</span>
+                      <span class="search-product-cat">${escapeHtml(p.category || 'Lighting')}</span>
                       <span class="search-product-title">${escapeHtml(p.name)}</span>
-                      <span class="search-product-price">From ₹${p.price || 399}</span>
+                      <span class="search-product-price">₹${p.price || ''}</span>
                     </div>
                   </a>
                 `).join('')}
@@ -413,15 +411,15 @@ function initBrushMain() {
             suggestionsBox.innerHTML = `
               <div class="search-no-results">
                 <i class="fa-solid fa-magnifying-glass search-empty-icon"></i>
-                <p class="search-empty-title">No posters found matching “${escapeHtml(query)}”</p>
-                <p class="search-empty-sub">Try exploring one of our popular collections:</p>
+                <p class="search-empty-title">No lighting fixtures found matching “${escapeHtml(query)}”</p>
+                <p class="search-empty-sub">Try exploring one of our popular lighting collections:</p>
                 <div class="search-chip-group">
-                  <button type="button" class="search-quick-chip" data-query="Anime">Anime</button>
-                  <button type="button" class="search-quick-chip" data-query="Motivation">Motivation</button>
-                  <button type="button" class="search-quick-chip" data-query="Formula 1">F1</button>
-                  <button type="button" class="search-quick-chip" data-query="Marvel">Marvel</button>
-                  <button type="button" class="search-quick-chip" data-query="Minimalist">Minimalist</button>
-                  <button type="button" class="search-quick-chip" data-query="Vintage">Vintage</button>
+                  <button type="button" class="search-quick-chip" data-query="Chandeliers">Chandeliers</button>
+                  <button type="button" class="search-quick-chip" data-query="Decorative Wall Lamps">Wall Lamps</button>
+                  <button type="button" class="search-quick-chip" data-query="Pendant & Hanging Lights">Pendants</button>
+                  <button type="button" class="search-quick-chip" data-query="Ceiling & Chandelier Fans">Ceiling Fans</button>
+                  <button type="button" class="search-quick-chip" data-query="Spot & Track Lights">Track Lights</button>
+                  <button type="button" class="search-quick-chip" data-query="COB & Downlights">COB Downlights</button>
                 </div>
               </div>
             `;
@@ -766,7 +764,7 @@ function initBrushMain() {
   }
 
   if (posterCountEl || statDesignsEl || statCollectionsEl) {
-    const FALLBACK_POSTER_COUNT = 523;
+    const FALLBACK_POSTER_COUNT = 368;
     const fallbackTimer = setTimeout(() => reportPosterCount(FALLBACK_POSTER_COUNT), 4000);
 
     getProducts()
@@ -1004,17 +1002,17 @@ function initBrushMain() {
         const idx = BESTSELLER_PRIORITY.indexOf(Number(id));
         return idx === -1 ? 999 : idx;
       };
-      // Bestsellers with progressive fallback to top-rated posters if fewer than 8
+      // Bestsellers with progressive fallback to top-rated lights if fewer than 8
       let bestSellers = products
         .filter(p => p.showInBestsellers)
-        .sort((a, b) => realFirst(a, b) || (bsRank(a.id) - bsRank(b.id)));
+        .sort((a, b) => realFirst(a, b) || (Number(b.orderFrequency || 0) - Number(a.orderFrequency || 0)) || (bsRank(a.id) - bsRank(b.id)));
 
       if (bestSellers.length < 8) {
         const bsIds = new Set(bestSellers.map(p => Number(p.id)));
-        const fallbackPosters = products
+        const fallbackLights = products
           .filter(p => isSinglePosterProduct(p) && !BrushImg.isDummy(p) && !bsIds.has(Number(p.id)))
           .sort((a, b) => (Number(b.orderFrequency) || 0) - (Number(a.orderFrequency) || 0) || (Number(b.id) - Number(a.id)));
-        bestSellers = bestSellers.concat(fallbackPosters.slice(0, 8 - bestSellers.length));
+        bestSellers = bestSellers.concat(fallbackLights.slice(0, 8 - bestSellers.length));
       }
 
       // New Arrivals: descending chronological order without restrictive date cutoffs
@@ -1032,12 +1030,11 @@ function initBrushMain() {
       };
       const newestFirst = (a, b) => (stamp(b) - stamp(a)) || ((Number(b.id) || 0) - (Number(a.id) || 0));
 
-      const isPriorityArrival = p => Boolean(p.showInNewArrivals || p.category === 'Original Movie Posters' || p.category === 'Movies & TV');
       let newArrivals = products
         .filter(p => isSinglePosterProduct(p) && !BrushImg.isDummy(p) && (p.stockQuantity === undefined || p.stockQuantity > 0))
         .sort((a, b) => {
-          const tierA = isPriorityArrival(a) ? 1 : 2;
-          const tierB = isPriorityArrival(b) ? 1 : 2;
+          const tierA = a.showInNewArrivals ? 1 : 2;
+          const tierB = b.showInNewArrivals ? 1 : 2;
           if (tierA !== tierB) return tierA - tierB;
           return newestFirst(a, b);
         });
@@ -1068,14 +1065,13 @@ function initBrushMain() {
         const splitCardClass = isSplit ? (isSplit2 ? 'is-split-card is-split-2' : 'is-split-card is-split-3') : '';
         const specLine = isSplit
           ? `<span><i class="fa-solid fa-layer-group"></i> Multi-Piece Setup</span><span><i class="fa-solid fa-truck-fast"></i> Fast Dispatch</span>`
-          : (isSinglePoster
-            ? `<span><i class="fa-solid fa-gem"></i> 300 GSM Matte</span><span><i class="fa-solid fa-truck-fast"></i> Fast Dispatch</span>`
-            : `<span><i class="fa-solid fa-gem"></i> Premium Quality</span><span><i class="fa-solid fa-truck-fast"></i> Fast Dispatch</span>`);
+          : `<span><i class="fa-solid fa-gem"></i> Premium Lighting</span><span><i class="fa-solid fa-truck-fast"></i> Express Delivery</span>`;
 
         const loadAttr = isEager ? 'fetchpriority="high"' : 'loading="lazy"';
         const cardImgSize = isSplit ? 1080 : 480;
         const imgAttrs = `${imgAttrsFor(p, cardImgSize, true)} ${loadAttr} decoding="async" width="480" height="600" onload="this.classList.add('loaded')"`;
         const safeName = escapeHtml(p.name);
+        const secondImg = Array.isArray(p.images) && p.images.length > 1 ? p.images[1] : '';
 
         let extraImgClass = '';
         if (isGarment(p)) {
@@ -1084,12 +1080,11 @@ function initBrushMain() {
           extraImgClass = 'collectible-card-img';
         }
 
-
         return `
-          <div class="product-card ${delayClass} ${splitCardClass}" data-id="${escapeHtml(p.id)}" data-name="${safeName}" data-price="${Number(p.price) || 0}" data-original="${Number(p.originalPrice) || Number(p.price) || 0}" data-image="${escapeHtml(BrushImg.original(p))}" data-stock="${Number(stockQty) || 0}" data-product-type="${escapeHtml(p.productType || 'poster')}">
+          <div class="product-card ${delayClass} ${splitCardClass}" data-id="${escapeHtml(p.id)}" data-name="${safeName}" data-price="${Number(p.price) || 0}" data-original="${Number(p.originalPrice) || Number(p.price) || 0}" data-image="${escapeHtml(BrushImg.original(p))}" data-stock="${Number(stockQty) || 0}" data-product-type="${escapeHtml(p.productType || 'Lights')}">
             <div class="product-card-image">
               <img class="plain-product-image ${extraImgClass}" alt="${safeName}" ${imgAttrs}>
-              ${isMetalPoster ? `<img class="product-card-hover-mockup metal-artwork-hover" data-mockup="/${escapeHtml(encodeURI(p.designImage))}" alt="${safeName} Artwork" width="480" height="600" loading="lazy" decoding="async">` : (isSinglePoster ? `<img class="product-card-hover-mockup" data-mockup="/img/framed-mockups/${escapeHtml(p.id)}.webp" alt="${safeName} Framed on Spacejoy Wall" width="480" height="600" loading="lazy" decoding="async">` : '')}
+              ${isMetalPoster ? `<img class="product-card-hover-mockup metal-artwork-hover" data-mockup="/${escapeHtml(encodeURI(p.designImage))}" alt="${safeName} Artwork" width="480" height="600" loading="lazy" decoding="async">` : (secondImg ? `<img class="product-card-hover-mockup" data-mockup="${escapeHtml(secondImg)}" alt="${safeName} Angle View" width="480" height="600" loading="lazy" decoding="async">` : '')}
               ${isSplit ? `<span class="split-view-badge"><i class="fa-solid fa-expand"></i> Room View</span>` : ''}
               ${displayBadge ? `<span class="product-badge" ${badgeStyle}>${escapeHtml(displayBadge)}</span>` : ''}
               <div class="product-quick-actions">
@@ -1097,7 +1092,7 @@ function initBrushMain() {
                   ${specLine}
                 </div>
                 <button class="quick-add-btn" ${isOut ? 'disabled style="background: rgba(0,0,0,0.8); color: var(--text-muted); cursor: not-allowed;"' : ''}>
-                  ${isOut ? (p.productType === 'apparel' || p.productType === 'hoodie' ? 'Will be in stock soon' : 'Out of Stock') : 'Add to Cart'}
+                  ${isOut ? 'Out of Stock' : 'Add to Cart'}
                 </button>
               </div>
             </div>
@@ -1174,13 +1169,16 @@ function initBrushMain() {
     if (!overlay || !modal || !grid) return;
     arrivalsPopupInitialized = true;
 
-    // Filter top 6 newest poster arrivals
+    // Filter top 6 newest lighting arrivals
     const stamp = p => Date.parse(p.createdAt) || 0;
-    const isPoster = p => isSinglePosterProduct(p) && !(typeof BrushImg !== 'undefined' && BrushImg.isDummy && BrushImg.isDummy(p)) && (p.stockQuantity === undefined || p.stockQuantity > 0);
+    const isArrival = p => isSinglePosterProduct(p) && !(typeof BrushImg !== 'undefined' && BrushImg.isDummy && BrushImg.isDummy(p)) && (p.stockQuantity === undefined || p.stockQuantity > 0);
 
     const top6Posters = products
-      .filter(isPoster)
+      .filter(isArrival)
       .sort((a, b) => {
+        const tierA = a.showInNewArrivals ? 1 : 2;
+        const tierB = b.showInNewArrivals ? 1 : 2;
+        if (tierA !== tierB) return tierA - tierB;
         const diff = stamp(b) - stamp(a);
         if (diff !== 0) return diff;
         return (Number(b.id) || 0) - (Number(a.id) || 0);
@@ -2143,6 +2141,19 @@ function initBrushMain() {
     return slides.length ? buildGallery(p, slides) : null;
   }
 
+  function buildLightingGallery(p) {
+    if (!p) return null;
+    const rawList = Array.isArray(p.images) && p.images.length > 0 ? p.images : (p.image ? [p.image] : []);
+    if (rawList.length <= 1) return null;
+    const slides = rawList.map((srcUrl, idx) => ({
+      src: srcUrl,
+      label: idx === 0 ? 'Main View' : `Angle ${idx + 1}`,
+      fit: 'contain',
+      zoom: true
+    }));
+    return buildGallery(p, slides, { hasFrameToggle: false });
+  }
+
   function buildPosterGallery(p) {
     const posterArtUrl = (window.BrushImg && BrushImg.src) ? BrushImg.src(p, 1080) : (p.image || '');
     const framedMockup = `/img/framed-mockups/${p.id}.webp`;
@@ -2596,10 +2607,14 @@ function initBrushMain() {
       // Wallpapers, tapestries and metal posters all carry a room mockup
       // plus flat/detail shots, so they share one gallery builder.
       const wallpaperGallery = /^(wallpaper|tapestr|metal)/.test(modalProductType) ? buildWallpaperGallery(currentProduct) : null;
+      const lightingGallery = buildLightingGallery(currentProduct);
       const isPackModal = modalProductType.includes('pack') || (currentProduct.category || '').toLowerCase().includes('pack') || (currentProduct.category || '').toLowerCase().includes('wall setup');
       const packGallery = (isPackModal || modalProductType === 'poster_3_pack' || modalProductType === 'poster_2_pack' || modalProductType.startsWith('poster_pack')) ? buildPoster3PackGallery(currentProduct) : null;
-      const posterGallery = isSinglePosterProduct(currentProduct) ? buildPosterGallery(currentProduct) : null;
-      if (packGallery) {
+      const posterGallery = !lightingGallery && modalProductType === 'poster' ? buildPosterGallery(currentProduct) : null;
+      if (lightingGallery) {
+        modalImageCol.innerHTML = lightingGallery;
+        initApparelGallery(modalImageCol);
+      } else if (packGallery) {
         modalImageCol.innerHTML = packGallery;
         initApparelGallery(modalImageCol);
       } else if (posterGallery) {

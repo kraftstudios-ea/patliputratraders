@@ -491,7 +491,7 @@
         <div class="search-container" role="dialog" aria-modal="true" aria-label="Search">
           <button type="button" class="search-close-btn" aria-label="Close search"><i class="fa-solid fa-xmark"></i></button>
           <form class="global-search-form" id="global-search-form" role="search">
-            <input type="search" id="global-search-input" name="search" placeholder="Search posters, categories, themes..." autocomplete="off" aria-label="Search products">
+            <input type="search" id="global-search-input" name="search" placeholder="Search chandeliers, lamps, pendants, fans, lights..." autocomplete="off" aria-label="Search products">
             <button type="submit" aria-label="Submit search"><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
         </div>`;

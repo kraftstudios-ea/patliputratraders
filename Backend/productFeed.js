@@ -56,21 +56,22 @@ function getProductCategories(p) {
 }
 
 function typeKey(p) {
-  if (!p) return 'other';
-  const t = String(p.productType || '').toLowerCase();
+  if (!p) return 'all';
   const c = String(p.category || '').toLowerCase();
-
-  // Metal posters are strictly their own category, never paper posters
-  if (t.startsWith('metal') || c.includes('metal poster') || t === 'metal posters') return 'metal';
-  if (t.startsWith('tapestr') || c.includes('tapestr')) return 'tapestries';
-  if (c === 'wall setup packs' || t.includes('poster_pack') || t.includes('poster_3_pack') || t.includes('poster_2_pack')) return 'packs';
-  if (t.startsWith('sticker')) return 'stickers';
-  if (t.startsWith('wallpaper')) return 'wallpapers';
-  if (t.startsWith('collectible')) return 'collectibles';
-  if (t === 'apparel' || t === 'hoodie' || t.includes('shirt') || t.includes('hoodie')) return 'apparel';
-  if (t.includes('digital') || c.includes('digital')) return 'digital';
-  if (!t || t.startsWith('poster') || t.startsWith('framed') || c.includes('framed')) return 'posters';
-  return 'other';
+  const t = String(p.productType || '').toLowerCase();
+  if (c.includes('chandelier') || t.includes('chandelier')) return 'chandeliers';
+  if (c.includes('wall lamp') || c.includes('wall light') || c.includes('picture light')) return 'wall-lamps';
+  if (c.includes('pendant') || c.includes('hanging')) return 'pendants';
+  if (c.includes('fan')) return 'ceiling-fans';
+  if (c.includes('track') || c.includes('spot')) return 'track-lights';
+  if (c.includes('cob') || c.includes('downlight')) return 'cob-downlights';
+  if (c.includes('profile') || c.includes('linear')) return 'profile-lights';
+  if (c.includes('strip') || c.includes('rope')) return 'strip-rope';
+  if (c.includes('outdoor') || c.includes('landscape') || c.includes('flood') || c.includes('solar')) return 'outdoor-lights';
+  if (c.includes('table') || c.includes('floor')) return 'table-floor';
+  if (c.includes('smart') || c.includes('utility') || c.includes('lock') || c.includes('sensor')) return 'smart-utility';
+  if (t === 'lights') return 'lights';
+  return 'lights';
 }
 
 /**
