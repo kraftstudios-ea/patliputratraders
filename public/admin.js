@@ -255,7 +255,11 @@
         body: JSON.stringify({ username: $('admin-user').value.trim(), password: $('admin-pass').value }),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data.token) throw new Error(res.status === 429 ? 'Too many attempts — wait a few minutes and try again.' : (data.error || 'Invalid credentials'));
+      if (!res.ok || !data.token) {
+        if (res.status === 404) throw new Error('API server unreachable (HTTP 404)');
+        if (res.status === 429) throw new Error('Too many attempts — wait a few minutes and try again.');
+        throw new Error(data.error || 'Invalid credentials');
+      }
       adminToken = data.token;
       sessionStorage.setItem('brush_admin_token', adminToken);
       sessionStorage.setItem('brush_admin_role', data.role || 'superadmin');

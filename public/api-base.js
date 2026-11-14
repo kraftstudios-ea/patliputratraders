@@ -23,6 +23,9 @@ const getApiBase = () => {
     const backendPort = (port === '9000' || port === '3000' || port === '8080' || port === '5500' || !port) ? '9050' : port;
     return `${window.location.protocol}//${hostname}:${backendPort}/api`;
   }
+  if (hostname.endsWith('.vercel.app') || hostname === 'patliputratraders.com' || hostname === 'www.patliputratraders.com') {
+    return 'https://brush-production.onrender.com/api';
+  }
   return `${window.location.origin}/api`;
 };
 

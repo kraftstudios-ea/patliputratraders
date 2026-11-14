@@ -5,6 +5,10 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "https://brush-production.onrender.com/api/:path*"
+    },
+    {
       "source": "/shop",
       "destination": "/all_products.html"
     },
